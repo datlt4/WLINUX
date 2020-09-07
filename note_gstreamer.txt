@@ -1,0 +1,139 @@
+gst-launch-1.0 rtspsrc location=rtsp://admin:abcd1234@192.168.1.8:554/h265/ch1/main/av_stream latency=300 ! rtph264depay ! h264parse ! nvv4l2decoder drop-frame-interval=1 ! nvvideoconvert ! video/x-raw,width=1080,height=720,formate=I420 ! queue !  nveglglessink window-x=0 window-y=0 window-width=1080 window-height=720
+
+gst-launch-1.0 rtspsrc location=rtsp://admin:abcd1234@192.168.1.8:554/h265/ch1/main/av_stream ! decodebin ! nvvidconv ! video/x-raw,format=I420,width=1061,height=600 ! videoconvert ! appsink
+
+rtspsrc location={location} latency=200 user-id={user} user-pw={password} ! queue ! rtph264depay ! h264parse ! nvv4l2decoder enable-max-performance=1 drop-frame-interval=1 ! nvvidconv ! video/x-raw(memory:NVMM),format=BGRx,width={width},height={height} ! queue ! nvvidconv ! video/x-raw,format=BGRx ! videoconvert ! video/x-raw,format=BGR ! videorate max-rate={fps} drop-only=true average-period=5000000 ! video/x-raw,framerate={fps}/1 ! appsink sync=true
+
+gst-launch-1.0 rtspsrc location=rtsp://admin:abcd1234@192.168.1.8:554/h265/ch1/main/av_stream latency=300 ! rtph264depay ! h264parse ! nvv4l2decoder drop-frame-interval=1 ! nvvideoconvert ! video/x-raw,width=1080,height=720,formate=I420 ! queue !  nveglglessink window-x=0 window-y=0 window-width=1080 window-height=720
+
+gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw, width=1280, height=720 ! xvimagesink
+
+gst-launch-1.0 filesrc location=~/Documents/conan.mp4 ! qtdemux name=demux demux.video_0 ! queue ! h265parse ! omxh265dec ! nvoverlaysink -e
+
+gst-launch-1.0 rtspsrc location=rtsp://admin:abcd1234@192.168.1.8:554/h265/ch1/main/av_stream latency=100 ! queue ! rtph264depay ! h264parse ! nvv4l2decoder drop-frame-interval=2 ! nvvideoconvert ! video/x-rawwidth=1920height=1080format=RGBA ! queue ! filesink location=/dev/stdout
+
+gst-launch-1.0 rtspsrc location=rtsp://admin:abcd1234@192.168.1.8:554/h265/ch1/main/av_stream latency=100 ! queue ! h264parse ! omxh264dec ! nveglglessink -e
+
+gst-launch-1.0 filesrc location=~/Documents/your_name.mp4 ! qtdemux name=demux demux.video_0 ! queue ! h264parse ! omxh264dec ! nveglglessink -e
+
+gst-launch-1.0 rtspsrc location=rtsp://admin:abcd1234@192.168.1.8:554/h265/ch1/main/av_stream ! decodebin ! nvvidconv ! video/x-raw,format=I420,width=1920,height=1080 ! videoconvert ! nveglglessink -e
+
+gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-h264,framerate=30/1,width=1280,height=720 ! xvimagesink
+
+gst-launch-1.0 v4l2src device="/dev/video0" ! bayer2rgb ! videoconvert ! video/x-raw, format=I420 ! omxh265enc ! h265parse ! matroskamux ! filesink location=test_v4l2.mkv -e
+
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw, width=640, height=480, format=I420 !  videoconvert ! video/x-raw, width=640, height=480, format=BGRx ! xvimagesink
+
+gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw,format=YUY2 ! videoconvert ! xvimagesink
+
+gst-launch-1.0 filesrc location=~/Documents/your_name.mp4 ! decodebin ! nvvidconv ! video/x-raw, format=I420, width=1920, height=1080 ! videoconvert ! nveglglessink -e
+
+gst-launch-1.0 filesrc location=~/Documents/your_name.mp4 ! decodebin ! nvvidconv ! video/x-raw, format=I420, width=1280, height=720 ! videoconvert ! nveglglessink -e
+
+gst-launch-1.0 v4l2src device=/dev/video0 ! decodebin ! nvvidconv ! video/x-raw, width=1280, height=720, format=I420 ! videoconvert ! 
+
+gst-launch-1.0 v4l2src device=/dev/video0 ! decodebin ! nvvidconv ! video/x-raw, format=YUY2, width=1280, height=720 ! videoconvert ! xvimagesink
+
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw, format=UYVY, width=1280, height=720 ! jpegenc ! filesink location=image01_5MP.jpg
+
+gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw, width=640, heigth=480 ! videoconvert ! x264enc ! rtph264pay ! udpsink host=127.0.0.1 port=5000 
+
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw, width=640, height=480, format=I420 ! videoconvert ! xvimagesink -e
+
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw, width=640, height=480, format=RGB !  xvimagesink
+
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw, width=1280, height=720 ! xvimagesink
+
+gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw, width=1280, height=720, format=I420 ! videoconvert ! xvimagesink
+
+gst_str = ('v4l2src device=/dev/video{} ! video/x-raw, width=1280, height=720, format=I420 ! videoconvert ! appsink').format(dev, width, height)
+
+{&quot;data&quot;:&quot;12|#|user|4|9|120150837pass|4|33|1g02jBk8kQoo+Mf/QLUqHoTIl3t5uczaQ#&quot;}
+————————————————
+版权声明：本文为CSDN博主「ZONG_XP」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/zong596568821xp/java/article/details/80306987
+
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw, width=1280, height=7200, format=YUY2 ! nvvidconv ! xvimagesink -v
+
+gst-launch-1.0 v4l2src device="/dev/video2" name=e ! video/x-raw, width=1280, height=720 ! videoconvert ! video/x-raw, width=1280, height=720, format=YUY2 ! xvimagesink
+
+=================================================
+Runned:
+[v] - stream cam 0, no NVDEC
+	gst-launch-1.0 -v v4l2src device=/dev/video0 ! xvimagesink
+	gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw, format=YUY2, width=1280, height=720 ! videoconvert ! xvimagesink
+
+	gst-launch-1.0 v4l2src device=/dev/video0 ! xvimagesink
+	cap = cv2.VideoCapture("v4l2src device=/dev/video0 ! appsink", cv2.CAP_GSTREAMER)
+
+[v] - stream cam 0, NVDEC
+	gst-launch-1.0 
+
+[v] - stream video, use NVDEC
+	gst-launch-1.0 filesrc location=~/Documents/your_name.mp4 ! qtdemux name=demux demux.video_0 ! queue ! h264parse ! omxh264dec ! nveglglessink -e
+	cap = cv2.VideoCapture("filesrc location=~/Documents/your_name.mp4 ! qtdemux name=demux demux.video_0 ! queue ! h264parse ! omxh264dec ! nveglglessink -e", cv2.CAP_GSTREAMER)
+
+[v] - stream RTSP, use NVDEC
+	gst-launch-1.0 rtspsrc location=rtsp://admin:abcd1234@192.168.1.8:554/h265/ch1/main/av_stream ! decodebin ! nvvidconv ! video/x-raw,format=I420,width=1920,height=1080 ! videoconvert ! nveglglessink -e
+	cap = cv2.VideoCapture("rtspsrc location=rtsp://admin:abcd1234@192.168.1.8:554/h265/ch1/main/av_stream ! decodebin ! nvvidconv ! video/x-raw, format=I420, width=1920, height=1080 ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
