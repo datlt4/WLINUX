@@ -1,0 +1,13 @@
+https://medium.com/codable/face-anti-spoofing-starter-kit-f248ed195a3c
+
+https://paperswithcode.com/task/face-anti-spoofing
+
+https://paperswithcode.com/paper/learning-generalized-spoof-cues-for-face-anti
+
+https://github.com/vis-var/lgsc-for-fas
+
+https://github.com/Podidiving/lgsc-for-fas-pytorch
+
+https://github.com/ZitongYu/CDCN
+
+https://paperswithcode.com/paper/searching-central-difference-convolutional
