@@ -1,5 +1,5 @@
 
-## [INFO] Jetson Download Center
+## [NOTE] Jetson Download Center
 **_Reference:_**
 
     https://developer.nvidia.com/embedded/downloads
@@ -79,11 +79,11 @@ deb http://ports.ubuntu.com/ubuntu-ports/ bionic-security multiverse
     
     snap install nano
 
-## [INFO] Check available camera
+## [TUITORIAL] Check available camera
 
     ls -ltrh /dev/video*
 
-## [INFO] Jetson Nano CSI-Camera
+## [TUITORIAL] Jetson Nano CSI-Camera
 
     git clone https://github.com/JetsonHacksNano/CSI-Camera.git
     git checkout v2.0
@@ -107,7 +107,7 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
     add "-o Acquire::Check-Valid-Until=false" into the end of command.
     eg: sudo apt update -o Acquire::Check-Valid-Until=false
 
-## [INFO] Uninstall OpenCV Completely
+## [TUITORIAL] Uninstall OpenCV Completely
 **_Reference_**
 
     https://installlion.com/ubuntu/xenial/universe/p/python-opencv/uninstall/index.html
@@ -124,7 +124,7 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
 
     sudo apt-get purge --auto-remove python-opencv
 
-## [INFO] Install OpenCV 3.4.6
+## [TUITORIAL] Install OpenCV 3.4.6
 **_[ ] Reference:_**
 
     https://github.com/jkjung-avt/jetson_nano.git
@@ -182,7 +182,7 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
     sudo ldconfig
     pkg-config --modversion opencv
 
-## [INFO] Install OpenCV 4.1.0
+## [TUITORIAL] Install OpenCV 4.1.0
 #### Method `1`
 
     git clone https://github.com/JetsonHacksNano/buildOpenCV
@@ -248,7 +248,7 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
     make -j2
     sudo make install
 
-## Install Tensorflow-gpu==1.15.0
+## [TUITORIAL] Install Tensorflow-gpu==1.15.0
 **_[ ]Reference:_**
 
     https://github.com/karaage0703/jetson-nano-tools
@@ -298,7 +298,7 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
     sudo pip3 install numpy==1.18
 
 
-## Pytorch v1.4.0 for Jetson Nano
+## [TUITORIAL] Pytorch v1.4.0 for Jetson Nano
 #### Pytorch v1.4.0 for Jetson Nano
 **_[ ] Reference:_**
 
@@ -351,7 +351,7 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
 |v1.4|v0.5.0|
 
 
-## Generating TensorRT Engines from TensorFlow
+## [TUITORIAL] Generating TensorRT Engines from TensorFlow
 **_[ ] Reference:_**
     https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt_401/tensorrt-api/python_api/index.html
 
@@ -372,7 +372,7 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
     
     pip3 install tensorrt-*_16.04-cp35-cp35m-linux_x86_64.whl
 
-## Install Jupiter Lab
+## [TUITORIAL] Install Jupiter Lab
 
     sudo apt install nodejs npm
     sudo apt install python3-pip
@@ -387,16 +387,16 @@ jupyter notebook remote
     ssh -N -f -L localhost:8888:localhost:8889 jetson@192.168.137.189
     localhost:8888
 
-## Cài đặt Anaconda
+## [TUITORIAL] Setup Anaconda
 **_[ ] Reference:_**
 
     https://www.digitalocean.com/community/tutorials/how-to-install-anaconda-on-ubuntu-18-04-quickstart
 
-## Install Scipy
+## [TUITORIAL] Install Scipy
 
     sudo apt-get install python3-scipy
 
-## nvcc not found - darknet
+## [NOTE] nvcc not found - darknet
 
 which nvcc
     
@@ -406,7 +406,7 @@ which nvcc
 
 ===========
 
-## Build DeepStream SDK
+## [TUITORIAL] Build DeepStream SDK
     sudo apt install \
         libssl1.0.0 \
         libgstreamer1.0-0 \
@@ -431,7 +431,7 @@ which nvcc
 
     https://docs.nvidia.com/metropolis/deepstream/4.0/dev-guide/index.html
 
-## Cài đặt TensorRT
+## [TUITORIAL] Setup TensorRT
 **_[ ] Reference:_**
     
     https://blog.csdn.net/ctwy291314/article/details/103507846
@@ -448,7 +448,7 @@ Tải các file deb sau được đề cập trong link trên:
     graphsurgeon-tf_5.1.6-1+cuda10.0_arm64.deb
     uff-converter-tf_5.1.6-1+cuda10.0_arm64.deb
 
-## Install PyQt5 for jetson nano
+## [TUITORIAL] Install PyQt5 for jetson nano
 Install PyQt5
 
     sudo apt-get install python3-pyqt5
@@ -457,7 +457,7 @@ Install QtCreator
 
     sudo apt-get install qtcreator
 
-## Torch model 2 ONNX
+## [TUITORIAL] Torch model 2 ONNX
 
     import torch
     import torchvision
@@ -476,7 +476,7 @@ Install QtCreator
 
     torch.onnx.export(faceReg, dummy_input, "insightfaceV2.onnx", verbose=True, input_names=input_names, output_names=output_names)
 
-## ONNX to TensorRT
+## [TUITORIAL] ONNX to TensorRT
 
     import os
     import tensorrt as trt
@@ -502,7 +502,7 @@ Install QtCreator
         with open(engine_file_path, "wb") as f:
             f.write(engine.serialize())
 
-## .pb to TensorRT
+## [TUITORIAL] .pb to TensorRT
 **_[ ] Reference:_**
 
     https://iwannatechcom.sharepoint.com/:w:/r/sites/iwanna-face/_layouts/15/Doc.aspx?sourcedoc=%7BA5AA2F4C-B3B8-4854-98CA-0913AF8227C1%7D&file=Speed%20up%20TensorFlow%20Inference%20on%20GPUs%20with%20TensorRT.doc&action=default&mobileredirect=true
@@ -534,7 +534,7 @@ Install QtCreator
     with open('facebox.pb', 'wb') as f:
         f.write(trt_graph.SerializeToString())
 
-## Object Detection in 10 lines code
+## [TUITORIAL] Object Detection in 10 lines code
 
     sudo apt-get update
     sudo apt-get install git cmake libpython3-dev python3-numpy
@@ -547,7 +547,7 @@ Install QtCreator
     sudo make install
     sudo ldconfig
 
-## RTSP link
+## [NOTE] RTSP link
     https://www.unifore.net/ip-video-surveillance/network-camera-rtsp-url-address-and-port-number.html
 
     [RTSP] rtsp://admin:abcd1234@192.168.1.8:554/h265/ch1/main/av_stream
@@ -557,7 +557,7 @@ Install QtCreator
     [SADP Tool] https://www.hikvision.com/en/support/tools/destop-tools/sadp-for-windows/
 
 
-## GSTREAMER vs OpenCV
+## [NOTE] GSTREAMER vs OpenCV
 [v] - stream video, use NVDEC
 
     gst-launch-1.0 filesrc location=~/Documents/your_name.mp4 ! qtdemux name=demux demux.video_0 ! queue ! h264parse ! omxh264dec ! nveglglessink -e
@@ -572,7 +572,7 @@ Install QtCreator
 
 ===========
 
-## Reference
+## [REFERENCE]
 
 #### Use NVIDIA DeepStream to Accelerate H.264 Video Stream Decoding
 
@@ -641,7 +641,7 @@ Install QtCreator
 
 ===========
 
-## Encrypt python code
+## [TUITORIAL] Encrypt python code
 **_[ ] Reference:_**
 Step `1`:
 
@@ -659,11 +659,11 @@ Step `2`:
         python3 encrypt.py -s /home/jetson/Documents/ -e js_gui.py:main -o /home/jetson/Documents/build
 
 
-## request
+## [TUITORIAL] request
 curl -X POST http://x.x.x.x:8080/predictons/getembed -T "m.jpg"
 
 
-## cron job
+## [TUITORIAL] CRONJOB
 #### Create job
     #pip install python-crontab
     from crontab import CronTab
