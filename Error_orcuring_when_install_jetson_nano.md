@@ -534,6 +534,40 @@ Install QtCreator
     with open('facebox.pb', 'wb') as f:
         f.write(trt_graph.SerializeToString())
 
+**_load TensorRT model_**
+
+    import tensorflow as tf
+    from tensorflow.python.platform import gfile
+
+    with gfile.FastGFile(FLAGS.model_save_dir.format(log_id) + '/graph.pb', 'rb') as f:
+        graph_def = tf.GraphDef()
+        graph_def.ParseFromString(f.read())
+        x, y, y_ = tf.import_graph_def(graph_def,
+                                        return_elements=['data/inputs',
+                                                         'output/network_activation',
+                                                         'data/correct_outputs'],
+                                        name='')
+
+## [ERROR] Extremely long model loading time problem of TF-TRT
+
+**_Reference_**
+
+    https://jkjung-avt.github.io/tf-trt-revisited/
+
+**_Reason_**
+
+    The default `python implementation` of python3 `protobuf` module runs too slowly on the Jetson platforms.
+
+**_Solution_**
+
+    Replace it with `cpp implementaion` of that same module.
+
+**_Install protobuf-3.6.1_**
+
+    wget https://raw.githubusercontent.com/jkjung-avt/jetson_nano/master/install_protobuf-3.6.1.sh
+    ./install_protobuf-3.6.1.sh
+
+
 ## [TUITORIAL] Object Detection in 10 lines code
 
     sudo apt-get update
