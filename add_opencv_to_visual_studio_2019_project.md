@@ -24,12 +24,12 @@ Tell the compiler how the OpenCV library looks. This is done by providing a path
 ## Step `5`: Add to Library Directories
 Tell the linker where it can find the lib files for different modules.
 
-    Project → YourProjectName Properties → go to VC++ Directories → <Edit…> in Library Directories → add -  C:\opencv\build\x64\vc15\bin
+    Project → YourProjectName Properties → go to VC++ Directories → <Edit…> in Library Directories → add -  C:\opencv\build\x64\vc15\lib
 
 ## Step `6`: Add Additional Dependencies
 List `opencv_world`.
 
-    Project → YourProjectName Properties → go to Linker → Input → <Edit…> in Additional Dependencies → add -  opencv_world346d.dll
+    Project → YourProjectName Properties → go to Linker → Input → <Edit…> in Additional Dependencies → add -  C:\opencv\build\x64\vc15\bin\opencv_world346d.dll
 
 ## Check out demo code!
 
