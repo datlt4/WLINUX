@@ -29,7 +29,7 @@ Tell the linker where it can find the lib files for different modules.
 ## Step `6`: Add Additional Dependencies
 List `opencv_world`.
 
-    Project → YourProjectName Properties → go to Linker → Input → <Edit…> in Additional Dependencies → add -  C:\opencv\build\x64\vc15\bin\opencv_world346d.dll
+    Project → YourProjectName Properties → go to Linker → Input → <Edit…> in Additional Dependencies → add -  C:\opencv\build\x64\vc14\lib\opencv_world346d.lib
 
 ## Check out demo code!
 
