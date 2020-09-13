@@ -74,6 +74,16 @@ deb http://ports.ubuntu.com/ubuntu-ports/ bionic-security multiverse
 # deb-src http://ports.ubuntu.com/ubuntu-ports/ bionic-security multiverse
 ```
 
+## [ERROR] The repository does not have a Release file
+Run `sudo apt update` and get error:
+    E: The repository 'http://ppa.launchpad.net/armagetronad-dev/ppa/ubuntu bionic Release' does not have a Release file. 
+    N: Updating from such a repository can't be done securely, and is therefore disabled by default. 
+    N: See apt-secure(8) manpage for repository creation and user configuration details.
+
+**_Solution_**:
+    sudo apt-add-repository -r ppa:armagetronad-dev/ppa
+    sudo apt update -q
+
 ## [ERROR] `E: Unable to locate package nano`
 **_Solution:_**
     
