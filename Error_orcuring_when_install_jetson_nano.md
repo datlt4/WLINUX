@@ -82,6 +82,7 @@ Run `sudo apt update` and get error:
     N: See apt-secure(8) manpage for repository creation and user configuration details.
 
 **_Solution_**:
+
     sudo apt-add-repository -r ppa:armagetronad-dev/ppa
     sudo apt update -q
 
