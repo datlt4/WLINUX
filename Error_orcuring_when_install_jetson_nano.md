@@ -399,6 +399,10 @@ jupyter notebook remote
     ssh -N -f -L localhost:8888:localhost:8889 jetson@192.168.137.189
     localhost:8888
 
+Add Conda environment to jupyter notebook
+    
+    python -m ipykernel install --user --name M --display-name "MINH"
+
 ## [TUITORIAL] Setup Anaconda
 **_[ ] Reference:_**
 
