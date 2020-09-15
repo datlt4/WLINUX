@@ -44,6 +44,10 @@
     sudo apt update -q
     ibus restart
 
+[**ERROR**] Can't connect ibus
+
+    ibus-daemon &
+
 ## Install KDE-Plasma
 
     sudo apt install tasksel
