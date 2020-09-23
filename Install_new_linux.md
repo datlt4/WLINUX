@@ -57,6 +57,8 @@
     sudo apt install sddm
     sudo dpkg-reconfigure sddm
 
+[**Customize KDE-Plasma - Dark Material Blur**](https://www.youtube.com/watch?v=VL7B6oBaTfs&list=PL9hShGTZRBvLMMPn6QjRJk6zklF-ZqRMo)
+
 ## Install GPU Driver - Support higher graphic resolutions or how GPU talk to python interface.
 
 [**Download**](https://www.nvidia.com/Download/index.aspx)
