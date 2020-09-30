@@ -24,6 +24,14 @@
     wget https://go.skype.com/skypeforlinux-64.deb
     sudo apt install ./skypeforlinux-64.deb
 
+Start Teamviewer
+
+    /usr/bin/teamviewer
+
+Get ID
+
+    sudo teamviewer --info print version, status, id
+
 ## Install `Visual Code`
 
     https://code.visualstudio.com/download
