@@ -2,7 +2,7 @@
 
 ## Install `htop`
 
-    sudo apt install cmake htop tree
+    sudo apt --assume-yes install cmake htop tree
     sudo apt-get update
     sudo apt-get --assume-yes upgrade
     sudo apt-get --assume-yes install tmux build-essential gcc g++ make binutils
@@ -65,6 +65,18 @@ Get ID
     sudo apt install sddm
     sudo dpkg-reconfigure sddm
 
+Customize:
+
+    sudo apt install g++ cmake libx11-dev libxext-dev qtbase5-dev libqt5svg5-dev libqt5x11extras5-dev libqt4-dev qttools5-dev-tools libkf5windowsystem-dev git
+    sudo add-apt-repository ppa:papirus/papirus
+    sudo apt-get update
+    sudo apt-get install --install-recommends adapta-kde 
+
+Install Kvantum
+
+    sudo add-apt-repository ppa:papirus/papirus
+    sudo apt install qt5-style-kvantum
+
 [**Customize KDE-Plasma - Dark Material Blur**](https://www.youtube.com/watch?v=VL7B6oBaTfs&list=PL9hShGTZRBvLMMPn6QjRJk6zklF-ZqRMo)
 
 ## Install GPU Driver - Support higher graphic resolutions or how GPU talk to python interface.
@@ -81,6 +93,24 @@ Get ID
     cat /etc/modprobe.d/blacklist-nvidia-nouveau.conf
     sudo update-initramfs -u
     sudo reboot
+
+[**ERROR**] `ERROR: An NVIDIA kernel module 'nvidia-drm' appears to already be loaded in your kernel.  This may be because it is in use (for example, by an X server, a CUDA program, or the NVIDIA Persistence Daemon)`
+
+    sudo systemctl set-default multi-user.target
+    sudo reboot 0
+
+    sudo ./NVIDIA-Linux-x86_64-440.44.run
+
+    sudo systemctl set-default graphical.target
+    sudo reboot 0
+
+[**ERROR**] `Possible missing firmware /lib/firmware/rtl_nic/rtl8105e-1.fw for module r8169 with 2.6.39 kernel`
+
+    git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+    sudo cp -r linux-firmware/rtl_nic/ /lib/firmware/
+    sudo update-initramfs -u
+
+
 
 ## Install CUDA - allows us a way to write code for GPUs (Install cuda 10.0 - 10.1)
 
