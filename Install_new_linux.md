@@ -13,6 +13,21 @@
     
     sudo apt install openssh-server openssh-client
 
+## Install the latest version of `cmake`
+
+    sudo apt remove --purge --auto-remove cmake
+
+Download `.sh` file from [this link](https://cmake.org/download/)
+
+    $ wget https://github.com/Kitware/CMake/releases/download/v3.18.3/cmake-3.18.3-Linux-x86_64.sh
+    $ sudo sh cmake-3.18.3-Linux-x86_64.sh --prefix=/opt/cmake
+    
+Add to the end of file `.bashrc`
+
+    $ export PATH=/opt/cmake/cmake-3.18.3-Linux-x86_64/bin:${PATH:+:${PATH}}
+
+    $ cmake --version
+
 ## Install TeamVier
 
     sudo apt update -y && sudo apt upgrade -y
