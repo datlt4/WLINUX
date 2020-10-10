@@ -125,15 +125,25 @@ Install Kvantum
     sudo cp -r linux-firmware/rtl_nic/ /lib/firmware/
     sudo update-initramfs -u
 
+[**ERROR**]  `Restore nouveau driver and get desktop working`.
 
+    sudo apt-get purge nvidia*
+    sudo apt-get install xserver-xorg-video-nouveau
+    sudo reboot now
+
+[**ERROR**] `PCIe BUS error severity=Corrected`
+
+    cp /etc/default/grub ~/grub.backup
+    sudo nano /etc/default/grub
+    GRUB_CMDLINE_LINUX_DEFAULT="quite splash pci=noaer"
 
 ## Install CUDA - allows us a way to write code for GPUs (Install cuda 10.0 - 10.1)
 
     sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub && echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" | sudo tee /etc/apt/sources.list.d/cuda.list
-    sudo apt-get update && sudo apt-get -o Dpkg::Options::="--force-overwrite" install cuda-10-0 cuda-drivers
-    echo 'export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.bashrc && source ~/.bashrc && sudo ldconfig
+    sudo apt-get update && sudo apt-get -o Dpkg::Options::="--force-overwrite" install cuda-10-1 cuda-drivers
+    echo 'export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.bashrc && source ~/.bashrc && sudo ldconfig
     nvcc --version
-    nvidia-smi -l 1
+    nvidia-smi
 
 ## Install CuDNN - Primitives for Deep Learning Network
 
@@ -228,3 +238,28 @@ Install Pycuda
 ## Install Pip
 
     sudo apt install python3-pip -y
+
+## GPU check AI framework
+
+**Pytorch**
+
+    import torch
+    torch.cuda.current_device()
+    torch.cuda.device(0)
+    torch.cuda.device_count()
+    torch.cuda.get_device_name(0)
+    torch.cuda.is_available()
+
+**Mxnet**
+
+    from mxnet.runtime import feature_list
+    _ = mx.nd.array([1, 2, 3], ctx=mx.gpu(0))
+    
+**Tensorflow**
+
+    import tensorflow as tf
+    from tensorflow.python.client import device_lib
+    print(device_lib.list_local_devices())
+    with tf.Session() as sess:
+        devices = sess.list_devices()
+
