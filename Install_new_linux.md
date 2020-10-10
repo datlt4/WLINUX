@@ -153,6 +153,65 @@ Install Kvantum
 
     sudo dpkg -i libcudnn7-doc_7.6.5.32-1+cuda10.1_amd64.deb
 
+## Install TensorRT
+
+[ACCESS](https://developer.nvidia.com/nvidia-tensorrt-download) to download the version of TensorRT that you are interested in.
+
+    $ os="ubuntu1804"
+    $ tag="cuda10.0-trt7.0.0.11-ga-20191216"
+    $ sudo dpkg -i nv-tensorrt-repo-${os}-${tag}_1-1_amd64.deb
+    $ sudo apt-key add /var/nv-tensorrt-repo-${tag}/7fa2af80.pub
+    $ sudo apt update
+    $ sudo apt upgrade -y
+    $ sudo apt install tensorrt
+    $ sudo apt-get install python3-libnvinfer-dev
+    $ sudo apt-get install uff-converter-tf
+
+Install Onnx
+    
+    $ git clone https://github.com/NVIDIA/TensorRT.git
+    $ cd TensorRT/tools/onnx-graphsurgeon/
+    $ make build
+    $ python -m pip install onnx_graphsurgeon-X.Y.Z-py2.py3-none-any.whl --user
+
+where `X, Y, Z` if the vertion number.
+
+Verify the installation.
+
+    $ dpkg -l | grep TensorRT
+
+Install TensorRT python
+
+    $ pip install nvidia-pyindex
+    $ pip install nvidia-tensorrt
+
+Install Pycuda
+
+    $ conda activate M
+    $ arch=$(uname -m)
+    $ folder=${HOME}/src
+    $ mkdir -p $folder
+    $ sudo apt-get install -y build-essential python3-dev
+    $ sudo apt-get install -y libboost-python-dev libboost-thread-dev
+    $ sudo /home/m/.conda/envs/M/bin/pip install setuptools==41.0.0
+    $ boost_pylib=$(basename /usr/lib/${arch}-linux-gnu/libboost_python*-py3?.so)
+    $ boost_pylibname=${boost_pylib%.so}
+    $ boost_pyname=${boost_pylibname/lib/}
+    $ pushd $folder
+    $ wget https://files.pythonhosted.org/packages/5e/3f/5658c38579b41866ba21ee1b5020b8225cec86fe717e4b1c5c972de0a33c/pycuda-2019.1.2.tar.gz
+    $ CPU_CORES=$(nproc)
+    $ tar xzvf pycuda-2019.1.2.tar.gz
+    $ cd pycuda-2019.1.2
+    $ sudo /home/m/.conda/envs/M/bin/python ./configure.py --python-exe=/home/m/.conda/envs/M/bin/python --cuda-root=/usr/local/cuda --cudadrv-lib-dir=/usr/lib/${arch}-linux-gnu --boost-inc-dir=/usr/include --boost-lib-dir=/usr/lib/${arch}-linux-gnu --boost-python-libname=${boost_pyname} --boost-thread-libname=boost_thread
+    $ make -j$CPU_CORES
+    $ sudo /home/m/.conda/envs/M/bin/python setup.py build
+    $ sudo /home/m/.conda/envs/M/bin/python setup.py install
+    $ popd
+    $ sudo /home/m/.conda/envs/M/bin/python -c "import pycuda; print('pycuda version:', pycuda.VERSION)"
+
+
+
+
 ## Install Anaconda
 
 **[Access]**
