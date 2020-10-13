@@ -34,18 +34,18 @@ Add to the end of file `.bashrc`
     wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
     sudo apt install ./teamviewer_amd64.deb
 
+*Start Teamviewer*
+
+    /usr/bin/teamviewer
+
+*Get ID*
+
+    sudo teamviewer --info print version, status, id
+
 ## Install `Skype`
 
     wget https://go.skype.com/skypeforlinux-64.deb
     sudo apt install ./skypeforlinux-64.deb
-
-Start Teamviewer
-
-    /usr/bin/teamviewer
-
-Get ID
-
-    sudo teamviewer --info print version, status, id
 
 ## Install `Visual Code`
 
@@ -252,7 +252,8 @@ Install Pycuda
 
 **Mxnet**
 
-    from mxnet.runtime import feature_list
+    import mxnet as mx
+    mx.runtime.feature_list()
     _ = mx.nd.array([1, 2, 3], ctx=mx.gpu(0))
     
 **Tensorflow**
