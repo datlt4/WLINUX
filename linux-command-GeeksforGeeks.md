@@ -1,5 +1,230 @@
 [**SOURCE**](https://www.geeksforgeeks.org/tag/linux-command/)
 
+# [ZIP command in Linux](https://www.geeksforgeeks.org/zip-command-in-linux-with-examples/)
+
+- Compress files in a single `.zip` file
+    
+      $ zip [options] zipfile.zip  files  list
+
+- Extract files from a `.zip` file
+
+      $ unzip myfile.zip
+
+   |Options|Description|
+   |:---:|---|
+   |`-d`|Removes the file from the zip archive|
+   |`-u`|Update the specified list of files or add new files to the existing zip file|
+   |`-m`|Deletes the original files after zipping|
+   |`-r`|Zip a directory recursively|
+   |`-x`|Exclude the files in creating the zip|
+   |`-v`|Verbose mode|
+
+# [TAR command in Linux](https://www.geeksforgeeks.org/tar-command-linux-examples/?ref=lbp)
+
+    tar [options] [archive-file] [file or directory to be archived]
+
+|Options|Description|
+|:---:|---|
+|`-c`|Creates Archive|
+|`-x`|Extract the archive|
+|`-f`|creates archive with given filename|
+|`-t`|displays or lists files in archived file|
+|`-u`|archives and adds to an existing archive file|
+|`-v`|Displays Verbose Information|
+|`-A`|Concatenates the archive files|
+|`-z`|zip, tells tar command that create tar file using `gzip`|
+|`-j`|filter archive tar file using `tbzip`|
+|`-W`|Verify a archive file|
+|`-r`|update or add file or directory in already existed `.tar` file|
+
+1. Creating an uncompressed `tar` Archive.
+
+       $ tar cvf file.tar *.c
+
+1. Extracting files from Archive
+
+       $ tar xvf file.tar
+
+1. `gzip` compression on the tar Archive
+
+       $ tar cvzf file.tar.gz *.c
+
+1. Extracting a gzip tar Archive `*.tar.gz`
+
+       $ tar xvzf file.tar.gz
+
+1. Creating compressed tar archive file in Linux
+
+       $ tar cvfj file.tar.tbz example.cpp
+
+1. Update existing tar file in Linux
+
+       $ tar rvf file.tar *.c
+
+1. Viewing the Archive
+
+       $ tar tvf file.tar
+       >> -rwxrwxrwx root/root       191 2017-09-17 02:20 os2.c
+       >> -rwxrwxrwx root/root       218 2017-09-17 02:20 os3.c
+       >> -rwxrwxrwx root/root       493 2017-09-17 02:20 os4.c
+
+# [`IPCS` command in Linux with examples](https://www.geeksforgeeks.org/ipcs-command-linux-examples/)
+
+`ipcs` shows information on the inter-process communication facilities for which the calling process has read access. By default, it shows information about all three resources: shared memory segments, message queues, and semaphore arrays.
+Without options, the information shall be written in short format for message queues, shared memory segments, and semaphore sets that are currently active in the system. Otherwise, the information that is displayed is controlled by the options specified.
+
+# [`dd` command in Linux](https://www.geeksforgeeks.org/dd-command-linux/)
+
+Safely and reliably make perfect copies of drives, partitions, and filesystems with the Linux dd tool. Whether you're trying to rescue data from a dying storage drive, backing up archives to remote storage, or making a perfect copy of an active partition somewhere else, you'll need to know how to safely and reliably copy drives and filesystems.
+
+1. Backup the entire hard disk
+
+- To backup an entire copy of a hard disk to another hard disk connected to the same system, execute the `dd` command as shown. In this dd command example, the UNIX device name of the source hard disk is /dev/hda, and device name of the target hard disk is /dev/hdb. 
+
+      $ dd if = /dev/sda of = /dev/sdb
+
+1. Backup a Partition
+
+      $ dd if=/dev/sda1 of=~/partition.img
+
+1. Create an image of a hard disk
+
+      $ dd if=/dev/sda of=~/sdadisk.img
+
+1. Restore using the hard disk image
+
+      $ dd if=hdadisk.img of=/dev/hdb
+
+1. To create CDROM backup
+
+      $ dd if=/dev/cdrom of=tgsservice.iso bs=2048
+
+# [*Soft Link* And *Hard Link* In Linux](https://ostechnix.com/explaining-soft-link-and-hard-link-in-linux-with-examples/#:~:text=What%20is%20Soft%20Link%20And,to%20a%20non%2Dexistent%20file)
+
+- A `symbolic` or `soft link` is an actual link to the original file. If you delete the original file, the soft link has no value, because it points to a non-existent file.
+
+      $ ln -s source.file softlink.file
+
+- A `hard link` is a mirror copy of the original file. But hard link, if you delete the original file, the hard link will still has the data of the original file. Because hard link acts as a mirror copy of the original file.
+
+      $ ln source.file hardlink.file
+
+# [`crontab` in Linux](https://www.geeksforgeeks.org/crontab-in-linux-with-examples/)
+
+The crontab is a list of commands that you want to run on a regular schedule.
+Linux Crontab format:
+
+    MIN HOUR DOM MON DOW CMD
+
+|Field|Description|Allowed Value|
+|:---:|---|---|
+|`MIN`|Minute field|`0` to `59`|
+|`HOUR`|Hour field|`0` to `23`|
+|`DOM`|Day of Month|`1` to `31`|
+|`MON`|Month field|`1` to `12`|
+|`DOW`|Day Of Week|`0` to `6`|
+|`CMD`|Command|Any command to be executed.|
+
+- Using Operators
+
+|Operator|Name|Description|
+|:---:|---|---|
+|`*`|asterisk|Stands for all values. Use this operator to keep tasks running during all months, or all days of the week.|
+|`,`|comma|specifies separate individual values.|
+|`-`|dash|Indicates a range of values.|
+|`/`|forward-slash|Used to divide a value into steps. (*/2 would be every 2 uints, */3 would be every 3 uint, */10 would be every tenth, etc.)|
+
+- Cron special keywords and its meaning
+
+|Keyword|Equivalent|
+|:---:|:---:|
+|`@reboot`|Run once after `reboot`.|
+|`@yearly`|Run once a year, ie. `0 0 1 1 *`|
+|`@annually`|Run once a year, ie. `0 0 1 1 *`|
+|`@monthly`|Run once a month, ie. `0 0 1 * *`|
+|`@weekly`|Run once a week, ie. `0 0 * * 0`|
+|`@daily`|Run once a day, ie. `0 0 * * *`|
+|`@hourly`|Run once an hour, ie. `0 * * * *`|
+
+
+- Common command
+
+|Command|Description|
+|:---:|---|
+|`crontab -e`|tạo hoặc chỉnh sửa file crontab|
+|`crontab -l`|hiển thị file crontab|
+|`crontab -r`|xóa file crontab|
+
+
+# `ls` command
+
+1. List and sort the file by modification time.
+
+       $ ls -t
+  
+- In Reverse order
+
+      $ ls -tr
+
+1. Display one file per line
+
+       $ ls -1
+
+1. Display all information about files / directories.
+
+       $ ls -l
+       >> -rw-rw-r-- 1 m m  7178 Thg 1  3 12:39 Minh_cho.md
+
+   - Field explanation:
+       - Field 1 - File permissions
+       - Field 2 - Number of links
+       - Field 3 - Owner
+       - Field 4 - Group
+       - Field 5 - Size (in bytes)
+       - Field 6 - Last modified date and time
+       - Field 7 - File name
+
+   - Display File UID and GID instead username and group name
+
+         $ ls -n
+         >> total 164
+         >> -rw-rw-r-- 1 1000 1000  1948 Thg 1  3 12:39 add_opencv_to_visual_studio_2019_project.md
+         >> -rw-rw-r-- 1 1000 1000 25081 Thg 1  3 12:39 Error_orcuring_when_install_jetson_nano.md
+         >> -rw-rw-r-- 1 1000 1000   204 Thg 1  3 12:39 hive_sample.txt
+         >> -rw-rw-r-- 1 1000 1000  5099 Thg 1  3 12:39 install_hadoop_hive.md
+         >> -rw-rw-r-- 1 1000 1000  8734 Thg 1 11 01:59 Install_new_linux.md
+
+
+1. Display file size in human readable format
+
+       $ ls -lh
+       >> -rw-rw-r-- 1 m m 7,1K Thg 1  3 12:39 Minh_cho.md
+
+1. Display directory information
+
+       $ ls -ld serial_number/
+       >> drwxrwxr-x 2 m m 4096 Thg 1  3 12:39 serial_number/
+
+1. Display hidden files
+
+       $ ls -la
+       >> total 20
+       >> drwxrwxr-x 2 m m 4096 Thg 1  3 12:39 .
+       >> drwxrwxr-x 6 m m 4096 Thg 1 11 01:40 ..
+       >> drwxrwxr-x 1 m m 2210 Thg 1  3 12:39 folder
+       >> -rw-rw-r-- 1 m m 4139 Thg 1  3 12:39 serial_number_nano.py
+       >> -rw-rw-r-- 1 m m   64 Thg 1  3 12:39 .unique
+
+       $ ls -lA
+       >> total 12
+       >> drwxrwxr-x 1 m m 2210 Thg 1  3 12:39 folder
+       >> -rw-rw-r-- 1 m m 4139 Thg 1  3 12:39 serial_number_nano.py
+       >> -rw-rw-r-- 1 m m   64 Thg 1  3 12:39 .unique
+
+1. Display files recursively
+
+       $ ls -R
+
 # Regular Expression
 
     import re
@@ -345,3 +570,7 @@ Ccrypt is a command line tool for encryption and decryption of data. Ccrypt is b
 
        $ curl http://wttr.in/Hanoi
 
+1. Display a calendar and date of Easter
+
+       $ cal
+       $ ncal
