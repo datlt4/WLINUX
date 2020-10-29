@@ -1,4 +1,4 @@
-skyp[REFERENCE](https://towardsdatascience.com/a-definitive-guide-for-setting-up-a-deep-learning-workstation-with-ubuntu-18-04-5459d70e19c3)
+[REFERENCE](https://towardsdatascience.com/a-definitive-guide-for-setting-up-a-deep-learning-workstation-with-ubuntu-18-04-5459d70e19c3)
 
 ## Install `htop`
 

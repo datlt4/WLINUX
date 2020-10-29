@@ -1,5 +1,141 @@
 [**SOURCE**](https://www.geeksforgeeks.org/tag/linux-command/)
 
+# [SED Command in Linux](https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/)
+
+Sed command in Unix OS can perform a lot of function like searching, find and replace, insertion or deletion.
+
+1. **Syntax**:
+
+      sed OPTIONS... [SCRIPT] [INPUTFILE...] 
+
+1. **Substituting string**
+
+   `s` specifies the substitution operation.
+
+   `/` are delimiters.
+
+   `[nth]` specifies the nth occurences of a pattern in a line. (`empty` means `1`).
+   
+   `g` specifies all the occurences of a pattern in a line.
+
+   `[line_number]` specifies line number. (`empty` means `all`).
+
+   `$` the last line.
+
+       $ sed 's/[search_pattern]/[replacement_string]/[nth]' [file_name]
+       $ sed 's/unix/LINUX/' geekfile.txt
+       $ sed 's/unix/LINUX/2' geekfile.txt
+
+       $ sed 's/[search_pattern]/[replacement_string]/g' [file_name]
+       $ sed 's/unix/LINUX/g' geekfile.txt
+
+       $ sed 's/[search_pattern]/[replacement_string]/[nth]g' [file_name]
+       $ sed 's/unix/LINUX/3g' geekfile.txt
+
+       $ sed '[line_number[,line_number]] s/[search_pattern]/[replacement_string]/[nth]g' [file_name]
+       $ sed '[line_number,$] s/[search_pattern]/[replacement_string]/[nth]g' [file_name]
+       $ sed '3 s/unix/linux/' geekfile.txt
+       $ sed '1,3 s/unix/linux/' geekfile.txt
+       $ sed '2,$ s/unix/linux/' geekfile.txt
+
+1. **Replace with re**
+       
+       $ sed 's/\([re_pattern]\)/\1/[nth]g'
+       $ echo "Welcome To The Geek Stuff" | sed 's/\(\b[A-Z]\)/\(\1\)/g'
+
+1. **Duplicating the replaced line**
+
+    `p` specifies duplicating.
+
+    `n` print only the replaced lines
+
+       $ sed [-n] 's/[search_pattern]/[replacement_string]/p' [file_name]
+       $ sed 's/unix/linux/p' geekfile.txt
+       $ sed -n 's/unix/linux/p' geekfile.txt
+
+1. **Deleting lines from a particular file**
+
+    `d` specifies deleting.
+
+       $ sed '[line_number[,line_number]]d' [file_name]
+       $ sed '5d' filename.txt
+       $ sed '$d' filename.txt
+       $ sed '3,6d' filename.txt
+       $ sed '12,$d' filename.txt
+
+       $ sed '/[re_pattern]/d' [file_name]
+       $ sed '/abc/d' filename.txt
+
+1. Insert one blank line after each line
+
+       $ sed G M.log
+
+1. Insert two blank lines
+
+       $ sed 'G;G' M.log
+
+1. Delete blank lines and insert one blank line after each line
+
+       $ sed '/^$/d;G' M.log
+
+1. Insert a black line above every line which matches pattern
+
+       $ sed '/love/{x;p;x;}' M.log
+
+1. Insert a black line below every line which matches pattern
+
+       $ sed '/love/G' M.log
+
+1. Insert 4 spaces to the of every lines
+       
+       $ sed 's/^/    /' M.log
+
+1. Numbering each line of a file (left alignment)
+
+       $ sed =  M.log | sed 'N;s/\n/\t/'
+
+1. Numbering each line of a file (number on left, right-aligned)
+
+       $ sed = M.log | sed 'N; s/^/     /; s/ *\(.\{4,\}\)\n/\1  /'
+
+1. Numbering each line of a file (only if line is not blank)
+
+       $ sed '/./=' M.log | sed '/./N; s/\n/ /'
+       
+
+# [Permissions in Linux](https://www.geeksforgeeks.org/permissions-in-linux/)
+
+- e.g `1`:
+
+      $ chmod ugo-rwx [file_name]
+
+- e.g `2`:
+
+      $ chmod ug+rw,o-x [file_name]
+
+- e.g `3`:
+
+      $ chmod ug=rx,o+r [file_name]
+
+- e.g `4`:
+
+      $ chmod ug+rw,o-x [file_name]
+
+- e.g `5`:
+
+      $ chmod ugo+rwx [file_name]
+      $ chmod 777 [file_name]
+
+- e.g `6`:
+
+      $ chmod u=r,g=wx,o=rx [file_name]
+      $ chmod 435 [file_name] 
+
+- e.g `7`:
+
+      $ chmod ug+rwx,o=rx [file_name]
+      $ chmod 775 [file_name]
+
 # [ZIP command in Linux](https://www.geeksforgeeks.org/zip-command-in-linux-with-examples/)
 
 - Compress files in a single `.zip` file
@@ -247,7 +383,7 @@ Linux Crontab format:
    |:---:|---|---|
    |`[]` (square brackets)|A set of characters.|`>>> re.findall("[a-m]", sentence)`<br>`['g', 'e', 'i', 'e', 'a', 'h', 'a', 'e', 'b', 'e', 'a', 'i', 'f', 'l']`|
    |`.` (Dot)|match bất kỳ ký tự nào ngoại trừ `[\n]`.<br>`re.DOTALL` flag giúp `'.'` match bất kỳ ký tự nào kể cả `[\n]`.|`re.findall('...............', sentence)`<br>`['Nguyen Hien anh', ' - 06/03/1997, ', 'you are so beau']`|
-   |`|`|Or|`>>> re.findall("anh|Hien", sentence)`<br>`['Hien', 'anh']`|
+   |`\|`|Or|`>>> re.findall("anh|Hien", sentence)`<br>`['Hien', 'anh']`|
    |`*` (Star)|Check xem một string có được theo sau bởi **_0_** hoặc **_n_** ký tự.|`>>> re.findall("en*", 'Nguyen Hiennnn anh - 06/03/1997, you are so beautiful')`<br>`['en', 'ennnn', 'e', 'e']`|
    |`+` (Plus)|Check xem một string có được theo sau bởi **_1_** hoặc **_n_** ký tự.|`>>> re.findall("en+", 'Nguyen Hiennnn anh - 06/03/1997, you are so beautiful')`<br>`['en', 'ennnn']`|
    |`^` (Caret)|Starts with|`>>> re.findall("You are so cute", sentence)`<br>`[]`<br>`>>> re.findall("^Nguyen Hien anh", sentence)`<br>`['Nguyen Hien anh']`|
