@@ -383,7 +383,7 @@ Linux Crontab format:
    |:---:|---|---|
    |`[]` (square brackets)|A set of characters.|`>>> re.findall("[a-m]", sentence)`<br>`['g', 'e', 'i', 'e', 'a', 'h', 'a', 'e', 'b', 'e', 'a', 'i', 'f', 'l']`|
    |`.` (Dot)|match bất kỳ ký tự nào ngoại trừ `[\n]`.<br>`re.DOTALL` flag giúp `'.'` match bất kỳ ký tự nào kể cả `[\n]`.|`re.findall('...............', sentence)`<br>`['Nguyen Hien anh', ' - 06/03/1997, ', 'you are so beau']`|
-   |`\|`|Or|`>>> re.findall("anh|Hien", sentence)`<br>`['Hien', 'anh']`|
+   |`\|`|Or|`>>> re.findall("anh\|Hien", sentence)`<br>`['Hien', 'anh']`|
    |`*` (Star)|Check xem một string có được theo sau bởi **_0_** hoặc **_n_** ký tự.|`>>> re.findall("en*", 'Nguyen Hiennnn anh - 06/03/1997, you are so beautiful')`<br>`['en', 'ennnn', 'e', 'e']`|
    |`+` (Plus)|Check xem một string có được theo sau bởi **_1_** hoặc **_n_** ký tự.|`>>> re.findall("en+", 'Nguyen Hiennnn anh - 06/03/1997, you are so beautiful')`<br>`['en', 'ennnn']`|
    |`^` (Caret)|Starts with|`>>> re.findall("You are so cute", sentence)`<br>`[]`<br>`>>> re.findall("^Nguyen Hien anh", sentence)`<br>`['Nguyen Hien anh']`|
