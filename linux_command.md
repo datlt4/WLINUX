@@ -63,22 +63,41 @@
 
 1. Run ngrok server at remote Linux Machine
 
-        $ ngrok tcp 22
-        Forwarding tcp://0.tcp.ngrok.io:13212 -> localhost:22
+       $ ngrok tcp 22
+       Forwarding tcp://0.tcp.ngrok.io:13212 -> localhost:22
 
 1. Run SSH client on system to connect remote ssh running host
 
-        $ ssh user@0.tcp.ngrok.io -p 13212
+       $ ssh user@0.tcp.ngrok.io -p 13212
 
 1. Connect to the nearest data center around the world
 
-        $ ngrok tcp --region=ap 22
-        Forwarding tcp://0.tcp.ap.ngrok.io:12681-> localhost:22
+       $ ngrok tcp --region=ap 22
+       Forwarding tcp://0.tcp.ap.ngrok.io:12681-> localhost:22
 
 1. Connect to remote system by ssh to nearest ap (asia pacific) region end-point( 0.tcp.ap.ngrok.io ).
 
-        $ ssh user@0.tcp.ap.ngrok.io -p 12681
+       $ ssh user@0.tcp.ap.ngrok.io -p 12681
 
+## Create SSH tunel to a running colab notebook
+1. Generate `id_rsa.pub` of **your machine**
+
+       $ ssh-keygen
+       $ cat /home/${USER}/.ssh/id_rsa.pub
+
+2. [Install `cloudflared`](https://developers.cloudflare.com/argo-tunnel/getting-started/installation) on **your machine**
+
+       $ wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb
+       $ sudo dpkg -i cloudflared-stable-linux-amd64.deb
+ 
+3. Create a new Colab notebook with a single cell
+
+       !pip3 install linus_colab_ssh
+       
+       from colab_ssh import setup_ssh, loop_forever
+       public_key = '<YOUR_PUBLIC_SSH_KEY>'
+       setup_ssh(public_key)
+       loop_forever()
 
 ## SCP command to Sercurely Tranfer Files
 
