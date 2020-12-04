@@ -79,7 +79,7 @@
 
        $ ssh user@0.tcp.ap.ngrok.io -p 12681
 
-## Create SSH tunel to a running colab notebook
+## [Create SSH tunel to a running colab notebook](https://github.com/lamhoangtung/colab_ssh)
 1. Generate `id_rsa.pub` of **your machine**
 
        $ ssh-keygen
