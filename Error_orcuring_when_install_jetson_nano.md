@@ -396,8 +396,8 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
 jupyter notebook remote
 
     jupyter notebook --no-browser --port=8889
-    ssh -N -f -L localhost:8888:localhost:8889 jetson@192.168.137.189
-    localhost:8888
+    ssh -N -f -L 8888:8889 jetson@192.168.137.189
+    http://localhost:8888/?token=a9dca23be19c7a142c5d593d9c717c81354fd1062ab90fad
 
 Add Conda environment to jupyter notebook
     
