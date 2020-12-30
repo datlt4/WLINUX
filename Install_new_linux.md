@@ -2,8 +2,8 @@
 
 ## Install `htop`
 
-    sudo apt --assume-yes install cmake htop tree
     sudo apt-get update
+    sudo apt --assume-yes install cmake htop tree
     sudo apt-get --assume-yes upgrade
     sudo apt-get --assume-yes install tmux build-essential gcc g++ make binutils
     sudo apt-get --assume-yes install software-properties-common
