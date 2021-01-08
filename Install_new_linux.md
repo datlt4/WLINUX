@@ -180,6 +180,13 @@ Install Kvantum
 
     sudo dpkg -i libcudnn7-doc_7.6.5.32-1+cuda10.1_amd64.deb
 
+**Install** cuDNN with Tar file installation
+
+    tar -xzvf cudnn-xxx.tgz
+    sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
+    sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+    sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+
 ## Install TensorRT
 
 [ACCESS](https://developer.nvidia.com/nvidia-tensorrt-download) to download the version of TensorRT that you are interested in.
