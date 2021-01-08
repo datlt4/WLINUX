@@ -182,7 +182,7 @@ Install Kvantum
 
 **Install** cuDNN with Tar file installation
 
-    tar -xzvf cudnn-xxx.tgz
+    tar -xzvf cudnn-x.x-linux-x64-v8.x.x.x.tgz
     sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
     sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
     sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
