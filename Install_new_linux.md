@@ -153,6 +153,7 @@ Install Kvantum
     $ sudo nano /etc/default/grub
     GRUB_CMDLINE_LINUX_DEFAULT="quite splash pci=noaer"
 
+<a name="installcuda"></a>
 ## Install CUDA - allows us a way to write code for GPUs (Install cuda 10.0 - 10.1)
 
     $ sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub && echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" | sudo tee /etc/apt/sources.list.d/cuda.list
@@ -180,12 +181,33 @@ Install Kvantum
 
     sudo dpkg -i libcudnn7-doc_7.6.5.32-1+cuda10.1_amd64.deb
 
+<a name="installcudnntar"></a>
 **Install** cuDNN with Tar file installation
 
     tar -xzvf cudnn-x.x-linux-x64-v8.x.x.x.tgz
     sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
     sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
     sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+
+## [Install multiple versions of CUDA on one machine](https://medium.com/@peterjussi/multicuda-multiple-versions-of-cuda-on-one-machine-4b6ccda6faae)
+
+1. Install all necessary CUDA versions
+
+    [Reference](#installcuda)
+
+2. Point symlink /usr/local/cuda to default version
+
+       $ cd /usr/local
+       $ sudo rm cuda
+       $ sudo ln -s cuda-10.0 cuda
+
+1. Install suitable cuDNN versions for each CUDA using the Library for Linux tar files
+
+    [Reference](#installcudnntar)
+
+1. Add each CUDA lib directory to LD_LIBRARY_PATH in order
+
+       $ sudo sh -c ‘echo export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-10.0/lib64:/usr/local/cuda-8.0/lib64:\$LD_LIBRARY_PATH > /etc/profile.d/cuda.sh’
 
 ## Install TensorRT
 
