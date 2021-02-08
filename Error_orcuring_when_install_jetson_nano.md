@@ -194,6 +194,16 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
     sudo ldconfig
     pkg-config --modversion opencv
 
+**_Step `3`: Find & Set “opencv.pc” file path:_**
+
+    ls /usr/local/lib/pkgconfig/
+    sudo cp /usr/local/lib/pkgconfig/opencv4.pc  /usr/lib/x86_64-linux-gnu/pkgconfig/opencv.pc
+    pkg-config --modversion opencv
+
+**_Step `4`: Compile code:_**
+
+    g++ main.cpp -o app -std=c++11 `pkg-config --cflags --libs opencv`
+
 ## [TUITORIAL] Install OpenCV 4.1.0
 #### Method `1`
 
