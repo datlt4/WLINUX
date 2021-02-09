@@ -396,7 +396,6 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
 
 ## [TUITORIAL] Install Jupiter Lab
 
-    sudo apt install nodejs npm
     sudo apt install python3-pip
     sudo pip3 install wheel
     sudo pip3 install jupyter jupyterlab

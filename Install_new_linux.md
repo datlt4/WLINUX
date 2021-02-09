@@ -265,8 +265,43 @@ Install Pycuda
     $ popd
     $ sudo /home/m/.conda/envs/M/bin/python -c "import pycuda; print('pycuda version:', pycuda.VERSION)"
 
+## Install FFmpeg with Nvidia Accelator
 
+**Clone ffnvcodec**
 
+    git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
+
+**Install ffnvcodec**
+
+    cd nv-codec-headers && sudo make install && cd -
+
+**Clone FFmpeg's public GIT repository.**
+
+    git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg/ && cd ffmpeg/
+
+**Install necessary packages.**
+
+    sudo apt --assume-yes install build-essential yasm cmake libtool libc6 libc6-dev unzip wget libnuma1 libnuma-dev
+
+**Configure**
+
+    ./configure --enable-nonfree --enable-cuda-nvcc --enable-libnpp --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64
+
+**Compile**
+
+    make -j$(nproc)
+
+**Install the libraries.**
+
+    sudo make install
+
+**Install the libraries.**
+
+    ffmpeg -version
+
+[**Testing**](https://docs.nvidia.com/video-technologies/video-codec-sdk/ffmpeg-with-nvidia-gpu/#basic-testing)
+
+    
 
 ## Install Anaconda
 
@@ -277,6 +312,8 @@ Install Pycuda
 **[Install]**
 
     sudo sh Anaconda3-2019.10-Linux-x86_64.sh
+    sudo chown -R 1000:1000 ~/.conda
+    sudo chmod 666 ~/.conda/environments.txt
     cat >> ~/.bashrc << 'EOF' export PATH=$HOME/anaconda3/bin:${PATH} 'EOF'
     source ~/.bashrc
     conda upgrade -y --all
