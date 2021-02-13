@@ -377,19 +377,63 @@ The Linux tmux command is a terminal multiplexer, allow you to have multiple win
 
     - next windows
 
-            [ctrl + b] + n
+          [ctrl + b] + n
 
     - previous windows
 
-            [ctrl + b] + p
+          [ctrl + b] + p
 
 1. Display list of Windows
 
-        [ctrl + b] + w
+       [ctrl + b] + w
 
 1. Close a Window
 
-        [ctrl + b] + &
+       [ctrl + b] + &
+
+## Tmuxinator configuration
+
+- Install tmuxinator
+
+      $ sudo apt --assume-yes install ruby
+      $ gem install tmuxinator
+      $ export EDITOR="/bin/nano"
+
+- Create or edit projects
+
+      tmuxinator new [project]
+      tmuxinator new --local [project]
+
+  `--local`: Create or edit a local project where the config file will be stored in the current working directory instead of the default project configuration file location.
+
+- Start a session
+
+      tmuxinator start [project]
+
+- Configuration
+
+       # /home/m/.config/tmuxinator/HNIW.yml
+       
+       name: HNIW
+       root: ~/
+       
+       windows:
+         - Minh:
+             layout: 3e7d,272x64,0,0{194x64,0,0,0,77x64,195,0[77x23,195,0,2,77x40,195,24,3]}
+             panes:
+               - M:
+                 - neofetch
+               - htop:
+                 - htop
+               - nvtop:
+                 - nvtop
+         - Python:
+             root: ~/Documents/DL-with-pytorch-code
+             panes:
+               - jupyter notebook
+
+  `layout`: can be one of [5 preset tmux window layout](https://tao-of-tmux.readthedocs.io/zh_CN/latest/manuscript/06-window.html#layouts-window-layouts), or can be retrieved by `tmux list-windows`
+
 
 ## Tree command
 
