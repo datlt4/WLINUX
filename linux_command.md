@@ -79,6 +79,16 @@
 
        $ ssh user@0.tcp.ap.ngrok.io -p 12681
 
+1. Get tunnels status
+       
+       $ curl -s http://localhost:4040/api/tunnels | \
+           python3 -c \
+             "import json, sys, os, pwd; \
+             username=pwd.getpwuid(os.getuid()).pw_name;\
+             print(json.load(sys.stdin)['tunnels'][0]['public_url'].\
+             replace('tcp://', f'ssh {username}@').\
+             replace(':', ' -p '))"
+
 ## [Create SSH tunel to a running colab notebook](https://github.com/lamhoangtung/colab_ssh)
 1. Generate `id_rsa.pub` of **your machine**
 
