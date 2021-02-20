@@ -9,6 +9,8 @@
     1. [Training](#det_training)
     1. [Evaluation](#det_evaluate)
     1. [Test](#det_test)
+1. [TEXT ANGLE CLASSIFICATION](#text_angle_classification_header)
+
 
 <a name="installation"></a>
 # Installation
