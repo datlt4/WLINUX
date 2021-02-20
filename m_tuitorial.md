@@ -191,6 +191,7 @@ Test the detection result on all images in the folder:
 
     python3 tools/infer_det.py -c configs/det/m_det_mv3_db.yml -o Global.infer_img=./doc/imgs_en/ Global.pretrained_model=./output/east_mv3/best_accuracy Global.load_static_weights=false
 
-<a name="text_angle_classification_header"></a>
-# TEXT ANGLE CLASSIFICATION
-l
+
+# TEXT ANGLE CLASSIFICATION<a name="text_angle_classification_header"></a>
+
+## TEXT ANGLE CLASSIFICATION
