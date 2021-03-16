@@ -301,8 +301,6 @@ Install Pycuda
 
 [**Testing**](https://docs.nvidia.com/video-technologies/video-codec-sdk/ffmpeg-with-nvidia-gpu/#basic-testing)
 
-    
-
 ## Install Anaconda
 
 **[Access]**

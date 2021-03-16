@@ -406,8 +406,10 @@ The Linux tmux command is a terminal multiplexer, allow you to have multiple win
 - Install tmuxinator
 
       $ sudo apt --assume-yes install ruby
-      $ gem install tmuxinator
+      $ gem install tmuxinator -v 1.1.5
       $ export EDITOR="/bin/nano"
+      $ export SHELL='/bin/bash'
+      $ tmuxinator doctor
 
 - Create or edit projects
 
@@ -418,31 +420,78 @@ The Linux tmux command is a terminal multiplexer, allow you to have multiple win
 
 - Start a session
 
-      tmuxinator start [project]
+      tmuxinator start [project] -n [name] -p [project-config]
+
+`[project-config]` : path to `.yaml` file in local file system.
 
 - Configuration
 
-       # /home/m/.config/tmuxinator/HNIW.yml
-       
-       name: HNIW
-       root: ~/
-       
-       windows:
-         - Minh:
-             layout: 3e7d,272x64,0,0{194x64,0,0,0,77x64,195,0[77x23,195,0,2,77x40,195,24,3]}
-             panes:
-               - M:
-                 - neofetch
-               - htop:
-                 - htop
-               - nvtop:
-                 - nvtop
-         - Python:
-             root: ~/Documents/DL-with-pytorch-code
-             panes:
-               - jupyter notebook
+      # /home/m/.config/tmuxinator/HNIW.yml
+      
+      name: HNIW
+      root: ~/
+
+      windows:
+        - Minh:
+            layout: 3e7d,272x64,0,0{194x64,0,0,0,77x64,195,0[77x23,195,0,2,77x40,195,24,3]}
+            panes:
+              - M:
+                - neofetch
+              - htop:
+                - htop
+              - nvtop:
+                - nvtop
+        - Python:
+            root: ~/Documents/DL-with-pytorch-code
+            panes:
+              - jupyter notebook
 
   `layout`: can be one of [5 preset tmux window layout](https://tao-of-tmux.readthedocs.io/zh_CN/latest/manuscript/06-window.html#layouts-window-layouts), or can be retrieved by `tmux list-windows`
+
+
+## Crontab
+
+1. Create and edit cron directory
+
+       
+       # Example of job definition:
+       # .---------------- minute (0 - 59)
+       # |  .------------- hour (0 - 23)
+       # |  |  .---------- day of month (1 - 31)
+       # |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+       # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri, sat
+       # |  |  |  |  |
+       # *  *  *  *  *  user-name  command-to-be-executed
+
+1. Scheduling tricks
+
+       01 01 * * * /usr/local/bin/rsbu -vbd1 ; /usr/local/bin/rsbu -vbd2
+
+       03 05 * * * /sbin/hwclock --systohc
+
+       25 04 1 * * /usr/bin/dnf -y update
+
+       00 15 * * Thu /usr/local/bin/mycronjob.sh
+
+       02 03 1 1,4,7,10 * /usr/local/bin/reports.sh
+
+       01 09-17 * * * /usr/local/bin/hourlyreminder.sh
+
+       # run every 5 minutes during any even hours between 8 am to 6pm.
+       */5 08-18/2 * * * /usr/local/bin/mycronjob.sh
+
+       # run a job as the user "W"
+       04 07 * * * W /usr/local/bin/mycronjob.sh
+
+1. Shortcuts
+  
+       @reboot : Run once after reboot.
+       @yearly : Run once a year, ie. 0 0 1 1 *
+       @annually : Run once a year, ie. 0 0 1 1 *
+       @monthly : Run once a month, ie. 0 0 1 * *
+       @weekly : Run once a week, ie. 0 0 * * 0
+       @daily : Run once a day, ie. 0 0 * * *
+       @hourly : Run once an hour, ie. 0 * * * *
 
 
 ## Tree command

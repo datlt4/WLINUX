@@ -1,4 +1,4 @@
-## ## Hive - Create Database
+## Hive - Create Database
 
     CREATE DATABASE|SCHEMA [IF NOT EXISTS] <database name>
 
@@ -98,7 +98,7 @@
 
     UPDATE students SET name = null WHERE gpa <= 1.0; 
 
-> *DELETE*
+> **DELETE**
 
     DELETE FROM tablename [WHERE expression]; 
 
