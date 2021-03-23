@@ -202,7 +202,27 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
 
 **_Step `4`: Compile code:_**
 
-    g++ main.cpp -o app -std=c++11 `pkg-config --cflags --libs opencv`
+    .
+    ├── build
+    ├── CMakeLists.txt
+    ├── main.cpp
+    └── makefile
+
+>**Makefile**
+
+    all:
+    	g++ main.cpp -o app -std=c++11 `pkg-config --cflags --libs opencv`
+
+>**CMakeLists.txt**
+
+    cmake_minimum_required(VERSION 2.8)
+    project( HNIW )
+    
+    find_package( OpenCV REQUIRED )
+    include_directories( ${OpenCV_INCLUDE_DIRS} )
+
+    add_executable( app main.cpp )
+    target_link_libraries( app ${OpenCV_LIBS} )
 
 ## [TUITORIAL] Install OpenCV 4.1.0
 #### Method `1`
