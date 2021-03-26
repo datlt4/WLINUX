@@ -72,3 +72,32 @@ Go to [Silab webpage](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-d
 
 Reference: http://headstation.com/archives/instructions-installing-cp210x-serial-bridge-driver/
 
+## ESP-IDF with Visual Studio Code
+
+- Step 1: Install `C/C++` extention
+- Step 2: `mkdir .vscode`
+- Step 3: Create new file named as `c_cpp_properties.json` with content:
+```
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "~/esp/esp-idf/components/**",
+                "${workspaceFolder}/**"
+            ],
+            "browse": {
+                "path": [
+                    "/home/m/esp/esp-idf/components/**",
+                    "${workspaceFolder}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "compilerPath": "~/.espressif/tools/xtensa-esp32-elf/esp-2020r3-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
+```
