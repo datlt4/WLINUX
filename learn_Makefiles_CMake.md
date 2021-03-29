@@ -1,5 +1,6 @@
 # Learn Makefiles
-[![Refence](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Emoji_u1f601.svg/128px-Emoji_u1f601.svg.png)](https://makefiletutorial.com/) Reference
+<!-- [![Refence](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Emoji_u1f601.svg/128px-Emoji_u1f601.svg.png)](https://makefiletutorial.com/) -->
+[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Reference-com_logo.svg/1280px-Reference-com_logo.svg.png" height="15">](https://makefiletutorial.com/)
 
 ## Getting Started <a name="getting_started"></a>
 
@@ -292,9 +293,9 @@ clean:
 
 # Introduction to CMake by Example
 
-[Reference](http://derekmolloy.ie/hello-world-introductions-to-cmake/#)
+[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Reference-com_logo.svg/1280px-Reference-com_logo.svg.png" height="15">](http://derekmolloy.ie/hello-world-introductions-to-cmake/#)
 
-[Github](https://github.com/derekmolloy/exploringBB/tree/version2/extras/cmake)
+[<img src= "https://aimansoliman.files.wordpress.com/2020/02/github_owler_20180612_070358_original.png" height="25">](https://github.com/derekmolloy/exploringBB/tree/version2/extras/cmake)
 
 ## Introduction
 
