@@ -426,9 +426,9 @@ The Linux tmux command is a terminal multiplexer, allow you to have multiple win
 
 - Configuration
 
-      # /home/m/.config/tmuxinator/HNIW.yml
+      # /home/m/.config/tmuxinator/AA.yml
       
-      name: HNIW
+      name: AA
       root: ~/
 
       windows:
