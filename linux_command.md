@@ -432,7 +432,7 @@ The Linux tmux command is a terminal multiplexer, allow you to have multiple win
       root: ~/
 
       windows:
-        - Minh:
+        - HA:
             layout: 3e7d,272x64,0,0{194x64,0,0,0,77x64,195,0[77x23,195,0,2,77x40,195,24,3]}
             panes:
               - M:
@@ -444,7 +444,7 @@ The Linux tmux command is a terminal multiplexer, allow you to have multiple win
         - Python:
             root: ~/Documents/DL-with-pytorch-code
             panes:
-              - jupyter notebook
+              - conda acitvate M
 
   `layout`: can be one of [5 preset tmux window layout](https://tao-of-tmux.readthedocs.io/zh_CN/latest/manuscript/06-window.html#layouts-window-layouts), or can be retrieved by `tmux list-windows`
 

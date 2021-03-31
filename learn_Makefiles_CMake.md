@@ -510,3 +510,54 @@ include_directories( ../studentlib_static/include )
 add_executable(libtest libtest.cpp)
 target_link_libraries(libtest ${PROJECT_LINK_LIBS} )
 ```
+
+# Note
+
+## OpenCV
+
+- `CMakeLists.txt`
+
+```
+cmake_minimum_required(VERSION 2.8)
+project(opencv)
+
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
+
+add_executable(app main.cpp)
+target_link_libraries(app ${OpenCV_LIBS})
+```
+
+## Libtorch
+
+- `CMakeLists.txt`
+
+```
+cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+project(Project)
+
+find_package(Torch REQUIRED)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
+
+add_executable(app main2.cpp)
+target_link_libraries(app "${TORCH_LIBRARIES}")
+set_property(TARGET app PROPERTY CXX_STANDARD 14)
+```
+
+## ESP-IDF
+
+- `Makefile`
+
+```
+PROJECT_NAME := new_milestone
+include $(IDF_PATH)/make/project.mk
+```
+
+- `CMakeLists.txt`
+```
+cmake_minimum_required(VERSION 3.5)
+
+include($ENV{IDF_PATH}/tools/cmake/project.cmake)
+project(new-milestone)
+```
+
