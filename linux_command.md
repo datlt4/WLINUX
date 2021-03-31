@@ -432,16 +432,16 @@ The Linux tmux command is a terminal multiplexer, allow you to have multiple win
       root: ~/
 
       windows:
-        - HA:
+        - w1:
             layout: 3e7d,272x64,0,0{194x64,0,0,0,77x64,195,0[77x23,195,0,2,77x40,195,24,3]}
             panes:
-              - M:
+              - main:
                 - neofetch
               - htop:
                 - htop
               - nvtop:
                 - nvtop
-        - Python:
+        - w2:
             root: ~/Documents/DL-with-pytorch-code
             panes:
               - conda acitvate M
