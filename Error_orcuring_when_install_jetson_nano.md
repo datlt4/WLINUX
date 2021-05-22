@@ -554,44 +554,90 @@ Install QtCreator
 
 **_code_**
 
-    from tensorflow.python import ops
-    import tensorflow.contrib.tensorrt as trt
-    import tensorflow as tf
+```python
+from tensorflow.python import ops
+import tensorflow.contrib.tensorrt as trt
+import tensorflow as tf
+import argparse
 
-    def get_graph_def_from_file(graph_filepath):
-        tf.reset_default_graph()
-        with ops.Graph().as_default():
-            with tf.gfile.GFile(graph_filepath, 'rb') as f:
-                graph_def = tf.GraphDef()
-                graph_def.ParseFromString(f.read())
-            return graph_def
+ap = argparse.ArgumentParser()
+ap.add_argument("-m", "--model", type=str, help="path to pb file")
+args = ap.parse_args()
 
-    frozen_graph = get_graph_def_from_file('iwanna.pb')
+def get_graph_def_from_file(graph_filepath):
+    tf.compat.v1.reset_default_graph()
+    with ops.Graph().as_default():
+        with tf.io.gfile.GFile(graph_filepath, 'rb') as f:
+            graph_def = tf.compat.v1.GraphDef()
+            graph_def.ParseFromString(f.read())
+        return graph_def
 
-    output_names = ["boxes", "scores", "num_boxes"]
-    trt_graph = trt.create_inference_graph(input_graph_def=frozen_graph,
-                                            outputs=output_names,
-                                            max_batch_size=1,
-                                            max_workspace_size_bytes=1 << 25,
-                                            precision_mode='FP16',
-                                            minimum_segment_size=3)
+frozen_graph = get_graph_def_from_file(args.model)
 
-    with open('facebox.pb', 'wb') as f:
-        f.write(trt_graph.SerializeToString())
+output_names = ["boxes", "scores", "num_boxes"]
+trt_graph = trt.create_inference_graph(input_graph_def=frozen_graph,
+                                        outputs=output_names,
+                                        max_batch_size=1,
+                                        max_workspace_size_bytes=1 << 25,
+                                        precision_mode='FP16',
+                                        minimum_segment_size=3)
+
+with open(args.model.replace(".pb", ".trt"), 'wb') as f:
+    f.write(trt_graph.SerializeToString())
+```
 
 **_load TensorRT model_**
 
-    import tensorflow as tf
-    from tensorflow.python.platform import gfile
+``` python
+from tensorflow.python import ops
+import tensorflow as tf
+import argparse
+import cv2
 
-    with gfile.FastGFile(FLAGS.model_save_dir.format(log_id) + '/graph.pb', 'rb') as f:
-        graph_def = tf.GraphDef()
-        graph_def.ParseFromString(f.read())
-        x, y, y_ = tf.import_graph_def(graph_def,
-                                        return_elements=['data/inputs',
-                                                         'output/network_activation',
-                                                         'data/correct_outputs'],
-                                        name='')
+ap = argparse.ArgumentParser()
+ap.add_argument("-m", "--model", type=str, help="path to pb file")
+ap.add_argument("-i", "--image", type=str, help="image path")
+args = ap.parse_args()
+
+def get_graph_def_from_file(graph_filepath):
+    tf.compat.v1.reset_default_graph()
+    with ops.Graph().as_default():
+        with tf.io.gfile.GFile(graph_filepath, 'rb') as f:
+            graph_def = tf.compat.v1.GraphDef()
+            graph_def.ParseFromString(f.read())
+        return graph_def
+
+if __name__=="__main__":
+    graph_def = get_graph_def_from_file(args.model)
+    graph = tf.Graph()
+    with graph.as_default():
+        tf.import_graph_def(graph_def, name='import')
+
+
+    input_image = graph.get_tensor_by_name('import/image_tensor:0')
+    output_ops = [
+        graph.get_tensor_by_name('import/boxes:0'),
+        graph.get_tensor_by_name('import/scores:0'),
+        graph.get_tensor_by_name('import/num_boxes:0'),
+    ]
+
+    gpu_options = tf.compat.v1.GPUOptions(
+        per_process_gpu_memory_fraction=0.5,
+        visible_device_list="0"
+    )
+    config_proto = tf.compat.v1.ConfigProto(gpu_options=gpu_options, log_device_placement=False)
+    sess = tf.compat.v1.Session(graph=graph, config=config_proto)
+
+    img = cv2.imread(args.image)
+    img_batch = img[None]
+    boxes, scores, num_boxes = sess.run(output_ops, feed_dict={input_image: img_batch})
+    
+    to_keep = scores > score_threshold
+    boxes = boxes[to_keep]
+    scores = scores[to_keep]
+
+    print(boxes, scores)
+```
 
 ## [ERROR] Extremely long model loading time problem of TF-TRT
 
