@@ -194,101 +194,180 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
     sudo ldconfig
     pkg-config --modversion opencv
 
+<a name="set_opencv_pc"></a>
 **_Step `3`: Find & Set “opencv.pc” file path:_**
 
-    ls /usr/local/lib/pkgconfig/
-    sudo cp /usr/local/lib/pkgconfig/opencv4.pc  /usr/lib/x86_64-linux-gnu/pkgconfig/opencv.pc
-    pkg-config --modversion opencv
+```bash
+ls /usr/local/lib/pkgconfig/
+sudo cp /usr/local/lib/pkgconfig/opencv.pc  /usr/lib/x86_64-linux-gnu/pkgconfig/opencv.pc
+pkg-config --modversion opencv
+```
 
+<a name="compile_code"></a>
 **_Step `4`: Compile code:_**
 
-    .
-    ├── build
-    ├── CMakeLists.txt
-    ├── main.cpp
-    └── makefile
+```
+.
+├── build
+├── CMakeLists.txt
+├── main.cpp
+└── makefile
+```
 
 >**Makefile**
 
-    all:
-    	g++ main.cpp -o app -std=c++11 `pkg-config --cflags --libs opencv`
+```Makefile
+GCC ?= g++
+
+CCFLAGS := -std=c++11
+
+LDFLAGS += $(shell pkg-config --libs opencv)
+INCLUDES += $(shell pkg-config --cflags opencv)
+
+SRCS=main.cpp
+OBJS=main.o
+RM=rm -f
+EXEC=app
+
+# Target rules
+all: build
+
+build: ${EXEC}
+
+%.o: %.cpp %.h
+    $(GCC) $(CCFLAGS) $(INCLUDES) -o $@ -c $<
+
+${EXEC}: ${OBJS}
+    $(GCC) $(CCFLAGS) -o $@ $^ $(LDFLAGS)
+
+clean:
+    ${RM} ${EXEC} *.o 
+
+dist-clean:
+    $(RM) $(EXEC)
+```
 
 >**CMakeLists.txt**
 
-    cmake_minimum_required(VERSION 2.8)
-    project( HNIW )
-    
-    find_package( OpenCV REQUIRED )
-    include_directories( ${OpenCV_INCLUDE_DIRS} )
+```Cmake
+cmake_minimum_required(VERSION 2.8)
+project( HNIW )
 
-    add_executable( app main.cpp )
-    target_link_libraries( app ${OpenCV_LIBS} )
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
 
-## [TUITORIAL] Install OpenCV 4.1.0
-#### Method `1`
+add_executable( app main.cpp )
+target_link_libraries( app ${OpenCV_LIBS} )
+```
 
-    git clone https://github.com/JetsonHacksNano/buildOpenCV
-    cd buildOpenCV
-    ./buildOpenCV.sh |& tee openCV_build.log
-    sudo ldconfig -v
+## [TUITORIAL] Install OpenCV 4
 
-#### Method `2`
 **_Add Swap Memory_**
 
-    sudo fallocate -l 4G /var/swapfile
-    sudo chmod 600 /var/swapfile
-    sudo mkswap /var/swapfile
-    sudo swapon /var/swapfile
-    sudo bash -c 'echo "/var/swapfile swap swap defaults 0 0" >> /etc/fstab'
-
+``` bash
+sudo fallocate -l 4G /var/swapfile
+sudo chmod 600 /var/swapfile
+sudo mkswap /var/swapfile
+sudo swapon /var/swapfile
+sudo bash -c 'echo "/var/swapfile swap swap defaults 0 0" >> /etc/fstab'
+```
 **_Updating the packages_**
 
-    sudo apt update
-    sudo apt install -y build-essential cmake git libgtk2.0-dev pkg-config  libswscale-dev libtbb2 libtbb-dev
-    sudo apt install -y python-dev python3-dev python-numpy python3-numpy
-    sudo apt install -y curl
+``` bash
+sudo apt -y remove x264 libx264-dev
 
-**_Install video & image formats_**
+sudo apt -y install build-essential checkinstall cmake pkg-config yasm
+sudo apt -y install git gfortran
+sudo apt -y install libjpeg8-dev libpng-dev
 
-    sudo apt install -y  libjpeg-dev libpng-dev libtiff-dev libjasper-dev 
-    sudo apt install -y libavcodec-dev libavformat-dev
-    sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
-    sudo apt install -y libv4l-dev v4l-utils qv4l2 v4l2ucp libdc1394-22-dev
+sudo apt -y install software-properties-common
+sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
+sudo apt -y update
+
+sudo apt -y install libjasper1
+sudo apt -y install libtiff-dev
+
+sudo apt -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev
+sudo apt -y install libxine2-dev libv4l-dev
+cd /usr/include/linux
+sudo ln -s -f ../libv4l1-videodev.h videodev.h
+cd "$cwd"
+
+sudo apt -y install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+sudo apt -y install libgtk2.0-dev libtbb-dev qt5-default
+sudo apt -y install libatlas-base-dev
+sudo apt -y install libfaac-dev libmp3lame-dev libtheora-dev
+sudo apt -y install libvorbis-dev libxvidcore-dev
+sudo apt -y install libopencore-amrnb-dev libopencore-amrwb-dev
+sudo apt -y install libavresample-dev
+sudo apt -y install x264 v4l-utils
+
+sudo apt -y install libprotobuf-dev protobuf-compiler
+sudo apt -y install libgoogle-glog-dev libgflags-dev
+sudo apt -y install libgphoto2-dev libeigen3-dev libhdf5-dev doxygen
+
+sudo apt install -y  libjpeg-dev libpng-dev libtiff-dev libjasper-dev 
+sudo apt install -y libavcodec-dev libavformat-dev
+sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+sudo apt install -y libv4l-dev v4l-utils qv4l2 v4l2ucp libdc1394-22-dev
+
+```
 
 **_Download OpenCV & Contribs Modules_**
 
-    curl -L https://github.com/opencv/opencv/archive/4.1.0.zip -o opencv-4.1.0.zip
-    curl -L https://github.com/opencv/opencv_contrib/archive/4.1.0.zip -o opencv_contrib-4.1.0.zip
-
-**_Unzipping packages_**
-
-    unzip opencv-4.1.0.zip 
-    unzip opencv_contrib-4.1.0.zip 
-    cd opencv-4.1.0/
+``` bash
+pushd ~/
+git clone https://github.com/opencv/opencv.git
+git clone https://github.com/opencv/opencv_contrib.git
+```
 
 **_Create directory_**
 
-    mkdir release
-    cd release/
+mkdir build
+cd build/
 
 **_Build Opencv using Cmake_**
 
-    cmake -D WITH_CUDA=ON \
-    -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.1.0/modules \
+```bash
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_C_COMPILER=/usr/bin/gcc \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D INSTALL_C_EXAMPLES=OFF \
+    -D WITH_TBB=ON \
+    -D WITH_CUDA=ON \
+    -D WITH_CUDNN=ON \
+    -D OPENCV_DNN_CUDA=ON \
+    -D BUILD_opencv_cudacodec=ON \
+    -D ENABLE_FAST_MATH=1 \
+    -D CUDA_FAST_MATH=1 \
+    -D WITH_CUBLAS=1 \
+    -D WITH_V4L=ON \
+    -D WITH_QT=OFF \
+    -D WITH_OPENGL=ON \
     -D WITH_GSTREAMER=ON \
-    -D WITH_LIBV4L=ON \
-    -D BUILD_opencv_python2=ON \
-    -D BUILD_opencv_python3=ON \
+    -D OPENCV_GENERATE_PKGCONFIG=ON \
+    -D OPENCV_PC_FILE_NAME=opencv.pc \
+    -D OPENCV_ENABLE_NONFREE=ON \
+    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+    -D BUILD_SHARED_LIBS=ON \
+    -D WITH_FFMPEG=OFF \
+    -D BUILD_EXAMPLES=ON \
     -D BUILD_TESTS=OFF \
-    -D BUILD_PERF_TESTS=OFF \
-    -D BUILD_EXAMPLES=OFF \
-    -D CMAKE_BUILD_TYPE=RELEASE \
-    -D CMAKE_INSTALL_PREFIX=/usr/local ..
+    -D BUILD_PERF_TESTS=OFF .. 
+```
 
 **_Compile the OpenCV with Contribs Modules_**
 
-    make -j2
-    sudo make install
+```bash
+make -j${nproc}
+sudo make install
+```
+
+<a name="set_opencv_pc"></a>
+**_[Find & Set “opencv.pc” file path](#set_opencv_pc)_**
+
+<a name="compile_code"></a>
+**_[Compile code](#compile_code)_**
 
 ## [TUITORIAL] Install Tensorflow-gpu==1.15.0
 **_[ ]Reference:_**
