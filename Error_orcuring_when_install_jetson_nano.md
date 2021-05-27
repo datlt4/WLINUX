@@ -206,6 +206,8 @@ pkg-config --modversion opencv
 <a name="compile_code"></a>
 **_Step `4`: Compile code:_**
 
+[code](https://github.com/long-senpai/Manual_for_deeplearning/blob/master/Install_OpenCV4_CUDA10.md#example)
+
 ```
 .
 ├── build
@@ -273,45 +275,7 @@ sudo bash -c 'echo "/var/swapfile swap swap defaults 0 0" >> /etc/fstab'
 ```
 **_Updating the packages_**
 
-``` bash
-sudo apt -y remove x264 libx264-dev
-
-sudo apt -y install build-essential checkinstall cmake pkg-config yasm
-sudo apt -y install git gfortran
-sudo apt -y install libjpeg8-dev libpng-dev
-
-sudo apt -y install software-properties-common
-sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
-sudo apt -y update
-
-sudo apt -y install libjasper1
-sudo apt -y install libtiff-dev
-
-sudo apt -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev
-sudo apt -y install libxine2-dev libv4l-dev
-cd /usr/include/linux
-sudo ln -s -f ../libv4l1-videodev.h videodev.h
-cd "$cwd"
-
-sudo apt -y install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
-sudo apt -y install libgtk2.0-dev libtbb-dev qt5-default
-sudo apt -y install libatlas-base-dev
-sudo apt -y install libfaac-dev libmp3lame-dev libtheora-dev
-sudo apt -y install libvorbis-dev libxvidcore-dev
-sudo apt -y install libopencore-amrnb-dev libopencore-amrwb-dev
-sudo apt -y install libavresample-dev
-sudo apt -y install x264 v4l-utils
-
-sudo apt -y install libprotobuf-dev protobuf-compiler
-sudo apt -y install libgoogle-glog-dev libgflags-dev
-sudo apt -y install libgphoto2-dev libeigen3-dev libhdf5-dev doxygen
-
-sudo apt install -y  libjpeg-dev libpng-dev libtiff-dev libjasper-dev 
-sudo apt install -y libavcodec-dev libavformat-dev
-sudo apt install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
-sudo apt install -y libv4l-dev v4l-utils qv4l2 v4l2ucp libdc1394-22-dev
-
-```
+[link to Long_senpai](https://github.com/long-senpai/Manual_for_deeplearning/blob/master/Install_OpenCV4_CUDA10.md#how-to-install-opencv-410-with-cuda-100-in-ubuntu-distro-1804)
 
 **_Download OpenCV & Contribs Modules_**
 
