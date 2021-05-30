@@ -1,0 +1,3 @@
+[submodule "WOpenCL_book"]
+	path = WOpenCL_book
+	url = https://github.com/LuongTanDat/WOpenCL_book.git
