@@ -11,7 +11,7 @@
     export PATH=$PATH:$HIVE_HOME/bin
 
 # Install dependencies
-    sudo apt-get install pdsh
+    sudo apt-get install pdsh -y
     sudo apt install openjdk-8-jdk -y
     java -version; javac -version
     sudo apt install openssh-server openssh-client -y
