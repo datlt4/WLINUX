@@ -21,7 +21,7 @@
 
 # Download Hadoop-3.1.2 vs Hive-3.1.2
     wget https://archive.apache.org/dist/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz
-    wget http://mirrors.viethosting.com/apache/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz
+    wget https://downloads.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz
     tar -xzf apache-hive-3.1.2-bin.tar.gz
     tar -xzf hadoop-3.1.2.tar.gz
     mv hadoop-3.1.2 hadoop
