@@ -333,55 +333,55 @@ sudo make install
 <a name="compile_code"></a>
 **_[Compile code](#compile_code)_**
 
-## [TUITORIAL] Install Tensorflow-gpu==1.15.0
+## [TUITORIAL] Install Tensorflow
 **_[ ]Reference:_**
 
-    https://github.com/karaage0703/jetson-nano-tools
+    https://forums.developer.nvidia.com/t/official-tensorflow-for-jetson-nano/71770
 
-**_..._**
+### Python 3.6 + JetPack 4.5
 
-    sudo apt-get update
+```bash
+$ sudo apt-get install libhdf5-serial-dev hdf5-tools libhdf5-dev zlib1g-dev zip libjpeg8-dev liblapack-dev libblas-dev gfortran
+$ sudo apt-get install python3-pip
+$ sudo pip3 install -U pip testresources setuptools==49.6.0
+$ sudo pip3 install -U numpy==1.16.1 future==0.18.2 mock==3.0.5 h5py==2.10.0 keras_preprocessing==1.1.1 keras_applications==1.0.8 gast==0.2.2 futures protobuf pybind11
 
-**_Install HDF5_**
+# TF-2.x
+$ sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v45 tensorflow
 
-    sudo apt-get -y install libhdf5-serial-dev
-    sudo apt-get -y install hdf5-tools
+# TF-1.15
+$ sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v45 'tensorflow<2'
+```
 
-**_Install pip_**
+### Python 3.6 + JetPack 4.4
 
-    sudo apt-get -y install python3-pip
+```bash
+$ sudo apt-get install libhdf5-serial-dev hdf5-tools libhdf5-dev zlib1g-dev zip libjpeg8-dev liblapack-dev libblas-dev gfortran
+$ sudo apt-get install python3-pip
+$ sudo pip3 install -U pip
+$ sudo pip3 install -U pip testresources setuptools numpy==1.16.1 future==0.17.1 mock==3.0.5 h5py==2.9.0 keras_preprocessing==1.0.5 keras_applications==1.0.8 gast==0.2.2 futures protobuf pybind11
 
-**_Install required packages_**
+# TF-2.x
+$ sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v44 tensorflow==2.3.1+nv20.12
 
-    sudo apt-get -y install zlib1g-dev
-    sudo apt-get -y install zip
-    sudo apt-get -y install libjpeg8-dev
-    sudo apt-get -y install libhdf5-dev
-    sudo -H pip3 install -U numpy==1.16.1
-    sudo -H pip3 install -U grpcio
-    sudo -H pip3 install -U absl-py
-    sudo -H pip3 install -U py-cpuinfo
-    sudo -H pip3 install -U psutil
-    sudo -H pip3 install -U portpicker
-    sudo -H pip3 install -U six
-    sudo -H pip3 install -U mock
-    sudo -H pip3 install -U requests
-    sudo -H pip3 install -U gast
-    sudo -H pip3 install -U h5py
-    sudo -H pip3 install -U astor
-    sudo -H pip3 install -U termcolor
-    sudo -H pip3 install -U cython
+# TF-1.15
+$ sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v44 'tensorflow<2'
+```
 
-**_Install TensorFlow_**
+### Python 3.6 + JetPack 4.3
 
-(check version at: https://developer.download.nvidia.com/compute/redist/jp/v43/tensorflow-gpu/)
+```bash
+$ sudo apt-get install libhdf5-serial-dev hdf5-tools libhdf5-dev zlib1g-dev zip libjpeg8-dev
+$ sudo apt-get install python3-pip
+$ sudo pip3 install -U pip
+$ sudo pip3 install -U numpy grpcio absl-py py-cpuinfo psutil portpicker six mock requests gast h5py astor termcolor protobuf keras-applications keras-preprocessing wrapt google-pasta
 
-    pip3 install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v43 tensorflow-gpu==1.15.0+nv20.1 --user
+# TF-2.x
+$ sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v43 tensorflow==2.1.0+nv20.3
 
-**_Upgrade Numpy_**
-
-    sudo pip3 install numpy==1.18
-
+# TF-1.15
+$ sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v43 tensorflow==1.15.2+nv20.3
+```
 
 ## [TUITORIAL] Pytorch v1.4.0 for Jetson Nano
 #### Pytorch v1.4.0 for Jetson Nano
