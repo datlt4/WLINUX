@@ -333,6 +333,42 @@ sudo make install
 <a name="compile_code"></a>
 **_[Compile code](#compile_code)_**
 
+
+## Install PyCuda
+
+- By `pip`
+
+```bash
+python -m pip install pycuda
+```
+
+- Build
+
+```bash
+arch=$(uname -m)
+folder=${HOME}/src
+mkdir -p $folder
+sudo apt-get install -y build-essential python3-dev
+sudo apt-get install -y libboost-python-dev libboost-thread-dev
+boost_pylib=$(basename /usr/lib/${arch}-linux-gnu/libboost_python*-py3?.so)
+boost_pylibname=${boost_pylib%.so}
+boost_pyname=${boost_pylibname/lib/}
+pushd $folder
+wget https://files.pythonhosted.org/packages/5a/56/4682a5118a234d15aa1c8768a528aac4858c7b04d2674e18d586d3dfda04/pycuda-2021.1.tar.gz
+CPU_CORES=$(nproc)
+tar xzvf pycuda-2021.1.tar.gz
+cd pycuda-2021.1
+cat ./setup.py | sed 's/"nvcc"/"\/usr\/local\/cuda\/bin\/nvcc"/g' > m_setup.py
+mv m_setup.py setup.py
+sudo $(which python) ./configure.py --python-exe=$(which python) --cuda-root=/usr/local/cuda --cudadrv-lib-dir=/usr/lib/${arch}-linux-gnu --boost-inc-dir=/usr/include --boost-lib-dir=/usr/lib/${arch}-linux-gnu --boost-python-libname=${boost_pyname} --boost-thread-libname=boost_thread
+make -j$CPU_CORES
+sudo $(which python) setup.py build
+sudo $(which python) setup.py install
+popd
+sudo $(which python) -c "import pycuda; print('pycuda version:', pycuda.VERSION)"
+```
+
+
 ## [TUITORIAL] Install Tensorflow
 **_[ ]Reference:_**
 
@@ -427,7 +463,6 @@ If there is some error when `import tensorflow` after installation, run `export 
 
     sudo python3 setup.py install
 
-
 #### Version of torchvision to download depending on the version of PyTorch
 |Pytorch|torchvision|
 |:-:|:-:|
@@ -521,22 +556,7 @@ which nvcc
 
     https://docs.nvidia.com/metropolis/deepstream/4.0/dev-guide/index.html
 
-## [TUITORIAL] Setup TensorRT
-**_[ ] Reference:_**
-    
-    https://blog.csdn.net/ctwy291314/article/details/103507846
-    https://github.com/BouweCeunen/computer-vision-jetson-nano/blob/master/README.md
 
-Tải các file deb sau được đề cập trong link trên:
-
-    libnvinfer5_5.1.6-1+cuda10.0_arm64.deb
-    libnvinfer-dev_5.1.6-1+cuda10.0_arm64.deb
-    libnvinfer-samples_5.1.6-1+cuda10.0_all.deb
-    tensorrt_5.1.6.1-1+cuda10.0_arm64.deb
-    python3-libnvinfer_5.1.6-1+cuda10.0_arm64.deb
-    python3-libnvinfer-dev_5.1.6-1+cuda10.0_arm64.deb
-    graphsurgeon-tf_5.1.6-1+cuda10.0_arm64.deb
-    uff-converter-tf_5.1.6-1+cuda10.0_arm64.deb
 
 ## [TUITORIAL] Install PyQt5 for jetson nano
 Install PyQt5
