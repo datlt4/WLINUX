@@ -382,7 +382,9 @@ $ sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.co
 # TF-1.15
 $ sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v43 tensorflow==1.15.2+nv20.3
 ```
+### Note
 
+If there is some error when `import tensorflow` after installation, run `export OPENBLAS_CORETYPE=ARMV` before run python app.
 ## [TUITORIAL] Pytorch v1.4.0 for Jetson Nano
 #### Pytorch v1.4.0 for Jetson Nano
 **_[ ] Reference:_**
