@@ -88,6 +88,29 @@
              print(json.load(sys.stdin)['tunnels'][0]['public_url'].\
              replace('tcp://', f'ssh {username}@').\
              replace(':', ' -p '))"
+	     
+       alias get_ngrok="curl -s http://localhost:4040/api/tunnels | python3 -c \"import json, sys, os, pwd; username=pwd.getpwuid(os.getuid()).pw_name; print(json.load(sys.stdin)['tunnels'][0]['public_url'].replace('tcp://', f'ssh {username}@').replace(':', ' -p '))\""
+
+## Local Port Forwarding
+
+```bash
+ssh -L 9000:127.0.0.1:80 user@<ip address>
+ssh -L 5901:127.0.0.1:5901 -L 4000:127.0.0.1:3306 user@example.com
+```
+where:
+
+- `9000`, `5901`, `4000`: port in local
+- `80`, `5901`, `3306`: port in remote server
+
+## Remote Port Forwarding
+
+```bash
+ssh -R 7000:127.0.0.1:8000 user@example.com
+```
+where:
+
+- `8000`: port in local
+- `7000`: port in remote
 
 ## [Create SSH tunel to a running colab notebook](https://github.com/lamhoangtung/colab_ssh)
 1. Generate `id_rsa.pub` of **your machine**
