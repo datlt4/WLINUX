@@ -384,7 +384,7 @@ $ sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.co
 ```
 ### Note
 
-If there is some error when `import tensorflow` after installation, run `export OPENBLAS_CORETYPE=ARMV` before run python app.
+If there is some error when `import tensorflow` after installation, run `export OPENBLAS_CORETYPE=ARMV8` before run python app.
 ## [TUITORIAL] Pytorch v1.4.0 for Jetson Nano
 #### Pytorch v1.4.0 for Jetson Nano
 **_[ ] Reference:_**
