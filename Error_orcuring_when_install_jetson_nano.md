@@ -174,26 +174,35 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
 
 **_Step `2`: Download the official OpenCV source:_**
 
-    cd ~
-    wget -O opencv.zip https://github.com/opencv/opencv/archive/3.4.6.zip
-    wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.4.6.zip
-    unzip opencv.zip
-    unzip opencv_contrib.zip
-    mv opencv-3.4.6 opencv
-    mv opencv_contrib-3.4.6 opencv_contrib
-    pip3 install numpy
-    cd ~/opencv
-    mkdir build
-    cd build
-    cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_CUDA=ON -D INSTALL_PYTHON_EXAMPLES=ON -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules -D OPENCV_ENABLE_NONFREE=ON -D BUILD_EXAMPLES=ON -D WITH_GSTREAMER=ON ..
+```bash
+cd ~
+wget -O opencv.zip https://github.com/opencv/opencv/archive/3.4.6.zip
+wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.4.6.zip
+unzip opencv.zip
+unzip opencv_contrib.zip
+mv opencv-3.4.6 opencv
+mv opencv_contrib-3.4.6 opencv_contrib
+pip3 install numpy
+cd ~/opencv
+mkdir build
+cd build
+cmake \
+    -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D WITH_CUDA=ON \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+    -D OPENCV_ENABLE_NONFREE=ON \
+    -D BUILD_EXAMPLES=ON \
+    -D WITH_GSTREAMER=ON ..
 
-    sudo make -j3
-    # sudo make -j$(nproc)
+sudo make -j3
+# sudo make -j$(nproc)
 
-    sudo make install
-    sudo ldconfig
-    pkg-config --modversion opencv
-
+sudo make install
+sudo ldconfig
+pkg-config --modversion opencv
+```
 <a name="set_opencv_pc"></a>
 **_Step `3`: Find & Set “opencv.pc” file path:_**
 
@@ -319,8 +328,9 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D BUILD_EXAMPLES=ON \
     -D INSTALL_PYTHON_EXAMPLES=ON \
     -D PYTHON_EXECUTABLE=/usr/bin/python3 \
+    -D OPENCV_PYTHON3_INSTALL_PATH=/usr/local/lib/python3.8/dist-packages/ \
     -D BUILD_TESTS=OFF \
-    -D BUILD_PERF_TESTS=OFF .. 
+    -D BUILD_PERF_TESTS=OFF ..
 ```
 
 **_Compile the OpenCV with Contribs Modules_**
