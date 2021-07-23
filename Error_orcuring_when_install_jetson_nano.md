@@ -305,7 +305,7 @@ cd build/
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_C_COMPILER=/usr/bin/gcc \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
-    -D INSTALL_C_EXAMPLES=OFF \
+    -D INSTALL_C_EXAMPLES=ON \
     -D WITH_TBB=ON \
     -D WITH_CUDA=ON \
     -D WITH_CUDNN=ON \
