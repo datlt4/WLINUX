@@ -339,7 +339,7 @@ int main(int argc, char ** argv) {
 }
 ```
 ```cmake
-# CmakeLists.txt
+# CMakeLists.txt
 project(EMoi)
 cmake_minimum_required(VERSION 3.10)
 
