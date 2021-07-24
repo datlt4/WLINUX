@@ -301,6 +301,87 @@ Install Pycuda
 
 [**Testing**](https://docs.nvidia.com/video-technologies/video-codec-sdk/ffmpeg-with-nvidia-gpu/#basic-testing)
 
+## Install Boost C++
+
+[Download](https://www.boost.org/users/download/)
+
+```bash
+tar -xvf boost_1_76_0.tar.gz
+cd boost_1_76_0
+```
+
+```bash
+sudo apt-get install build-essential g++ python-dev autotools-dev libicu-dev build-essential libbz2-dev libboost-all-dev -y
+./bootstrap.sh --prefix=/usr/ --with-libraries=python
+sudo ./b2 --with=all -j16 install
+```
+```cpp
+// main.cpp
+#include <boost/python/numpy.hpp>
+#include <iostream>
+
+namespace py = boost::python;
+namespace np = boost::python::numpy;
+
+int main(int argc, char ** argv) {
+    Py_Initialize();
+    np::initialize();
+    p::tuple shape = py::make_tuple(3, 3);
+    np::dtype dtype = np::dtype::get_builtin<float>();
+    np::ndarray a = np::zeros(shape, dtype);
+    np::ndarray b = np::empty(shape, dtype);
+
+    std::cout << "Original array:\n" << py::extract<char const *> (py::str(a)) << std::endl;
+    // Reshape the array into a 1D array
+    a = a.reshape(py::make_tuple(9));
+    // Print it again.
+    std::cout << "Reshaped array:\n" << py::extract <char const *> (py::str(a)) << std::endl;
+}
+```
+```cmake
+project(EMoi)
+cmake_minimum_required(VERSION 3.10)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+FIND_PACKAGE(PythonInterp 3)
+if (PYTHONINTERP_FOUND)
+  if (UNIX AND NOT APPLE)
+    if (PYTHON_VERSION_MAJOR EQUAL 3)
+        FIND_PACKAGE(Boost COMPONENTS python${PYTHON_VERSION_MAJOR} numpy)
+        FIND_PACKAGE(PythonInterp 3)
+        FIND_PACKAGE(PythonLibs 3 REQUIRED)
+    else()
+        FIND_PACKAGE(Boost COMPONENTS python numpy)
+        FIND_PACKAGE(PythonInterp)
+        FIND_PACKAGE(PythonLibs REQUIRED)
+    endif()
+  else()	
+    if (PYTHON_VERSION_MAJOR EQUAL 3)
+        FIND_PACKAGE(Boost COMPONENTS python${PYTHON_VERSION_MAJOR}${PYTHON_VERSION_MINOR} numpy)
+        FIND_PACKAGE(PythonInterp 3)
+        FIND_PACKAGE(PythonLibs 3 REQUIRED)
+    else()
+        FIND_PACKAGE(Boost COMPONENTS python${PYTHON_VERSION_MAJOR}${PYTHON_VERSION_MINOR} numpy)
+        FIND_PACKAGE(PythonInterp)
+        FIND_PACKAGE(PythonLibs REQUIRED)
+    endif()
+  endif()
+else()
+    message("Python not found")
+endif()
+
+message(STATUS "PYTHON_LIBRARIES = ${PYTHON_LIBRARIES}")
+message(STATUS "PYTHON_EXECUTABLE = ${PYTHON_EXECUTABLE}")
+message(STATUS "PYTHON_INCLUDE_DIRS = ${PYTHON_INCLUDE_DIRS}")
+message(STATUS "Boost_LIBRARIES = ${Boost_LIBRARIES}")
+
+INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
+
+add_executable(app main.cpp)
+target_link_libraries(app ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+```
+
 ## Install Anaconda
 
 **[Access]**
