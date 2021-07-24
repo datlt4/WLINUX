@@ -326,7 +326,7 @@ namespace np = boost::python::numpy;
 int main(int argc, char ** argv) {
     Py_Initialize();
     np::initialize();
-    p::tuple shape = py::make_tuple(3, 3);
+    py::tuple shape = py::make_tuple(3, 3);
     np::dtype dtype = np::dtype::get_builtin<float>();
     np::ndarray a = np::zeros(shape, dtype);
     np::ndarray b = np::empty(shape, dtype);
@@ -339,6 +339,7 @@ int main(int argc, char ** argv) {
 }
 ```
 ```cmake
+# CmakeLists.txt
 project(EMoi)
 cmake_minimum_required(VERSION 3.10)
 
