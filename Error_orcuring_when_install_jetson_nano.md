@@ -246,16 +246,16 @@ all: build
 build: ${EXEC}
 
 %.o: %.cpp %.h
-    $(GCC) $(CCFLAGS) $(INCLUDES) -o $@ -c $<
+	$(GCC) $(CCFLAGS) $(INCLUDES) -o $@ -c $<
 
 ${EXEC}: ${OBJS}
-    $(GCC) $(CCFLAGS) -o $@ $^ $(LDFLAGS)
+	$(GCC) $(CCFLAGS) -o $@ $^ $(LDFLAGS)
 
 clean:
-    ${RM} ${EXEC} *.o 
+	${RM} ${EXEC} *.o 
 
 dist-clean:
-    $(RM) $(EXEC)
+	$(RM) $(EXEC)
 ```
 
 >**CMakeLists.txt**
