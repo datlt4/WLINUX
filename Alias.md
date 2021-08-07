@@ -11,6 +11,6 @@ alias notify_done2="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/tr
 ```
 
 For Raspberry Pi
-```
+```bash
 alias cap="raspistill -o ~/Pictures/$(date +'%Y%m%d_%H%M%S_%N').jpg"
 ```
