@@ -9,3 +9,8 @@ alias notify_done0="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/ca
 alias notify_done1="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/canary-long.wav"
 alias notify_done2="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/trumpet-12.wav"
 ```
+
+For Raspberry Pi
+```
+alias cap="raspistill -o ~/Pictures/$(date +'%Y%m%d_%H%M%S_%N').jpg"
+```
