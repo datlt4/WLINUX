@@ -71,6 +71,30 @@ Add to the end of file `.bashrc`
 
     $ ibus-daemon &
 
+## Install **_Warp 1.1.1.1_**
+
+- Download the latest executable file from https://github.com/ViRb3/wgcf/releases/
+
+```bash
+wget https://github.com/ViRb3/wgcf/releases/download/v2.2.8/wgcf_2.2.8_linux_amd64
+mv ./wgcf_2.2.8_linux_amd64 ./wgcf
+```
+
+- Install
+
+```bash
+sudo apt update
+sudo apt install wireguard -y
+sudo chmod +x wgcf
+./wgcf register
+./wgcf generate
+sudo cp wgcf-profile.conf /etc/wireguard/
+sudo wg-quick up wgcf-profile
+sudo apt install resolvconf
+./wgcf registersudo wg-quick up wgcf-profile
+sudo wg-quick up wgcf-profile
+```
+
 ## Install Gnome Shell Extensions
 
     $ sudo apt install gnome-shell-extensions
@@ -382,6 +406,7 @@ INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
 add_executable(app main.cpp)
 target_link_libraries(app ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
 ```
+
 
 ## Install Anaconda
 
