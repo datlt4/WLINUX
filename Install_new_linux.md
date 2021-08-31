@@ -91,7 +91,7 @@ sudo chmod +x wgcf
 sudo cp wgcf-profile.conf /etc/wireguard/
 sudo wg-quick up wgcf-profile
 sudo apt install resolvconf
-./wgcf registersudo wg-quick up wgcf-profile
+./wgcf register
 sudo wg-quick up wgcf-profile
 ```
 
