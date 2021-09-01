@@ -328,6 +328,8 @@ cd -
 
 [**Testing**](https://docs.nvidia.com/video-technologies/video-codec-sdk/ffmpeg-with-nvidia-gpu/#basic-testing)
 
+[**ERROR**] `Ffmpeg: error while loading shared libraries: libavdevice.so.52: cannot open shared object file`
+
 ## Install Boost C++
 
 [Download](https://www.boost.org/users/download/)
