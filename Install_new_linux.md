@@ -291,37 +291,40 @@ Install Pycuda
 
 ## Install FFmpeg with Nvidia Accelator
 
-**Clone ffnvcodec**
+**Install necessary packages.**
 
-    git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
+```bash
+sudo apt --assume-yes install libfdk-aac-dev libass-dev libopus-dev libtheora-dev libvorbis-dev libvpx-dev libssl-dev build-essential yasm cmake libtool libc6 libc6-dev unzip wget libnuma1 libnuma-dev libmp3lame-dev nasm
+```
 
 **Install ffnvcodec**
 
-    cd nv-codec-headers && sudo make install && cd -
+```bash
+git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
+cd nv-codec-headers && sudo make install && cd -
+```
+
+**Install x264**
+
+```bash
+git clone https://code.videolan.org/videolan/x264.git
+cd x264
+./configure --enable-static --enable-shared
+make -j $(nproc)
+sudo make install
+cd -
+```
 
 **Clone FFmpeg's public GIT repository.**
 
-    git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg/ && cd ffmpeg/
-
-**Install necessary packages.**
-
-    sudo apt --assume-yes install build-essential yasm cmake libtool libc6 libc6-dev unzip wget libnuma1 libnuma-dev
-
-**Configure**
-
-    ./configure --enable-shared --enable-static --enable-nonfree --enable-cuda-nvcc --enable-libnpp --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64
-
-**Compile**
-
-    make -j$(nproc)
-
-**Install the libraries.**
-
-    sudo make install
-
-**Install the libraries.**
-
-    ffmpeg -version
+```bash
+git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg/ && cd ffmpeg/
+./configure --enable-gpl --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-shared --enable-openssl --enable-cuda-nvcc --enable-libnpp --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64
+make -j$(nproc)
+sudo make install
+ffmpeg -version
+cd -
+```
 
 [**Testing**](https://docs.nvidia.com/video-technologies/video-codec-sdk/ffmpeg-with-nvidia-gpu/#basic-testing)
 
