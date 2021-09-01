@@ -296,8 +296,10 @@ git clone https://github.com/opencv/opencv_contrib.git
 
 **_Create directory_**
 
+```bash
 mkdir build
 cd build/
+```
 
 **_Build Opencv using Cmake_**
 
@@ -336,7 +338,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 **_Compile the OpenCV with Contribs Modules_**
 
 ```bash
-make -j${nproc}
+make -j$(nproc)
 sudo make install
 ```
 
