@@ -25,6 +25,5 @@ export EDITOR="/bin/nano"
 export SHELL='/bin/bash'
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64:/usr/local/cuda-11.1/lib64:/usr/local/cuda-11.2/lib64:/usr/local/TensorRT/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
-dpkg -l | grep TensorRT
 export Torch_DIR=/usr/local/lib/python3.8/dist-packages/torch
 ```
