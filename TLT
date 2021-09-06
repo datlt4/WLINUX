@@ -1,0 +1,79 @@
+[ ] Catalog » ResourcesTLT » CV Sample WorkFlows
+https://ngc.nvidia.com/catalog/resources/nvidia:tlt_cv_samples
+
+[ ] Docs » Object Detection » DetectNet_v2
+https://docs.nvidia.com/tao/archive/tlt-30/text/object_detection/detectnet_v2.html
+
+//=---------------------------------------------------
+
+[ ] Catalog » Models » License Plate Recognition
+https://ngc.nvidia.com/catalog/models/nvidia:tlt_lprnet
+
+[ ] Docs » License Plate Recognition Model (LPRNet)
+https://docs.nvidia.com/tao/archive/tlt-30/text/purpose_built_models/lprnet.html
+
+[ ] Docs » Character Recognition » LPRNet
+https://docs.nvidia.com/tao/archive/tlt-30/text/character_recognition/lprnet.html
+
+//=---------------------------------------------------
+
+[ ] Catalog » Models » LPDNet
+https://ngc.nvidia.com/catalog/models/nvidia:tlt_lpdnet
+
+[ ] Docs » LPDNet
+https://docs.nvidia.com/tao/archive/tlt-30/text/purpose_built_models/lpdnet.html
+
+//=---------------------------------------------------
+
+[ ] Catalog » Models » PeopleNet
+https://ngc.nvidia.com/catalog/models/nvidia:tlt_peoplenet
+
+[ ] Docs » PeopleNet
+https://docs.nvidia.com/tao/archive/tlt-30/text/purpose_built_models/peoplenet.html
+
+//=---------------------------------------------------
+
+[ ] Catalog » Models » BodyPoseNet
+https://ngc.nvidia.com/catalog/models/nvidia:tlt_bodyposenet
+
+//=---------------------------------------------------
+[ ] Docs » TrafficCamNet
+https://docs.nvidia.com/tao/archive/tlt-30/text/purpose_built_models/trafficcamnet.html
+
+[ ] Catalog » Models » TrafficCamNet
+https://ngc.nvidia.com/catalog/models/nvidia:tlt_trafficcamnet
+
+
+//=---------------------------------------------------
+//=---------------------------------------------------
+
+```
+ngc config set
+```
+
+```
+docker login nvcr.io
+$oauthtoken
+YWIwczloMjkwM3RnOHVhMW1xdXVnMnFpanY6ZjFjYjA1ZGUtNmU1ZS00N2IxLTljZjMtODEyOWI4NjExNzNl
+```
+
+```
+jupyter notebook --ip 0.0.0.0 --port 8888 --allow-root
+```
+
+```
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+   && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
+   && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+curl -s -L https://nvidia.github.io/nvidia-container-runtime/experimental/$distribution/nvidia-container-runtime.list | sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+sudo apt-get update
+sudo apt-get install -y nvidia-docker2
+sudo systemctl restart docker
+sudo docker run --rm --gpus all nvidia/cuda:11.1-base nvidia-smi
+```
+
+```
+sudo newgroup docker
+sudo chmod 666 /var/run/docker.sock
+sudo usermod -aG docker ${USER}
+```
