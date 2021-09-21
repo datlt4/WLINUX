@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/usr/local/cuda/**",
+                "/usr/local/cuda/include/**",
+                "/usr/local/cuda/include",
+                "/usr/include/**",
+                "/usr/local/include/**",
+                "/usr/local/lib/python3.8/dist-packages/torch/include/**",
+                "/usr/local/lib/python3.8/dist-packages/torch/include/torch/csrc/api/include/torch/**",
+                "/usr/local/TensorRT-7.2.3.4/include/**",
+                "./"
+            ],
+            "browse": {
+                "path": [
+                    "/usr/local/cuda/**",
+                    "/usr/local/cuda/include/**",
+                    "/usr/local/cuda/include",
+                    "/usr/include/**",
+                    "/usr/local/include/**",
+                    "/usr/local/lib/python3.8/dist-packages/torch/include/**",
+                    "/usr/local/lib/python3.8/dist-packages/torch/include/torch/csrc/api/include/torch/**",
+                    "/usr/local/TensorRT-7.2.3.4/include/**",
+                    "./"
+                ],
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "compilerPath": "/usr/bin/g++-9",
+            "cppStandard": "c++20"
+        }
+    ],
+    "version": 4
+}
