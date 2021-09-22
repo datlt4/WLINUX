@@ -304,17 +304,6 @@ git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
 cd nv-codec-headers && sudo make install && cd -
 ```
 
-**Install x264**
-
-```bash
-git clone https://code.videolan.org/videolan/x264.git
-cd x264
-./configure --enable-static --enable-shared
-make -j $(nproc)
-sudo make install
-cd -
-```
-
 **Clone FFmpeg's public GIT repository.**
 
 ```bash
