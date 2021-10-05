@@ -308,7 +308,7 @@ cd nv-codec-headers && sudo make install && cd -
 
 ```bash
 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg/ && cd ffmpeg/
-./configure --enable-gpl --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-shared --enable-openssl --enable-cuda-nvcc --enable-libnpp --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64
+./configure --enable-nonfree --enable-cuda-nvcc --enable-libnpp --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64
 make -j$(nproc)
 sudo make install
 ffmpeg -version
@@ -401,6 +401,29 @@ add_executable(app main.cpp)
 target_link_libraries(app ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
 ```
 
+## Install Docker
+
+1. Install 
+
+```bash
+sudo apt remove docker docker-engine docker.io containerd runc -y
+sudo apt autoremove -y
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io -y
+sudo docker run hello-world
+```
+
+2. Got Permission
+
+```bash
+sudo newgroup docker
+sudo chmod 666 /var/run/docker.sock
+sudo usermod -aG docker ${USER}
+```
 
 ## Install Anaconda
 
