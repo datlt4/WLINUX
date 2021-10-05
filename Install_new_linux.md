@@ -420,7 +420,7 @@ sudo docker run hello-world
 2. Got Permission
 
 ```bash
-sudo newgroup docker
+sudo groupadd docker
 sudo chmod 666 /var/run/docker.sock
 sudo usermod -aG docker ${USER}
 ```
