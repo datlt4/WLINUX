@@ -36,5 +36,5 @@ export Torch_DIR=/usr/local/lib/python3.8/dist-packages/torch
 Modify `PS1`
 
 ```bash
-export PS1="\[\[\033[01;41m\]\u\[\033[00m\]:\[\033[01;32m\]\W \[\033[01;36m\]➔ \[\033[00m\]"
+export PS1="\[\[\033[01;41m\]\u\[\033[00m\]:\[\033[01;32m\]\W \[\033[01;36m\]➜ \[\033[00m\]"
 ```
