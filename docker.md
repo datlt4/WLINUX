@@ -148,7 +148,15 @@ sudo chmod 666 /var/run/docker.sock
 sudo usermod -aG docker ${USER}            
  ```
  
- [ ] https://nguyenvanhieu.vn/docker-la-gi/?medium=ltkk 
+- Clean
+
+```
+docker container prune -f
+docker image prune -f
+docker volume prune -f
+```
+
+[ ] https://nguyenvanhieu.vn/docker-la-gi/?medium=ltkk 
 
 # Dockerfile, Images & Containers
 
