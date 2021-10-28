@@ -11,6 +11,7 @@ alias hc="cat ~/.bash_history -n | cut -c 8- | sort | uniq | fzf | tr -d '\\n' |
 alias h="cat ~/.bash_history -n | cut -c 8- | sort | uniq | fzf"
 alias H="cat ~/.bash_history -n | cut -c 8- | sort | uniq | fzf"
 alias rr="readlink -f"
+alias rrc="readlink -f * | sort | uniq | fzf | tr -d '\\n' | DISPLAY=:0 xclip -selection c"
 alias pwdc="pwd | tr -d '\\n' | DISPLAY=:0 xclip -selection c"
 
 alias notify_done0="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/canary-long.wav /usr/share/sounds/sound-icons/trumpet-12.wav"
