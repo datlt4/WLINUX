@@ -14,9 +14,9 @@ alias rr="readlink -f"
 alias rrc="readlink -f * | sort | uniq | fzf | tr -d '\\n' | DISPLAY=:0 xclip -selection c"
 alias pwdc="pwd | tr -d '\\n' | DISPLAY=:0 xclip -selection c"
 
-alias notify_done0="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/canary-long.wav /usr/share/sounds/sound-icons/trumpet-12.wav"
-alias notify_done1="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/canary-long.wav"
-alias notify_done2="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/trumpet-12.wav"
+alias buzz0="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/canary-long.wav /usr/share/sounds/sound-icons/trumpet-12.wav"
+alias buzz1="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/canary-long.wav"
+alias buzz2="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/trumpet-12.wav"
 ```
 
 For Raspberry Pi
