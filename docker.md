@@ -145,9 +145,8 @@ docker build -t  demo:1.0
 ```
 sudo groupadd docker
 sudo usermod -aG docker ${USER}
-su -s ${USER}
-sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
-sudo chmod g+rwx "$HOME/.docker" -R
+sudo chown "$USER":"$USER" ${HOME}/.docker -R
+sudo chmod g+rwx "${HOME}/.docker" -R
 sudo chmod 666 /var/run/docker.sock
  ```
  
