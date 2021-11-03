@@ -143,9 +143,9 @@ docker build -t  demo:1.0
 - `[ERROR] Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock`
 
 ```
-sudo newgroup docker 
-sudo chmod 666 /var/run/docker.sock 
-sudo usermod -aG docker ${USER}            
+sudo newgrp docker
+sudo chmod 666 /var/run/docker.sock
+sudo usermod -aG docker ${USER}
  ```
  
 - Clean
