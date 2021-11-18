@@ -1,5 +1,161 @@
 [**SOURCE**](https://www.geeksforgeeks.org/tag/linux-command/)
 
+# [`Curl`](https://reqbin.com/req/v0crmky0/rest-api-post-example)
+
+## What is Curl?
+
+Curl is a command line tool for transferring data to and from servers. 
+
+## POST Request
+
+- Post JSON with CURL
+
+```bash
+curl -X POST https://reqbin.com/echo/post/json
+   -H 'Content-Type: application/json'
+   -d '{"login":"my_login","password":"my_password"}'
+```
+
+- POST file with CURL
+
+```bash
+curl -X POST https://reqbin.com/echo/post/json -d @filename.ext
+```
+
+- POST XML
+
+```bash
+curl -X POST https://reqbin.com/echo/post/xml
+   -H "Content-Type: application/xml"
+   -H "Accept: application/xml"
+   -d "<xml_data>....</xml_data>"
+```
+
+
+## GET Request
+
+- GET `json`
+
+```bash
+curl https://reqbin.com/echo/get/json
+   -H "Accept: application/json"
+```
+
+- GET `xml`
+
+```bash
+curl https://reqbin.com/echo/get/xml
+   -H "Accept: application/xml"
+```
+
+- GET `html`
+
+```bash
+curl https://reqbin.com/echo
+   -H "Accept: text/html"
+```
+
+- Limiting the maximum transfer rate for Curl GET requests
+
+```bash
+curl https://reqbin.com/echo
+   --limit-rate 50K
+```
+
+## Add Header to Curl request
+
+- Sent custom HTTP headers using Curl
+
+```bash
+curl https://reqbin.com/echo/get/json
+   -H "X-Custom-Header: value"
+   -H "Content-Type: application/json"
+   -H "Accept: application/json"
+```
+
+- Only get HTTP headers using Curl
+
+```bash
+curl -I https://reqbin.com/echo
+```
+
+## Curl POST Form
+
+- Curl POST Form Syntax
+
+```bash
+curl -X POST [URL]
+   -H "Content-Type: application/x-www-form-urlencoded" 
+   -d "key1=value1&key2=value2"
+```
+
+- Curl POST Form with multipart/form-data Format
+
+```bash
+curl https://reqbin.com/echo/post/form 
+   -F key1=value1
+   -F key2=value2
+   -F photo=@photo.png
+```
+
+## Curl ignore SSL
+
+```bash
+curl -k https://expired.badssl.com
+```
+```bash
+curl --insecure https://expired.badssl.com
+```
+
+## Curl DELETE Request
+
+```bash
+curl -X DELETE http://reqbin.com/echo/delete/json?id=1	
+   -H "Accept: application/json"
+```
+
+## Curl Proxy
+
+- Curl Proxy Syntax
+
+```bash
+curl -x "[protocol://][host][:port]" [URL] [options]
+```
+
+- Allow Insecure SSL Connections for Curl Proxy Requests
+
+```bash
+curl -x "[protocol://][host][:port]" -k [URL]
+```
+
+- Curl SOCKS Proxy Syntax
+
+```bash
+curl -x "[socks5://][host][:port]" [URL] [options]
+curl --socks5 "[host][:port]" [URL] [options]
+```
+
+- Specify proxy username and password
+
+```bash
+curl -x "[protocol://][host][:port]" [URL] -U login:password
+```
+
+## Curl HTTPS
+
+- CURL Client Certificate Example
+
+```bash
+curl -E cerfile.crt https://reqbin.com/echo
+curl --cert cerfile.crt https://reqbin.com/echo
+```
+
+- CURL CA Certificate Example
+
+```bash
+curl --cacert mycompany.cert  https://www.mycompany.com/internal
+```
+
 # [SED Command in Linux](https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/)
 
 Sed command in Unix OS can perform a lot of function like searching, find and replace, insertion or deletion.
