@@ -155,6 +155,30 @@ docker volume create <new-volume-volume>
 docker container run -d -v <new-volume-volume>:</path/to/mount> --name <Name-container> <Image-name>
 ```
 
+# Networks in Docker
+
+- If you want to connect two or more containers, so that they can communicate with each other, they have to share the same `network`.
+
+## Connecting two containers on the same network
+
+- Create the network
+
+```
+docker network create <network-name>
+```
+
+- List the networks
+
+```
+docker network ls
+```
+- Start container and link it to new network
+
+```
+docker container run -d --rm --network <network-name> --name c1 <image1>
+docker container run -d --rm --network <network-name> --name c2 <image2>
+```
+
 # `Dockerfile`
 
 Mỗi dòng  lấy image tạo ra từ dòng trước đó để tạo một image mới .Không chỉnh sửa trạng  thái của dòng trước đó .Phần code chỉnh sửa nên đặt  ở cuối `Dockerfile `. Các tiến  trình chạy tên một dòng sẽ không chạy  ở  dòng  tiếp theo . Các biến môi trường được đặt sẽ giữ lại ở dòng tiếp theo . Mỗi dòng trong dockerfile đều gọi tới `docker run `.
