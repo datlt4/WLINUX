@@ -127,6 +127,34 @@ Kiểm tra cấu hình container
 
 docker inspect <id> | grep IPAddress
 
+# `Docker Volume`
+
+- `Volumes`: are used to persist data, Usually use them for Databases.
+
+- Inspect container
+
+```bash
+docker container inspect <Container>
+```
+
+- List volumes
+
+```bash
+docker volume ls
+```
+
+- Create a volume
+
+```bash
+docker volume create <new-volume-volume>
+```
+ 
+- Link the new volume created
+
+```
+docker container run -d -v <new-volume-volume>:</path/to/mount> --name <Name-container> <Image-name>
+```
+
 # `Dockerfile`
 
 Mỗi dòng  lấy image tạo ra từ dòng trước đó để tạo một image mới .Không chỉnh sửa trạng  thái của dòng trước đó .Phần code chỉnh sửa nên đặt  ở cuối `Dockerfile `. Các tiến  trình chạy tên một dòng sẽ không chạy  ở  dòng  tiếp theo . Các biến môi trường được đặt sẽ giữ lại ở dòng tiếp theo . Mỗi dòng trong dockerfile đều gọi tới `docker run `.
