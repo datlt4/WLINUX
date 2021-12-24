@@ -33,6 +33,8 @@ export SHELL='/bin/bash'
 export PATH=/usr/local/cuda/bin:/opt/Qt/6.2.2/gcc_64/lib/cmake:${PATH}
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64:/usr/local/cuda-11.1/lib64:/usr/local/TensorRT/lib:/usr/local/cuda/extras/CUPTI/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 export Torch_DIR=/usr/local/lib/python3.8/dist-packages/torch
+export Qt6Core_DIR=/opt/Qt/6.2.2/gcc_64/lib/cmake/Qt6Core
+export Qt6_DIR=/opt/Qt/6.2.2/gcc_64/lib/cmake/Qt6
 ```
 
 Modify `PS1`
