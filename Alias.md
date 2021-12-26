@@ -28,7 +28,7 @@ alias cap="raspistill -o ~/Pictures/\$(date +%Y%m%d_%H%M%S_%N).jpg"
 Get temporature Raspberry Pi
 
 ```bash
-echo "CPU: $(printf %.1f \"$(</sys/class/thermal/thermal_zone0/temp)e-3\")'C ... GPU: $(/opt/vc/bin/vcgencmd measure_temp | awk -F [=\'] '{print($2)}')'C"
+echo "CPU: $(printf %.1f $(</sys/class/thermal/thermal_zone0/temp)e-3)'C ... GPU: $(/opt/vc/bin/vcgencmd measure_temp | awk -F [=\'] '{print($2)}')'C"
 ```
 
 PATH
