@@ -7,7 +7,7 @@ Docker Desktop for Mac/Windows includes Compose along with other Docker apps, so
 
 ## Install Compose on Linux
 
-1. Method 1
+1. Method `1`
 
 ```bash
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -16,7 +16,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose --version
 ```
 
-2. Method 2
+2. Method `2`
 
 ```bash
 sudo apt install docker-compose -y
