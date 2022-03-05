@@ -29,7 +29,8 @@ docker-compose --version
 sudo apt-get update -y
 sudo apt-get install curl python3-pip libffi-dev python-openssl libssl-dev zlib1g-dev gcc g++ make -y
 sudo snap install rustup --classic
-sudo apt install rustc
+sudo apt install rustc -y
+sudo python3 -m pip install setuptools_rust
 sudo python3 -m pip install docker-compose
 sudo docker-compose --version
 ```
