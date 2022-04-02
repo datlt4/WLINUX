@@ -21,6 +21,26 @@
         $ sudo passwd root
         $ sudo passwd <userName>
 
+## How to run sudo command without a password on a Linux or Unix
+
+1. Edit file named as `/etc/sudoers`
+
+```bash
+sudo nano /etc/sudoers
+```
+
+2. put text to the end of file
+
+```bash
+<Username> ALL = NOPASSWD: <command1>, <command2>
+```
+
+- example: the below example, I run `/bin/kill` command and `systemctl` as user named `emoi`.
+
+```bash
+emoi ALL = NOPASSWD: /bin/systemctl restart httpd.service, /bin/kill
+```
+
 ## Secure Shell (SSH)
 
 1. Install
