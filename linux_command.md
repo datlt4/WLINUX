@@ -138,6 +138,16 @@ where:
 - `-N`: do not open shell SSH
 - `-f`: SSH to into background
 
+## Cloudflare Warp
+
+[warp-cli](https://pkg.cloudflareclient.com/packages/cloudflare-warp)
+
+```bash
+warp-cli register <- cái này first time thôi
+warp-cli connect
+warp-cli disconnect
+```
+
 ## [Create SSH tunel to a running colab notebook](https://github.com/lamhoangtung/colab_ssh)
 1. Generate `id_rsa.pub` of **your machine**
 
