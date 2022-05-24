@@ -364,8 +364,6 @@ warp-cli disconnect
 
             $ rsync -avzi  /home/pkumar/techi  root@192.168.1.29:/opt
 
-
-
 ## Linux tmux command
 
 The Linux tmux command is a terminal multiplexer, allow you to have multiple windows within a single terminal window, and to jump back and forth between them.. In tmux, you will be working with sessions, windows and panes.
@@ -552,6 +550,72 @@ The Linux tmux command is a terminal multiplexer, allow you to have multiple win
        @daily : Run once a day, ie. 0 0 * * *
        @hourly : Run once an hour, ie. 0 * * * *
 
+## Wake On Lan
+
+- BIOS
+
+```
+Advanced > Power On By PCI-E > Enabled
+```
+
+- Installation
+
+```bash
+sudo apt install ethtool
+```
+
+- Checking the interface
+
+```
+ip a
+```
+
+Ouput:
+
+```
+2: enp4s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 38:d5:47:79:ab:0b brd ff:ff:ff:ff:ff:ff
+    inet 192.168.86.97/24 brd 192.168.86.255 scope global dynamic noprefixroute enp4s0
+       valid_lft 84752sec preferred_lft 84752sec
+    inet6 fe80::685d:374d:a577:f787/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+```
+
+Need to note `enp4s0` and `38:d5:47:79:ab:0b`
+
+- Check interface supports WOL
+
+```
+sudo ethtool enp4s0
+```
+
+- Turn it on
+
+```bash
+sudo nano /etc/systemd/system/wol.service
+```
+
+put bellow setting to the file
+
+```
+[Unit]
+Description=Enable Wake On Lan
+
+[Service]
+Type=oneshot
+ExecStart = /sbin/ethtool --change enp4s0 wol g
+
+[Install]
+WantedBy=basic.target
+```
+
+- Enable The Service
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable wol.service
+sudo systemctl status wol
+```
 
 ## Tree command
 
