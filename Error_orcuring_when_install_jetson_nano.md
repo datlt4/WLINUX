@@ -119,6 +119,60 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
     add "-o Acquire::Check-Valid-Until=false" into the end of command.
     eg: sudo apt update -o Acquire::Check-Valid-Until=false
 
+## Setup VNC server on the Jetson developer kit 
+
+- Enable the VNC server to start each time you log in
+
+```bash
+pushd /usr/lib/systemd/user/graphical-session.target.wants
+sudo ln -s ../vino-server.service ./.
+```
+
+- Configure the VNC server
+
+```bash
+gsettings set org.gnome.Vino authentication-methods "['vnc']"
+gsettings set org.gnome.Vino vnc-password $(echo -n '6262Ando286'|base64)
+```
+
+- Set a password to access the VNC server
+
+```bash
+# Replace thepassword with your desired password
+gsettings set org.gnome.Vino authentication-methods "['vnc']"
+gsettings set org.gnome.Vino vnc-password $(echo -n 'thepassword'|base64)
+```
+
+- Edit file config
+
+```bash
+sudo nano /usr/share/glib-2.0/schemas/org.gnome.Vino.gschema.xml
+```
+
+```bash
+    <key name='enabled' type='b'>
+      <summary>Enable remote access to the desktop</summary>
+      <description>
+        If true, allows remote access to the desktop via the RFB
+        protocol. Users on remote machines may then connect to the
+        desktop using a VNC viewer.
+      </description>
+      <default>false</default>
+    </key>
+```
+
+- recompile
+
+```bash
+sudo glib-compile-schemas /usr/share/glib-2.0/schemas
+```
+
+- Reboot the system so that the settings take effect
+
+```bash
+sudo reboot
+```
+
 ## [TUITORIAL] Uninstall OpenCV Completely
 **_Reference_**
 
