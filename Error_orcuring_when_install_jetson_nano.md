@@ -120,6 +120,7 @@ E: Release file for http://archive.debian.org/debian/dists/jessie-backports/InRe
     eg: sudo apt update -o Acquire::Check-Valid-Until=false
 
 ## Setup VNC server on the Jetson developer kit 
+[REference](https://developer.nvidia.com/embedded/learn/tutorials/vnc-setup)
 
 - Enable the VNC server to start each time you log in
 
@@ -131,8 +132,8 @@ sudo ln -s ../vino-server.service ./.
 - Configure the VNC server
 
 ```bash
-gsettings set org.gnome.Vino authentication-methods "['vnc']"
-gsettings set org.gnome.Vino vnc-password $(echo -n '6262Ando286'|base64)
+gsettings set org.gnome.Vino prompt-enabled false
+gsettings set org.gnome.Vino require-encryption false
 ```
 
 - Set a password to access the VNC server
