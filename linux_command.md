@@ -168,7 +168,7 @@ warp-cli disconnect
        setup_ssh(public_key)
        loop_forever()
 
-# Add an additional hard drive
+## Add an additional hard drive
 
 ```bash
 sudo fdisk -l
@@ -190,6 +190,8 @@ sudo mkdir /ssd1
 sudo mkdir /ssd2
 ```
 
+- Edit `/etc/fstab`
+
 ```
 sudo nano /etc/fstab
 ```
@@ -202,6 +204,13 @@ add following to the end of the file:
 /dev/sdb2    /ssd2    ext4    defaults    0    0
 ```
 
+- Mount partition
+
+```bash
+sudo mount /hdd
+sudo mount /ssd1
+sudo mount /ssd2
+```
 
 ## SCP command to Sercurely Tranfer Files
 
