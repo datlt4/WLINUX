@@ -168,6 +168,25 @@ sudo nano /usr/share/glib-2.0/schemas/org.gnome.Vino.gschema.xml
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas
 ```
 
+- Create pseudo screen
+
+```bash
+sudo nano /etc/X11/xorg.conf
+```
+
+```
+Section "Screen"
+    Identifier "Default Screen"
+    Monitor "Configured Monitor"
+    Device "Tegra0"
+    DefaultDepth 24
+    SubSection "Display"
+        Depth 24
+        Virtual 1920 1080
+    EndSubSection
+EndSection
+```
+
 - Reboot the system so that the settings take effect
 
 ```bash
