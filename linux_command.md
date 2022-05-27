@@ -168,6 +168,41 @@ warp-cli disconnect
        setup_ssh(public_key)
        loop_forever()
 
+# Add an additional hard drive
+
+```bash
+sudo fdisk -l
+```
+
+output:
+```
+Device     Start        End    Sectors   Size Type
+/dev/sda1   2048 1953523711 1953521664 931.5G Microsoft basic data
+/dev/sdb2   2048 1953523711 1953521664 500.2G Microsoft basic data
+/dev/sdb2   2048 1953523711 1953521664 256.8G Microsoft basic data
+```
+
+- Create a mount point
+
+```bash
+sudo mkdir /hdd
+sudo mkdir /ssd1
+sudo mkdir /ssd2
+```
+
+```
+sudo nano /etc/fstab
+```
+
+add following to the end of the file:
+
+```
+/dev/sda1    /hdd     ntfs    defaults    0    0
+/dev/sdb1    /ssd1    ext4    defaults    0    0
+/dev/sdb2    /ssd2    ext4    defaults    0    0
+```
+
+
 ## SCP command to Sercurely Tranfer Files
 
 1. SCP Command Syntax
