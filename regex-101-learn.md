@@ -39,7 +39,7 @@
 ## Lookarounds
 
 - Positive Lookahead `(?=)`: Example `\d+(?=PM)` - select the numberical values that **have** `PM` **after them**.
-- Negative Lookahead `(?!)`: Example `\d+(?=PM)` - select only the numerical values that do **not have** `PM` **after them**.
+- Negative Lookahead `(?!)`: Example `\d+(?!PM)` - select only the numerical values that do **not have** `PM` **after them**.
 - Positive Lookbehind `(?<=)`: Example `(?<=\$)\d+` - select only the number values that **preceded** by `$`.
 - Negative Lookbehind `(?<!)`: Example `(?<!\$)\d+` - select only the number values that **not preceded** by `$`.
 
