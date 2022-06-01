@@ -95,6 +95,20 @@ sudo apt install resolvconf
 sudo wg-quick up wgcf-profile
 ```
 
+## [Install Bluetooth 5 USB Dongle Orico BTA-608/ Ugreen CM390 Driver](https://sepatufans.wordpress.com/2022/02/26/bluetooth-5-usb-adapter-orico-bta-608-ugreen-cm390-realtek-rtl8761buv-di-ubuntu-linux-20-04-0bda8771/)
+
+- Download [.7z](https://mpow.s3-us-west-1.amazonaws.com/20201202_mpow_BH456A_driver+for+Linux.7z) file and unzip.
+- After unzip:
+
+```bash
+cd 20201202_LINUX_BT_DRIVER/
+sudo make install INTERFACE=usb
+cd rtkbt-firmware/lib/firmware/
+sudo cp rtl8761bu_fw /lib/firmware/rtl_bt/rtl8761b_fw.bin
+sudo cp rtl8761bu_config /lib/firmware/rtl_bt/rtl8761b_config.bin
+sudo reboot 0
+```
+
 ## Install Gnome Shell Extensions
 
     $ sudo apt install gnome-shell-extensions
