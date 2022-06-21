@@ -463,14 +463,22 @@ The Linux tmux command is a terminal multiplexer, allow you to have multiple win
 
         - tmux detach
 
-                [ctrl + b] + d
-
+```bash
+[ctrl + b] + d
+tmux detach-client -s Session_name
+```
         - re-attach
 
-                $ tmux attach
-                $ tmux a -t Session_name
+```bash
+tmux attach
+tmux a -t Session_name
+```
+
         - make a panel go full screen
-                [ctrl + b] + z
+
+```bash
+[ctrl + b] + z
+```
 
 1. List active Sessions
 
