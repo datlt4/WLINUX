@@ -461,20 +461,20 @@ The Linux tmux command is a terminal multiplexer, allow you to have multiple win
 
     - Tmux can be used to keep a process working in background. Detach from current session
 
-        - tmux detach
+    - tmux detach
 
 ```bash
 [ctrl + b] + d
 tmux detach-client -s Session_name
 ```
-        - re-attach
+   - re-attach
 
 ```bash
 tmux attach
 tmux a -t Session_name
 ```
 
-        - make a panel go full screen
+   - make a panel go full screen
 
 ```bash
 [ctrl + b] + z
