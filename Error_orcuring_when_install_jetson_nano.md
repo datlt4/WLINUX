@@ -1,4 +1,3 @@
-
 ## [NOTE] Jetson Download Center
 **_Reference:_**
 
@@ -192,6 +191,19 @@ EndSection
 ```bash
 sudo reboot
 ```
+
+## [`/etc/sudoers` file corrupted and I can't run `'pkexec visudo'` over `SSH`](https://askubuntu.com/questions/799669/etc-sudoers-file-corrupted-and-i-cant-run-pkexec-visudo-over-ssh)
+
+- Open two ssh sessions to the target server.
+
+- In the first session, get the PID of bash by running: `echo $$`
+
+- In the second session, start the authentication agent with: `pkttyagent --process (pid from step 2)`
+
+- Back in the first session, run: `pkexec visudo`
+
+- In the second session, you will get the password prompt. `visudo` will start in the first session.
+
 
 ## [TUITORIAL] Uninstall OpenCV Completely
 **_Reference_**
