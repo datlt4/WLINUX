@@ -589,7 +589,11 @@ $ tmux kill-session -a
 [ctrl + b] + q
 ```
 
-- Zoom in to Pane
+- Zoom in, zoom out to Pane
+
+```
+[ctrl + b] + z
+```
 
 - Tmux can be used to keep a process working in background. Detach from current session
 
