@@ -213,6 +213,26 @@ setup_ssh(public_key)
 loop_forever()
 ```
 
+## `Tmpfs` and `Ramfs`
+
+- `Tmpfs`: Tmpfs is a temporary file system stored in the RAM memory (and/or swap memory). By specifying this file system with the argument -t of the command mount, you can assign limited memory resources to a temporary file system. As a result, applications stored in this filesystem will perform several times faster than they would on conventional storage devices, including cssd devices.
+
+- `Ramfs`: Ramfs is similar to Tmpfs, but the user can’t ensure a limit, and the allocated resource grows dynamically. If the user doesn’t control the ramfs consumption, ramfs will keep using all the memory until hanging or crashing the system.
+
+- Create a `Ramdisk` in Linux Using `Tmpfs`
+
+```bash
+mkdir -p /mnt/tmp
+mount -t tmpfs -o size=2g tmpfs /mnt/tmp
+```
+
+- Creating a `Ramdisk` in Linux Using `Ramfs`
+
+```bash
+mkdir -p /mnt/tmp
+mount -t ramfs -o size=2 ramfs /mnt/tmp
+```
+
 ## Add an additional hard drive
 
 ```bash
