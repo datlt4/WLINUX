@@ -71,30 +71,6 @@ Add to the end of file `.bashrc`
 
     $ ibus-daemon &
 
-## Install **_Warp 1.1.1.1_**
-
-- Download the latest executable file from https://github.com/ViRb3/wgcf/releases/
-
-```bash
-wget https://github.com/ViRb3/wgcf/releases/download/v2.2.8/wgcf_2.2.8_linux_amd64
-mv ./wgcf_2.2.8_linux_amd64 ./wgcf
-```
-
-- Install
-
-```bash
-sudo apt update
-sudo apt install wireguard -y
-sudo chmod +x wgcf
-./wgcf register
-./wgcf generate
-sudo cp wgcf-profile.conf /etc/wireguard/
-sudo wg-quick up wgcf-profile
-sudo apt install resolvconf
-./wgcf register
-sudo wg-quick up wgcf-profile
-```
-
 ## [Install Bluetooth 5 USB Dongle Orico BTA-608/ Ugreen CM390 Driver](https://sepatufans.wordpress.com/2022/02/26/bluetooth-5-usb-adapter-orico-bta-608-ugreen-cm390-realtek-rtl8761buv-di-ubuntu-linux-20-04-0bda8771/)
 
 - Download [.7z](https://mpow.s3-us-west-1.amazonaws.com/20201202_mpow_BH456A_driver+for+Linux.7z) file and unzip ([Google Drive](https://drive.google.com/file/d/1sJ_IboSfwUPQFrmEQuKtMCAhlUjQGyq0/view?usp=sharing)).
