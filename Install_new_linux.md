@@ -1,17 +1,9 @@
 [REFERENCE](https://towardsdatascience.com/a-definitive-guide-for-setting-up-a-deep-learning-workstation-with-ubuntu-18-04-5459d70e19c3)
 
-## Install `htop`
+## Install
 
-    sudo apt-get update
-    sudo apt-get --assume-yes upgrade
-    sudo apt --assume-yes install cmake htop tree
-    sudo apt-get --assume-yes install tmux build-essential gcc g++ make binutils
-    sudo apt-get --assume-yes install software-properties-common
-    sudo apt-get --assume-yes install git
-
-## Install `openssh`
-    
-    sudo apt install openssh-server openssh-client
+    sudo apt-get update && sudo apt-get --assume-yes upgrade
+    sudo apt --assume-yes install cmake htop tree tmux build-essential gcc g++ make binutils software-properties-common git openssh-server openssh-client
 
 ## Install the latest version of `cmake`
 
@@ -53,12 +45,12 @@ Add to the end of file `.bashrc`
 
 ## Install `Sublime Text`
 
-    $ sudo apt update
-    $ sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
-    $ curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-    $ sudo add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
-    $ sudo apt update
-    $ sudo apt install sublime-text -y
+    sudo apt update
+    sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+    curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+    sudo add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
+    sudo apt update
+    sudo apt install sublime-text -y
 
 ## Install `ibus-unikey`
 
