@@ -71,10 +71,8 @@ if __name__ == "__main__":
 ## Using free CA with `Let's Encrypt`.
 
 ```bash
-sudo apt install software-properties-common
-sudo add-apt-repository ppa:certbot/certbot
+sudo snap install --classic certbot
 sudo apt update
-sudo apt install certbot
 ```
 
 ```bash
