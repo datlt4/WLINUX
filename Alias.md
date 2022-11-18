@@ -56,5 +56,5 @@ parse_git_branch2() {
           echo ""
      fi
 }
-export PS1="\[\[\033[01;43m\]\u\[\033[00m\]:\[\033[01;32m\]\W \[\e[94m\]\$(parse_git_branch2)\[\e[91m\]\$(parse_git_branch)\[\e[00m\]\[\033[01;36m\]➜ \[\033[00m\]"
+export PS1="\[\[\033[01;43m\]\u\[\033[00m\]:\[\033[01;32m\]\W \[\e[96m\]\$(parse_git_branch2)\[\e[91m\]\$(parse_git_branch)\[\e[00m\]\[\033[01;36m\]➜ \[\033[00m\]"
 ```
