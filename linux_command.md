@@ -68,7 +68,13 @@ $ ssh <username>@<hosname_ip>
 - SSH configuration
 
 ```
-$ sudo /etc/ssh/sshd_config
+sudo nano /etc/ssh/sshd_config
+```
+
+Disable access via text password: set `PasswordAuthentication` to `no`
+
+```
+PasswordAuthentication no
 ```
 
 - See status of OpenSSH server
