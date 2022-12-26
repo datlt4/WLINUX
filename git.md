@@ -32,3 +32,7 @@ git fetch upstream
 git rebase upstream/main
 git push origin
 ```
+
+```bash
+git remote -v
+```
