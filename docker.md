@@ -276,3 +276,213 @@ sudo docker run --name news-crawler -p 9000:5001 news-crawler
 ```
 sudo docker image ls 
 ```
+
+# Dockerfile
+
+1. `FROM`
+
+Usage:
+
+```
+FROM <image>
+FROM <image>:<tag>
+FROM <image>@<digest>
+```
+
+Information:
+
+- `FROM` must be the first non-comment instruction in the Dockerfile.
+
+2. `MAINTAINER`
+
+Usage:
+
+```
+MAINTAINER <name>
+```
+
+- The `MAINTAINER` instruction allows you to set the Author field of the generated images.
+
+3. `RUN`
+
+Usage:
+
+```
+RUN <command> (shell form, the command is run in a shell, which by default is /bin/sh -c on Linux or cmd /S /C on Windows)
+RUN ["<executable>", "<param1>", "<param2>"] (exec form)
+```
+
+Information:
+
+- The exec form makes it possible to avoid shell string munging, and to `RUN` commands using a base image that does not contain the specified shell executable.
+
+
+4. `LABEL`
+
+Usage:
+
+```
+LABEL <key>=<value> [<key>=<value> ...]
+```
+
+Information:
+
+- The `LABEL` instruction adds metadata to an image.
+
+5. `ENV`
+
+Usage:
+
+```
+ENV <key> <value>
+ENV <key>=<value> [<key>=<value> ...]
+```
+
+Information:
+
+- The `ENV` instruction sets the environment variable <key> to the value <value>.
+
+6. `ARG`
+
+Usage:
+
+```
+ARG <name>[=<default value>]
+```
+
+Information:
+
+Defines a variable that users can pass at build-time to the builder with the docker build command using the --build-arg <varname>=<value> flag.
+
+7. `ADD`
+
+Usage:
+
+```
+ADD <src> [<src> ...] <dest>
+ADD ["<src>", ... "<dest>"] (this form is required for paths containing whitespace)
+```
+
+Information:
+
+- Copies new files, directories, or remote file URLs from <src> and adds them to the filesystem of the image at the path <dest>.
+
+8. `COPY`
+
+Usage:
+
+```
+COPY <src> [<src> ...] <dest>
+COPY ["<src>", ... "<dest>"] (this form is required for paths containing whitespace)
+```
+
+Information:
+
+- Copies new files or directories from <src> and adds them to the filesystem of the image at the path <dest>.
+
+9. `VOLUME`
+
+Usage:
+
+```
+VOLUME ["<path>", ...]
+VOLUME <path> [<path> ...]
+```
+
+- Creates a mount point with the specified name and marks it as holding externally mounted volumes from native host or other containers.
+
+10. `USER`
+
+Usage:
+
+```
+USER <username | UID>
+```
+
+- The `USER` instruction sets the user name or UID to use when running the image and for any `RUN`, `CMD` and `ENTRYPOINT` instructions that follow it in the Dockerfile.
+
+11. `WORKDIR`
+
+Usage:
+
+```
+WORKDIR </path/to/workdir>
+```
+
+Information:
+
+- Sets the working directory for any `RUN`, `CMD`, `ENTRYPOINT`, `COPY`, and `ADD` instructions that follow it.
+- It can be used multiple times in the one Dockerfile. If a relative path is provided, it will be relative to the path of the previous `WORKDIR` instruction.
+
+12. `ONBUILD`
+
+Usage:
+
+```
+ONBUILD <Dockerfile INSTRUCTION>
+```
+
+Information:
+
+- Adds to the image a trigger instruction to be executed at a later time, when the image is used as the base for another build. The trigger will be executed in the context of the downstream build, as if it had been inserted immediately after the `FROM` instruction in the downstream Dockerfile.
+- Any build instruction can be registered as a trigger.
+- Triggers are inherited by the "child" build only. In other words, they are not inherited by "grand-children" builds.
+- The `ONBUILD` instruction may not trigger `FROM`, `MAINTAINER`, or `ONBUILD` instructions.
+
+13. `CMD`
+
+Usage:
+
+```
+CMD ["<executable>","<param1>","<param2>"] (exec form, this is the preferred form)
+CMD ["<param1>","<param2>"] (as default parameters to ENTRYPOINT)
+CMD <command> <param1> <param2> (shell form)
+```
+
+Information:
+
+- The main purpose of a `CMD` is to provide defaults for an executing container. These defaults can include an executable, or they can omit the executable, in which case you must specify an `ENTRYPOINT` instruction as well.
+- There can only be one `CMD` instruction in a Dockerfile. If you list more than one `CMD` then only the last `CMD` will take effect.
+- If `CMD` is used to provide default arguments for the `ENTRYPOINT` instruction, both the `CMD` and `ENTRYPOINT` instructions should be specified with the JSON array format.
+- If the user specifies arguments to docker run then they will override the default specified in `CMD`.
+- Normal shell processing does not occur when using the exec form. For example, `CMD ["echo", "$HOME"]` will not do variable substitution on `$HOME`.
+
+14. `ENTRYPOINT`
+
+Usage:
+
+```
+ENTRYPOINT ["<executable>", "<param1>", "<param2>"] (exec form, preferred)
+ENTRYPOINT <command> <param1> <param2> (shell form)
+```
+
+Information:
+
+- Allows you to configure a container that will run as an executable.
+- Command line arguments to docker run <image> will be appended after all elements in an exec form `ENTRYPOINT` and will override all elements specified using `CMD`.
+- The shell form prevents any `CMD` or run command line arguments from being used, but the `ENTRYPOINT` will start via the shell. This means the executable will not be PID 1 nor will it receive UNIX signals. Prepend exec to get around this drawback.
+- Only the last `ENTRYPOINT` instruction in the Dockerfile will have an effect.
+
+15. `STOPSIGNAL`
+
+Usage:
+
+```
+STOPSIGNAL <signal>
+```
+
+- The `STOPSIGNAL` instruction sets the system call signal that will be sent to the container to exit. This signal can be a valid unsigned number that matches a position in the kernel’s syscall table, for instance 9, or a signal name in the format `SIGNAME`, for instance `SIGKILL`.
+
+16. `HEALTHCHECK`
+
+Usage:
+
+```
+HEALTHCHECK [<options>] CMD <command> (check container health by running a command inside the container)
+HEALTHCHECK NONE (disable any healthcheck inherited from the base image)
+```
+
+Information:
+
+- Tells Docker how to test a container to check that it is still working
+- Whenever a health check passes, it becomes healthy. After a certain number of consecutive failures, it becomes unhealthy.
