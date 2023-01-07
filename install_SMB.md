@@ -19,7 +19,7 @@ At the bottom of the file, add the following lines:
     
     sudo service smbd restart
     sudo ufw allow samba
-    sudo smbpasswd -a m
+    sudo smbpasswd -a anoi
 
 # Connect to Server:
 
