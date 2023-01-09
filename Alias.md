@@ -50,6 +50,7 @@ parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 parse_git_branch2() {
+     git config --global --add safe.directory $(pwd)
      if [[ $(parse_git_branch) ]]; then
           echo "git:"
      else
