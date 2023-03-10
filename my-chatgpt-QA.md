@@ -11,6 +11,64 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **explain dynamic_cast, static_cast and reinterpret_cast in c++**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+C++ provides several casting operators to convert values between different types. The three most common casting operators are `dynamic_cast`, `static_cast`, and `reinterpret_cast`.
+
+1. `dynamic_cast`:
+
+    This cast is used to perform runtime type checking to safely cast down the inheritance hierarchy. It can be used to safely downcast a pointer from a base class to a derived class. It checks the type of the object at runtime and returns null if the object is not of the requested type. It can only be used with polymorphic types, i.e., classes that have at least one virtual function.
+
+    Here's an example:
+
+    ```cpp
+    class Base {
+    public:
+        virtual void foo() {}
+    };
+
+    class Derived : public Base {
+    public:
+        void bar() {}
+    };
+
+    Base* base = new Derived;
+    Derived* derived = dynamic_cast<Derived*>(base); // This is a safe downcast
+    ```
+
+1. `static_cast`:
+
+    This cast is used to perform simple conversions between types. It can be used to convert between fundamental data types, such as int and double, and to perform implicit type conversions. It can also be used to perform upcasting between base and derived classes, and to cast between void pointers and other pointer types.
+
+    Here's an example:
+
+    ```cpp
+    int i = 10;
+    double d = static_cast<double>(i); // This converts i to a double
+    ```
+
+1. `reinterpret_cast`:
+
+    This cast is used to perform low-level conversions between pointer types, such as casting a pointer to an integer type or vice versa. It can also be used to cast between unrelated pointer types, although this is generally considered unsafe.
+
+    Here's an example:
+
+    ```cpp
+    int* p = new int(10);
+    long l = reinterpret_cast<long>(p); // This converts the pointer to a long integer
+    ```
+
+It's important to use the appropriate cast operator for the type of conversion you need. Each operator has a specific purpose and should be used carefully to avoid type-related bugs and issues.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **grpc example that can send and receive binary file in Rust**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
