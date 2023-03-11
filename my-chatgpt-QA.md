@@ -11,6 +11,40 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what is the different between py.arg and "x"_a in pybind11 project**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In pybind11, `py::arg` and `"x"_a` are both used to specify function arguments in Python.
+
+`py::arg` is a class that represents a function argument, which can be used to specify the name, default value, and type of the argument. It is used by passing it as an argument to the `def` method in a pybind11 module.
+
+`"x"_a` is a user-defined literal that creates a py::arg object with the specified name `x. It can be used as a shorthand for creating py::arg objects, making it easier and more concise to specify function arguments.
+
+For example, consider the following two function definitions in pybind11:
+
+```cpp
+#include <pybind11/pybind11.h>
+
+void foo(int x, float y, bool z) {}
+
+PYBIND11_MODULE(example, m) {
+    m.def("foo", &foo, py::arg("x"), py::arg("y"), py::arg("z"));
+    m.def("bar", &foo, "x"_a, "y"_a, "z"_a);
+}
+```
+
+The `foo` function takes an integer, a float, and a boolean argument. In the `example` module, the `foo` function is exposed twice, once using `py::arg` and once using `"x"_a`. Both methods produce the same result.
+
+In general, the choice between `py::arg` and `"x"_a` is a matter of personal preference and coding style. Some developers may prefer the more verbose `py::arg` for clarity, while others may prefer the more concise `"x"_a` for brevity.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **why do we need to  explicitly instantiate the template function in a source file?**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
