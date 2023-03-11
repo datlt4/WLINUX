@@ -11,6 +11,55 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Static method and static attributes and give intuitive example in class C++**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In C++, a static member is a member of a class that is associated with the class rather than with individual instances of the class.
+
+A static attribute is a member variable of the class that is shared by all instances of the class. This means that if any instance of the class changes the value of a static attribute, that value will be reflected across all instances of the class.
+
+A static method is a member function of the class that does not have access to an instance of the class. It can only operate on static attributes and other static methods of the class. This is because static methods are not bound to any instance of the class.
+
+Here is an example to illustrate these concepts:
+
+```cpp
+#include <iostream>
+
+class MyClass {
+public:
+    static int staticAttribute; // static attribute
+    static void staticMethod() { // static method
+        std::cout << "This is a static method.\n";
+    }
+};
+
+int MyClass::staticAttribute = 0; // initialize the static attribute
+
+int main() {
+    MyClass obj1, obj2; // create two instances of MyClass
+
+    // access the static attribute using both instances
+    obj1.staticAttribute = 10;
+    std::cout << "obj1.staticAttribute = " << obj1.staticAttribute << std::endl;
+    std::cout << "obj2.staticAttribute = " << obj2.staticAttribute << std::endl;
+
+    // access the static method using the class name
+    MyClass::staticMethod();
+
+    return 0;
+}
+```
+
+In this example, `MyClass` has a static attribute `staticAttribute` and a static method `staticMethod`. When we create two instances of `MyClass`, we can access the static attribute using both instances, and any changes made to the attribute will be reflected across all instances of the class. We can also call the static method using the class name, and it will not have access to any specific instance of the class.
+  
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Overload << operator in C++**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
