@@ -11,6 +11,45 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **common .gitignore for pybind11 project**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Here is an example of a common `.gitignore` file for a pybind11 project:
+
+```python
+# Ignore build artifacts
+build/
+dist/
+__pycache__/
+*.pyc
+*.egg-info/
+*.egg
+
+# Ignore CMake and Visual Studio build directories
+CMakeFiles/
+cmake-build-*/
+
+# Ignore compiled binary files
+*.so
+*.pyd
+*.dll
+
+# Ignore system and editor files
+.DS_Store
+.idea/
+.vscode/
+```
+
+This `.gitignore` file will ignore all the build artifacts and compiled binary files generated during the build process. It will also ignore the system and editor files that are not relevant to the project.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what is the different between py.arg and "x"_a in pybind11 project**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
