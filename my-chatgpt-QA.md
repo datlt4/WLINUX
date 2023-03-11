@@ -11,6 +11,52 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Overload << operator in C++**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+  
+The `<<` operator in C++ is known as the stream insertion operator. It is used to insert data into output streams like `std::cout` or `std::cerr`. You can overload the `<<` operator to print your own data types.
+
+Here is an example of overloading the << operator for a Person class:
+
+```c++
+#include <iostream>
+#include <string>
+
+class Person {
+public:
+    Person(const std::string& name, int age) : name_(name), age_(age) {}
+
+    std::string name() const { return name_; }
+    int age() const { return age_; }
+    friend std::ostream& operator<<(std::ostream& os, const Person& person)
+
+private:
+    std::string name_;
+    int age_;
+};
+
+std::ostream& operator<<(std::ostream& os, const Person& person) {
+    os << "Name: " << person.name() << ", Age: " << person.age();
+    return os;
+}
+
+int main() {
+    Person person("Alice", 25);
+    std::cout << person << std::endl;
+    return 0;
+}
+```
+
+In this example, we define a `Person` class with a `name` and `age` attribute. We overload the `<<` operator to print the name and age of a `Person` object. We define the `<<` operator as a `friend` function that takes an output stream and a `Person` object as parameters. It then prints the name and age of the `Person` object to the output stream and returns the output stream. In the `main` function, we create a `Person` object and print it using the `<<` operator. The output will be `Name: Alice, Age: 25`.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **common .gitignore for pybind11 project**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
