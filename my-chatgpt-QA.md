@@ -11,6 +11,80 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **why do we need to  explicitly instantiate the template function in a source file?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In C++, template functions are not compiled until they are called with specific template arguments. This means that if a template function is only declared in a header file, but not defined in the same header file or a linked source file, the linker will not be able to find the function's implementation when it is called. This results in an "undefined reference" error during the linking phase.
+
+To avoid this error, the template function must be explicitly instantiated for all the required template argument types in a source file. This tells the compiler to generate the code for the function with the specified template arguments, and include it in the object file generated from that source file. Then, the linker can find the implementation of the template function when it is called, and link it with the rest of the program.
+
+Explicit instantiation can be done using the template keyword followed by the function signature, with the required template arguments enclosed in angle brackets. For example:
+
+```cpp
+// header file
+template <typename T>
+void myFunc(T arg);
+
+// source file
+template void myFunc<int>(int arg);
+template void myFunc<float>(float arg);
+```
+
+In this example, the `myFunc` template function is declared in the header file, and explicitly instantiated for the `int` and `float` template argument types in the source file. This generates the code for the function with the specified template arguments, and allows it to be linked with the rest of the program when it is called with those argument types.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **pybind11 undefined symbol, cannot link to a template function**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+When you encounter an "undefined symbol" error in a pybind11 project when trying to link to a template function, it is often because the template function is not explicitly instantiated or defined in a source file.
+
+To resolve this error, you can explicitly instantiate the template function in a source file and then link to it in the pybind11 module.
+
+Here is an example of how to do this:
+
+```c++
+// In header file:
+template<typename T>
+T add(T a, T b);
+
+// In source file:
+template<typename T>
+T add(T a, T b) {
+    return a + b;
+}
+
+// Explicitly instantiate the template function for the types you want to use
+template int add<int>(int a, int b);
+template double add<double>(double a, double b);
+
+// In pybind11 module:
+#include <pybind11/pybind11.h>
+
+namespace py = pybind11;
+
+PYBIND11_MODULE(example, m) {
+    m.def("add", &add<int>);
+    m.def("add", &add<double>);
+}
+```
+
+In this example, we define a templated function `add` in a header file, then explicitly instantiate it for the `int` and `double` types in a source file. Finally, we link to the instantiated functions in the pybind11 module by using the `&add<int>` and `&add<double>` function pointers.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **explain dynamic_cast, static_cast and reinterpret_cast in c++**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
