@@ -11,6 +11,374 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **example pybind11 project use `return_value_policy::automatic_reference` as return value policies**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Sure, here's an example Pybind11 project that uses the `return_value_policy::automatic_reference` return value policy:
+
+```cpp
+#include <pybind11/pybind11.h>
+
+namespace py = pybind11;
+
+class MyClass {
+public:
+    int my_value;
+
+    MyClass(int value) : my_value(value) {}
+
+    int get_value() const { return my_value; }
+};
+
+PYBIND11_MODULE(example, m) {
+    py::class_<MyClass>(m, "MyClass")
+        .def(py::init<int>())
+        .def("get_value", &MyClass::get_value, py::return_value_policy::automatic_reference);
+}
+```
+
+In this example, we define a simple `MyClass` C++ class with a single `my_value` data member and a `get_value()` member function that returns this value. We then use Pybind11 to expose this class to Python, and use the `return_value_policy::automatic_reference` return value policy to automatically handle memory management of the returned object.
+
+With this return value policy, Pybind11 will automatically choose the appropriate reference policy based on the object being returned. If the object is a C++ object owned by the caller (i.e. returned by value or as a raw pointer), Pybind11 will return a Python object that does not take ownership of the C++ object. If the object is a C++ object owned by a smart pointer, Pybind11 will return a Python object that takes ownership of the C++ object via a reference to the smart pointer.
+
+In our example, since we are returning a value by copy from `MyClass::get_value()`, Pybind11 will automatically choose a reference policy that does not take ownership of the returned object, avoiding any potential memory management issues.
+
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **example pybind11 project use `return_value_policy::automatic` as return value policies**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Sure, here is an example of a Pybind11 project that uses the `return_value_policy::automatic` as the return value policy:
+
+```c++
+#include <pybind11/pybind11.h>
+#include <vector>
+
+namespace py = pybind11;
+
+int add(int a, int b) {
+    return a + b;
+}
+
+std::vector<int> multiply(std::vector<int> v, int scalar) {
+    for (int& elem : v) {
+        elem *= scalar;
+    }
+    return v;
+}
+
+PYBIND11_MODULE(example, m) {
+    m.doc() = "example module";
+
+    m.def("add", &add, "A function that adds two integers",
+        py::arg("a"), py::arg("b"));
+
+    m.def("multiply", &multiply, "A function that multiplies a vector of integers by a scalar",
+        py::arg("v"), py::arg("scalar"));
+
+    // The following line sets the default return value policy for this module
+    // to automatic
+    py::options options;
+    options.enable_function_signatures();
+    options.set_default_return_value_policy(py::return_value_policy::automatic);
+}
+```
+
+In this example, we define two functions, `add` and `multiply`, and expose them to Python using the `m.def` function. We then set the default return value policy for the entire module to `return_value_policy::automatic` using the `py::options` object.
+
+With `return_value_policy::automatic`, Pybind11 will attempt to automatically deduce the return value policy for each function based on its return type. If the return type is a value or a reference, Pybind11 will use `return_value_policy::automatic_reference`. If the return type is a pointer or a non-reference type, Pybind11 will use `return_value_policy::automatic_pointer`. This allows Pybind11 to automatically handle returning C++ objects to Python without requiring the user to specify a return value policy for each function individually.
+
+Note that the `options.enable_function_signatures()` call is used to enable the generation of function signatures in the Python docstrings. This is optional but recommended as it makes it easier for users to understand how to call the functions from Python.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **example pybind11 project use `return_value_policy::reference_internal` as return value policies**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Here is an example pybind11 project that uses `return_value_policy::reference_internal` as the return value policy:
+
+```cpp
+
+#include <pybind11/pybind11.h>
+
+namespace py = pybind11;
+
+class MyClass {
+public:
+    MyClass(int x) : x_(x) {}
+    int getX() { return x_; }
+    void setX(int x) { x_ = x; }
+private:
+    int x_;
+};
+
+PYBIND11_MODULE(example, m) {
+    py::class_<MyClass>(m, "MyClass")
+        .def(py::init<int>())
+        .def("getX", &MyClass::getX, py::return_value_policy::reference_internal)
+        .def("setX", &MyClass::setX);
+}
+```
+
+In this example, we define a `MyClass` C++ class that has an integer data member `x_` and two member functions `getX()` and `setX()`. We then use `py::class_` to expose this class to Python, specifying the constructor and the member functions we want to expose.
+
+In particular, we use py::return_value_policy::reference_internal as the return value policy for the `getX()` function. This tells pybind11 to return a reference to the int data member of `MyClass` rather than a copy. By default, pybind11 returns copies of C++ objects to Python, but using `reference_internal` allows us to avoid unnecessary copying and improve performance.
+
+We can use this module in Python as follows:
+
+```python
+import example
+
+obj = example.MyClass(42)
+print(obj.getX())  # prints 42
+
+obj.setX(23)
+print(obj.getX())  # prints 23
+```
+
+Here, we create a `MyClass` object obj and call its `getX()` and `setX()` member functions from Python. Because we used reference_internal as the return value policy for `getX()`, the Python code can access the underlying int data member of `MyClass` directly, without the need for any copies or conversions.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **example pybind11 project use `return_value_policy::reference` as return value policies**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Sure! Here is an example Pybind11 project that uses `return_value_policy::reference` as the return value policy:
+
+```c++
+#include <pybind11/pybind11.h>
+
+namespace py = pybind11;
+
+// A simple function that returns a reference to an int
+int& get_reference(int& x) {
+    return x;
+}
+
+// Define a Python module that exposes the get_reference() function
+PYBIND11_MODULE(example, m) {
+    m.def("get_reference", &get_reference, py::return_value_policy::reference);
+}
+```
+
+In this example, we define a simple C++ function `get_reference()` that takes a reference to an `int` as an argument and returns a reference to the same `int`. We then define a Python module `example` using Pybind11 and expose the `get_reference()` function using `py::return_value_policy::reference` as the return value policy.
+
+With this return value policy, Pybind11 creates a Python object that simply wraps the C++ reference, without copying or taking ownership of the referred-to object. This means that any changes made to the Python object will be reflected in the original C++ object, and vice versa.
+
+Here's an example of how this module can be used in Python:
+
+```python
+import example
+
+x = 10
+ref = example.get_reference(x)
+
+print(ref)   # Prints "10"
+
+ref = 20
+
+print(x)     # Prints "20"
+```
+
+In this example, we first create an `int` object `x` with the value `10`. We then call the `get_reference()` function from the `example` module to get a reference to `x`, which is stored in the `ref` variable. We then print the value of `ref`, which is `10` (the value of `x`).
+
+We then change the value of `ref` to 20, which changes the value of `x` as well. Finally, we print the value of `x`, which is now `20`.
+
+This example demonstrates how the `return_value_policy::reference` return value policy can be used to expose C++ references to Python without copying or taking ownership of the underlying objects.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **example pybind11 project use `return_value_policy::move` as return value policies**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Sure, here's an example Pybind11 project that uses return_value_policy::move as the return value policy:
+
+```cpp
+#include <pybind11/pybind11.h>
+
+namespace py = pybind11;
+
+class MyClass {
+public:
+    int m_value;
+
+    MyClass(int value) : m_value(value) {}
+
+    MyClass(const MyClass&) = delete;
+    MyClass& operator=(const MyClass&) = delete;
+
+    MyClass(MyClass&& other) : m_value(other.m_value) {
+        other.m_value = 0;
+    }
+
+    MyClass& operator=(MyClass&& other) {
+        m_value = other.m_value;
+        other.m_value = 0;
+        return *this;
+    }
+
+    int getValue() const {
+        return m_value;
+    }
+
+    void setValue(int value) {
+        m_value = value;
+    }
+};
+
+PYBIND11_MODULE(example, m) {
+    py::class_<MyClass>(m, "MyClass")
+        .def(py::init<int>())
+        .def("getValue", &MyClass::getValue)
+        .def("setValue", &MyClass::setValue)
+        .def("__repr__",
+             [](const MyClass& obj) {
+                 return "<MyClass with value " + std::to_string(obj.getValue()) + ">";
+             })
+        .def("__str__",
+             [](const MyClass& obj) {
+                 return "MyClass(" + std::to_string(obj.getValue()) + ")";
+             });
+
+    m.def("createMyClass", []() {
+        return MyClass(42);
+    }, py::return_value_policy::move);
+}
+```
+
+In this example, we define a simple class `MyClass` with an integer member variable `m_value`, a constructor, and getter/setter methods. We also define a function `createMyClass` that creates an instance of `MyClass` with a value of 42 and define a Python function with the same name that calls. We use the `py::return_value_policy::move` policy to indicate that the returned `MyClass`.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **example pybind11 project use `return_value_policy::copy` as return value policies**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+
+Sure, here's an example of a Pybind11 project using `return_value_policy::copy` as the return value policy:
+
+```c++
+#include <pybind11/pybind11.h>
+
+namespace py = pybind11;
+
+class MyClass {
+public:
+    int x;
+    MyClass(int x) : x(x) {}
+};
+
+// Define a function that returns a copy of a MyClass instance
+MyClass return_my_class(int x) {
+    return MyClass(x);
+}
+
+// Define a Pybind11 module
+PYBIND11_MODULE(example, m) {
+    // Expose the MyClass class to Python
+    py::class_<MyClass>(m, "MyClass")
+        .def(py::init<int>())
+        .def_readwrite("x", &MyClass::x);
+
+    // Expose the return_my_class function to Python
+    m.def("return_my_class", &return_my_class, py::return_value_policy::copy);
+}
+```
+
+In this example, we define a `MyClass` class with a single integer member variable `x`. We also define a function `return_my_class` that creates a new `MyClass` instance with the given x value and returns it.
+
+When we expose the `return_my_class` function to Python using m.def, we specify `py::return_value_policy::copy` as the return value policy. This tells Pybind11 to create a copy of the `MyClass` instance returned by the function and pass that copy to Python, rather than passing a reference or pointer to the original instance.
+
+By using `return_value_policy::copy`, we ensure that any modifications made to the `MyClass` instance in Python do not affect the original C++ instance.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **example pybind11 project use `return_value_policy::take_ownership` as return value policies**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Sure! Here's an example Pybind11 project that uses return_value_policy::take_ownership as a return value policy:
+
+```c++
+#include <pybind11/pybind11.h>
+#include <pybind11/numpy.h>
+
+namespace py = pybind11;
+
+class MyData {
+public:
+    MyData(double* data, int size) : data_(data), size_(size) {}
+    ~MyData() { delete[] data_; }
+
+    double* data() { return data_; }
+    int size() const { return size_; }
+
+private:
+    double* data_;
+    int size_;
+};
+
+PYBIND11_MODULE(example, m) {
+    py::class_<MyData>(m, "MyData")
+        .def(py::init<double*, int>(), py::arg("data"), py::arg("size"))
+        .def_property_readonly("data", &MyData::data)
+        .def_property_readonly("size", &MyData::size);
+
+    m.def("create_mydata", []() -> std::unique_ptr<MyData> {
+        double* data = new double[5] {1, 2, 3, 4, 5};
+        return std::unique_ptr<MyData>(new MyData(data, 5));
+    }, py::return_value_policy::take_ownership);
+}
+```
+
+In this example, we define a `MyData` class that holds a pointer to a dynamically allocated array of doubles. We then define a Python module called `example` that exposes this class and a function `create_mydata` that returns a `std::unique_ptr<MyData>`.
+
+In order to properly transfer ownership of the `MyData` object to Python, we use the `py::return_value_policy::take_ownership` policy when defining the `create_mydata` function. This tells Pybind11 to take ownership of the `MyData` object and delete it when it is no longer needed by Python.
+
+Note that this policy only works for objects that are dynamically allocated using `new` and wrapped in a `std::unique_ptr`. For other types of objects, you may need to use a different return value policy.
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Static method and static attributes and give intuitive example in class C++**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
@@ -1631,18 +1999,6 @@ Structs are typically used when the primary purpose is to group together related
 Classes, on the other hand, are typically used when the primary purpose is to encapsulate data and behavior together. They allow the user to specify the access level for members (public, private, or protected) and support inheritance, allowing one class to derive from another.
 
 In general, the choice between struct and class depends on the specific needs of the program and the preferences of the programmer. If the user needs to define a simple type that groups together related variables, a struct is a good choice. If the user needs to define a more complex data type that encapsulates data and behavior, and potentially supports inheritance, a class is a better choice.
-
-
-</details>
-
----
-
-## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> ****
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
-
-<details>
-  <summary>Click to expand</summary>
 
 
 </details>
