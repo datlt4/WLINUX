@@ -11,6 +11,45 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **how to use `cv::gpu::GpuMat`**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+To use OpenCV's `Mat` data structure with CUDA, you need to first create a `cv::cuda::GpuMat` object and then convert it to a `Mat` object. This can be done using the `cv::cuda::GpuMat`::download function, which copies data from the `GpuMat` object to a `Mat` object in the CPU memory. Similarly, you can also `upload` data from a `Mat` object to a `GpuMat` object using the `cv::cuda::GpuMat::upload` function.
+
+Here's an example code snippet that shows how to use `cv::Mat` with CUDA:
+
+```c++
+// Load image using cv::imread
+cv::Mat img = cv::imread("image.png", cv::IMREAD_GRAYSCALE);
+
+// Create a cv::cuda::GpuMat object from the input image
+cv::cuda::GpuMat gpuImg;
+gpuImg.upload(img);
+
+// Create a cv::cuda::GpuMat object to hold the output image
+cv::cuda::GpuMat gpuResult(gpuImg.size(), gpuImg.type());
+
+// Perform a CUDA operation on the input image
+cv::cuda::threshold(gpuImg, gpuResult, 128, 255, cv::THRESH_BINARY);
+
+// Convert the result back to a cv::Mat object
+cv::Mat result;
+gpuResult.download(result);
+
+// Save the result to disk using cv::imwrite
+cv::imwrite("result.png", result);
+```
+
+In this example, we first load an image using `cv::imread` and create a `cv::cuda::GpuMat` object from it using the `upload` function. We then create another `cv::cuda::GpuMat` object to hold the output image, and perform a CUDA operation on the input image using the `cv::cuda::threshold` function. Finally, we convert the result back to a `cv::Mat` object using the `download` function and save it to disk using `cv::imwrite`.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **example pybind11 project use `return_value_policy::automatic_reference` as return value policies**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
