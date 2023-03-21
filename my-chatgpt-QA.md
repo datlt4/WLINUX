@@ -146,48 +146,28 @@ In our example, since we are returning a value by copy from `MyClass::get_value(
 
 <details>
   <summary>Click to expand</summary>
-
-Sure, here is an example of a Pybind11 project that uses the `return_value_policy::automatic` as the return value policy:
+Sure, here's an example Pybind11 project that uses `return_value_policy::automatic` as the return value policy:
 
 ```c++
 #include <pybind11/pybind11.h>
-#include <vector>
+#include <string>
 
 namespace py = pybind11;
 
-int add(int a, int b) {
-    return a + b;
-}
-
-std::vector<int> multiply(std::vector<int> v, int scalar) {
-    for (int& elem : v) {
-        elem *= scalar;
-    }
-    return v;
+std::string greet() {
+    return "Hello, World!";
 }
 
 PYBIND11_MODULE(example, m) {
-    m.doc() = "example module";
-
-    m.def("add", &add, "A function that adds two integers",
-        py::arg("a"), py::arg("b"));
-
-    m.def("multiply", &multiply, "A function that multiplies a vector of integers by a scalar",
-        py::arg("v"), py::arg("scalar"));
-
-    // The following line sets the default return value policy for this module
-    // to automatic
-    py::options options;
-    options.enable_function_signatures();
-    options.set_default_return_value_policy(py::return_value_policy::automatic);
+    m.def("greet", &greet, py::return_value_policy::automatic);
 }
 ```
 
-In this example, we define two functions, `add` and `multiply`, and expose them to Python using the `m.def` function. We then set the default return value policy for the entire module to `return_value_policy::automatic` using the `py::options` object.
+In this example, we define a simple C++ function `greet()` that returns a `std::string` object. We then use Pybind11 to expose this function to Python through the `PYBIND11_MODULE` macro.
 
-With `return_value_policy::automatic`, Pybind11 will attempt to automatically deduce the return value policy for each function based on its return type. If the return type is a value or a reference, Pybind11 will use `return_value_policy::automatic_reference`. If the return type is a pointer or a non-reference type, Pybind11 will use `return_value_policy::automatic_pointer`. This allows Pybind11 to automatically handle returning C++ objects to Python without requiring the user to specify a return value policy for each function individually.
+The `py::return_value_policy::automatic` argument tells Pybind11 to automatically determine the appropriate return value policy for the function. This is useful when the function returns a C++ object that has a corresponding Python type. In this case, since `std::string` maps to a Python string, Pybind11 will automatically use the copy return value policy, which creates a copy of the returned object and returns it to Python.
 
-Note that the `options.enable_function_signatures()` call is used to enable the generation of function signatures in the Python docstrings. This is optional but recommended as it makes it easier for users to understand how to call the functions from Python.
+Note that `return_value_policy::automatic` may not always be the appropriate choice, especially if the function returns a C++ object that does not have a corresponding Python type or requires some special handling. In such cases, it may be necessary to explicitly specify a return value policy.
 
 </details>
 
