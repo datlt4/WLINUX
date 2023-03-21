@@ -11,6 +11,63 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **example with `py::args`, `py::kwargs` have a simple mathematical calculation in pybind11 project**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Sure, here's an example of using `py::args` and `py::kwargs` in a Pybind11 project to perform a simple mathematical calculation:
+
+```cpp
+#include <pybind11/pybind11.h>
+#include <pybind11/functional.h>
+
+namespace py = pybind11;
+
+int add(int x, int y) {
+    return x + y;
+}
+
+PYBIND11_MODULE(example, m) {
+    m.def("add", &add, py::arg("x"), py::arg("y"), "Add two numbers");
+    
+    m.def("calculate", [](py::args args, py::kwargs kwargs) {
+        int sum = 0;
+        for (auto item : args) {
+            sum += py::cast<int>(item);
+        }
+        for (auto item : kwargs) {
+            sum += py::cast<int>(item.second);
+        }
+        return sum;
+    }, "Calculate the sum of all arguments");
+}
+```
+
+In this example, we have a simple `add` function that takes two integers and returns their sum. We then define a new function called `calculate` that takes any number of positional and keyword arguments, and calculates the sum of all of them.
+
+The `py::args` object represents all of the positional arguments passed to the function, and the `py::kwargs` object represents all of the keyword arguments passed to the function. We iterate over both of these objects and add up their values, casting them to integers using `py::cast<int>`.
+
+We can then use this function in Python like this:
+
+```python
+import example
+
+# Call add directly
+print(example.add(1, 2))  # Output: 3
+
+# Call calculate with positional and keyword arguments
+print(example.calculate(1, 2, 3, a=4, b=5))  # Output: 15
+```
+
+In this example, we call the `add` function directly with two integer arguments, and we call the `calculate` function with three positional arguments (`1`, `2`, and `3`) and two keyword arguments (`a=4` and `b=5`). The `calculate` function correctly calculates the sum of all of these arguments and returns `15`.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Using `make_unique` with Unique Pointer Syntax in C++**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
