@@ -11,6 +11,55 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Using `make_unique` with Unique Pointer Syntax in C++**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Unique pointers are a powerful tool for managing memory and ensuring that memory is released when no longer needed. `make_unique` is a function that allows you to create a unique pointer in a single line of code.
+
+The syntax for using `make_unique` is as follows:
+
+```c++
+auto ptr = std::make_unique<Type>(args);
+```
+
+In this example, `Type` is the type of the object that the unique pointer will point to. `args` is the list of arguments that will be passed to the constructor of the object.
+
+For example, if you wanted to create a unique pointer to an `int` with the value `42`, you would use the following syntax:
+
+```cpp
+auto ptr = std::make_unique<int>(42);
+```
+
+If you wanted to create a unique pointer to a `Person` object, you would use the following syntax:
+
+```cpp
+auto ptr = std::make_unique<Person>(name, age);
+```
+
+In this example, `name` and `age` are the arguments that will be passed to the constructor of the `Person` object.
+
+You can also use `make_unique` to create an array of objects. The syntax for this is as follows:
+
+```cpp
+auto ptr = std::make_unique<Type[]>(length);
+```
+
+In this example, `Type` is the type of the objects that the unique pointer will point to and `length` is the number of objects in the array.
+
+For example, if you wanted to create an array of `int` objects with 10 elements, you would use the following syntax:
+
+```cpp
+auto ptr = std::make_unique<int[]>(10);
+```
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **how to use `cv::gpu::GpuMat`**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
