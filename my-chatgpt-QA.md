@@ -11,6 +11,31 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **which vscode extension need to install to support PHP, laravel coder?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+To support PHP and Laravel development in Visual Studio Code, you can install the following extensions:
+
+- **PHP IntelliSense**: This extension provides intelligent code completion, function parameter hints, and more for PHP code.
+
+- **Laravel Extension Pack**: This extension pack includes a set of extensions that are useful for Laravel development, including Laravel Blade Snippets, Laravel Goto View, and Laravel Artisan.
+
+- **Laravel Blade Snippets**: This extension provides snippets for Laravel Blade templates, making it easier to write Blade code.
+
+- **Laravel Artisan**: This extension provides a command palette for Laravel Artisan commands, allowing you to easily run commands without leaving Visual Studio Code.
+
+- **Laravel Goto View**: This extension provides a quick way to navigate to a Laravel view from a controller method.
+
+You can install these extensions by going to the Extensions panel in Visual Studio Code and searching for their names.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **example with `py::args`, `py::kwargs` have a simple mathematical calculation in pybind11 project**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
