@@ -11,6 +11,40 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what does seeder do?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In Laravel, a seeder is a class that populates the database with sample or default data. Seeders are often used in development or testing environments where you want to quickly create a large amount of data to test your application.
+
+Seeders allow you to define a set of data that can be inserted into your database tables automatically when you run the `php artisan db:seed` command. This command executes all the seeder classes in the `database/seeds` directory.
+
+Seeders are particularly useful when you're working with database tables that need to be populated with default data, such as user roles, permissions, or initial settings for your application. With a seeder, you can create this data once and then reuse it as needed, without having to manually insert it into the database each time.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what is  batch of migrations?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+A batch of migrations in Laravel is a way to group a set of related migrations that are executed together. By default, all migrations are added to the first batch, but you can specify a different batch number for a migration using the `--batch` option when running the migration command.
+
+Batching allows you to keep track of which migrations have already been executed, so you can easily rollback or migrate to a specific point in time. You can also run migrations in a specific batch by passing the `--batch` option to the migration command.
+
+For example, if you have three migrations to create three different tables, you can group them together by setting the same batch number for all three migrations. When you run the `migrate` command, all three migrations will be executed together as a single batch.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **explain artisan migrate, migrate:install, migrate:status, migrate:rollback, migrate:reset, migrate:refresh, migrate:fresh**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
