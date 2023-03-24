@@ -11,6 +11,48 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **list all design pattern in C++ project**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Here is a list of some common design patterns in C++:
+
+1. Creational Patterns:
+    - Abstract Factory: Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+    - Builder: Separates the construction of a complex object from its representation so that the same construction process can create different representations.
+    - Factory Method: Defines an interface for creating objects, but lets subclasses decide which classes to instantiate. It lets a class defer instantiation to subclasses.
+    - Prototype: Specifies the kinds of objects to create using a prototypical instance, and creates new objects by copying this prototype.
+    - Singleton: Ensures that a class has only one instance and provides a global point of access to it.
+
+1. Structural Patterns:
+    - Adapter: Converts the interface of a class into another interface clients expect. It lets classes work together that could not otherwise because of incompatible interfaces.
+    - Bridge: Decouples an abstraction from its implementation so that the two can vary independently.
+    - Composite: Composes objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.
+    - Decorator: Attaches additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
+    - Facade: Provides a unified interface to a set of interfaces in a subsystem. Facade defines a higher-level interface that makes the subsystem easier to use.
+    - Flyweight: Uses sharing to support large numbers of fine-grained objects efficiently.
+    - Proxy: Provides a surrogate or placeholder for another object to control access to it.
+
+1. Behavioral Patterns:
+    - Chain of Responsibility: Avoids coupling the sender of a request to its receiver by giving more than one object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.
+    - Command: Encapsulates a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations.
+    - Interpreter: Given a language, defines a representation for its grammar along with an interpreter that uses the representation to interpret sentences in the language.
+    - Iterator: Provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
+    - Mediator: Defines simplified communication between objects in a system. Acts as a central point of communication for a set of objects.
+    - Memento: Without violating encapsulation, captures and externalizes an object's internal state so that the object can be restored to this state later.
+    - Observer: Defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
+    - State: Allows an object to alter its behavior when its internal state changes. The object will appear to change its class.
+    - Strategy: Defines a family of algorithms, encapsulates each one, and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
+    - Template Method: Defines the skeleton of an algorithm in a method, deferring some steps to subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure.
+    - Visitor: Lets you define a new operation without changing the classes of the elements on which it operates.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what does seeder do?**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
