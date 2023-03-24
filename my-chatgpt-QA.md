@@ -11,6 +11,41 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **list all design pattern in web project and explain each pattern in detail**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+There are several design patterns used in web projects. Here are some of the most commonly used design patterns and their descriptions:
+
+- Model-View-Controller (MVC) Pattern: This pattern separates the presentation layer, the data layer, and the application logic into separate components. The model is responsible for data and business logic, the view for user interface and presentation, and the controller for handling user input and mediating communication between the model and the view.
+
+- Front Controller Pattern: This pattern provides a centralized entry point for handling requests. The front controller handles all requests and dispatches them to the appropriate handler. This pattern is commonly used in web frameworks.
+
+- Singleton Pattern: This pattern ensures that there is only one instance of a class at any given time. This is useful for classes that need to be shared across the application, such as database connections or configuration settings.
+
+- Factory Pattern: This pattern provides a way to create objects without exposing the instantiation logic to the client. A factory method is used to create objects of a specific type.
+
+- Observer Pattern: This pattern defines a one-to-many dependency between objects, where changes in one object trigger updates in its dependents. This is commonly used in event-driven architectures, such as web applications.
+
+- Decorator Pattern: This pattern allows behavior to be added to an individual object, either statically or dynamically, without affecting the behavior of other objects from the same class. This is useful for adding functionality to objects without modifying their underlying code.
+
+- Dependency Injection Pattern: This pattern provides a way to inject dependencies into a class, rather than having the class create them itself. This makes the code more modular and easier to test.
+
+- Command Pattern: This pattern encapsulates a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations.
+
+- Template Method Pattern: This pattern defines the skeleton of an algorithm in a method, deferring some steps to subclasses. It lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure.
+
+- Strategy Pattern: This pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable. Strategy lets the algorithm vary independently from the clients that use it.
+
+These are just a few examples of the many design patterns used in web projects. Understanding these patterns can help you write better, more modular code that is easier to maintain and extend over time.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **list all design pattern in C++ project**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
