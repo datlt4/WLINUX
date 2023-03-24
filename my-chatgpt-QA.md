@@ -11,6 +11,24 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what is difference between design pattern in C++ and web development?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+The difference between design patterns in C++ and web development lies mainly in their application and implementation.
+
+C++ design patterns are mainly focused on solving common problems in software development, such as code reusability, maintainability, and scalability. These patterns are applied in object-oriented programming and often involve the use of classes, inheritance, and polymorphism. Examples of popular design patterns in C++ include the Singleton, Factory, and Observer patterns.
+
+Web design patterns, on the other hand, are focused on solving problems that are specific to web development, such as managing user sessions, optimizing page loading times, and improving user experience. These patterns are applied in web development frameworks such as Laravel, React, and Angular, and often involve the use of front-end technologies such as HTML, CSS, and JavaScript. Examples of popular design patterns in web development include the Model-View-Controller (MVC), Front Controller, and Dependency Injection patterns.
+
+In summary, while both C++ and web development use design patterns to solve common problems, the patterns themselves and their implementation are specific to the context in which they are used.
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **list all design pattern in web project and explain each pattern in detail**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
