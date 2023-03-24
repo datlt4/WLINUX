@@ -11,6 +11,30 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **explain artisan migrate, migrate:install, migrate:status, migrate:rollback, migrate:reset, migrate:refresh, migrate:fresh**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In Laravel, `php artisan migrate` is a command used to run all the available database migrations. Migrations are a way to manage database changes over time and ensure that all developers working on the project have the same database schema.
+
+Here's an overview of the other migrate-related Artisan commands:
+
+- `php artisan migrate:install`: This command creates a migration table in the database to keep track of which migrations have been executed.
+- `php artisan migrate:status`: This command lists the status of all migrations (up or down) and shows which migrations have been run and which are pending.
+- `php artisan migrate:rollback`: This command rolls back the last batch of migrations, effectively undoing the last migration batch.
+- `php artisan migrate:reset`: This command rolls back all migrations, effectively undoing all migrations that have been run.
+- `php artisan migrate:refresh`: This command rolls back all migrations and then runs them again, effectively resetting the database to its original state.
+- `php artisan migrate:fresh`: This command drops all tables in the database and then runs all migrations, effectively recreating the entire database schema from scratch.
+
+In summary, `php artisan migrate` runs all available migrations, `migrate:install` creates the migration table, `migrate:status` shows the status of migrations, `migrate:rollback` undoes the last migration, `migrate:reset` undoes all migrations, `migrate:refresh` resets the database and runs all migrations, and `migrate:fresh` recreates the entire database schema.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **which vscode extension need to install to support PHP, laravel coder?**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
