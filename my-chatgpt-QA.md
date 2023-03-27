@@ -11,6 +11,117 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **why use div tag in html? and example**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+The `div` tag in HTML is a container element used to group other HTML elements together and apply styles to them. It has no semantic meaning on its own, but it helps to organize and structure web pages.
+
+An example of using the `div` tag could be to group a set of HTML elements together and apply a specific style to them. For instance, let's say we want to display a set of images on a web page and apply a border and padding to them. We can use the `div` tag to group the images and apply the styles to the `div` element. Here's an example code snippet:
+
+```php
+<div class="image-container">
+   <img src="image1.jpg" alt="Image 1">
+   <img src="image2.jpg" alt="Image 2">
+   <img src="image3.jpg" alt="Image 3">
+</div>
+
+<style>
+   .image-container {
+      border: 1px solid #ccc;
+      padding: 10px;
+   }
+
+   .image-container img {
+      width: 200px;
+      height: 200px;
+   }
+</style>
+```
+
+In this example, we've created a `div` element with the class `image-container` and added three img elements inside it. We've then applied a border and padding to the `image-container` class and set the width and height of the images. By grouping the images inside the `div` element, we can easily apply the same styles to all the images at once.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **why use class in html tag? and example**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Using classes in HTML tags is a way of adding styling and functionality to specific elements on a webpage. By assigning classes to HTML tags, you can use CSS to apply styles to those specific elements or JavaScript to manipulate those elements in some way.
+
+For example, let's say you have a paragraph on your webpage that you want to style differently from the rest of the text. You can assign a class to that paragraph element, like so:
+
+```html
+<p class="special-paragraph">This paragraph is special!</p>
+```
+
+Then, in your CSS file, you can target that class and apply styles to it:
+
+```css
+.special-paragraph {
+  font-size: 24px;
+  color: red;
+}
+```
+
+This will make the "special" paragraph larger and red, while the other paragraphs on the page retain their default styling.
+
+You can also use classes in JavaScript to select and manipulate specific elements on the page. For example, you could use jQuery to select all elements with a particular class and add an event listener to them:
+
+```javascript
+$('.special-paragraph').on('click', function() {
+  alert('You clicked the special paragraph!');
+});
+`````
+
+In summary, using classes in HTML tags allows you to add specific styling and functionality to those elements using CSS and JavaScript.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **explain @include and @extends in blade template - laravel**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In Laravel, `@include` and `@extends` are Blade template directives that allow you to reuse and extend templates.
+
+`@include` allows you to include the content of another Blade template within the current template. It takes the name of the template as a parameter, and you can also pass data to the included template using an array as the second parameter. For example:
+
+```php
+@include('partials.header', ['title' => 'Home'])
+```
+
+This will include the content of the `partials/header.blade.php` template, and pass it an array with a `'title'` key set to `'Home'`.
+
+`@extends` allows you to create a master template that can be extended by child templates. It takes the name of the parent template as a parameter, and the child template can override specific sections of the parent template using the `@section` directive. For example:
+
+```php
+@extends('layouts.master')
+
+@section('content')
+    <h1>Welcome to my site</h1>
+    <p>Here is some content for the home page</p>
+@endsection
+```
+
+This will extend the `layouts/master.blade.php` template, and replace the `@yield('content')` section with the content of the `@section('content')` block in the child template.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what is difference between design pattern in C++ and web development?**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
