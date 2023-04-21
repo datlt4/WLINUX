@@ -18,9 +18,7 @@
 <details>
   <summary>Click to expand</summary>
 
-Certainly! Here's a revised version of my previous response:
-
-To validate a password in Laravel that meets specific requirements, such as having a length between 8 to 20 characters, including numeric, uppercase and lowercase alphabetical characters, and at least one special character, you can use the `regex` rule in combination with other validation rules.
+To validate a password in Laravel that has specific requirements such as length, inclusion of numeric characters, upper/lowercase alphabetical characters, and at least one special character, you can use the `regex` rule in combination with other validation rules.
 
 Here's an example of how to set up the validation rules for a password field:
 
@@ -28,19 +26,24 @@ Here's an example of how to set up the validation rules for a password field:
 use Illuminate\Support\Facades\Validator;
 
 Validator::make($request->all(), [
-    'password' => [
-        'required',
-        'string',
-        'min:8',
-        'max:20',
-        'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'
-    ]
+    'password' => ['required', 'string', 'min:8', 'max:20', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/']
 ]);
 ```
 
-Let me explain each validation rule:
+Let me break down each validation rule:
 
-- `'required'` ensures that the password field is
+- `'required'` ensures that the password field is not empty.
+- `'string'` ensures that the password input is a string.
+- `'min:8'` and `'max:20'` set the minimum and maximum length for the password respectively.
+- `'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'` uses a regular expression to ensure that the password meets all of the specified conditions. The regular expression matches sequences that:
+  - contain at least one lowercase alphabetical character (`(?=.*[a-z])`)
+  - contain at least one uppercase alphabetical character (`(?=.*[A-Z])`)
+  - contain at least one numeric character (`(?=.*\d)`)
+  - contain at least one special character (`(?=.*(_|[^\w]))`)
+
+Note that the `^(?=.*pattern)` syntax is used to specify the order in which the patterns must be matched without consuming any characters. If you want to require a sequence of specific special characters, replace `(_|[^\w])` with your desired pattern. 
+
+I hope this helps! Let me know if you have any other questions.
 
 </details>
 
