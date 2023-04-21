@@ -11,6 +11,156 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **develop a client and server code of grpc service in C++ that transfers binary files.**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Sure, here is a more detailed explanation and code snippets of how you can implement a gRPC service in C++ that transfers binary files between the client and server.
+
+1. Define the protocol buffer messages: 
+
+    First, define the protocol buffer messages that will be used for the transfer of binary files. Here is an example of what the message might look like:
+    
+    ```protobuf
+    syntax = "proto3";
+
+    package filetransfer;
+
+    message FileRequest {
+        string filename = 1;
+    }
+
+    message FileResponse {
+        bytes fileContent = 1;
+    }
+    ```
+
+2. Generate source code:
+
+    Use the `protoc` compiler to generate C++ source code from the protobuf definition file using the following command:
+
+    ```bash
+    $ protoc --cpp_out=. filetransfer.proto
+    ```
+
+    This will generate the `filetransfer.pb.h` and `filetransfer.pb.cc` files which contain the generated code for encoding and decoding protobuf messages.
+
+3. Implement the server-side code:
+
+    Here's an example of how you might implement the server-side code for handling incoming requests from clients and sending back the requested binary file:
+
+    ```cpp
+    #include <grpcpp/grpcpp.h>
+    #include "filetransfer.grpc.pb.h"
+
+    using grpc::Server;
+    using grpc::ServerBuilder;
+    using grpc::ServerContext;
+    using grpc::Status;
+    using filetransfer::FileRequest;
+    using filetransfer::FileResponse;
+    using filetransfer::FileTransfer;
+
+    class FileTransferServiceImpl final : public FileTransfer::Service
+    {
+        Status TransferFile(ServerContext* context, const FileRequest* request, FileResponse* response) override
+        {
+            std::string filename = request->filename();
+            // Open file and read content into buffer
+            std::ifstream ifs(filename, std::ios::binary | std::ios::ate);
+            std::ifstream::pos_type pos = ifs.tellg();
+            std::vector<char> buffer(pos);
+            ifs.seekg(0, std::ios::beg);
+            ifs.read(buffer.data(), pos);
+
+            response->set_filecontent(buffer.data(), buffer.size());
+            return Status::OK;
+        }
+    };
+
+    void RunServer()
+    {
+        std::string server_address("0.0.0.0:50051");
+        FileTransferServiceImpl service;
+
+        grpc::ServerBuilder builder;
+        builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+        builder.RegisterService(&service);
+        std::unique_ptr<Server> server(builder.BuildAndStart());
+        std::cout << "Server listening on " << server_address << std::endl;
+        server->Wait();
+    }
+
+    int main(int argc, char** argv)
+    {
+        RunServer();
+        return 0;
+    }
+    ```
+
+4. Write the client-side code:
+
+    Here's an example of how you might implement the client-side code for requesting binary files from the server:
+
+    ```cpp
+    #include <grpcpp/grpcpp.h>
+    #include "filetransfer.grpc.pb.h"
+
+    using grpc::Channel;
+    using grpc::ClientContext;
+    using grpc::Status;
+    using filetransfer::FileRequest;
+    using filetransfer::FileResponse;
+    using filetransfer::FileTransfer;
+
+    class FileTransferClient {
+    public:
+    FileTransferClient(std::shared_ptr<Channel> channel) : stub_(FileTransfer::NewStub(channel)) {}
+
+    std::vector<char> TransferFile(const std::string& filename)
+    {
+        FileRequest request;
+        request.set_filename(filename);
+
+        FileResponse response;
+        ClientContext context;
+
+        Status status = stub_->TransferFile(&context, request, &response);
+        if (status.ok())
+        {
+            return std::vector<char>(response.filecontent().begin(), response.filecontent().end());
+        }
+        else
+        {
+            std::cout << "Error: " << status.error_code() << ": " << status.error_message() << std::endl;
+            return std::vector<char>();
+        }
+    }
+
+    private:
+    std::unique_ptr<FileTransfer::Stub> stub_;
+    };
+
+    int main(int argc, char** argv) {
+    FileTransferClient client(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
+    std::vector<char> file_content = client.TransferFile("example.bin");
+    // Write file content to disk using standard C++ file operations
+    std::ofstream out("received.bin", std::ios::binary);
+    out.write(file_content.data(), file_content.size());
+    out.close();
+    return 0;
+    }
+    ```
+
+    These snippets of code demonstrate how you can create a gRPC service in C++ that transfers binary files between the client and server. Of course, this is just an example, and there are many ways to achieve this functionality depending on your specific needs. I hope this helps you get started!
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what is the different between factory and seeder in laravel project**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
