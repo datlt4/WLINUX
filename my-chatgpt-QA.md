@@ -11,6 +11,41 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Laravel validates the password based on certain conditions, such as having a length between 8 to 20 characters, containing at least one number, uppercase and lowercase letter, and one special character.**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Certainly! Here's a revised version of my previous response:
+
+To validate a password in Laravel that meets specific requirements, such as having a length between 8 to 20 characters, including numeric, uppercase and lowercase alphabetical characters, and at least one special character, you can use the `regex` rule in combination with other validation rules.
+
+Here's an example of how to set up the validation rules for a password field:
+
+```php
+use Illuminate\Support\Facades\Validator;
+
+Validator::make($request->all(), [
+    'password' => [
+        'required',
+        'string',
+        'min:8',
+        'max:20',
+        'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'
+    ]
+]);
+```
+
+Let me explain each validation rule:
+
+- `'required'` ensures that the password field is
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **develop a client and server code of grpc service in C++ that transfers binary files.**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
