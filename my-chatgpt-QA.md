@@ -11,6 +11,39 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **`^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$` explain in detail**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+The given string is a regular expression that is used to validate a password based on specific criteria. Here is an explanation of each part of the regex:
+
+- `^` and `$`: These are called anchors, and they match the beginning and end of the string, respectively. This ensures that the entire password is being validated.
+
+- `(?=.*[a-z])`: This is a positive lookahead assertion that matches any character (represented by the `.`), as long as it is followed by at least one lowercase letter.
+
+- `(?=.*[A-Z])`: This is another positive lookahead assertion that matches any character, as long as it is followed by at least one uppercase letter.
+
+- `(?=.*\d)`: This is a third positive lookahead assertion that matches any character, as long as it is followed by at least one digit.
+
+- `(?=(_|[^\w]))`: This is the final positive lookahead assertion that matches any character, as long as it is followed by either an underscore (`_`) or a character that is not a word character (`\w`). The `\w` character class matches letters, digits, and underscores, so this assertion ensures that at least one non-alphanumeric character is included in the password.
+
+- `.+`: This matches any combination of characters that satisfies all of the previous assertions. The `+` quantifier means that there must be at least one character, but there could be more.
+
+To summarize, this regular expression validates passwords that meet at least the following criteria:
+
+- Contains at least one lowercase letter
+- Contains at least one uppercase letter
+- Contains at least one digit
+- Contains at least one non-alphanumeric character (either an underscore or a character that is not a letter, digit, or underscore)
+- Is between one and unlimited characters long.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Laravel validates the password based on certain conditions, such as having a length between 8 to 20 characters, containing at least one number, uppercase and lowercase letter, and one special character.**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
