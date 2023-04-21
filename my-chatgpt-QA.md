@@ -118,40 +118,41 @@ Sure, here is a more detailed explanation and code snippets of how you can imple
 
     class FileTransferClient {
     public:
-    FileTransferClient(std::shared_ptr<Channel> channel) : stub_(FileTransfer::NewStub(channel)) {}
+        FileTransferClient(std::shared_ptr<Channel> channel) : stub_(FileTransfer::NewStub(channel)) {}
 
-    std::vector<char> TransferFile(const std::string& filename)
-    {
-        FileRequest request;
-        request.set_filename(filename);
-
-        FileResponse response;
-        ClientContext context;
-
-        Status status = stub_->TransferFile(&context, request, &response);
-        if (status.ok())
+        std::vector<char> TransferFile(const std::string& filename)
         {
-            return std::vector<char>(response.filecontent().begin(), response.filecontent().end());
+            FileRequest request;
+            request.set_filename(filename);
+
+            FileResponse response;
+            ClientContext context;
+
+            Status status = stub_->TransferFile(&context, request, &response);
+            if (status.ok())
+            {
+                return std::vector<char>(response.filecontent().begin(), response.filecontent().end());
+            }
+            else
+            {
+                std::cout << "Error: " << status.error_code() << ": " << status.error_message() << std::endl;
+                return std::vector<char>();
+            }
         }
-        else
-        {
-            std::cout << "Error: " << status.error_code() << ": " << status.error_message() << std::endl;
-            return std::vector<char>();
-        }
-    }
 
     private:
-    std::unique_ptr<FileTransfer::Stub> stub_;
+        std::unique_ptr<FileTransfer::Stub> stub_;
     };
 
-    int main(int argc, char** argv) {
-    FileTransferClient client(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
-    std::vector<char> file_content = client.TransferFile("example.bin");
-    // Write file content to disk using standard C++ file operations
-    std::ofstream out("received.bin", std::ios::binary);
-    out.write(file_content.data(), file_content.size());
-    out.close();
-    return 0;
+    int main(int argc, char** argv)
+    {
+        FileTransferClient client(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
+        std::vector<char> file_content = client.TransferFile("example.bin");
+        // Write file content to disk using standard C++ file operations
+        std::ofstream out("received.bin", std::ios::binary);
+        out.write(file_content.data(), file_content.size());
+        out.close();
+        return 0;
     }
     ```
 
