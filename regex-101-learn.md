@@ -38,10 +38,10 @@
  
 ## Lookarounds
 
-- Positive Lookahead `(?=)`: Example `\d+(?=PM)` - select the numberical values that **have** `PM` **after them**.
-- Negative Lookahead `(?!)`: Example `\d+(?!PM)` - select only the numerical values that do **not have** `PM` **after them**.
-- Positive Lookbehind `(?<=)`: Example `(?<=\$)\d+` - select only the number values that **preceded** by `$`.
-- Negative Lookbehind `(?<!)`: Example `(?<!\$)\d+` - select only the number values that **not preceded** by `$`.
+- Positive Lookahead `pattern(?=matching_pattern)` - asserts that the pattern only matches if it is followed by a certain pattern. Example: `cat(?=\sfish)` matches `cat` only if it is immediately followed by `fish`, but `cat` is not included in the final match.
+- Negative Lookahead `pattern(?!non_matching_pattern)` - asserts that the pattern only matches if it is **NOT** followed by a certain pattern. Example: `cat(?!\sfish)` matches `cat` only if it is **NOT** immediately followed by `fish`..
+- Positive Lookbehind `(?<=matching_pattern)pattern` - asserts that the pattern only matches if it is preceded by a certain pattern. Example `(?<=black )cat` matches `cat` only if it is preceded by the word `black`, but `black` is not included in the final match.
+- Negative Lookbehind `(?<!non_matching_pattern)pattern` - asserts that the pattern only matches if it is **NOT** preceded by a certain pattern. Example `(?<!black )cat` - select only the number values that **not preceded** by `$`.
 
 ## Flags
 Flags change the output of the expression. That's why flags are also called `modifiers`.
