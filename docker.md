@@ -155,6 +155,29 @@ docker volume create <new-volume-volume>
 docker container run -d -v <new-volume-volume>:</path/to/mount> --name <Name-container> <Image-name>
 ```
 
+# Start GUI application on docker container
+
+1. On Ubuntu
+
+```bash
+xhost +local:root
+docker run -it --rm --net=host -v /tmp/.X11-unix/:/tmp/.X11-unix -e DISPLAY=$DISPLAY <image_name>
+```
+
+2. on MacOS
+
+- Run `xhost` command on [Xquartz](https://www.xquartz.org/) app
+
+```bash
+xhost $(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}')
+```
+
+- Run docker on other terminal
+
+```bash
+docker run -it --rm -e DISPLAY=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'):0 <Image-name>
+```
+
 # Networks in Docker
 
 - If you want to connect two or more containers, so that they can communicate with each other, they have to share the same `network`.
@@ -487,3 +510,5 @@ Information:
 
 - Tells Docker how to test a container to check that it is still working
 - Whenever a health check passes, it becomes healthy. After a certain number of consecutive failures, it becomes unhealthy.
+
+
