@@ -11,6 +11,79 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **What does "Negotiation" mean?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+Negotiation refers to the process of reaching an agreement or understanding between two parties regarding certain terms, conditions, or parameters. In the context of multimedia processing, negotiation occurs when different components or elements need to establish common characteristics or parameters in order to work together effectively.
+
+In the multimedia domain, negotiation often involves determining the optimal format or settings for data exchange between different components. This is important when elements in a multimedia pipeline have varying capabilities, such as different supported audio or video formats, frame rates, resolutions, or other attributes.
+
+Here's how negotiation works in the context of multimedia processing, such as in GStreamer or other multimedia frameworks:
+
+1. **Capability Discovery:** When two components or elements in a multimedia pipeline need to be connected, they may have different capabilities or requirements. For example, an audio decoder might produce PCM audio data, while an audio sink might expect compressed audio data.
+
+2. **Caps (Capabilities) Matching:** Elements specify their capabilities using caps (short for capabilities). Caps describe the format and characteristics of the data that an element can handle. During negotiation, the caps of the source pad are matched against the caps of the sink pad to find a common format that both elements can work with.
+
+3. **Finding Common Ground:** The negotiation process involves finding a compatible set of caps that both elements support. This could involve agreeing on common attributes like audio format, sample rate, video resolution, etc.
+
+4. **Propagating Negotiated Caps:** Once a common set of caps is agreed upon, these negotiated caps are propagated through the pipeline, ensuring that data produced by the source element matches the expectations of the sink element.
+
+5. **Data Transformation:** In some cases, negotiation might involve data transformation, such as converting one audio format to another. For example, if an audio source produces audio in stereo but the sink requires mono, a conversion might be needed.
+
+6. **Ensuring Seamless Data Flow:** The goal of negotiation is to ensure that data flows seamlessly between elements in a pipeline, despite their potentially different capabilities or requirements.
+
+Negotiation is a fundamental aspect of multimedia frameworks like GStreamer, as it allows different elements with diverse capabilities to work together harmoniously. It ensures that data can be exchanged and processed effectively, regardless of the variations in formats and attributes supported by individual components.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain about GstPad in detail**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+`GstPad` is a fundamental element in the GStreamer multimedia framework, which is an open-source toolkit for building multimedia applications. GStreamer enables the construction of multimedia pipelines to process and manipulate audio and video data. `GstPad` plays a critical role within these pipelines as a connection point that allows data to flow between different elements.
+
+Here's a detailed explanation of `GstPad`:
+
+**1. Role within the Pipeline:**
+A GStreamer pipeline is composed of various elements, each responsible for a specific task, such as capturing video, decoding audio, encoding video, etc. Elements are connected together using `GstPad`s. A `GstPad` is an interface that defines a specific type of data (e.g., audio, video, or events) that can be pushed or pulled from an element. Each element typically has both source pads (outputs) and sink pads (inputs).
+
+**2. Types of `GstPad`s:**
+There are three main types of pads based on the direction of data flow:
+
+- **SrcPad (Source Pad):** Source pads are used to provide data and events. They typically provide data that flows out of an element. Elements that produce data, like cameras or file sources, have source pads.
+
+- **SinkPad (Sink Pad):** Sink pads are used to receive data and events. They typically consume data that flows into an element. Elements like decoders or encoders have sink pads.
+
+- **GhostPad:** A ghost pad is a special kind of pad that is linked to an existing pad of another element. It acts as a proxy, allowing data to flow through it without being processed. Ghost pads are commonly used for creating connections between elements in different pads.
+
+**3. Negotiation:**
+When pads are linked, they perform negotiation to determine the optimal format of data to be passed between elements. This involves agreeing on aspects like media type, caps (capabilities), and buffer sizes. This negotiation ensures that data flows smoothly between elements with compatible capabilities.
+
+**4. Events:**
+Apart from data, `GstPad` also handles events. Events are messages that carry information about the stream, such as seeking requests, EOS (end-of-stream) signals, and custom control events. Elements can generate and respond to events, and `GstPad` plays a role in propagating these events through the pipeline.
+
+**5. Dynamic Pads:**
+In GStreamer, some elements can have dynamic pads, which means that the number and types of pads can change during runtime. For example, an audio mixer could have a variable number of input pads depending on the number of audio streams being mixed.
+
+**6. Pad Probing:**
+Probing allows applications to temporarily intercept or modify data flow between elements by inserting callback functions into the pipeline. This is useful for tasks like modifying or analyzing data as it passes through the pipeline.
+
+**7. Extending Functionality:**
+Developers can extend the functionality of `GstPad` by subclassing it and implementing their own custom pads. This allows for implementing specialized data handling or custom processing.
+
+In summary, `GstPad` is a crucial concept within GStreamer, providing the foundation for creating flexible and dynamic multimedia processing pipelines. It enables elements to communicate, negotiate data formats, and handle events effectively, making GStreamer a powerful framework for building multimedia applications.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **What is playback in gstreamer**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
