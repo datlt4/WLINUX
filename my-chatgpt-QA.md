@@ -11,6 +11,107 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what happen if `virtual gboolean checkValid(void)` I don't declare with `= 0` at the end**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+If you declare a function as `virtual gboolean checkValid(void)` without `= 0` at the end, it makes the function "virtual," but it is not a pure virtual function. In C++, this means that the function has a default implementation in the base class, but derived classes can choose to override it or not. In other words, the base class provides a concrete (non-abstract) implementation of the function.
+
+Here's an example to illustrate the difference:
+
+```cpp
+class Element {
+public:
+    virtual gboolean checkValid(void) {
+        // Default implementation
+        return true;
+    }
+};
+
+class ConcreteElement : public Element {
+public:
+    // This class does not need to override checkValid
+};
+
+int main() {
+    ConcreteElement element;
+    if (element.checkValid()) {
+        // Since Element provides a default implementation, this will use the base class implementation.
+        std::cout << "Element is valid." << std::endl;
+    } else {
+        std::cout << "Element is not valid." << std::endl;
+    }
+
+    return 0;
+}
+```
+
+In this example, `Element` provides a default implementation for the `checkValid` function, so it is not a pure virtual function. The `ConcreteElement` class does not need to override this function because it inherits the default implementation from the base class. If a derived class does not override the function, it will use the default implementation from the base class.
+
+The key distinction between a virtual function and a pure virtual function (`= 0`) is that derived classes must provide their own implementation for pure virtual functions, while virtual functions can be optionally overridden.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **class Element { public: virtual gboolean checkValid(void) = 0; };**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+It seems like you're defining a C++ class named `Element` with a single pure virtual function `checkValid`. In C++, classes with pure virtual functions are considered abstract classes, and they cannot be instantiated directly. Derived classes must implement the pure virtual function.
+
+Here's a brief explanation of your code:
+
+- `class Element`: This is the class declaration. It starts the definition of the `Element` class.
+
+- `public`: This keyword specifies the access control level for the subsequent members (functions and data members). In this case, everything following `public:` is accessible from outside the class.
+
+- `virtual gboolean checkValid(void) = 0;`: This line declares a pure virtual function named `checkValid`. A pure virtual function is declared with `= 0` at the end. This means that any class that inherits from `Element` must provide an implementation for this function. The return type of the function is `gboolean`, which is a common type in libraries like GLib for representing boolean values.
+
+Here's a possible usage example of your class:
+
+```cpp
+#include <iostream>
+
+class Element {
+public:
+    virtual gboolean checkValid(void) = 0;
+};
+
+class ConcreteElement : public Element {
+public:
+    gboolean checkValid(void) override {
+        // Implement the checkValid function
+        return true;
+    }
+};
+
+int main() {
+    ConcreteElement element;
+    if (element.checkValid()) {
+        std::cout << "Element is valid." << std::endl;
+    } else {
+        std::cout << "Element is not valid." << std::endl;
+    }
+
+    return 0;
+}
+```
+
+In this example, `ConcreteElement` is a concrete class that derives from `Element` and provides an implementation for the `checkValid` function. You can create an instance of `ConcreteElement` and call the `checkValid` method to determine if the element is valid.
+
+Remember that you can have multiple classes that inherit from `Element`, each providing its own implementation of the `checkValid` function.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **What does "Negotiation" mean?**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
