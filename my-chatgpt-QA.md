@@ -57,7 +57,7 @@ The key distinction between a virtual function and a pure virtual function (`= 0
 
 ---
 
-## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **class Element { public: virtual gboolean checkValid(void) = 0; };**
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **`class Element { public: virtual gboolean checkValid(void) = 0; };`**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
 
