@@ -54,6 +54,12 @@ cat "$HOME/.ssh/id_rsa_$USR.pub" >> /home/$USR/.ssh/authorized_keys
 ssh -i $HOME/.ssh/id_rsa_$USR $USR@localhost "docker --version && echo '>>> DONE. New user added'"
 ```
 
+- Activate new user
+
+```bash
+su jenkins
+```
+
 - Run Jenkins and mount Docker services in host to jenkins container
 
 ```bash
@@ -68,11 +74,6 @@ trong đó `1000`: là user-id, `999`: docker group-id
 
 ```bash
 Environment="JENKINS_PORT=xxxx"
-```
-
-- Activate new user
-```bash
-su jenkins
 ```
 
 # Jenkins
