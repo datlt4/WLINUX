@@ -65,7 +65,7 @@ su jenkins
 ```bash
 id
 docker volume create jenkins_volume
-docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):$(which docker) -v jenkins_volume:/var/jenkins_home -p 8080:8080 --user 1000:999 --name jenkins-server -d jenkins/jenkins/lts
+docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):$(which docker) -v jenkins_volume:/var/jenkins_home -p 8081:8080 --user 1000:999 --name jenkins -d jenkins/jenkins:lts
 ```
 
 trong đó `1000`: là user-id, `999`: docker group-id
