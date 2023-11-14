@@ -58,8 +58,8 @@ ssh -i $HOME/.ssh/id_rsa_$USR $USR@localhost "docker --version && echo '>>> DONE
 
 ```bash
 id
-docker volume create devops_volume
-docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):$(which docker) -v devops_volume/jenkins_data:/var/jenkins_home -p 8080:8080 --user 1000:999 --name jenkins-server -d jenkins/jenkins/lts
+docker volume create jenkins_volume
+docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):$(which docker) -v jenkins_volume:/var/jenkins_home -p 8080:8080 --user 1000:999 --name jenkins-server -d jenkins/jenkins/lts
 ```
 
 trong đó `1000`: là user-id, `999`: docker group-id
