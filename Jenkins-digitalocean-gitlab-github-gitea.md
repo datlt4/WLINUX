@@ -49,14 +49,9 @@ ssh-keygen -q -N '' -m PEM -t rsa -f "$HOME/.ssh/id_rsa_$USR" <<< ""$'\n'"y" 2>&
 useradd -m -d /home/$USR -s /bin/bash $USR
 usermod -aG docker $USR
 mkdir -p /home/$USR/.ssh
-# touch /home/$USR/.ssh/authorized_keys
+touch /home/$USR/.ssh/authorized_keys
 cat "$HOME/.ssh/id_rsa_$USR.pub" >> /home/$USR/.ssh/authorized_keys
 ssh -i $HOME/.ssh/id_rsa_$USR $USR@localhost "docker --version && echo '>>> DONE. New user added'"
-```
-
-- Activate new user
-```bash
-su jenkins
 ```
 
 - Run Jenkins and mount Docker services in host to jenkins container
@@ -73,6 +68,11 @@ trong đó `1000`: là user-id, `999`: docker group-id
 
 ```bash
 Environment="JENKINS_PORT=xxxx"
+```
+
+- Activate new user
+```bash
+su jenkins
 ```
 
 # Jenkins
