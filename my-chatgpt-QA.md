@@ -11,6 +11,63 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **ist all type of container in C++ and explain in each aspect: Size, Memory, Access Time, Resizing, Usage**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In C++, there are several container classes available in the Standard Template Library (STL), each designed with specific characteristics and functionalities. Here's an overview of some commonly used containers in C++:
+
+### 1. **Array (`std::array`)**
+- **Size:** Fixed size defined at compile-time.
+- **Memory:** Contiguous memory allocation.
+- **Access Time:** Constant time access (`O(1)`), like built-in arrays.
+- **Resizing:** Cannot resize after creation.
+- **Usage:** Best used for fixed-size arrays, providing bounds checking and better encapsulation compared to built-in arrays.
+
+### 2. **Vector (`std::vector`)**
+- **Size:** Dynamic size that grows as elements are added.
+- **Memory:** Dynamic allocation, typically using contiguous memory.
+- **Access Time:** Constant time access (`O(1)`) for element access, but occasionally involves reallocation (`O(n)`) when growing.
+- **Resizing:** Automatically resizes when needed. Reserves more memory than required to minimize reallocations.
+- **Usage:** General-purpose container offering dynamic size and efficient random access.
+
+### 3. **List (`std::list`)**
+- **Size:** Dynamic size.
+- **Memory:** Non-contiguous memory allocation using linked nodes.
+- **Access Time:** Linear time access (`O(n)`) for sequential traversal due to non-contiguous memory.
+- **Resizing:** No resizing; elements can be added or removed efficiently without affecting other elements.
+- **Usage:** Suitable for frequent insertions/deletions anywhere in the list.
+
+### 4. **Deque (`std::deque`)**
+- **Size:** Dynamic size.
+- **Memory:** Typically uses multiple fixed-size arrays (blocks) to store elements.
+- **Access Time:** Constant time access at both ends (`O(1)`); slightly slower than vectors due to more complex structure.
+- **Resizing:** Efficient for growing at both ends, unlike vectors that mainly grow at the end.
+- **Usage:** Offers fast insertion and deletion at both ends, suitable for stack-like and queue-like behavior.
+
+### 5. **Map (`std::map`) and Unordered Map (`std::unordered_map`)**
+- **Size:** Dynamic size, associative containers.
+- **Memory:** Typically implemented using balanced trees (map) or hash tables (unordered_map).
+- **Access Time:** Logarithmic (`O(log n)`) for map, constant (`O(1)`) for unordered_map on average.
+- **Resizing:** Dynamic resizing to maintain performance characteristics.
+- **Usage:** Store key-value pairs; map maintains sorted order, while unordered_map provides faster lookups but unordered iteration.
+
+### 6. **Set (`std::set`) and Unordered Set (`std::unordered_set`)**
+- **Size:** Dynamic size, associative containers.
+- **Memory:** Similar to map containers.
+- **Access Time:** Logarithmic (`O(log n)`) for set, constant (`O(1)`) for unordered_set on average.
+- **Resizing:** Dynamic resizing.
+- **Usage:** Store unique elements; set maintains sorted order, while unordered_set offers faster lookups but unordered iteration.
+
+Each container has its strengths and trade-offs based on the specific requirements of your application. The choice depends on factors such as the need for dynamic sizing, efficiency in element access, insertion/deletion performance, and memory utilization.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **write a example code for C++ sender and python receiver, and they communicate between mqueue**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
