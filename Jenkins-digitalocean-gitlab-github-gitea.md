@@ -499,7 +499,7 @@ volumes:
   mysql-gitea:
     driver: local
   postgres-gitea:
-  	driver: local
+    driver: local
 
 services:
   server:
