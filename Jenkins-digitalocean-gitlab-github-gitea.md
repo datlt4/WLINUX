@@ -254,3 +254,257 @@ docker exec -it gitlab bash -c "cat /etc/gitlab/initial_root_password"
 
 
 # Gitea
+
+## Installation
+
+### Basics
+
+- The most simple setup just creates a volume and a network and starts the `gitea/gitea:latest` image as a service. Since there is no database available, one can be initialized using `SQLite3`. 
+- Create a directory like gitea and paste the following content into a file named `docker-compose-gitea.yml`.
+
+<details>
+  <summary>docker-compose-gitea.yml</summary>
+
+```yml
+version: "3"
+
+networks:
+  gitea:
+    external: false
+
+services:
+  server:
+    image: gitea/gitea:1.21.0
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: always
+    networks:
+      - gitea
+    volumes:
+      - ./gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "222:22"
+```
+</details>
+
+### Ports
+
+- To bind the integrated OpenSSH daemon and the webserver on a different port, adjust the port section. It's common to just change the host port and keep the ports within the container like they are.
+
+<details>
+  <summary>docker-compose-gitea.yml</summary>
+
+```diff
+version: "3"
+
+networks:
+  gitea:
+    external: false
+
+services:
+  server:
+    image: gitea/gitea:1.21.0
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: always
+    networks:
+      - gitea
+    volumes:
+      - ./gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+-     - "3000:3000"
+-     - "222:22"
++     - "8080:3000"
++     - "2221:22"
+```
+</details>
+
+### Databases
+
+#### MySQL database
+
+- To start Gitea in combination with a `MySQL` database, apply these changes to the `docker-compose-gitea.yml` file created above.
+
+<details>
+  <summary>docker-compose-gitea.yml</summary>
+
+```diff
+version: "3"
+
+networks:
+  gitea:
+    external: false
+
+services:
+  server:
+    image: gitea/gitea:1.21.0
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
++      - GITEA__database__DB_TYPE=mysql
++      - GITEA__database__HOST=db:3306
++      - GITEA__database__NAME=gitea
++      - GITEA__database__USER=gitea
++      - GITEA__database__PASSWD=gitea
+    restart: always
+    networks:
+      - gitea
+    volumes:
+      - ./gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "222:22"
++    depends_on:
++      - db
++
++  db:
++    image: mysql:8
++    restart: always
++    environment:
++      - MYSQL_ROOT_PASSWORD=gitea
++      - MYSQL_USER=gitea
++      - MYSQL_PASSWORD=gitea
++      - MYSQL_DATABASE=gitea
++    networks:
++      - gitea
++    volumes:
++      - ./mysql:/var/lib/mysql
+```
+</details>
+
+#### PostgreSQL database
+
+- To start Gitea in combination with a PostgreSQL database, apply these changes to the `docker-compose-gitea.yml` file created above.
+
+<details>
+  <summary>docker-compose-gitea.yml</summary>
+
+```diff
+version: "3"
+
+networks:
+  gitea:
+    external: false
+
+services:
+  server:
+    image: gitea/gitea:1.21.0
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
++      - GITEA__database__DB_TYPE=postgres
++      - GITEA__database__HOST=db:5432
++      - GITEA__database__NAME=gitea
++      - GITEA__database__USER=gitea
++      - GITEA__database__PASSWD=gitea
+    restart: always
+    networks:
+      - gitea
+    volumes:
+      - ./gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "222:22"
++    depends_on:
++      - db
++
++  db:
++    image: postgres:14
++    restart: always
++    environment:
++      - POSTGRES_USER=gitea
++      - POSTGRES_PASSWORD=gitea
++      - POSTGRES_DB=gitea
++    networks:
++      - gitea
++    volumes:
++      - ./postgres:/var/lib/postgresql/data
+```
+</details>
+
+### Named volumes
+
+- To use named volumes instead of host volumes, define and use the named volume within the `docker-compose-gitea.yml` configuration. This change will automatically create the required volume. You don't need to worry about permissions with named volumes; Docker will deal with that automatically.
+
+<details>
+  <summary>docker-compose-gitea.yml</summary>
+
+```diff
+version: "3"
+
+networks:
+  gitea:
+    external: false
+
++volumes:
++  gitea:
++    driver: local
++
+services:
+  server:
+    image: gitea/gitea:1.21.0
+    container_name: gitea
+    restart: always
+    networks:
+      - gitea
+    volumes:
+-      - ./gitea:/data
++      - gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "222:22"
+```
+</details>
+
+### Startup
+
+- To start this setup based on `docker-compose`, execute `docker-compose -f docker-compose-gitea.yml up -d `, to launch Gitea in the background. Using `docker-compose ps` will show if Gitea started properly. Logs can be viewed with `docker-compose logs`.
+
+- To shut down the setup, execute `docker-compose down`. This will stop and kill the containers. The volumes will still exist.
+
+- Notice: if using a non-3000 port on http, change `app.ini` to match `LOCAL_ROOT_URL = http://localhost:3000/`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
