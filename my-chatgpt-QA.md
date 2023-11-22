@@ -11,7 +11,42 @@
 
 ---
 
-## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **ist all type of container in C++ and explain in each aspect: Size, Memory, Access Time, Resizing, Usage**
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Clear C++ vector more efficently**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+The given code involves the use of `std::vector` in C++ to efficiently clear the contents of a vector by using the `swap` trick with an empty vector.
+
+```cpp
+std::vector<unsigned char> buff;        // Declare a vector named 'buff' of type 'unsigned char'
+std::vector<unsigned char>().swap(buff); // Swap contents of 'buff' with an empty vector to clear its contents
+```
+
+Explanation:
+
+1. `std::vector<unsigned char> buff;`: This line declares a vector named `buff` of type `unsigned char`. However, at this point, the vector is not empty, and it might contain some elements.
+
+2. `std::vector<unsigned char>().swap(buff);`: This line does the following:
+   - Constructs a temporary empty vector of type `std::vector<unsigned char>()`.
+   - Uses the `swap` method of vectors to swap the content of the temporary empty vector with the content of `buff`.
+   - After the swap, the temporary empty vector will now contain the elements that were previously in `buff`, and `buff` will be left with an empty state. Essentially, this operation efficiently clears the contents of `buff`.
+
+### Why Use `swap` to Clear the Vector?
+
+The purpose of using `swap` to clear a vector is to ensure efficient memory management. Simply calling `buff.clear()` would remove elements from the vector, but it might not free the memory occupied by the vector's internal buffer immediately. Using the `swap` trick with an empty temporary vector allows the vector to release its memory more efficiently.
+
+This technique takes advantage of the fact that swapping the contents of two vectors results in memory deallocation for the vector whose contents are swapped out, allowing the vector to release the memory it previously held.
+
+It's a common pattern used to clear the contents of a vector while efficiently managing memory resources.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **List all type of container in C++ and explain in each aspect: Size, Memory, Access Time, Resizing, Usage**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
 
