@@ -21,8 +21,9 @@
 The given code involves the use of `std::vector` in C++ to efficiently clear the contents of a vector by using the `swap` trick with an empty vector.
 
 ```cpp
-std::vector<unsigned char> buff;        // Declare a vector named 'buff' of type 'unsigned char'
+std::vector<unsigned char> buff;         // Declare a vector named 'buff' of type 'unsigned char'
 std::vector<unsigned char>().swap(buff); // Swap contents of 'buff' with an empty vector to clear its contents
+buff.reserve(1024);                      // Specify the minimum size of the vector
 ```
 
 Explanation:
@@ -33,6 +34,10 @@ Explanation:
    - Constructs a temporary empty vector of type `std::vector<unsigned char>()`.
    - Uses the `swap` method of vectors to swap the content of the temporary empty vector with the content of `buff`.
    - After the swap, the temporary empty vector will now contain the elements that were previously in `buff`, and `buff` will be left with an empty state. Essentially, this operation efficiently clears the contents of `buff`.
+
+3. `buff.reserve(1024);`
+   - In C++ vectors are dynamic arrays. Unlike arrays, they don't have a fixed size. They can grow or shrink as required. Vectors are assigned memory in blocks of contiguous locations. When the memory allocated for the vector falls short of storing new elements, a new memory block is allocated to vector and all elements are copied from the old location to the new location. This reallocation of elements helps vectors to grow when required. However, it is a costly operation and time complexity is involved in this step is linear. 
+   - `std::vector` class provides a useful function reserve which helps user specify the minimum size of the vector. It indicates that the vector is created such that it can store at least the number of the specified elements without having to reallocate memory.
 
 ### Why Use `swap` to Clear the Vector?
 
