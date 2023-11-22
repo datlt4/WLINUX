@@ -11,6 +11,78 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain `const_cast`**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In C++, `const_cast` is a type of casting operator that is used to add or remove the `const` qualifier from a variable. It allows you to temporarily cast away the `const`ness or volatility of a variable, enabling you to modify it, although this can lead to undefined behavior if you attempt to modify an originally `const` object.
+
+### Syntax:
+```cpp
+const_cast<new_type>(expression)
+```
+
+- `new_type`: The type to which the expression will be cast.
+- `expression`: The expression or variable that is being cast.
+
+### Usage:
+
+1. **Removing `const` Qualifier:**
+   - When you have a `const`-qualified variable and you need to modify it, `const_cast` can be used to remove the `const` qualifier.
+   - For example:
+     ```cpp
+     const int x = 5;
+     int& y = const_cast<int&>(x); // Removes const-ness temporarily
+     y = 10; // Now able to modify 'x' indirectly through 'y'
+     ```
+
+2. **Caution: Undefined Behavior:**
+   - Modifying a variable originally declared as `const` through `const_cast` can lead to undefined behavior if the object was initially declared as `const` or if the memory is read-only.
+   - It should be used with caution and only when absolutely necessary, such as when dealing with legacy code or interacting with APIs that might not be designed with `const` correctness.
+
+3. **Usage with Pointers:**
+   - Similar to references, `const_cast` can also be used with pointers to cast away `const`-ness or volatility.
+   - For example:
+     ```cpp
+     const int* ptr = new int(5);
+     int* writable_ptr = const_cast<int*>(ptr); // Removes const-ness temporarily
+     *writable_ptr = 10; // Modifying the value pointed to by 'ptr'
+     ```
+
+### Important Note:
+- It's crucial to be cautious while using `const_cast`. Modifying an originally `const` object might result in unexpected behavior, and it should be avoided whenever possible to maintain program safety and integrity.
+- Always consider alternative design approaches or refactor code if `const_cast` is being used frequently, as it may indicate a design issue or a need for reevaluation of the code's const-correctness.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain `const void *const buf;`**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In the declaration `const void *const buf;`, both `buf` and the data it points to are `const`.
+
+- `const void *const buf;` is composed of two `const` qualifiers:
+   - The first `const` (`const void *`) makes the data pointed to by `buf` constant. This means you cannot modify the data through the `buf` pointer.
+   - The second `const` (`const void *const`) makes the pointer `buf` itself constant. This means the pointer `buf` cannot be reassigned to point to a different memory location once it has been initialized.
+
+Therefore, in this declaration:
+- `buf` is a constant pointer (because of the second `const`), meaning you cannot change what memory address it points to.
+- The data pointed to by `buf` is also constant (due to the first `const`), meaning you cannot modify the data using this pointer.
+
+Both the pointer `buf` and the data it points to are immutable in this context.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Clear C++ vector more efficently**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
