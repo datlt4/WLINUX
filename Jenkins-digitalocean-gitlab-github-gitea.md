@@ -478,9 +478,17 @@ services:
 
 ### Startup
 
-- To start this setup based on `docker-compose`, execute `docker-compose -f docker-compose-gitea.yml up -d `, to launch Gitea in the background. Using `docker-compose ps` will show if Gitea started properly. Logs can be viewed with `docker-compose logs`.
+- To start this setup based on `docker-compose`
+
+    - Execute `docker-compose -f docker-compose-gitea.yml up -d `, to launch Gitea in the background.
+    - Using `docker-compose ps` will show if Gitea started properly.
+    - Logs can be viewed with `docker-compose logs`.
 
 - To shut down the setup, execute `docker-compose down`. This will stop and kill the containers. The volumes will still exist.
+
+- `docker-compose down` removes all container.
+
+- `docker-compose down -v` removes all volumes attached.
 
 - Notice: if using a non-3000 port on http, change `app.ini` to match `LOCAL_ROOT_URL = http://localhost:3000/`.
 
@@ -494,30 +502,35 @@ networks:
     external: false
 
 volumes:
-  gitea:
+  data-volume:
     driver: local
-  mysql-gitea:
+  mysql-volume:
     driver: local
-  postgres-gitea:
+  postgres-volume:
     driver: local
 
 services:
   server:
     image: gitea/gitea:1.21.0
     container_name: gitea
-    # environment:
-    # 	- USER_UID=1000
-    #   - USER_GID=1000
-    #   - GITEA__database__DB_TYPE=mysql
-    #   - GITEA__database__HOST=db:3306
-    #   - GITEA__database__NAME=gitea
-    #   - GITEA__database__USER=gitea
-    #   - GITEA__database__PASSWD=gitea
+    environment:
+      # - USER_UID=1000
+      # - USER_GID=1000
+      - GITEA__database__DB_TYPE=mysql
+      - GITEA__database__HOST=db:3306
+      - GITEA__database__NAME=gitea
+      - GITEA__database__USER=gitea
+      - GITEA__database__PASSWD=gitea
+      # - GITEA__database__DB_TYPE=postgres
+      # - GITEA__database__HOST=db:5432
+      # - GITEA__database__NAME=gitea
+      # - GITEA__database__USER=gitea
+      # - GITEA__database__PASSWD=gitea
     restart: always
     networks:
       - gitea
     volumes:
-      - ./gitea:/data
+      - data-volume:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
@@ -537,7 +550,7 @@ services:
     networks:
       - gitea
     volumes:
-      - mysql-gitea:/var/lib/mysql
+      - mysql-volume:/var/lib/mysql
 
   # db:
   #   image: postgres:14
@@ -549,7 +562,7 @@ services:
   #   networks:
   #     - gitea
   #   volumes:
-  #     - postgres-gitea:/var/lib/postgresql/data
+  #     - postgres-volume:/var/lib/postgresql/data
 ```
 
 
