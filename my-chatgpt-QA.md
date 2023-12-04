@@ -1,3 +1,4 @@
+---
 
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> ****
 
@@ -10,6 +11,73 @@
 </details>
 
 ---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain `backtrace` in `execinfo.h` in detail**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+The `execinfo.h` header file in C/C++ provides functions that allow you to work with backtraces, which are essentially a snapshot of the call stack at a particular point in the execution of a program. The backtrace includes information about the sequence of function calls that led to the current point in the code.
+
+One of the key functions provided by `execinfo.h` is `backtrace`. Here's a breakdown:
+
+### `backtrace` Function
+
+- **Purpose:** The `backtrace` function is used to capture a backtrace, which is essentially a list of return addresses of the function calls made up to a certain point in the program's execution.
+
+- **Syntax:**
+  ```c
+  int backtrace(void** buffer, int size);
+  ```
+  
+- **Parameters:**
+  - `buffer`: A pointer to an array of `void*` where the backtrace information will be stored.
+  - `size`: The maximum number of return addresses to capture and store in the buffer.
+
+- **Return Value:**
+  - Upon success, `backtrace` returns the number of return addresses captured.
+  - If the function fails, it returns `-1`.
+
+- **Usage:**
+  ```c
+  #include <execinfo.h>
+  void* callstack[128];
+  int frames = backtrace(callstack, 128);
+  ```
+
+- **Notes:**
+  - The returned array of `void*` contains the return addresses of the function calls. These addresses can be later used for debugging or logging purposes.
+  - You can use other functions provided by `execinfo.h`, such as `backtrace_symbols`, to convert these addresses into human-readable function names and locations.
+
+### Example:
+```c
+#include <stdio.h>
+#include <execinfo.h>
+
+void print_backtrace() {
+    void* callstack[128];
+    int frames = backtrace(callstack, 128);
+    char** strs = backtrace_symbols(callstack, frames);
+
+    if (strs) {
+        for (int i = 0; i < frames; ++i) {
+            printf("%s\n", strs[i]);
+        }
+        free(strs);
+    }
+}
+
+int main() {
+    print_backtrace();
+    return 0;
+}
+```
+
+This code captures the backtrace in the `main` function and prints it out using `backtrace_symbols`. This can be useful for debugging purposes, as it shows the sequence of function calls up to the point where `print_backtrace` is called.
+
+</details>
 
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain `const_cast`**
 
