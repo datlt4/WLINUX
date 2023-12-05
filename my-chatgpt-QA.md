@@ -12,6 +12,57 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **I aim to become proficient in all NVIDIA GPU platforms in order to apply NVIDIA Inter program. Can you provide me with a roadmap?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Mastering NVIDIA GPU platforms and technologies for an NVIDIA internship or program involves a comprehensive understanding of GPU architectures, parallel computing, and relevant software development skills. Here's a roadmap to help you become proficient in various NVIDIA GPU platforms:
+
+### 1. Foundational Knowledge:
+- **Computer Graphics Fundamentals:** Understand the basics of computer graphics, including rendering techniques, shaders, and GPU-accelerated graphics pipelines.
+
+### 2. GPU Architectures:
+- **Study NVIDIA GPU Architectures:** Dive into the architectures of various NVIDIA GPUs (such as GeForce, Quadro, Tesla, and RTX series). Understand CUDA cores, Tensor Cores (if applicable), memory hierarchies, and compute capabilities.
+
+### 3. CUDA Programming:
+- **Learn CUDA Programming:** Master CUDA C/C++ programming for GPU parallel computing. Understand kernel programming, memory management, and optimization techniques.
+- **Explore CUDA Toolkit:** Familiarize yourself with the CUDA Toolkit, including libraries like cuBLAS, cuDNN, and cuFFT for various computational tasks.
+
+### 4. Deep Learning and AI on GPUs:
+- **GPU-Accelerated Deep Learning:** Explore frameworks like TensorFlow and PyTorch to understand GPU-accelerated deep learning.
+- **Study Tensor Cores:** Learn about Tensor Cores' role in accelerating deep learning workloads.
+
+### 5. GPU Profiling and Optimization:
+- **Performance Optimization:** Master techniques to optimize GPU code for performance, including memory access patterns, thread synchronization, and reducing latency.
+- **Utilize Profiling Tools:** Gain proficiency in NVIDIA's profiling tools like NVIDIA Nsight Systems and NVIDIA Visual Profiler.
+
+### 6. Graphics APIs and Libraries:
+- **OpenGL, Vulkan, DirectX:** Understand various graphics APIs and their interaction with NVIDIA GPUs.
+- **Explore NVIDIA SDKs:** Familiarize yourself with NVIDIA SDKs for graphics, AI, and computing.
+
+### 7. Parallel Computing:
+- **Parallel Programming Models:** Deepen your knowledge of parallel programming models like OpenACC and OpenMP for NVIDIA GPUs.
+
+### 8. Real-world Projects and Contributions:
+- **Practical Projects:** Work on hands-on projects involving CUDA programming, GPU-accelerated applications, or deep learning tasks.
+- **Contribute to Open Source:** Collaborate or contribute to open-source projects related to NVIDIA GPU technologies.
+
+### 9. Certifications and Specializations:
+- **NVIDIA Certifications:** Consider obtaining NVIDIA's CUDA certifications or AI-related certifications to validate your skills.
+- **Specialized Courses or Degrees:** Pursue specialized courses or degrees in GPU computing, parallel programming, or AI offered by universities or online platforms.
+
+### 10. Stay Updated:
+- **Stay Current with NVIDIA Technologies:** Continuously follow NVIDIA's latest advancements, research papers, blogs, and attend conferences or webinars related to NVIDIA GPU technologies.
+
+Remember, mastering NVIDIA GPU platforms is an ongoing learning journey, and hands-on experience combined with continuous learning and exploration of new technologies will help you stand out when applying for NVIDIA internship programs or roles.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain `fcntl` function in c++**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
