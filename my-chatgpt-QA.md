@@ -12,6 +12,258 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain `fcntl` function in c++**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In C and C++ programming languages, the `fcntl` function (file control) is used to perform various control operations on open files. It allows you to manipulate file descriptors and change file properties after a file has been opened.
+
+The `fcntl` function typically operates on open file descriptors and provides a variety of operations depending on the `cmd` argument passed to it.
+
+The prototype of the `fcntl` function in C is:
+
+```c
+#include <fcntl.h>
+
+int fcntl(int fd, int cmd, ... /* arg */ );
+```
+
+Parameters:
+- `fd`: The file descriptor for which the operation needs to be performed.
+- `cmd`: The command specifying the operation to be executed.
+- `arg`: Optional argument, its meaning depends on the specific `cmd`.
+
+Some common uses of `fcntl` include:
+
+1. **File Descriptor Duplication**: `F_DUPFD` command duplicates a file descriptor.
+
+2. **File Descriptor Flags**: `F_GETFD` and `F_SETFD` commands retrieve and set file descriptor flags, respectively.
+
+3. **File Status Flags**: `F_GETFL` and `F_SETFL` commands retrieve and set file status flags, respectively. For example, to change the file access mode (read-only, write-only, etc.) or to enable non-blocking mode.
+
+4. **Record Locking**: `F_GETLK`, `F_SETLK`, and `F_SETLKW` commands are used for advisory file record locking.
+
+5. **File Advisory Locks**: `F_SETOWN` and `F_GETOWN` commands set and get the process or process group that will receive signals when input or output becomes possible on a file descriptor.
+
+6. **Asynchronous I/O**: `F_SETSIG` and `F_SETOWN_EX` commands for asynchronous I/O handling.
+
+For instance, setting the non-blocking flag for a file descriptor can be done using `fcntl` as follows:
+
+Example 1:
+
+```cpp
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+#include <cerrno>
+
+int main() {
+    int fd = open("example.txt", O_RDONLY);
+
+    if (fd == -1) {
+        std::cerr << "Error opening file: " << strerror(errno) << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    int flags = fcntl(fd, F_GETFL, 0);
+    if (flags == -1) {
+        std::cerr << "Error getting file flags: " << strerror(errno) << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    // Set the non-blocking flag
+    flags |= O_NONBLOCK;
+    if (fcntl(fd, F_SETFL, flags) == -1) {
+        std::cerr << "Error setting non-blocking mode: " << strerror(errno) << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    // Use the file descriptor...
+    
+    close(fd);
+    return 0;
+}
+```
+
+Example 2:
+
+```cpp
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <errno.h>
+
+int main() {
+    int fd = open("example.txt", O_RDONLY);
+
+    if (fd == -1) {
+        perror("open");
+        return 1;
+    }
+
+    int flags = fcntl(fd, F_GETFL, 0);
+    if (flags == -1) {
+        perror("fcntl - F_GETFL");
+        return 1;
+    }
+
+    // Set the file descriptor to non-blocking mode
+    if (fcntl(fd, F_SETFL, flags | O_NONBLOCK) == -1) {
+        perror("fcntl - F_SETFL");
+        return 1;
+    }
+
+    // Now 'fd' operates in non-blocking mode
+
+    close(fd);
+    return 0;
+}
+```
+
+Please note that `fcntl` is a low-level function and usage might depend on the specific operating system and its capabilities. Care should be taken when using it, as improper usage may lead to unexpected behavior or errors in your program.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **List all IPC type in C++**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In C++, Interprocess Communication (IPC) mechanisms allow different processes to communicate and synchronize with each other. IPC facilitates data exchange, synchronization, and communication between multiple processes running concurrently on the same system. Here are some common IPC mechanisms available in C++:
+
+1. **Pipes**: Pipes are a simple form of IPC where data is transmitted between two related processes, typically a parent and child process. They allow unidirectional communication.
+
+2. **Named Pipes (FIFOs)**: Named pipes, also known as FIFOs (First In, First Out), are similar to pipes but exist independently of related processes. They allow communication between unrelated processes.
+
+3. **Shared Memory**: Shared memory allows multiple processes to access the same region of memory. It provides a faster means of inter-process communication but requires careful synchronization to avoid race conditions.
+
+4. **Message Queues**: Message queues allow processes to communicate by sending and receiving messages through a queue. Messages in the queue are identified by a message type.
+
+5. **Semaphores**: Semaphores are synchronization primitives used to control access to shared resources. They are typically used to prevent race conditions in multi-threaded or multi-process environments.
+
+6. **Mutexes and Locks**: These are synchronization mechanisms used to control access to shared resources, ensuring that only one process or thread can access the resource at a time.
+
+7. **Signals**: Signals are software interrupts used to notify processes about specific events. They can be used for simple communication between processes.
+
+8. **Socket Programming**: Using sockets, processes can communicate over a network or locally by establishing connections and transferring data.
+
+9. **File Locking**: File locking mechanisms prevent simultaneous access to a file by multiple processes to ensure data consistency.
+
+10. **Remote Procedure Calls (RPC)**: RPC mechanisms allow a process to execute code on a remote system as if it were a local procedure call.
+
+Each IPC mechanism has its advantages and limitations, and the choice of IPC mechanism depends on factors such as the nature of the data to be exchanged, synchronization requirements, performance considerations, and the relationship between the communicating processes.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain `pipe` in `unistd.h` in C++**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In C and C++ programming languages, the `unistd.h` header file contains various constants, function prototypes, and macros that provide access to the operating system's API. One of the functions defined in `unistd.h` is `pipe`.
+
+The `pipe` function creates an interprocess communication channel (IPC) using a unidirectional pipe. This pipe allows communication between two related processes – a parent process and its child – by establishing a unidirectional flow of data. The data written to one end of the pipe can be read from the other end.
+
+The `pipe` function prototype typically looks like this:
+
+```cpp
+#include <unistd.h>
+
+int pipe(int pipefd[2]);
+```
+
+Here, `pipefd` is an array of two integers where the file descriptors for the pipe ends will be stored. `pipefd[0]` refers to the read end of the pipe, and `pipefd[1]` refers to the write end.
+
+When you call the `pipe` function, the operating system creates a pipe and assigns two file descriptors – one for reading (`pipefd[0]`) and one for writing (`pipefd[1]`). Data written to the write end of the pipe can be read from the read end of the pipe.
+
+For example, after successfully calling `pipe`:
+
+```cpp
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int pipefd[2];
+    if (pipe(pipefd) == -1) {
+        perror("pipe");
+        exit(EXIT_FAILURE);
+    }
+
+    // Now, pipefd[0] is the read end, and pipefd[1] is the write end.
+
+    // Use these file descriptors for read and write operations.
+    
+    return 0;
+}
+```
+
+Remember, `pipe` is commonly used for communication between processes. After creating a pipe, you might use functions like `fork`, `read`, and `write` to establish communication between the parent and child processes via the created pipe.
+
+Here's a simple example illustrating how `pipe` can be used with `fork` to create a communication channel between a parent and child process:
+
+```cpp
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+
+#define BUFFER_SIZE 50
+
+int main() {
+    int pipefd[2];
+    pid_t pid;
+    char buffer[BUFFER_SIZE];
+    
+    if (pipe(pipefd) == -1) {
+        perror("pipe");
+        exit(EXIT_FAILURE);
+    }
+
+    pid = fork();
+
+    if (pid < 0) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    } else if (pid == 0) {  // Child process
+        close(pipefd[1]);  // Close the write end in the child process
+
+        read(pipefd[0], buffer, sizeof(buffer));
+        printf("Child process received: %s\n", buffer);
+
+        close(pipefd[0]);  // Close the read end in the child process
+    } else {  // Parent process
+        close(pipefd[0]);  // Close the read end in the parent process
+
+        const char message[] = "Hello from parent!";
+        write(pipefd[1], message, sizeof(message));
+
+        close(pipefd[1]);  // Close the write end in the parent process
+
+        wait(NULL);  // Wait for the child process to complete
+    }
+
+    return 0;
+}
+```
+
+This code creates a pipe, forks a child process, and allows communication between the parent and child processes using the pipe. The parent writes a message to the pipe, and the child reads and prints that message.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain `backtrace` in `execinfo.h` in detail**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
