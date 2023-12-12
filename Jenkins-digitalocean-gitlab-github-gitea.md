@@ -494,6 +494,13 @@ services:
 
 ### `docker-compse-gitea.yml`
 
+- On the host, create the `git` user which shares the same UID/ GID as the container values USER_UID/ USER_GID: `sudo useradd git [-g 1000]`
+
+- Get `git` UID and GID: `id git`, and the output like this: `uid=1001(git) gid=1000(emoi) groups=1000(emoi)`
+
+<details>
+  <summary>docker-compose-gitea.yml</summary>
+
 ```yml
 version: "3"
 
@@ -511,11 +518,11 @@ volumes:
 
 services:
   server:
-    image: gitea/gitea:1.21.0
+    image: gitea/gitea:1.21.2
     container_name: gitea
     environment:
-      # - USER_UID=1000
-      # - USER_GID=1000
+      - USER_UID=1001
+      - USER_GID=1000
       - GITEA__database__DB_TYPE=mysql
       - GITEA__database__HOST=db:3306
       - GITEA__database__NAME=gitea
@@ -564,26 +571,147 @@ services:
   #   volumes:
   #     - postgres-volume:/var/lib/postgresql/data
 ```
+</details>
 
+### Configure
 
+- Access `127.0.0.1:8000` for initial configuration and email configuration.
 
+<img src="asset/gitea-initial-configuration.png" width="800"/>
 
+<img src="asset/gitea-email-configuration.png" width="800"/>
 
+- Then create first user, it will consider as administrator.
 
+<img src="asset/gitea-first-account.png" width="800"/>
 
+- And all accounts registered after will need to activate via link will sent to user's email
 
+<img src="asset/gitea-activate-account.png" width="800"/>
 
+- You can modify the configuration after initially by `app.ini` file
 
+```bash
+docker exec -it gitea bash
+vi /data/gitea/conf/app.ini
+```
 
+<details>
+  <summary>app.ini</summary>
 
+```
+APP_NAME = Gitea: Git with a cup of tea
+RUN_MODE = prod
+RUN_USER = git
+WORK_PATH = /data/gitea
 
+[repository]
+ROOT = /data/git/repositories
 
+[repository.local]
+LOCAL_COPY_PATH = /data/gitea/tmp/local-repo
 
+[repository.upload]
+TEMP_PATH = /data/gitea/uploads
 
+[server]
+APP_DATA_PATH = /data/gitea
+DOMAIN = 127.0.0.1
+SSH_DOMAIN = 127.0.0.1
+HTTP_PORT = 3000
+ROOT_URL = http://127.0.0.1:8000/
+DISABLE_SSH = false
+SSH_PORT = 22
+SSH_LISTEN_PORT = 22
+LFS_START_SERVER = true
+LFS_JWT_SECRET = *******************************************
+OFFLINE_MODE = false
 
+[database]
+PATH = /data/gitea/gitea.db
+DB_TYPE = mysql
+HOST = db:3306
+NAME = gitea
+USER = gitea
+PASSWD = gitea
+LOG_SQL = false
+SCHEMA =
+SSL_MODE = disable
 
+[indexer]
+ISSUE_INDEXER_PATH = /data/gitea/indexers/issues.bleve
 
+[session]
+PROVIDER_CONFIG = /data/gitea/sessions
+PROVIDER = file
 
+[picture]
+AVATAR_UPLOAD_PATH = /data/gitea/avatars
+REPOSITORY_AVATAR_UPLOAD_PATH = /data/gitea/repo-avatars
+
+[attachment]
+PATH = /data/gitea/attachments
+
+[log]
+MODE = console
+LEVEL = info
+ROOT_PATH = /data/gitea/log
+
+[security]
+INSTALL_LOCK = true
+SECRET_KEY =
+REVERSE_PROXY_LIMIT = 1
+REVERSE_PROXY_TRUSTED_PROXIES = *
+INTERNAL_TOKEN = *********************************************************************************************************
+PASSWORD_HASH_ALGO = pbkdf2
+
+[service]
+DISABLE_REGISTRATION = false
+REQUIRE_SIGNIN_VIEW = false
+REGISTER_EMAIL_CONFIRM = false
+ENABLE_NOTIFY_MAIL = true
+ALLOW_ONLY_EXTERNAL_REGISTRATION = false
+ENABLE_CAPTCHA = false
+DEFAULT_KEEP_EMAIL_PRIVATE = false
+DEFAULT_ALLOW_CREATE_ORGANIZATION = true
+DEFAULT_ENABLE_TIMETRACKING = true
+NO_REPLY_ADDRESS = noreply.localhost
+
+[lfs]
+PATH = /data/git/lfs
+
+[mailer]
+ENABLED = true
+SMTP_ADDR = smtp.gmail.com
+SMTP_PORT = 587
+FROM = ***********************************
+USER = ***********************************
+PASSWD = ****************
+
+[openid]
+ENABLE_OPENID_SIGNIN = true
+ENABLE_OPENID_SIGNUP = true
+
+[cron.update_checker]
+ENABLED = false
+
+[repository.pull-request]
+DEFAULT_MERGE_STYLE = merge
+
+[repository.signing]
+DEFAULT_TRUST_MODEL = committer
+
+[oauth2]
+JWT_SECRET = *******************************************
+```
+
+</details>
+
+### SSH
+
+- Remember add key as on github
+
+- add remote repo: `git remote add gitea ssh://git@192.168.120.103:2222/datlt4/gst-learn.git`
 
 
 
