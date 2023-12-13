@@ -548,6 +548,7 @@ services:
 
   db:
     image: mysql:8
+    container_name: gitea_db
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=gitea
@@ -561,6 +562,7 @@ services:
 
   # db:
   #   image: postgres:14
+  #   container_name: gitea_db
   #   restart: always
   #   environment:
   #     - POSTGRES_USER=gitea
