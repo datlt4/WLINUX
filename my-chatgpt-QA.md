@@ -12,6 +12,53 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **list all and explain each type `printf` function in `stdio.h` library**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In the C standard library's `stdio.h`, the `printf` function is used for formatted output to the standard output (usually the console). There are several variations of the `printf` function, each designed to handle different data types and formatting options. Here are some of the most commonly used variants:
+
+1. **`printf`**:
+   - Signature: `int printf(const char *format, ...);`
+   - This is the standard `printf` function used for formatted output. It takes a format string followed by optional arguments, and it prints formatted output to the standard output.
+
+2. **`fprintf`**:
+   - Signature: `int fprintf(FILE *stream, const char *format, ...);`
+   - Similar to `printf`, but it writes the output to the specified file stream (`FILE *stream`) instead of standard output.
+
+3. **`sprintf`**:
+   - Signature: `int sprintf(char *str, const char *format, ...);`
+   - Writes formatted output to a string (`char *str`) instead of standard output. It is similar to `printf` but writes to a character array (`str`) instead of a file or the console.
+
+4. **`snprintf`**:
+   - Signature: `int snprintf(char *str, size_t size, const char *format, ...);`
+   - Similar to `sprintf`, but it limits the number of characters written to the output buffer (`char *str`) to prevent buffer overflow. It takes the maximum size of the output buffer as an argument (`size_t size`).
+
+5. **`vprintf`**:
+   - Signature: `int vprintf(const char *format, va_list arg);`
+   - Similar to `printf`, but it takes a `va_list` argument instead of the variable arguments directly. This variant is used when dealing with variable argument lists.
+
+6. **`vfprintf`**:
+   - Signature: `int vfprintf(FILE *stream, const char *format, va_list arg);`
+   - Similar to `vprintf`, but writes the output to a specified file stream (`FILE *stream`) instead of standard output.
+
+7. **`vsprintf`**:
+   - Signature: `int vsprintf(char *str, const char *format, va_list arg);`
+   - Similar to `vprintf`, but writes formatted output to a string (`char *str`) instead of standard output.
+
+8. **`vsnprintf`**:
+   - Signature: `int vsnprintf(char *str, size_t size, const char *format, va_list arg);`
+   - Similar to `vsprintf`, but limits the number of characters written to the output buffer (`char *str`) to prevent buffer overflow.
+
+These functions are powerful for formatted output in C. The difference lies in where they direct their output (`stdout`, a file stream, or a string), and whether they provide additional safety features like limiting the output size (`snprintf` and its variations). The `v*printf` functions take a `va_list` argument, which is used when functions need to pass variable arguments to another function.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Roadmap to Prepare for NVIDIA Job Application**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Google_Bard_logo.svg/2048px-Google_Bard_logo.svg.png" width="20"/>
