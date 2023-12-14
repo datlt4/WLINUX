@@ -255,6 +255,4 @@ docker exec -it gitlab bash -c "cat /etc/gitlab/initial_root_password"
 
 # Gitea
 
-## Installation
-
 [Gitea installation](gitea-setup.md)
