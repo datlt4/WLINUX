@@ -317,6 +317,29 @@ services:
   #     - gitea
   #   volumes:
   #     - postgres-volume:/var/lib/postgresql/data
+
+  backup:
+    image: alpine
+    tty: false
+    environment:
+      - TARGET=${TARGET}
+    volumes:
+      - data-volume:/data
+      - mysql-volume:/mysql-data
+      # - postgres-volume:/postgres-data
+      - ./backup:/backup
+    command: sh -c "cd /backup; tar -czf gitea_data_$${TARGET}.tar.gz /data/*; tar -czf gitea_db_$${TARGET}.tar.gz /mysql-data/*"
+
+  restore:
+    image: alpine
+    environment:
+      - SOURCE=dbdata
+    volumes:
+      - data-volume:/data
+      - mysql-volume:/mysql-data
+      # - postgres-volume:/postgres-data
+      - ./backup:/backup
+    command: sh -c "rm -rf /data/* /data/..?* /data/.[!.]* /mysql-data/* /mysql-data/..?* /mysql-data/.[!.]*; tar -xzf /backup/gitea_data_$${SOURCE}.tar.gz -C /data; tar -xzf /backup/gitea_db_$${SOURCE}.tar.gz -C /mysql-data;"
 ```
 </details>
 
@@ -459,3 +482,21 @@ JWT_SECRET = *******************************************
 - Remember add key as on github
 
 - add remote repo: `git remote add gitea ssh://git@192.168.120.103:2222/datlt4/gst-learn.git`
+
+### Start
+
+```bash
+docker-compose up -d server db
+```
+
+### Stop
+
+```bash
+docker-compose stop
+```
+
+### Backup
+
+```bash
+export TARGET=$(date +%Y%m%d_%H%M%S) && docker-compose run --rm backup
+```
