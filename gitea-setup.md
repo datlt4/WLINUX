@@ -333,13 +333,13 @@ services:
   restore:
     image: alpine
     environment:
-      - SOURCE=dbdata
+      - TARGET=${TARGET}
     volumes:
       - data-volume:/data
       - mysql-volume:/mysql-data
       # - postgres-volume:/postgres-data
       - ./backup:/backup
-    command: sh -c "rm -rf /data/* /data/..?* /data/.[!.]* /mysql-data/* /mysql-data/..?* /mysql-data/.[!.]*; tar -xzf /backup/gitea_data_$${SOURCE}.tar.gz -C /data; tar -xzf /backup/gitea_db_$${SOURCE}.tar.gz -C /mysql-data;"
+    command: sh -c "rm -rf /data/* /data/..?* /data/.[!.]* /mysql-data/* /mysql-data/..?* /mysql-data/.[!.]*; tar -xzf /backup/gitea_data_$${TARGET}.tar.gz -C /data; tar -xzf /backup/gitea_db_$${TARGET}.tar.gz -C /mysql-data;"
 ```
 </details>
 
