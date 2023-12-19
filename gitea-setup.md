@@ -486,180 +486,180 @@ JWT_SECRET = *******************************************
 ### Control
 
 - Use `gitea_tools.sh` to start, stop gitea server and also backup and restore gitea data.
-
-<details>
-  <summary>gitea_tools.sh</summary>
-
-```bash
-# !/usr/bin/env bash
-
-# XTERM Color
-case "$TERM" in
-xterm-color | *-256color) color_prompt=yes ;;
-esac
-
-# define function
-print_with_color() {
-    local str="$1"
-    local color="$2"
-    if [ "$color_prompt" = yes ]; then
-        printf "${color}${str}\033[0m"
-    else
-        printf "${str}"
-    fi
-}
-
-exit_with_error_code() {
-    local error_code=$1
-    local message="$2"
-    if [ ${error_code} -gt 0 ]; then
-        print_with_color "$message" "\033[1m\033[31m"
-        exit ${error_code}
-    fi
-}
-
-# Define variable
-flag_BACKUP=0
-flag_find_BACKUP=0
-target_BACKUP="$(date +%Y%m%d_%H%M%S)"
-
-flag_RESTORE=0
-flag_find_RESTORE=0
-target_RESTORE=""
-
-flag_START_GITEA=1
-flag_STOP_GITEA=0
-
-docker_compose_yml="docker-compose.yml"
-backup_dir="backup/"
-
-DEBUG=0
-
-# Parse input arguments
-while [[ "$#" -gt 0 ]]; do
-    case $1 in
-        -b | --backup | "-b " | "--backup ")
-            flag_BACKUP=1
-            flag_find_BACKUP=1
-            flag_find_RESTORE=0
-            flag_START_GITEA=0
-            ;;
-        -r | --restore | "-r " | "--restore ")
-            flag_RESTORE=1
-            flag_find_BACKUP=0
-            flag_find_RESTORE=1
-            flag_START_GITEA=0
-            ;;
-        -f | --file | "-f " | "--file ")
-            docker_compose_yml="$2"
-            flag_find_BACKUP=0
-            flag_find_RESTORE=0
-            shift
-            ;;
-        -s | --stop | "-s " | "--stop ")
-            flag_find_BACKUP=0
-            flag_find_RESTORE=0
-            flag_START_GITEA=0
-            flag_STOP_GITEA=1
-            ;;
-        -h | --help | "-h " | "--help ")
-            flag_find_BACKUP=0
-            flag_find_RESTORE=0
-            print_with_color "[ START GITEA ]" "\033[43m"; print_with_color " bash ./gitea_tools.sh [-f/--file [Compose_config]]\n" "\033[93m\033[4m"
-            print_with_color "  | Launch gitea server and database\n" "\033[1m\033[33m"
-            print_with_color "  | <Compose_config>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : Compose configuration files. Default \`docker-compose.yml\`.\n" "\033[33m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh\n" "\033[1m\033[35m\033[2m\033[3m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -f docker-compose-gitea.yml\n" "\033[1m\033[35m\033[2m\033[3m"
-            print_with_color "[ STOP GITEA ]" "\033[43m"; print_with_color " bash ./gitea_tools.sh [-f/--file [Compose_config]] -s\n" "\033[93m\033[4m"
-            print_with_color "  | Stop gitea server and database\n" "\033[1m\033[33m"
-            print_with_color "  | <Compose_config>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : Compose configuration files. Default \`docker-compose.yml\`.\n" "\033[33m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -s\n" "\033[1m\033[35m\033[2m\033[3m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -f docker-compose-gitea.yml -s\n" "\033[1m\033[35m\033[2m\033[3m"
-            print_with_color "[ BACKUP DB ]" "\033[43m"; print_with_color " bash ./gitea_tools.sh [-b/--backup [<BACKUP_ID>]\n" "\033[93m\033[4m"
-            print_with_color "  | Compress database and gitea config to tar.gz file\n" "\033[1m\033[33m"
-            print_with_color "  | <Compose_config>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : Compose configuration files. Default \`docker-compose.yml\`.\n" "\033[33m"
-            print_with_color "  | <BACKUP_ID>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : Build ID specificed by user. Default is current datetime.\n" "\033[33m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -b\n" "\033[1m\033[35m\033[2m\033[3m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -b latest\n" "\033[1m\033[35m\033[2m\033[3m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -b \$(date)\n" "\033[1m\033[35m\033[2m\033[3m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -b \$(date) -f docker-compose-gitea.yml\n" "\033[1m\033[35m\033[2m\033[3m"
-            print_with_color "[ RESTORE DB ]" "\033[43m"; print_with_color " bash ./gitea_tools.sh [-r/--restore [<BACKUP_ID>]\n" "\033[93m\033[4m"
-            print_with_color "  | Compress database and gitea config to tar.gz file\n" "\033[1m\033[33m"
-            print_with_color "  | <Compose_config>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : Compose configuration files. Default \`docker-compose.yml\`.\n" "\033[33m"
-            print_with_color "  | <BACKUP_ID>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : backup ID specificed by user. Default is latest backup file saved on backup/ directory.\n" "\033[33m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -r\n" "\033[1m\033[35m\033[2m\033[3m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -r latest\n" "\033[1m\033[35m\033[2m\033[3m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -r -f docker-compose-gitea.yml\n" "\033[1m\033[35m\033[2m\033[3m"
-            print_with_color "[ HELP ] " "\033[43m"; print_with_color "bash ./run.sh [-h/--help]\n" "\033[93m\033[4m"
-            print_with_color "  | User Manual\n" "\033[1m\033[33m"
-            print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : bash ./run.sh --help\n" "\033[1m\033[35m\033[2m\033[3m"
-            exit 0
-            ;;
-        *)
-
-        if [ ${flag_find_BACKUP} -gt 0 ]; then
-            target_BACKUP=$1
-            flag_find_BACKUP=0
-        elif [ ${flag_find_RESTORE} -gt 0 ]; then
-            target_RESTORE=$1
-            flag_find_RESTORE=0
-        else
-            echo "Unknown parameter passed: ?$1?"
-            exit 1
-        fi
-        ;;
-    esac
-    shift
-done
-
-# Check docker-compose
-eval "which docker-compose"
-exit_with_error_code "$?" "docker-compose is not installed properly"
-
-# Check docker_compose.yml file
-if ! [ -f ${docker_compose_yml} ]; then
-    exit_with_error_code 1 "Not found \`${docker_compose_yml}\`"
-fi
-
-# Check backup directory
-if [ ${flag_RESTORE} -gt 0 ]; then
-    if [ -d ${backup_dir} ]; then
-        if [ -z "${target_RESTORE}" ]; then
-            target_RESTORE=$(ls -t1 ${backup_dir} | head -n 1 | awk -F '.' '{ print $1 }' | awk -F '_' '{ print $3 "_" $4  }')
-            if [ -z "${target_RESTORE}" ]; then
-                exit_with_error_code 1 "Cannot find valid backup_id in \`${backup_dir}\` automatically"
-            fi
-        fi
-    else
-        exit_with_error_code 1 "Not found \`${backup_dir}\`"
-    fi
-fi
-
-# Stop server
-if [ ${flag_STOP_GITEA} -gt 0 ] || [ ${flag_BACKUP} -gt 0 ] || [ ${flag_RESTORE} -gt 0 ]; then
-    print_with_color "$ docker-compose -f ${docker_compose_yml} stop\n" "\033[36m"
-    eval "docker-compose -f ${docker_compose_yml} stop"
-    if [ ${flag_STOP_GITEA} -gt 0 ]; then
-        exit 0
-    fi
-fi
-
-# Backup/Restore server
-if [ ${flag_BACKUP} -gt 0 ]; then
-    print_with_color "$ TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup\n" "\033[36m"
-    eval "TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup"
-elif [ ${flag_RESTORE} -gt 0 ]; then
-    print_with_color "$ TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore\n" "\033[36m"
-    eval "TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore"
-fi
-
-# Start server
-if [ ${flag_START_GITEA} -gt 0 ] || [ ${flag_BACKUP} -gt 0 ] || [ ${flag_RESTORE} -gt 0 ]; then
-    print_with_color "$ docker-compose -f ${docker_compose_yml} up -d server db\n" "\033[36m"
-    eval "docker-compose -f ${docker_compose_yml} up -d server db"
-fi
-```
-
-</details>
+  
+  <details>
+    <summary>gitea_tools.sh</summary>
+  
+  ```bash
+  # !/usr/bin/env bash
+  
+  # XTERM Color
+  case "$TERM" in
+  xterm-color | *-256color) color_prompt=yes ;;
+  esac
+  
+  # define function
+  print_with_color() {
+      local str="$1"
+      local color="$2"
+      if [ "$color_prompt" = yes ]; then
+          printf "${color}${str}\033[0m"
+      else
+          printf "${str}"
+      fi
+  }
+  
+  exit_with_error_code() {
+      local error_code=$1
+      local message="$2"
+      if [ ${error_code} -gt 0 ]; then
+          print_with_color "$message" "\033[1m\033[31m"
+          exit ${error_code}
+      fi
+  }
+  
+  # Define variable
+  flag_BACKUP=0
+  flag_find_BACKUP=0
+  target_BACKUP="$(date +%Y%m%d_%H%M%S)"
+  
+  flag_RESTORE=0
+  flag_find_RESTORE=0
+  target_RESTORE=""
+  
+  flag_START_GITEA=1
+  flag_STOP_GITEA=0
+  
+  docker_compose_yml="docker-compose.yml"
+  backup_dir="backup/"
+  
+  DEBUG=0
+  
+  # Parse input arguments
+  while [[ "$#" -gt 0 ]]; do
+      case $1 in
+          -b | --backup | "-b " | "--backup ")
+              flag_BACKUP=1
+              flag_find_BACKUP=1
+              flag_find_RESTORE=0
+              flag_START_GITEA=0
+              ;;
+          -r | --restore | "-r " | "--restore ")
+              flag_RESTORE=1
+              flag_find_BACKUP=0
+              flag_find_RESTORE=1
+              flag_START_GITEA=0
+              ;;
+          -f | --file | "-f " | "--file ")
+              docker_compose_yml="$2"
+              flag_find_BACKUP=0
+              flag_find_RESTORE=0
+              shift
+              ;;
+          -s | --stop | "-s " | "--stop ")
+              flag_find_BACKUP=0
+              flag_find_RESTORE=0
+              flag_START_GITEA=0
+              flag_STOP_GITEA=1
+              ;;
+          -h | --help | "-h " | "--help ")
+              flag_find_BACKUP=0
+              flag_find_RESTORE=0
+              print_with_color "[ START GITEA ]" "\033[43m"; print_with_color " bash ./gitea_tools.sh [-f/--file [Compose_config]]\n" "\033[93m\033[4m"
+              print_with_color "  | Launch gitea server and database\n" "\033[1m\033[33m"
+              print_with_color "  | <Compose_config>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : Compose configuration files. Default \`docker-compose.yml\`.\n" "\033[33m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -f docker-compose-gitea.yml\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "[ STOP GITEA ]" "\033[43m"; print_with_color " bash ./gitea_tools.sh [-f/--file [Compose_config]] -s\n" "\033[93m\033[4m"
+              print_with_color "  | Stop gitea server and database\n" "\033[1m\033[33m"
+              print_with_color "  | <Compose_config>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : Compose configuration files. Default \`docker-compose.yml\`.\n" "\033[33m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -s\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -f docker-compose-gitea.yml -s\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "[ BACKUP DB ]" "\033[43m"; print_with_color " bash ./gitea_tools.sh [-b/--backup [<BACKUP_ID>]\n" "\033[93m\033[4m"
+              print_with_color "  | Compress database and gitea config to tar.gz file\n" "\033[1m\033[33m"
+              print_with_color "  | <Compose_config>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : Compose configuration files. Default \`docker-compose.yml\`.\n" "\033[33m"
+              print_with_color "  | <BACKUP_ID>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : Build ID specificed by user. Default is current datetime.\n" "\033[33m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -b\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -b latest\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -b \$(date)\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -b \$(date) -f docker-compose-gitea.yml\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "[ RESTORE DB ]" "\033[43m"; print_with_color " bash ./gitea_tools.sh [-r/--restore [<BACKUP_ID>]\n" "\033[93m\033[4m"
+              print_with_color "  | Compress database and gitea config to tar.gz file\n" "\033[1m\033[33m"
+              print_with_color "  | <Compose_config>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : Compose configuration files. Default \`docker-compose.yml\`.\n" "\033[33m"
+              print_with_color "  | <BACKUP_ID>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : backup ID specificed by user. Default is latest backup file saved on backup/ directory.\n" "\033[33m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -r\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -r latest\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -r -f docker-compose-gitea.yml\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "[ HELP ] " "\033[43m"; print_with_color "bash ./run.sh [-h/--help]\n" "\033[93m\033[4m"
+              print_with_color "  | User Manual\n" "\033[1m\033[33m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : bash ./run.sh --help\n" "\033[1m\033[35m\033[2m\033[3m"
+              exit 0
+              ;;
+          *)
+  
+          if [ ${flag_find_BACKUP} -gt 0 ]; then
+              target_BACKUP=$1
+              flag_find_BACKUP=0
+          elif [ ${flag_find_RESTORE} -gt 0 ]; then
+              target_RESTORE=$1
+              flag_find_RESTORE=0
+          else
+              echo "Unknown parameter passed: ?$1?"
+              exit 1
+          fi
+          ;;
+      esac
+      shift
+  done
+  
+  # Check docker-compose
+  eval "which docker-compose"
+  exit_with_error_code "$?" "docker-compose is not installed properly"
+  
+  # Check docker_compose.yml file
+  if ! [ -f ${docker_compose_yml} ]; then
+      exit_with_error_code 1 "Not found \`${docker_compose_yml}\`"
+  fi
+  
+  # Check backup directory
+  if [ ${flag_RESTORE} -gt 0 ]; then
+      if [ -d ${backup_dir} ]; then
+          if [ -z "${target_RESTORE}" ]; then
+              target_RESTORE=$(ls -t1 ${backup_dir} | head -n 1 | awk -F '.' '{ print $1 }' | awk -F '_' '{ print $3 "_" $4  }')
+              if [ -z "${target_RESTORE}" ]; then
+                  exit_with_error_code 1 "Cannot find valid backup_id in \`${backup_dir}\` automatically"
+              fi
+          fi
+      else
+          exit_with_error_code 1 "Not found \`${backup_dir}\`"
+      fi
+  fi
+  
+  # Stop server
+  if [ ${flag_STOP_GITEA} -gt 0 ] || [ ${flag_BACKUP} -gt 0 ] || [ ${flag_RESTORE} -gt 0 ]; then
+      print_with_color "$ docker-compose -f ${docker_compose_yml} stop\n" "\033[36m"
+      eval "docker-compose -f ${docker_compose_yml} stop"
+      if [ ${flag_STOP_GITEA} -gt 0 ]; then
+          exit 0
+      fi
+  fi
+  
+  # Backup/Restore server
+  if [ ${flag_BACKUP} -gt 0 ]; then
+      print_with_color "$ TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup\n" "\033[36m"
+      eval "TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup"
+  elif [ ${flag_RESTORE} -gt 0 ]; then
+      print_with_color "$ TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore\n" "\033[36m"
+      eval "TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore"
+  fi
+  
+  # Start server
+  if [ ${flag_START_GITEA} -gt 0 ] || [ ${flag_BACKUP} -gt 0 ] || [ ${flag_RESTORE} -gt 0 ]; then
+      print_with_color "$ docker-compose -f ${docker_compose_yml} up -d server db\n" "\033[36m"
+      eval "docker-compose -f ${docker_compose_yml} up -d server db"
+  fi
+  ```
+  
+  </details>
 
 - Run `bash ./gitea_tools.sh --help` to get help and example. 
