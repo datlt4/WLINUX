@@ -876,6 +876,117 @@ It's a common pattern used to clear the contents of a vector while efficiently m
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Can we add new element or modify `std::array` and `std::tuple`**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+- **std::array**: You can modify the elements within a `std::array`, but you cannot change its size once it's created. Elements can be replaced, accessed, or modified using their indices or iterators.
+
+    Example of modifying elements:
+    ```cpp
+    std::array<int, 5> arr = {1, 2, 3, 4, 5};
+
+    // Modify element at index 2
+    arr[2] = 10;
+
+    // Replace the entire array
+    std::array<int, 5> newArr = {6, 7, 8, 9, 10};
+    arr = newArr;
+    ```
+
+- **std::tuple**: Elements within a `std::tuple` are fixed at their positions and cannot be modified directly once the tuple is created. However, you can create a new tuple with modified or additional elements.
+
+    Example:
+    ```cpp
+    std::tuple<int, double, std::string> tpl(10, 3.14, "hello");
+
+    // Create a new tuple with modified element
+    auto newTuple = std::make_tuple(std::get<0>(tpl), 6.28, std::get<2>(tpl));
+
+    // Combine tuples or add elements to a new tuple
+    auto combinedTuple = std::tuple_cat(tpl, std::make_tuple(42));
+    ```
+
+For `std::tuple`, you're unable to directly modify an element in place; instead, you create a new tuple by copying elements and modifying those copies. `std::array`, while allowing element modification, does not support dynamic resizing. Both data structures have different behaviors regarding modifications based on their design and intended use cases.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Compare std::array vs std::tuple in C++**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+`std::array` and `std::tuple` are two different data structures in C++ with distinct characteristics, purposes, and usage scenarios:
+
+### std::array:
+
+- Represents a fixed-size array container.
+- Elements in `std::array` are stored contiguously in memory.
+- Provides compile-time array bounds checking.
+- Supports random access using `[]` operator and iterators.
+- Requires a specified size at compile time.
+
+Example:
+```cpp
+#include <array>
+#include <iostream>
+
+int main() {
+    std::array<int, 5> arr = {1, 2, 3, 4, 5};
+    
+    // Access elements
+    std::cout << "Element at index 2: " << arr[2] << std::endl;
+
+    // Size
+    std::cout << "Size of array: " << arr.size() << std::endl;
+
+    return 0;
+}
+```
+
+### std::tuple:
+
+- Represents a fixed-size collection of heterogeneous elements.
+- Elements in `std::tuple` can have different data types.
+- Allows access to elements by index or through `std::get`.
+- Size is determined at compile time.
+- Useful for returning multiple values from functions or storing heterogeneous data.
+
+Example:
+```cpp
+#include <tuple>
+#include <iostream>
+
+int main() {
+    std::tuple<int, double, std::string> tpl(10, 3.14, "hello");
+
+    // Access elements
+    std::cout << "Element at index 1: " << std::get<1>(tpl) << std::endl;
+
+    return 0;
+}
+```
+
+### Comparison:
+
+- **Usage**: Use `std::array` when you need a fixed-size array with elements of the same type. Use `std::tuple` when you require a collection of heterogeneous elements.
+- **Size and Type**: `std::array` requires elements of the same type and a fixed size specified at compile time. `std::tuple` can hold elements of different types and sizes.
+- **Access**: `std::array` supports random access using indices or iterators. `std::tuple` accesses elements through `std::get` or `std::tie`.
+- **Purpose**: `std::array` is suitable for scenarios where you need a container with a fixed size and homogeneous elements. `std::tuple` is useful for combining different types into a single data structure, especially when returning multiple values from a function or working with heterogeneous collections.
+
+Choose between `std::array` and `std::tuple` based on your specific requirements regarding uniformity of elements, access patterns, and the need for heterogeneity in the data structure.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **List all type of container in C++ and explain in each aspect: Size, Memory, Access Time, Resizing, Usage**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
