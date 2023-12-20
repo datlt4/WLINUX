@@ -916,7 +916,7 @@ For `std::tuple`, you're unable to directly modify an element in place; instead,
 
 ---
 
-## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Compare std::array vs std::tuple in C++**
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Compare `std::array` vs `std::tuple` in C++**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
 
