@@ -12,6 +12,112 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain `fuse.h` in c, and give intuitive example**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+The `fuse.h` header file is part of the FUSE (Filesystem in Userspace) library, a mechanism that allows non-privileged users to create custom file systems without modifying kernel code. It provides an API that enables developers to create their own file systems as user-space programs.
+
+Here's a brief explanation of `fuse.h` and an intuitive example:
+
+### Explanation:
+
+- **FUSE (Filesystem in Userspace)**: FUSE allows developers to create file systems in user space by providing an interface between the kernel's VFS (Virtual File System) layer and the user-space program.
+
+- **fuse.h**: This header file contains the necessary declarations and structures required for interacting with the FUSE library. It includes various functions, constants, and structures that developers use to implement their custom file systems.
+
+### Example:
+
+Here's a simple intuitive example demonstrating the use of FUSE to create a basic filesystem:
+
+1. **Installation**: Ensure FUSE is installed on your system. Installation steps might vary based on the operating system.
+
+2. **Example Code**: Here's a minimal example demonstrating a FUSE-based filesystem that presents a simple directory with a single file:
+
+```c
+#define FUSE_USE_VERSION 31
+#include <fuse.h>
+#include <stdio.h>
+
+static int getattr_callback(const char *path, struct stat *stbuf) {
+    // Dummy implementation for file attributes
+    if (strcmp(path, "/") == 0) {
+        stbuf->st_mode = S_IFDIR | 0755;
+        stbuf->st_nlink = 2;
+        return 0;
+    }
+    if (strcmp(path, "/file.txt") == 0) {
+        stbuf->st_mode = S_IFREG | 0644;
+        stbuf->st_nlink = 1;
+        stbuf->st_size = 13;
+        return 0;
+    }
+    return -ENOENT;
+}
+
+static int readdir_callback(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi) {
+    // Dummy implementation for directory contents
+    if (strcmp(path, "/") != 0)
+        return -ENOENT;
+    filler(buf, ".", NULL, 0, 0);
+    filler(buf, "..", NULL, 0, 0);
+    filler(buf, "file.txt", NULL, 0, 0);
+    return 0;
+}
+
+static int open_callback(const char *path, struct fuse_file_info *fi) {
+    // Dummy implementation for opening a file
+    if (strcmp(path, "/file.txt") != 0)
+        return -ENOENT;
+    return 0;
+}
+
+static int read_callback(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
+    // Dummy implementation for reading file contents
+    if (strcmp(path, "/file.txt") != 0)
+        return -ENOENT;
+    const char *content = "Hello, FUSE!\n";
+    size_t len = strlen(content);
+    if (offset < len) {
+        if (offset + size > len)
+            size = len - offset;
+        memcpy(buf, content + offset, size);
+    } else {
+        size = 0;
+    }
+    return size;
+}
+
+static struct fuse_operations fuse_operations = {
+    .getattr = getattr_callback,
+    .readdir = readdir_callback,
+    .open = open_callback,
+    .read = read_callback,
+};
+
+int main(int argc, char *argv[]) {
+    return fuse_main(argc, argv, &fuse_operations, NULL);
+}
+```
+
+This example implements a minimal filesystem with a single file (`file.txt`) inside a directory. The callbacks (`getattr_callback`, `readdir_callback`, `open_callback`, `read_callback`) handle file system operations like getting attributes, reading directories, opening files, and reading file contents.
+
+### Running the Example:
+
+- Compile the code with the FUSE library (e.g., using `gcc -o myfs myfs.c -lfuse -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=31`).
+- Create a mount point (e.g., `mkdir /tmp/myfuse`).
+- Run the compiled binary with the mount point as an argument (e.g., `./myfs /tmp/myfuse`).
+- Navigate to the mount point (`cd /tmp/myfuse`) and interact with the filesystem (`ls`, `cat file.txt`, etc.).
+
+Please note that this example is simplistic and doesn't cover all aspects of building a full-fledged file system using FUSE. It's meant to demonstrate the basic structure and functionality of FUSE-based filesystems.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **list all and explain each type `printf` function in `stdio.h` library**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
