@@ -703,8 +703,8 @@ JWT_SECRET = *******************************************
   if [ ${flag_BACKUP} -gt 0 ]; then
       print_with_color "$ TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup\n" "\033[36m"
       eval "TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup"
-      print_with_color "$ ls -1t backup/ | tail -n+$((N_BACKUP_KEEP+1)) | xargs -I {} rm backup/{}\n" "\033[36m"
-      eval"ls -1t backup/ | tail -n+$((N_BACKUP_KEEP+1)) | xargs -I {} rm backup/{}"
+      print_with_color "$ ls -1t backup/ | tail -n+$((2 * N_BACKUP_KEEP + 1)) | xargs -I {} rm backup/{}\n" "\033[36m"
+      eval"ls -1t backup/ | tail -n+$((2 * N_BACKUP_KEEP + 1)) | xargs -I {} rm backup/{}"
   elif [ ${flag_RESTORE} -gt 0 ]; then
       print_with_color "$ TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore\n" "\033[36m"
       eval "TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore"
