@@ -706,8 +706,25 @@ JWT_SECRET = *******************************************
       print_with_color "$ ls -1t backup/ | tail -n+$((2 * N_BACKUP_KEEP + 1)) | xargs -I {} rm backup/{}\n" "\033[36m"
       eval"ls -1t backup/ | tail -n+$((2 * N_BACKUP_KEEP + 1)) | xargs -I {} rm backup/{}"
   elif [ ${flag_RESTORE} -gt 0 ]; then
-      print_with_color "$ TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore\n" "\033[36m"
-      eval "TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore"
+      while true; do
+          if [ "$color_prompt" = yes ]; then
+              read -p "\033[1m\033[31mRestore will delete all current data. Are you sure?\033[0m"$'\n\033[1m\033[31m      Proceed? (Yes/No) \033[0m' ans
+          else
+              read -p "Restore will delete all current data. Are you sure?"$'\n      Proceed? (Yes/No) ' ans
+          fi
+          case $ans in
+              [Yy]* )
+                  print_with_color "$ TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore\n" "\033[36m"
+                  eval "TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore"
+                  break
+                  ;;
+              [Nn]* )
+                  print_with_color "Aborted by user.\n" "\033[31m"
+                  break
+                  ;;
+              * ) print_with_color "  Please type \"Yes\" or \"No\".\n" "\033[31m";;
+          esac
+      done
   fi
 
   # Start server
