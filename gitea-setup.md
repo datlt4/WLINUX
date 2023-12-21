@@ -529,6 +529,8 @@ JWT_SECRET = *******************************************
   flag_START_GITEA=1
   flag_STOP_GITEA=0
 
+  flag_DELETE_RESOURCE=0
+
   docker_compose_yml="docker-compose.yml"
   backup_dir="backup/"
 
@@ -562,6 +564,13 @@ JWT_SECRET = *******************************************
               flag_START_GITEA=0
               flag_STOP_GITEA=1
               ;;
+          --down | "--down")
+              flag_DELETE_RESOURCE=1;
+              flag_find_BACKUP=0
+              flag_find_RESTORE=0
+              flag_START_GITEA=0
+              flag_STOP_GITEA=0
+              ;;
           -h | --help | "-h " | "--help ")
               flag_find_BACKUP=0
               flag_find_RESTORE=0
@@ -584,12 +593,15 @@ JWT_SECRET = *******************************************
               print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -b \$(date)\n" "\033[1m\033[35m\033[2m\033[3m"
               print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -b \$(date) -f docker-compose-gitea.yml\n" "\033[1m\033[35m\033[2m\033[3m"
               print_with_color "[ RESTORE DB ]" "\033[43m"; print_with_color " bash ./gitea_tools.sh [-r/--restore [<BACKUP_ID>]\n" "\033[93m\033[4m"
-              print_with_color "  | Compress database and gitea config to tar.gz file\n" "\033[1m\033[33m"
+              print_with_color "  | Extract tar.gz file and copy database and gitea config to docker-volume\n" "\033[1m\033[33m"
               print_with_color "  | <Compose_config>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : Compose configuration files. Default \`docker-compose.yml\`.\n" "\033[33m"
               print_with_color "  | <BACKUP_ID>" "\033[1m\033[33m"; print_with_color "(optional)" "\033[1m\033[33m\033[3m"; print_with_color " : backup ID specificed by user. Default is latest backup file saved on backup/ directory.\n" "\033[33m"
               print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -r\n" "\033[1m\033[35m\033[2m\033[3m"
               print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -r latest\n" "\033[1m\033[35m\033[2m\033[3m"
               print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh -r -f docker-compose-gitea.yml\n" "\033[1m\033[35m\033[2m\033[3m"
+              print_with_color "[ DELETE RESOURCES ]" "\033[43m"; print_with_color " bash ./gitea_tools.sh [--down]\n" "\033[93m\033[4m"
+              print_with_color "  | Stop and remove resources\n" "\033[1m\033[33m"
+              print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : " "\033[1m\033[35m\033[2m"; print_with_color "bash ./gitea_tools.sh --down\n" "\033[1m\033[35m\033[2m\033[3m"
               print_with_color "[ HELP ] " "\033[43m"; print_with_color "bash ./run.sh [-h/--help]\n" "\033[93m\033[4m"
               print_with_color "  | User Manual\n" "\033[1m\033[33m"
               print_with_color "  | -- " "\033[1m\033[35m"; print_with_color "Example : bash ./run.sh --help\n" "\033[1m\033[35m\033[2m\033[3m"
@@ -615,6 +627,8 @@ JWT_SECRET = *******************************************
   # Check docker-compose
   eval "which docker-compose"
   exit_with_error_code "$?" "docker-compose is not installed properly"
+  eval "which docker"
+  exit_with_error_code "$?" "docker is not installed properly"
 
   # Check docker_compose.yml file
   if ! [ -f ${docker_compose_yml} ]; then
@@ -635,6 +649,35 @@ JWT_SECRET = *******************************************
       fi
   fi
 
+  # Delete confirmation
+  if [ ${flag_DELETE_RESOURCE} -gt 0 ]; then
+      while true; do
+          if [ "$color_prompt" = yes ]; then
+              read -p "\033[1m\033[31mAre you sure you want to stop and remove all resource?\033[0m"$'\n\033[1m\033[31m      Proceed? (Yes/No) \033[0m' ans
+          else
+              read -p "Are you sure you want to stop and remove all resource?"$'\n      Proceed? (Yes/No) ' ans
+          fi
+          case $ans in
+              [Yy]* ) break;;
+              [Nn]* ) print_with_color "Aborted by user.\n" "\033[31m"; exit 0;;
+              * ) print_with_color "  Please type \"Yes\" or \"No\".\n" "\033[31m";;
+          esac
+      done
+  fi
+
+  # Delete resource
+  if [ ${flag_DELETE_RESOURCE} -gt 0 ]; then
+      print_with_color "$ docker-compose -f ${docker_compose_yml} down\n" "\033[36m"
+      eval "docker-compose -f ${docker_compose_yml} down"
+      print_with_color "$ docker volume rm gitea_data-volume\n" "\033[36m"
+      eval "docker volume rm gitea_data-volume"
+      print_with_color "$ docker volume rm gitea_mysql-volume\n" "\033[36m"
+      eval "docker volume rm gitea_mysql-volume"
+      print_with_color "$ docker volume rm gitea_postgres-volume\n" "\033[36m"
+      eval "docker volume rm gitea_postgres-volume"
+      exit 0
+  fi
+
   # Stop server
   if [ ${flag_STOP_GITEA} -gt 0 ] || [ ${flag_BACKUP} -gt 0 ] || [ ${flag_RESTORE} -gt 0 ]; then
       print_with_color "$ docker-compose -f ${docker_compose_yml} stop\n" "\033[36m"
@@ -649,7 +692,7 @@ JWT_SECRET = *******************************************
       print_with_color "$ TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup\n" "\033[36m"
       eval "TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup"
       print_with_color "$ ls -1t backup/ | tail -n+$((N_BACKUP_KEEP+1)) | xargs -I {} rm backup/{}\n" "\033[36m"
-      ls -1t backup/ | tail -n+$((N_BACKUP_KEEP+1)) | xargs -I {} rm backup/{}
+      eval"ls -1t backup/ | tail -n+$((N_BACKUP_KEEP+1)) | xargs -I {} rm backup/{}"
   elif [ ${flag_RESTORE} -gt 0 ]; then
       print_with_color "$ TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore\n" "\033[36m"
       eval "TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore"
@@ -660,6 +703,7 @@ JWT_SECRET = *******************************************
       print_with_color "$ docker-compose -f ${docker_compose_yml} up -d server db\n" "\033[36m"
       eval "docker-compose -f ${docker_compose_yml} up -d server db"
   fi
+  
   ```
 
   </details>
