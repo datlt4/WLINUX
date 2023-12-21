@@ -492,12 +492,11 @@ JWT_SECRET = *******************************************
   
   ```bash
   # !/usr/bin/env bash
-  
+
   # XTERM Color
-  case "$TERM" in
-  xterm-color | *-256color) color_prompt=yes ;;
+  case "$TERM" in xterm-color | *-256color) color_prompt=yes ;;
   esac
-  
+
   # define function
   print_with_color() {
       local str="$1"
@@ -508,7 +507,7 @@ JWT_SECRET = *******************************************
           printf "${str}"
       fi
   }
-  
+
   exit_with_error_code() {
       local error_code=$1
       local message="$2"
@@ -517,24 +516,25 @@ JWT_SECRET = *******************************************
           exit ${error_code}
       fi
   }
-  
+
   # Define variable
   flag_BACKUP=0
   flag_find_BACKUP=0
   target_BACKUP="$(date +%Y%m%d_%H%M%S)"
-  
+
   flag_RESTORE=0
   flag_find_RESTORE=0
   target_RESTORE=""
-  
+
   flag_START_GITEA=1
   flag_STOP_GITEA=0
-  
+
   docker_compose_yml="docker-compose.yml"
   backup_dir="backup/"
-  
+
   DEBUG=0
-  
+  N_BACKUP_KEEP=10
+
   # Parse input arguments
   while [[ "$#" -gt 0 ]]; do
       case $1 in
@@ -596,7 +596,7 @@ JWT_SECRET = *******************************************
               exit 0
               ;;
           *)
-  
+
           if [ ${flag_find_BACKUP} -gt 0 ]; then
               target_BACKUP=$1
               flag_find_BACKUP=0
@@ -611,16 +611,16 @@ JWT_SECRET = *******************************************
       esac
       shift
   done
-  
+
   # Check docker-compose
   eval "which docker-compose"
   exit_with_error_code "$?" "docker-compose is not installed properly"
-  
+
   # Check docker_compose.yml file
   if ! [ -f ${docker_compose_yml} ]; then
       exit_with_error_code 1 "Not found \`${docker_compose_yml}\`"
   fi
-  
+
   # Check backup directory
   if [ ${flag_RESTORE} -gt 0 ]; then
       if [ -d ${backup_dir} ]; then
@@ -634,7 +634,7 @@ JWT_SECRET = *******************************************
           exit_with_error_code 1 "Not found \`${backup_dir}\`"
       fi
   fi
-  
+
   # Stop server
   if [ ${flag_STOP_GITEA} -gt 0 ] || [ ${flag_BACKUP} -gt 0 ] || [ ${flag_RESTORE} -gt 0 ]; then
       print_with_color "$ docker-compose -f ${docker_compose_yml} stop\n" "\033[36m"
@@ -643,23 +643,25 @@ JWT_SECRET = *******************************************
           exit 0
       fi
   fi
-  
+
   # Backup/Restore server
   if [ ${flag_BACKUP} -gt 0 ]; then
       print_with_color "$ TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup\n" "\033[36m"
       eval "TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup"
+      print_with_color "$ ls -1t backup/ | tail -n+$((N_BACKUP_KEEP+1)) | xargs -I {} rm backup/{}\n" "\033[36m"
+      ls -1t backup/ | tail -n+$((N_BACKUP_KEEP+1)) | xargs -I {} rm backup/{}
   elif [ ${flag_RESTORE} -gt 0 ]; then
       print_with_color "$ TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore\n" "\033[36m"
       eval "TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore"
   fi
-  
+
   # Start server
   if [ ${flag_START_GITEA} -gt 0 ] || [ ${flag_BACKUP} -gt 0 ] || [ ${flag_RESTORE} -gt 0 ]; then
       print_with_color "$ docker-compose -f ${docker_compose_yml} up -d server db\n" "\033[36m"
       eval "docker-compose -f ${docker_compose_yml} up -d server db"
   fi
   ```
-  
+
   </details>
 
 - Run `bash ./gitea_tools.sh --help` to get help and example. 
