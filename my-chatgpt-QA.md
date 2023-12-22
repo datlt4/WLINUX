@@ -12,6 +12,23 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what is the difference between `char (*Str)[256]` and `char *Str[256]`**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+The difference between `char (*Str)[256]` and `char *Str[256]` lies in how they define arrays of strings.
+
+- `char (*Str1)[256]`: This declares a pointer `Str1` to an array of characters with a fixed size of 256. This pointer can point to the beginning of an array of strings where each string has a maximum length of 255 characters (plus 1 for the null terminator). It typically used to represent a two-dimensional array (a contiguous block of strings) where each "row" is an array of characters (a string).
+
+- `char *Str2[256]`: This declares an array `Str2` of 256 pointers to characters. Each element of this array is a pointer that can point to a string of characters. This type of declaration is an array of pointers where each pointer can refer to a separate string. This structure is suitable for handling an array of separate strings (allows for separate strings to be stored in different memory locations).
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain `fuse.h` in c, and give intuitive example**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
