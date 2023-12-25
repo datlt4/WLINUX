@@ -517,6 +517,29 @@ JWT_SECRET = *******************************************
       fi
   }
 
+  write_target_to_env() {
+      target_value="$1"
+      env_file="$2"
+      if [ -z "${env_file}" ]; then
+          env_file=".env"
+      fi
+
+      # Check if .env file exists
+      if [ -f "$env_file" ]; then
+          # Check if TARGET line exists in .env file
+          if grep -q "^TARGET=.*" "$env_file"; then
+              # Replace existing TARGET line with TARGET=latest
+              sed -i "s/^TARGET=.*/TARGET=$target_value/" "$env_file"
+          else
+              # Insert TARGET=latest at the end of .env file
+              echo "TARGET=$target_value" >> "$env_file"
+          fi
+      else
+          # Create .env file and add TARGET=latest
+          echo "TARGET=$target_value" > "$env_file"
+      fi
+  }
+
   # Define variable
   flag_BACKUP=0
   flag_find_BACKUP=0
@@ -701,10 +724,11 @@ JWT_SECRET = *******************************************
 
   # Backup/Restore server
   if [ ${flag_BACKUP} -gt 0 ]; then
-      print_with_color "$ TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup\n" "\033[36m"
-      eval "TARGET=${target_BACKUP} && docker-compose -f ${docker_compose_yml} run --rm backup"
+      write_target_to_env ${target_BACKUP}
+      print_with_color "$ docker-compose -f ${docker_compose_yml} run --rm backup\n" "\033[36m"
+      eval "docker-compose -f ${docker_compose_yml} run --rm backup"
       print_with_color "$ ls -1t backup/ | tail -n+$((2 * N_BACKUP_KEEP + 1)) | xargs -I {} rm backup/{}\n" "\033[36m"
-      eval"ls -1t backup/ | tail -n+$((2 * N_BACKUP_KEEP + 1)) | xargs -I {} rm backup/{}"
+      eval "ls -1t backup/ | tail -n+$((2 * N_BACKUP_KEEP + 1)) | xargs -I {} rm backup/{}"
   elif [ ${flag_RESTORE} -gt 0 ]; then
       while true; do
           if [ "$color_prompt" = yes ]; then
@@ -714,8 +738,9 @@ JWT_SECRET = *******************************************
           fi
           case $ans in
               [Yy]* )
-                  print_with_color "$ TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore\n" "\033[36m"
-                  eval "TARGET=${target_RESTORE} && docker-compose -f ${docker_compose_yml} run --rm restore"
+                  write_target_to_env ${target_RESTORE}
+                  print_with_color "$ docker-compose -f ${docker_compose_yml} run --rm restore\n" "\033[36m"
+                  eval "docker-compose -f ${docker_compose_yml} run --rm restore"
                   break
                   ;;
               [Nn]* )
