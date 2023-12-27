@@ -82,7 +82,18 @@ With Docker Compose you can easily configure, install, and upgrade your Docker-b
 docker compose up -d
 ```
 
+4. You’ll need to access the automatically generated root password with the command:
+   
+```bash
+docker exec -it gitlab bash -c "cat /etc/gitlab/initial_root_password | grep 'Password: ' | awk -F' ' '{print \$2}'"
+```
 
+5. Login admin account with username `root` and the automatically generated password.
 
+6. Check sign-up restrictions
+
+Your GitLab instance allows anyone to register for an account, which is a security risk on public-facing GitLab instances. You should deactivate new sign ups if public users aren't expected to register for an account.
+
+- `Search or go to...` > Settings > General > Sign-up restrictions > Expand > Disable `Sign-up enabled` > Save changes.
 
 
