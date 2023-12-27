@@ -12,6 +12,67 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **How to Access Global Variable if there is a Local Variable with Same Name in C/ C++?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In C/C++, if there is a local variable with the same name as a global variable, you can still access the global variable by using the scope resolution operator `::` in C++ and the `extern` keyword in C. Here's how to access the global variable in both languages:
+
+### C++
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int globalVar = 10; // Global variable
+
+int main() {
+    int globalVar = 20; // Local variable with the same name
+
+    // Accessing the global variable using the scope resolution operator ::
+    cout << "Local variable: " << globalVar << endl; // Output: Local variable: 20
+    cout << "Global variable: " << ::globalVar << endl; // Accessing global variable using ::  Output: Global variable: 10
+
+    return 0;
+}
+```
+
+### C
+
+In C, you can use the `extern` keyword to access the global variable from within a function, even if there's a local variable with the same name:
+
+```c
+#include <stdio.h>
+
+int globalVar = 10; // Global variable
+
+int main() {
+    int globalVar = 20; // Local variable with the same name
+
+    printf("Local variable: %d\n", globalVar); // Output: Local variable: 20
+    {
+        // Accessing the global variable using the extern keyword
+        extern int globalVar;
+        printf("Global variable: %d\n", globalVar); // Accessing global variable using extern
+    }
+    printf("Local variable: %d\n", globalVar); // Output: Local variable: 20
+
+    // Accessing global variable explicitly using the global scope
+    printf("Global variable (explicit): %d\n", ::globalVar); // Output: Global variable: 10
+
+    return 0;
+}
+```
+
+In both C and C++, the `::` operator (in C++) or `extern` keyword (in C) allows you to refer to the global variable explicitly, bypassing the local variable with the same name. This is useful when you need to access the global variable in the presence of a local variable with a similar name.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what is the difference between `char (*Str)[256]` and `char *Str[256]`**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
