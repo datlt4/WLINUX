@@ -12,6 +12,39 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what is the difference between mutex and semaphore**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Mutexes and semaphores are both synchronization mechanisms used in concurrent programming to control access to shared resources among multiple threads or processes, but they differ in their usage and characteristics:
+
+### Mutex:
+
+- **Usage:** Mutexes are primarily used to provide mutual exclusion to shared resources, allowing only one thread to access the resource at a time.
+  
+- **State:** A mutex has two states: locked and unlocked. When a thread locks a mutex (acquires the lock), it gains exclusive access to the protected resource. Other threads attempting to lock the mutex while it's already locked will typically block or spin until the mutex becomes available.
+
+- **Ownership:** Mutexes are designed for exclusive ownership, meaning the thread that locks the mutex is the only one that can unlock it.
+
+- **Binary Semantics:** In many systems, mutexes have binary semantics, similar to binary semaphores, which means they can be used for signaling (with conditions), but they are primarily intended for mutual exclusion.
+
+### Semaphore:
+
+- **Usage:** Semaphores are more versatile than mutexes. They can be used to control access to a pool of resources or implement synchronization among multiple threads by allowing multiple threads to access the shared resource simultaneously (depending on the semaphore count).
+
+- **State:** A semaphore maintains a count (referred to as the semaphore value) that can be incremented or decremented. Threads can acquire (decrement) or release (increment) the semaphore. When the count reaches zero, subsequent acquire operations block until another thread releases the semaphore.
+
+- **Counting Semantics:** Semaphores have counting semantics, allowing them to have values greater than 1, enabling more complex synchronization scenarios like thread signaling, rate limiting, etc.
+
+In summary, mutexes are typically used for mutual exclusion, ensuring exclusive access to a resource by a single thread at a time, whereas semaphores provide more general-purpose synchronization and can allow multiple threads to access shared resources concurrently or control access to a pool of resources based on their count value.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **How to Access Global Variable if there is a Local Variable with Same Name in C/ C++?**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
