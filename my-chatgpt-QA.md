@@ -12,6 +12,97 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **I have a c++ project:**
+
+In `Event.h`
+```
+class Event{
+// Inner code
+};
+```
+
+In `Wait.h`
+```
+class Wait{
+// Inner code
+};
+```
+
+In `Manager.h`
+```
+class Event;
+class Wait;
+```
+**explain why I need to add class Event and class Wait in `Manager.h` file**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Forward declaration is a technique used in C++ to declare a class, function, or any other entity before it is defined. It allows the usage of an identifier (like a class name) in a context where the full definition is not yet available. This technique is especially useful in reducing compile-time dependencies and speeding up compilation.
+
+In your scenario:
+
+- `Event.h` contains the definition of the `Event` class.
+- `Wait.h` contains the definition of the `Wait` class.
+- `Manager.h` is another header file that needs to use `Event` and `Wait` classes.
+
+When you include `Manager.h` in other files, it's a good practice not to include unnecessary headers to reduce compilation dependencies. Instead of including `Event.h` and `Wait.h` directly in `Manager.h`, you can use forward declarations to inform the compiler about the existence of these classes without including their full definitions.
+
+So, in `Manager.h`, you have:
+
+```cpp
+// Forward declarations
+class Event;
+class Wait;
+
+// Rest of the Manager class or functions using Event and Wait
+```
+
+This informs the compiler that `Event` and `Wait` are class names, allowing you to use pointers or references to these classes in `Manager.h`. However, remember that with forward declarations alone, you cannot access members or the size of the classes. You can only use them as pointers or references, or declare functions that take them as arguments or return them by reference or pointer.
+
+This approach helps in reducing compile-time dependencies. It's especially beneficial when working with large projects, as it can speed up the compilation process by minimizing the number of header files that need to be processed in each translation unit.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what is `compile-time dependencies`**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Compile-time dependencies refer to the relationships between different components (such as classes, functions, headers, libraries) in a software project that are required during the compilation process. These dependencies determine the order in which source code files need to be compiled and linked together to create the final executable or library.
+
+### Types of Compile-Time Dependencies:
+
+1. **Header Dependencies:** These dependencies occur when a source file includes (via `#include` directive) header files from other components. If a header file is included in a source file, any changes made to that header can trigger recompilation of files that depend on it.
+
+2. **Dependency Graph:** It represents the relationships between various components in a project. For example, when a source file depends on other source files or libraries, the compiler needs to process them in the correct order to resolve references.
+
+### Impact of Compile-Time Dependencies:
+
+1. **Build Times:** Excessive dependencies can lead to longer build times because changes in one component might require recompilation of multiple other components due to cascading dependencies.
+
+2. **Maintenance Challenges:** High interdependencies can make the codebase harder to maintain, as changes in one part of the code might have unintended consequences on other parts.
+
+### Reducing Compile-Time Dependencies:
+
+1. **Forward Declarations:** Use forward declarations instead of including unnecessary headers. Forward declarations allow using pointers or references to classes without including their full definitions.
+
+2. **Minimize Header Inclusions:** Include only necessary headers in source files to reduce the spread of dependencies.
+
+3. **Dependency Inversion Principle (DIP):** Design code in a way that higher-level modules don't depend on lower-level modules. Use abstractions (interfaces, abstract classes) to reduce direct dependencies.
+
+Reducing compile-time dependencies can improve build times, enhance code maintainability, and make the codebase more modular and flexible, allowing for easier updates and changes in the future.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **what is the difference between mutex and semaphore**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
