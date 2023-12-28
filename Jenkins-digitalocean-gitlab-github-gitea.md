@@ -48,8 +48,10 @@ ssh-keygen -q -N '' -m PEM -t rsa -f "$HOME/.ssh/id_rsa_$USR" <<< ""$'\n'"y" 2>&
 # create new user
 useradd -m -d /home/$USR -s /bin/bash $USR
 usermod -aG docker $USR
+
 mkdir -p /home/$USR/.ssh
 touch /home/$USR/.ssh/authorized_keys
+
 cat "$HOME/.ssh/id_rsa_$USR.pub" >> /home/$USR/.ssh/authorized_keys
 ssh -i $HOME/.ssh/id_rsa_$USR $USR@localhost "docker --version && echo '>>> DONE. New user added'"
 ```
@@ -68,7 +70,7 @@ docker volume create jenkins_volume
 docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):$(which docker) -v jenkins_volume:/var/jenkins_home -p 8081:8080 --user 1000:999 --name jenkins -d jenkins/jenkins:lts
 ```
 
-trong đó `1000`: là user-id, `999`: docker group-id
+trong đó `1000`: là jenkins user-id, `999`: docker group-id
 
 - Modify Jenkins port `/lib/systemd/system/jenkins.service` with change:
 
