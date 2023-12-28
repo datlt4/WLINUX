@@ -479,17 +479,17 @@ JWT_SECRET = *******************************************
 
 ### SSH
 
-- Remember add key as on github
+- Remember add key as on gitea web.
 
 - add remote repo: `git remote add gitea ssh://git@192.168.120.103:2222/datlt4/gst-learn.git`
 
 ### Control
 
 - Use `gitea_tools.sh` to start, stop gitea server and also backup and restore gitea data.
-  
+
   <details>
     <summary>gitea_tools.sh</summary>
-  
+
   ```bash
   # !/usr/bin/env bash
 
