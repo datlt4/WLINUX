@@ -243,16 +243,8 @@ Scope define
 
 # Gitlab
 
-
-```bash
-docker run --detach --hostname luongtandat.com --publish 1443:443 --publish 8082:80 --publish 2222:22 --name gitlab --restart always --volume `pwd`/gitlab_data/config:/etc/gitlab --volume `pwd`/gitlab_data/logs:/var/log/gitlab --volume `pwd`/gitlab_data/data:/var/opt/gitlab gitlab/gitlab-ce:latest
-```
-
-```bash
-docker exec -it gitlab bash -c "cat /etc/gitlab/initial_root_password"
-```
-
+[Gitlab Installation](gitlab-setup.md)
 
 # Gitea
 
-[Gitea installation](gitea-setup.md)
+[Gitea Installation](gitea-setup.md)
