@@ -483,6 +483,8 @@ JWT_SECRET = *******************************************
 
 - add remote repo: `git remote add gitea ssh://git@192.168.120.103:2222/datlt4/gst-learn.git`
 
+- With old ubuntu version, need to generate ssh key with more than 3071 length: `ssh-keygen -t rsa-sha2-512 -b 4096`
+
 ### Control
 
 - Use `gitea_tools.sh` to start, stop gitea server and also backup and restore gitea data.
