@@ -12,6 +12,27 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **MemCpy vs MemMove**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+| POINT              | MEMCPY                                                                             | MEMMOVE                                                              |
+| ------------------ | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Built-in function  | Yes                                                                                | Yes                                                                  |
+| Purpose            | Copies data directly to destination                                                | Copies data to temporary buffer and then, to destination.            |
+| Overflow           | Yes, as there is no check for \\0 (null terminator)                                | No overflow as null terminator is considered.                        |
+| Overlap            | Wrong output when source and destination memory overlap.                           | No problem as data to first copied to temporary buffer.              |
+| Performance        | Faster                                                                             | Slower than memcpy by nearly 2X                                      |
+| Recommended to use | Recommended in general                                                             | Recommended in cases where source and destination memory can overlap |
+| Output             | May be wrong if source and destination memory can overlap and if there is overflow | Always correct                                                       |
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **I have a c++ project:**
 
 In `Event.h`
