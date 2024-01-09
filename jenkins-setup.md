@@ -303,3 +303,41 @@ ssh-keygen -t rsa -f jenkins_agent
   <img src="asset/create_new_node_jenkins.jpg" width="800"/>
 
 </details>
+
+## Install Jenkins on native environment
+
+1. Install dependencies
+
+```bash
+sudo apt update
+sudo apt install python3 python3-pip fontconfig openjdk-17-jre -y
+java -version
+sudo apt update
+```
+
+2. Install Jenkins
+
+```bash
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+sudo apt update
+sudo apt install jenkins -y
+
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins![image](https://github.com/datlt4/WLINUX/assets/38512047/81c1c94f-5902-4779-be16-e1a75344bb6e)
+```
+
+<img src="assets/38512047/b08cad84-fe68-4eab-b952-3fc7c4c6b107" width="800"/>
+
+3. Open Port on the Firewall
+
+```bash
+sudo ufw allow 8080
+sudo ufw status
+```
+
+<img src="assets/38512047/6a0e4395-634a-4327-818a-bfe5ddcdefc5" width="250"/>
+
+4. .
