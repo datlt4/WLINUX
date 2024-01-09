@@ -308,65 +308,65 @@ ssh-keygen -t rsa -f jenkins_agent
 
 1. Install dependencies
 
-  ```bash
-  sudo apt update
-  sudo apt install python3 python3-pip fontconfig openjdk-17-jre -y
-  java -version
-  sudo apt update
-  ```
+    ```bash
+    sudo apt update
+    sudo apt install python3 python3-pip fontconfig openjdk-17-jre -y
+    java -version
+    sudo apt update
+    ```
 
 2. Install Jenkins
 
-  ```bash
-  sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
-  echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+    ```bash
+    sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+    
+    sudo apt update
+    sudo apt install jenkins -y
+    
+    sudo systemctl enable jenkins
+    sudo systemctl start jenkins
+    sudo systemctl status jenkins
+    ```
   
-  sudo apt update
-  sudo apt install jenkins -y
-  
-  sudo systemctl enable jenkins
-  sudo systemctl start jenkins
-  sudo systemctl status jenkins
-  ```
-
-  <img src="asset/jenkins_installed_successfully.jpg" width="900"/>
+    <img src="asset/jenkins_installed_successfully.jpg" width="900"/>
 
 3. Open Port on the Firewall
 
-  ```bash
-  sudo ufw allow 8080
-  sudo ufw status
-  ```
-
-  <img src="asset/ufw_allow_jenkins_port.jpg" width="250"/>
+    ```bash
+    sudo ufw allow 8080
+    sudo ufw status
+    ```
+  
+    <img src="asset/ufw_allow_jenkins_port.jpg" width="250"/>
 
 4. Change Jenkins port
 
-  ```bash
-  sudo nano /lib/systemd/system/jenkins.service
-  ```
-
-  - Find and change Jenkins port in jenkins's configuration file
+    ```bash
+    sudo nano /lib/systemd/system/jenkins.service
+    ```
   
-  ```
-  Environment="JENKINS_PORT=8081"
-  ```
+- Find and change Jenkins port in jenkins's configuration file
+    
+    ```
+    Environment="JENKINS_PORT=8081"
+    ```
+    
+- Restart Jenkins
+    
+    ```bash
+    sudo systemctl daemon-reload
+    sudo systemctl restart jenkins
+    sudo systemctl status jenkins
   
-  - Restart Jenkins
-  
-  ```bash
-  sudo systemctl daemon-reload
-  sudo systemctl restart jenkins
-  sudo systemctl status jenkins
-
-  sudo ufw allow 8081
-  sudo ufw status
-  ```
-  
-  <img src="asset/change_jenkins_port.jpg" width="400"/>
+    sudo ufw allow 8081
+    sudo ufw status
+    ```
+    
+    <img src="asset/change_jenkins_port.jpg" width="400"/>
 
 5. Archive Initial Password
 
-  ```bash
-  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-  ``` 
+    ```bash
+    sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+    ``` 
