@@ -367,6 +367,6 @@ ssh-keygen -t rsa -f jenkins_agent
 
 5. Archive Initial Password
 
-```bash
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-``` 
+  ```bash
+  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+  ``` 
