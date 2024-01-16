@@ -347,24 +347,24 @@ services:
 
 - Access `127.0.0.1:8000` for initial configuration and email configuration.
 
-<img src="asset/gitea-initial-configuration.png" width="800"/>
+  <img src="asset/gitea-initial-configuration.png" width="800"/>
 
-<img src="asset/gitea-email-configuration.png" width="800"/>
+  <img src="asset/gitea-email-configuration.png" width="800"/>
 
 - Then create first user, it will consider as administrator.
 
-<img src="asset/gitea-first-account.png" width="800"/>
+  <img src="asset/gitea-first-account.png" width="800"/>
 
 - And all accounts registered after will need to activate via link will sent to user's email
 
-<img src="asset/gitea-activate-account.png" width="800"/>
+  <img src="asset/gitea-activate-account.png" width="800"/>
 
 - You can modify the configuration after initially by `app.ini` file
 
-```bash
-docker exec -it gitea bash
-vi /data/gitea/conf/app.ini
-```
+  ```bash
+  docker exec -it gitea bash
+  vi /data/gitea/conf/app.ini
+  ```
 
 <details>
   <summary>app.ini</summary>
@@ -764,3 +764,71 @@ JWT_SECRET = *******************************************
   </details>
 
 - Run `bash ./gitea_tools.sh --help` to get help and example. 
+
+### Container Registry
+
+  1. Enable package
+  
+      ```bash
+      docker exec -it gitea bash
+      vi /data/gitea/conf/app.ini
+      ```
+
+      Add these line to the bottom of file
+
+      ```bash
+      [packages]               
+      ENABLED = true
+      ```
+
+  2. Restart `gitea`
+
+      ```bash
+      docker-compose restart server db
+      ```
+
+      or
+
+      ```bash
+      bash ./gitea_tools.sh --restart
+      ```
+
+  3. Generate personal access token
+
+      `Profile` > `Settings` > `Applications` > `Generate New Token` > Input `Token Name` > Select `permissions` (should select all) > Click `Generate Token`
+
+  4. [Add Insecure Registry to Docker](https://stackoverflow.com/questions/42211380/add-insecure-registry-to-docker)
+
+      Resolved the issue by adding a file `/etc/docker/daemon.json` with following content
+
+      ```bash
+      {
+          "insecure-registries" : [ "gitea:8000", "192.168.120.103:8000" ]
+      }
+      ```
+
+      And then restart docker
+
+      ```bash
+      sudo systemctl daemon-reload
+      sudo systemctl restart docker
+      ```
+
+  5. Login local Container Registry
+
+      ```bash
+      docker logout
+      ```
+
+      ```bash
+      docker login 192.168.120.103:8000
+      docker login gitea:8000
+      docker login http://gitea:8000
+      ```
+
+  5. Push image to local Container Registry
+
+      ```bash
+      docker tag <origin_image> gitea:8000/<username>/<image_name>:<tag>
+      docker push gitea:8000/<username>/<image_name>:<tag>
+      ```
