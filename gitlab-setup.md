@@ -94,7 +94,7 @@ docker exec -it gitlab bash -c "cat /etc/gitlab/initial_root_password | grep 'Pa
 
 Your GitLab instance allows anyone to register for an account, which is a security risk on public-facing GitLab instances. You should deactivate new sign ups if public users aren't expected to register for an account.
 
-- `Search or go to...` > Settings > General > Sign-up restrictions > Expand > Disable `Sign-up enabled` > Save changes.
+- `Search or go to...` > `Settings` > `General` > `Sign-up restrictions` > `Expand` > Disable `Sign-up enabled` > `Save changes`.
 
 ### SSH
 
