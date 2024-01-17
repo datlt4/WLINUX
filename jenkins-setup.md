@@ -80,6 +80,12 @@ where `1000`: is jenkins user-id, `999`: docker group-id.
   ```
   </details>
 
+- Archive Initial Password
+
+  ```bash
+  docker exec -it jenkins bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
+  ```
+
 ## [Create/Add Users in Jenkins & Manage Permissions](https://www.guru99.com/create-users-manage-permissions.html)
 
 ### How to Create/Add a User in Jenkins
