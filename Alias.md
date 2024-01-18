@@ -58,23 +58,7 @@ parse_git_branch2() {
      fi
 }
 export PS1="\[\[\033[01;43m\]\u\[\033[00m\]:\[\033[01;32m\]\W \[\e[96m\]\$(parse_git_branch2)\[\e[91m\]\$(parse_git_branch)\[\e[00m\]\[\033[01;36m\]➜ \[\033[00m\]"
-```
-
-Modify `PS1` on `zsh` 
-
-```bash
-parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-parse_git_branch2() {
-     git config --global --add safe.directory $(pwd)
-     if [[ $(parse_git_branch) ]]; then
-          echo "git:"
-     else
-          echo ""
-     fi
-}
-
-export PS1="%n@%m:%1~ $(parse_git_branch2)$(parse_git_branch) ➜ "
+# For zsh
+# export PS1="%n@%m:%1~ $(parse_git_branch2)$(parse_git_branch) ➜ "
 ```
 
