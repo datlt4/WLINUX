@@ -37,6 +37,7 @@ ExecStart=/usr/bin/dockerd -H unix://var/run/docker.sock -H tcp://10.137.0.2 --c
 systemctl daemon-reload
 systemctl restart docker
 systemctl status docker
+# docker -H <digital ocean ip address> ps
 ```
 
 - Create user `jenkins`
