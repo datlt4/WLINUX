@@ -12,6 +12,64 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **What happen if I don't override virtual method, and pure virtual method in c++**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In C++, if a class declares a virtual method without providing an implementation (pure virtual method) or if it declares a virtual method and provides an implementation but doesn't mark it as `override` in a derived class, it can have different consequences:
+
+### 1. Pure Virtual Method:
+
+If you declare a pure virtual method in a base class and don't provide an implementation for it, any attempt to create an instance of the base class will result in a compilation error. The derived classes must provide an implementation for all pure virtual methods. For example:
+
+```cpp
+class Base {
+public:
+    virtual void pureVirtualMethod() = 0;  // Pure virtual method
+};
+
+class Derived : public Base {
+public:
+    // Compiler error if you don't provide an implementation for pureVirtualMethod
+    void pureVirtualMethod() override {
+        // Implementation for the pure virtual method
+    }
+};
+```
+
+### 2. Non-Pure Virtual Method:
+
+If you declare a virtual method in a base class without providing an implementation and a derived class doesn't override it, the program will still compile, but calling the virtual method on an instance of the derived class will call the base class's implementation (if any). This might lead to unexpected behavior.
+
+```cpp
+class Base {
+public:
+    virtual void virtualMethod() {
+        // Base class implementation
+    }
+};
+
+class Derived : public Base {
+    // No override for virtualMethod
+};
+
+int main() {
+    Derived derivedObj;
+    derivedObj.virtualMethod();  // Calls the base class implementation
+
+    return 0;
+}
+```
+
+In summary, if you don't override a pure virtual method, it leads to a compilation error. If you don't override a non-pure virtual method, the program still compiles, but the base class's implementation is used when calling the method on an instance of the derived class, which might not be the intended behavior. It's generally good practice to use the `override` keyword to explicitly indicate that a method is intended to override a virtual method from a base class.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **MemCpy vs MemMove**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
