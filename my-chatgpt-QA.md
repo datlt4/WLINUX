@@ -12,6 +12,41 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **What is the purpose of using activation function in neural network?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+The activation function in a neural network serves a crucial role by introducing non-linearities into the network. Neural networks are composed of layers of interconnected neurons, and each connection is associated with a weight. The activation function is applied to the weighted sum of inputs and biases at each neuron to determine the neuron's output.
+
+Here are the key purposes of using activation functions in neural networks:
+
+1. **Introducing Non-linearity:**
+   - Activation functions introduce non-linearities to the network. Without non-linear activation functions, the entire neural network would behave like a linear model, regardless of its depth. Non-linearity enables the neural network to learn and represent complex, non-linear relationships in the data.
+
+2. **Capturing Complex Patterns:**
+   - Many real-world relationships and patterns are inherently non-linear. The introduction of non-linear activation functions allows neural networks to capture and model these complex relationships, making them more powerful in representing a wide range of data.
+
+3. **Enabling Learning of Hierarchical Features:**
+   - Neural networks, especially deep neural networks with multiple layers, learn hierarchical features. Each layer captures different levels of abstraction. The non-linear activation functions allow the network to learn and combine these hierarchical features, enabling the extraction of more abstract and complex representations.
+
+4. **Breaking Symmetry:**
+   - Activation functions help break symmetry among neurons in the same layer. Without non-linear activation functions, all neurons in a layer would essentially perform the same operation, leading to redundant computations. Non-linearity ensures that each neuron contributes differently to the overall learning process.
+
+5. **Supporting Gradient Descent Optimization:**
+   - Activation functions play a crucial role in the training process through gradient descent optimization. Non-linear activation functions introduce gradients that are essential for updating the weights during backpropagation, allowing the network to learn and adapt to the input data.
+
+6. **Avoiding Saturation:**
+   - Some activation functions, like the Rectified Linear Unit (ReLU), help mitigate the vanishing gradient problem. Saturation occurs when the gradients become very small during backpropagation, hindering the learning process. Non-linear activation functions help alleviate this issue.
+
+Common activation functions used in neural networks include Sigmoid, Hyperbolic Tangent (tanh), Rectified Linear Unit (ReLU), and variants like Leaky ReLU and Parametric ReLU. The choice of activation function depends on the specific characteristics of the data and the problem being addressed.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **What happen if I don't override virtual method, and pure virtual method in c++**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
