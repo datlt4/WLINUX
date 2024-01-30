@@ -182,6 +182,105 @@ where:
 - `-N`: do not open shell SSH
 - `-f`: SSH to into background
 
+## Using `mosh` on macOS and Ubuntu involves installing the `mosh` package and then connecting to a remote server. Here are the steps for both platforms:
+
+### 1. **Install Mosh:**
+
+#### On macOS:
+
+You can install `mosh` on macOS using a package manager like Homebrew.
+
+1. Open Terminal.
+
+2. Install Homebrew (if not installed):
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+
+3. Install `mosh`:
+   ```bash
+   brew install mosh
+   ```
+
+#### On Ubuntu:
+
+On Ubuntu, you can use the package manager to install `mosh`.
+
+1. Open Terminal.
+
+2. Update the package list:
+   ```bash
+   sudo apt-get update
+   ```
+
+3. Install `mosh`:
+   ```bash
+   sudo apt-get install mosh
+   sudo ufw allow 60000:61000/udp
+   ```
+
+### 2. **Connect to Remote Server:**
+
+Once `mosh` is installed, you can connect to a remote server using the `mosh` command.
+
+```bash
+mosh username@remote_host
+```
+
+Replace `username` with your remote username and `remote_host` with the IP address or domain name of your remote server.
+
+Example:
+```bash
+mosh john@example.com
+```
+
+### 3. **Using SSH Keys:**
+
+If you usually connect to your remote server using SSH keys, `mosh` can utilize your existing SSH configuration.
+
+```bash
+mosh --ssh="ssh -i /path/to/private-key" username@remote_host
+```
+
+Replace `/path/to/private-key` with the path to your private key file.
+
+### 4. **Specifying SSH Port:**
+
+If your SSH server runs on a non-default port (not 22), you can specify it with the `-p` option.
+
+```bash
+mosh --ssh="ssh -p 2222" username@remote_host
+```
+
+Replace `2222` with your actual SSH port.
+
+### 5. **Useful Options:**
+
+- **Specify Local Port:**
+  ```bash
+  mosh --local-port=60001 username@remote_host
+  ```
+
+- **Force UTF-8:**
+  ```bash
+  mosh --utf8 username@remote_host
+  ```
+
+- **Enable Disconnection Detection:**
+  ```bash
+  mosh --predict=username@remote_host
+  ```
+
+### 6. **Exiting Mosh:**
+
+To exit Mosh and close the connection, simply type `exit` or press `Ctrl-D`.
+
+```bash
+exit
+```
+
+That's it! You should now be able to use `mosh` to connect to your remote server on both macOS and Ubuntu. Adjust the options based on your specific use case and preferences.
+
 ## Cloudflare Warp
 
 [warp-cli](https://pkg.cloudflareclient.com/packages/cloudflare-warp)
