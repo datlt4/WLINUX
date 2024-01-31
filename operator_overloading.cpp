@@ -408,7 +408,7 @@ void ComplexNumber::operator delete(void *ptr)
     ::operator delete(ptr);
 }
 
-// Overload the insertion                                                  operator to recognize an ostream object on the left
+// Overload the insertion operator to recognize an ostream object on the left
 std::ostream &operator<<(std::ostream &os, const ComplexNumber &C)
 {
     os << C.real << "+";
