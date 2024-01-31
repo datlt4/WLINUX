@@ -12,6 +12,151 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Learn about `std::lower_bound`**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+1. Vector
+
+- example 1:
+
+    ```cpp
+    // std :: lower_bound 
+    #include <bits/stdc++.h> 
+    
+    // Driver code 
+    int main() 
+    { 
+        // Input 
+        std::vector<int> v{ 10, 20, 30, 30, 30, 40, 50 }; 
+    
+        // Print 
+        std::cout << "Vector contains :"; 
+        for (int i = 0; i < v.size(); i++) 
+            std::cout << " " << *next(v.begin(), i);
+    
+        std::cout << "\n"; 
+    
+        std::vector<int>::iterator low1, low2, low3; 
+    
+        // std :: lower_bound 
+        low1 = std::lower_bound(v.begin(), v.end(), 30); 
+        low2 = std::lower_bound(v.begin(), v.end(), 35); 
+        low3 = std::lower_bound(v.begin(), v.end(), 55); 
+    
+        // Find the index of low1
+        std::cout << "lower_bound for element 30 at position : " << std::distance(v.begin(), low1) << std::endl;
+        std::cout << "lower_bound for element 35 at position : " << std::distance(v.begin(), low2) << std::endl;
+        std::cout << "lower_bound for element 55 at position : " << std::distance(v.begin(), low3) << std::endl;
+    
+        return 0; 
+    }
+    ```
+    
+    Ouput
+    
+    ```bash
+    Vector contains : 10 20 30 30 30 40 50
+    lower_bound for element 30 at position : 2
+    lower_bound for element 35 at position : 5
+    lower_bound for element 55 at position : 7
+    ```
+
+- example 2:
+
+    ```cpp
+    // std :: lower_bound 
+    #include <bits/stdc++.h> 
+    
+    // Driver code 
+    int main() 
+    { 
+        // Input 
+        std::vector<int> v{ 10, 30, 20, 30, 40, 30, 50 }; 
+    
+        // Print 
+        std::cout << "Vector contains :"; 
+        for (int i = 0; i < v.size(); i++) 
+            std::cout << " " << *next(v.begin(), i);
+    
+        std::cout << "\n"; 
+    
+        std::vector<int>::iterator low1, low2, low3; 
+    
+        // std :: lower_bound 
+        low1 = std::lower_bound(v.begin(), v.end(), 30); 
+        low2 = std::lower_bound(v.begin(), v.end(), 35); 
+        low3 = std::lower_bound(v.begin(), v.end(), 55); 
+    
+        // Find the index of low1
+        std::cout << "lower_bound for element 30 at position : " << std::distance(v.begin(), low1) << std::endl;
+        std::cout << "lower_bound for element 35 at position : " << std::distance(v.begin(), low2) << std::endl;
+        std::cout << "lower_bound for element 55 at position : " << std::distance(v.begin(), low3) << std::endl;
+    
+        return 0; 
+    }
+    ```
+    
+    Ouput
+    
+    ```bash
+    Vector contains : 10 30 20 30 40 30 50
+    lower_bound for element 30 at position : 1
+    lower_bound for element 35 at position : 6
+    lower_bound for element 55 at position : 7
+    ```
+
+2. Set
+
+    ```cpp
+    // std :: lower_bound 
+    #include <bits/stdc++.h> 
+    #include <set>
+    
+    // Driver code 
+    int main() 
+    { 
+        // Input 
+        std::set<int> v{ 10, 30, 20, 30, 40, 30, 50 }; 
+    
+        // Print 
+        std::cout << "Set contains :"; 
+        for (int i = 0; i < v.size(); i++) 
+            std::cout << " " << *next(v.begin(), i);
+    
+        std::cout << "\n"; 
+    
+        std::set<int>::iterator low1, low2, low3; 
+    
+        // std :: lower_bound 
+        low1 = std::lower_bound(v.begin(), v.end(), 30); 
+        low2 = std::lower_bound(v.begin(), v.end(), 35); 
+        low3 = std::lower_bound(v.begin(), v.end(), 55); 
+    
+        // Find the index of low1
+        std::cout << "lower_bound for element 30 at position : " << std::distance(v.begin(), low1) << std::endl;
+        std::cout << "lower_bound for element 35 at position : " << std::distance(v.begin(), low2) << std::endl;
+        std::cout << "lower_bound for element 55 at position : " << std::distance(v.begin(), low3) << std::endl;
+    
+        return 0; 
+    }
+    ```
+    
+    Ouput
+    
+    ```bash
+    Set contains : 10 20 30 40 50
+    lower_bound for element 30 at position : 2
+    lower_bound for element 35 at position : 3
+    lower_bound for element 55 at position : 5
+    ```
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **List all operator overloading in C++**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
