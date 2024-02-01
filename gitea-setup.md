@@ -824,6 +824,7 @@ JWT_SECRET = *******************************************
       docker login 192.168.120.103:8000
       docker login gitea:8000
       docker login http://gitea:8000
+      docker --config ~/.gitea_registry login http://gitea:8000
       ```
 
   5. Push image to local Container Registry
@@ -831,4 +832,5 @@ JWT_SECRET = *******************************************
       ```bash
       docker tag <origin_image> gitea:8000/<username>/<image_name>:<tag>
       docker push gitea:8000/<username>/<image_name>:<tag>
+      docker --config ~/.gitea_registry push gitea:8000/<username>/<image_name>:<tag>
       ```
