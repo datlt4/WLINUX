@@ -894,5 +894,28 @@ JWT_SECRET = *******************************************
   - Even if Actions is enabled for the Gitea instance, repositories still disable Actions by default.
   - Go to the **settings page of your repository** like `your_gitea.com/<owner>/<repo>/settings` and enable `Enable Repository Actions`.
 
-<img src="asset/enable_gitea_actions.png" width="1000"/>
+<img src="asset/enable_gitea_actions.png" width="300"/>
 
+  - You can create a file with the extension `.yaml` in the directory `.gitea/workflows/` of the repository, for example `.gitea/workflows/demo.yaml`. simple demo:
+
+      ```yaml
+      name: Gitea Actions Demo
+      run-name: ${{ gitea.actor }} is testing out Gitea Actions 🚀
+      on: [push]
+      
+      jobs:
+        Explore-Gitea-Actions:
+          runs-on: ubuntu-latest
+          steps:
+            - run: echo "🎉 The job was automatically triggered by a ${{ gitea.event_name }} event."
+            - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by Gitea!"
+            - run: echo "🔎 The name of your branch is ${{ gitea.ref }} and your repository is ${{ gitea.repository }}."
+            - name: Check out repository code
+              uses: actions/checkout@v3
+            - run: echo "💡 The ${{ gitea.repository }} repository has been cloned to the runner."
+            - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+            - name: List files in the repository
+              run: |
+                ls ${{ gitea.workspace }}
+            - run: echo "🍏 This job's status is ${{ job.status }}."
+      ```
