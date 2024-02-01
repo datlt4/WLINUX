@@ -814,7 +814,7 @@ JWT_SECRET = *******************************************
       sudo systemctl restart docker
       ```
 
-  5. Login local Container Registry
+  5. Login local Container Registry using generated PAT
 
       ```bash
       docker logout
