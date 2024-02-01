@@ -834,3 +834,65 @@ JWT_SECRET = *******************************************
       docker push gitea:8000/<username>/<image_name>:<tag>
       docker --config ~/.gitea_registry push gitea:8000/<username>/<image_name>:<tag>
       ```
+
+### Gitea Actions
+
+#### Enable Actions
+
+- Since 1.21.0, Actions are enabled by default. If you are using versions before 1.21.0, you need to add the following to the configuration file `app.ini` to enable it:
+    
+    ```bash
+    [actions]
+    ENABLED=true
+    ```
+
+#### [Set up runner](https://docs.gitea.com/usage/actions/quickstart#set-up-runner)
+
+- You can use the pre-built binaries or the docker images to set up the runner.
+
+1. Installation
+
+    1.1. Download pre-built binary
+
+    - Visit [here](https://dl.gitea.com/act_runner/) and download the right version for your platform.
+
+2. Build from source
+
+    ```bash
+    git clone https://gitea.com/gitea/act_runner.git
+    make build
+    ```
+
+3. Build a docker image
+
+    ```bash
+    git clone https://gitea.com/gitea/act_runner.git
+    make docker
+    ```
+
+4. [Register](https://gitea.com/gitea/act_runner#register) and [run](https://gitea.com/gitea/act_runner#run) with binary executable file.
+
+5. Run with docker
+
+    ```bash
+    docker run -e GITEA_INSTANCE_URL=<instance> -e GITEA_RUNNER_REGISTRATION_TOKEN=<token> -v /var/run/docker.sock:/var/run/docker.sock --name my_runner gitea/act_runner:nightly
+    ```
+
+  - There are 2 arguments required, `instance` and `token`.
+  - `instance` refers to the address of your Gitea instance, like `http://192.168.120.103:8000` or `http://gitea:8000`.
+  - `token` is used for authentication and identification, such as `P2U1U0oB4XaRCi8azcngmPCLbRpUGapalhmddh23`. It is one-time use only and **cannot be used to register multiple runners**.
+  - You can obtain different levels of 'tokens' from the following places to create the corresponding level of' runners':
+    - Instance level: The admin settings page, like `<your_gitea.com>/admin/actions/runners`.
+    - Organization level: The organization settings page, like `<your_gitea.com>/<org>/settings/actions/runners`.
+    - Repository level: The repository settings page, like `<your_gitea.com>/<owner>/<repo>/settings/actions/runners`.
+
+<img src="asset/gitea_runner_token.png" width="1000"/>
+<img src="asset/gitea_runners_management.png" width="1000"/>
+
+#### [Set up runner](https://docs.gitea.com/usage/actions/quickstart#use-actions)
+
+  - Even if Actions is enabled for the Gitea instance, repositories still disable Actions by default.
+  - Go to the **settings page of your repository** like `your_gitea.com/<owner>/<repo>/settings` and enable `Enable Repository Actions`.
+
+<img src="asset/enable_gitea_actions.png" width="1000"/>
+
