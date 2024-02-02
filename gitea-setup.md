@@ -260,10 +260,12 @@ volumes:
     driver: local
   postgres-volume:
     driver: local
+  # runner-volume:
+  #   driver: local
 
 services:
   server:
-    image: gitea/gitea:1.21.2
+    image: gitea/gitea:1.21.4
     container_name: gitea
     environment:
       - USER_UID=1001
@@ -318,6 +320,22 @@ services:
   #   volumes:
   #     - postgres-volume:/var/lib/postgresql/data
 
+  runner:
+    image: gitea/act_runner:nightly
+    container_name: gitea_runner
+    build:
+      context: ./act_runner
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - server
+    volumes:
+      # - runner-volume:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - GITEA_INSTANCE_URL=http://192.168.120.103:8000
+      - GITEA_RUNNER_REGISTRATION_TOKEN=cIMi9L3HoJluACvhMDQ5RraOXMMjWOjVzOFaLq66
+
   backup:
     image: alpine
     tty: false
@@ -327,8 +345,14 @@ services:
       - data-volume:/data
       - mysql-volume:/mysql-data
       # - postgres-volume:/postgres-data
+      # - runner-volume:/runner-data
       - ./backup:/backup
-    command: sh -c "cd /data && tar -czf /backup/gitea_data_$${TARGET}.tar.gz *; cd /mysql-data && tar -czf /backup/gitea_db_$${TARGET}.tar.gz *"
+    command: >-
+      sh -c "
+        cd /data && tar -czf /backup/gitea_data_$${TARGET}.tar.gz *;
+        cd /mysql-data && tar -czf /backup/gitea_db_$${TARGET}.tar.gz *;
+        # cd /runner-data && tar -czf /backup/gitea_runner_$${TARGET}.tar.gz
+        "
 
   restore:
     image: alpine
@@ -338,8 +362,17 @@ services:
       - data-volume:/data
       - mysql-volume:/mysql-data
       # - postgres-volume:/postgres-data
+      # - runner-volume:/runner-data
       - ./backup:/backup
-    command: sh -c "rm -rf /data/* /data/..?* /data/.[!.]* /mysql-data/* /mysql-data/..?* /mysql-data/.[!.]*; tar -xzf /backup/gitea_data_$${TARGET}.tar.gz -C /data; tar -xzf /backup/gitea_db_$${TARGET}.tar.gz -C /mysql-data"
+    command: >-
+      sh -c "
+        rm -rf /data/* /data/..?* /data/.[!.]*;
+        rm -rf /mysql-data/* /mysql-data/..?* /mysql-data/.[!.]*
+        rm -rf /runner-data/* /runner-data/..?* /runner-data/.[!.]*;
+        tar -xzf /backup/gitea_data_$${TARGET}.tar.gz -C /data;
+        tar -xzf /backup/gitea_db_$${TARGET}.tar.gz -C /mysql-data;
+        # tar -xzf /backup/gitea_runner_$${TARGET}.tar.gz -C /runner-data
+        "
 ```
 </details>
 
@@ -556,6 +589,10 @@ JWT_SECRET = *******************************************
 
   flag_DELETE_RESOURCE=0
   flag_RESTART=0
+  flag_BUILD=0
+
+  flag_CHANGE_REGISTRATION_TOKEN=0
+  new_registration_token=""
 
   docker_compose_yml="docker-compose.yml"
   backup_dir="backup/"
@@ -587,6 +624,11 @@ JWT_SECRET = *******************************************
               flag_find_RESTORE=0
               flag_STOP_GITEA=1
               ;;
+          --build | "--build ")
+              flag_find_BACKUP=0
+              flag_find_RESTORE=0
+              flag_BUILD=1
+              ;;
           --down | "--down ")
               flag_find_BACKUP=0
               flag_find_RESTORE=0
@@ -596,6 +638,16 @@ JWT_SECRET = *******************************************
               flag_find_BACKUP=0
               flag_find_RESTORE=0
               flag_RESTART=1
+              ;;
+          -t | --change-token | "-t " | "--change-token ")
+              echo "CHANGE REGISTRATION TOKEN"
+              new_registration_token="$2"
+              echo "new_registration_token: $new_registration_token"
+              flag_CHANGE_REGISTRATION_TOKEN=1
+              flag_find_BACKUP=0
+              flag_find_RESTORE=0
+              sed -i "s/GITEA_RUNNER_REGISTRATION_TOKEN=.*/GITEA_RUNNER_REGISTRATION_TOKEN=$new_registration_token/" "$(readlink -f $docker_compose_yml)"
+              shift
               ;;
           -h | --help | "-h " | "--help ")
               flag_find_BACKUP=0
@@ -710,8 +762,8 @@ JWT_SECRET = *******************************************
 
   # Restart server
   if [ ${flag_RESTART} -gt 0 ]; then
-      print_with_color "$ docker-compose -f ${docker_compose_yml} restart server db\n" "\033[36m"
-      eval "docker-compose -f ${docker_compose_yml} restart server db"
+      print_with_color "$ docker-compose -f ${docker_compose_yml} restart server db runner\n" "\033[36m"
+      eval "docker-compose -f ${docker_compose_yml} restart server db runner"
       exit 0
   fi
 
@@ -756,8 +808,13 @@ JWT_SECRET = *******************************************
 
   # Start server
   if [ ${flag_START_GITEA} -gt 0 ] || [ ${flag_BACKUP} -gt 0 ] || [ ${flag_RESTORE} -gt 0 ]; then
-      print_with_color "$ docker-compose -f ${docker_compose_yml} up -d server db\n" "\033[36m"
-      eval "docker-compose -f ${docker_compose_yml} up -d server db"
+      command="docker-compose -f ${docker_compose_yml} up"
+      if [ ${flag_BUILD} -gt 0 ]; then
+          command="${command} --build --forece-recreate"
+      fi
+      command="${command} -d server db runner"
+      print_with_color "$ ${command}\n" "\033[36m"
+      eval "${command}"
   fi
   ```
 
