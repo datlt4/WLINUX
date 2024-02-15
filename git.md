@@ -2,21 +2,52 @@
 
 ## Submodule
 
-```bash
-git submodule add <remote_url> <destination_folder>
-git commit -m "Added the submodule to the project."
-git push
-```
+### Add a Git Submodule
 
-## Update submodule
+   ```bash
+   git submodule add <remote_url> <destination_folder>
+   git commit -m "Added the submodule to the project."
+   git push
+   ```
 
-```
-git clone --recursive <remote_url> <destination_folder>
-```
+### Pull a Git Submodule
 
-```bash
-git submodule update --init --recursive
-```
+   ```bash
+   git submodule update --init --recursive
+   ```
+
+### Update a Git Submodule
+
+   ```bash
+   git submodule update --remote --merge
+   ```
+
+### Fetch new submodule commits
+
+   ```bash
+   $ cd <repository>/<submodule>
+   $ git fetch
+
+   $ git log --oneline origin/master -3
+
+   93360a2 (origin/master, origin/HEAD) Second commit
+   88db523 First commit
+   43d0813 (HEAD -> master) Initial commit
+
+   $ git checkout -q 93360a2
+
+   $ cd <repository>
+   $ git add .
+   $ git commit -m "Added new commits from the submodule repository"
+   $ git push
+   ```
+
+### Remove Git submodules
+
+   ```bash
+   $ git submodule deinit <submodule>
+   $ git rm <submodule>
+   ```
 
 ## Add remote
 
