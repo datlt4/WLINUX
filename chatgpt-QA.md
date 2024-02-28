@@ -12,6 +12,29 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **What does 'dump' mean in IT?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In information technology (IT), "dump" can refer to several different concepts depending on the context:
+
+1. **Memory Dump**: In software development and debugging, a memory dump is a snapshot of the contents of a computer's memory at a specific point in time. It contains information about the state of the system, including the values of variables, the call stack, and other data structures. Memory dumps are often used to diagnose and debug software issues, such as crashes or unexpected behavior.
+
+2. **Core Dump**: A core dump is a type of memory dump that specifically captures the contents of a process's memory when it terminates unexpectedly (e.g., crashes). Core dumps are particularly useful for debugging crashes in software applications.
+
+3. **Data Dump**: In a broader sense, a data dump refers to the process of extracting or transferring a large amount of data from one system to another. This could involve exporting data from a database, transferring files between systems, or backing up data to an external storage device.
+
+4. **Log Dump**: In networking and systems administration, a log dump refers to the extraction of log data from a system or application for analysis or archival purposes. Log dumps can provide valuable information about system events, errors, and performance metrics.
+
+Overall, "dump" in IT generally refers to the process of extracting or capturing data for analysis, debugging, or archival purposes.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Learn about `std::lower_bound`**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
