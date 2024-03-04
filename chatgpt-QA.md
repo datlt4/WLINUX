@@ -12,6 +12,94 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Generate a sample c++ code for C++20 to test performance of a PC**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Sure, here's a simple C++ code snippet that demonstrates how you might test the performance of a PC using C++20 features. This example measures the time taken to execute a loop with a large number of iterations:
+
+```cpp
+#include <iostream>
+#include <chrono>
+
+int main() {
+    constexpr int iterations = 1000000000; // Number of iterations for the loop
+
+    auto start = std::chrono::steady_clock::now(); // Start time
+
+    // Loop with a large number of iterations
+    for (int i = 0; i < iterations; ++i) {
+        // Do some computation, replace this with your actual computation
+        volatile int x = i * i;
+    }
+
+    auto end = std::chrono::steady_clock::now(); // End time
+
+    // Calculate the duration in milliseconds
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+    // Output the duration
+    std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
+
+    return 0;
+}
+```
+
+This code snippet measures the time taken to execute a loop with a large number of iterations (`iterations`). It uses `std::chrono` for time measurement, which is part of C++11 and later versions. This code is fairly basic and may not fully stress the CPU or other components of your PC, depending on your requirements. You may need to replace the computation inside the loop with something more intensive to better test the performance of your PC.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **What is the difference between `steady_clock` and `system_clock` of `chrono` library C++?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In C++, the `<chrono>` library provides different clock types for measuring time, including `steady_clock` and `system_clock`. Here are the main differences between these two clock types:
+
+1. **Steady Clock (`std::chrono::steady_clock`):**
+   - `steady_clock` provides a monotonic clock, which means it cannot be adjusted and will never change during the lifetime of the program.
+   - It is typically used for measuring time intervals and performance benchmarks where high precision and consistency are required.
+   - `steady_clock` does not necessarily represent real-time. It measures time that is steady relative to the program's execution.
+
+2. **System Clock (`std::chrono::system_clock`):**
+   - `system_clock` provides access to the current time according to the system-wide real-time clock, which may be affected by system time adjustments.
+   - It is synchronized with the system clock, which means it can change if the system time is adjusted (e.g., due to clock drift correction or manual adjustment).
+   - `system_clock` is useful for obtaining the current date and time in terms of calendar time.
+
+In summary, `steady_clock` is preferred for measuring time intervals and performance benchmarks because it provides a stable and consistent time reference that is not affected by system time adjustments. On the other hand, `system_clock` is more suitable for tasks requiring access to the current real-world time, such as date and time calculations or system-related time functions.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Why need to use `volatile` keyword on above c++ code?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In the provided C++ code snippet, the `volatile` keyword is used in the line `volatile int x = i * i;`. In this context, `volatile` is used to prevent the compiler from optimizing away the variable `x`.
+
+Here's why `volatile` is used in this specific context:
+
+1. **Preventing Compiler Optimization:** When the compiler optimizes code, it may remove variables or operations that it deems unnecessary for the program's functionality. In this case, if the variable `x` is not used for anything else in the program, the compiler might optimize away the entire loop since it doesn't seem to have any observable effect.
+
+2. **Forcing Variable Access:** By declaring `x` as `volatile`, you're indicating to the compiler that `x` may be accessed from external sources (e.g., hardware interrupts or other threads), and its value may change unexpectedly. As a result, the compiler won't optimize away accesses to `x`, ensuring that the loop is executed as intended.
+
+However, it's important to note that in this specific example, the use of `volatile` may not be necessary for most compilers because `x` is not being used outside the loop and its value is not read back. Nevertheless, it's commonly used in such contexts to prevent potential issues with compiler optimizations.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **What does 'dump' mean in IT?**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
