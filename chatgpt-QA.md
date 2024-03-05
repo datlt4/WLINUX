@@ -12,6 +12,29 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Can webrtc use for data exchange, send voice and video call?**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Yes, WebRTC (Web Real-Time Communication) is a powerful technology that can be used for various forms of communication, including data exchange, voice calls, and video calls. It provides a set of APIs and protocols that enable real-time communication directly between web browsers or other applications without the need for additional plugins or software.
+
+Here's how WebRTC can be used for different types of communication:
+
+1. **Data Exchange:** WebRTC allows for peer-to-peer data exchange between browsers or applications. This can be used for various purposes such as file sharing, text messaging, or any other type of data transfer.
+
+2. **Voice Calls:** WebRTC supports real-time audio communication, allowing users to make voice calls directly from their web browsers or applications. It uses codecs like Opus for high-quality audio encoding and provides mechanisms for echo cancellation, noise reduction, and automatic gain control.
+
+3. **Video Calls:** WebRTC also supports real-time video communication, enabling users to make video calls directly from their web browsers or applications. It uses codecs like VP8 or H.264 for video encoding and provides features like adaptive bitrate control, resolution scaling, and frame rate adaptation to ensure optimal video quality and performance.
+
+WebRTC is widely used for various communication applications, including video conferencing, voice calling, online gaming, and more. It's supported by major web browsers such as Google Chrome, Mozilla Firefox, Microsoft Edge, and Opera, making it accessible to a large audience across different platforms.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Generate a sample c++ code for C++20 to test performance of a PC**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
