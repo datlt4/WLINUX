@@ -12,6 +12,31 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Explain 2 statements on JS**
+```
+$(document).ready(function () { ... });
+document.addEventListener("DOMContentLoaded", function() { ... });
+```
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Both statements are used in JavaScript to ensure that code execution occurs only after the DOM (Document Object Model) has been fully loaded and parsed, which means that all HTML elements on the page are accessible and ready for manipulation.
+
+1. `$(document).ready(function () { ... });`
+   - This statement is part of jQuery, a popular JavaScript library. It waits for the HTML document to be fully loaded and parsed before executing the function passed as an argument. Within this function, you can safely interact with DOM elements, attach event handlers, or perform other operations that depend on the presence of DOM elements.
+
+2. `document.addEventListener("DOMContentLoaded", function() { ... });`
+   - This statement is pure JavaScript. It registers an event listener for the "DOMContentLoaded" event on the document object. The "DOMContentLoaded" event is fired when the initial HTML document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading. When the event is triggered, the function passed as the second argument is executed. This approach is used when you prefer native JavaScript over jQuery or when you're not using jQuery in your project.
+
+In summary, both statements serve the same purpose of ensuring that JavaScript code runs only after the DOM is fully loaded, but they use different approaches to achieve this. The jQuery approach is more concise and may be preferred if you're already using jQuery in your project, while the pure JavaScript approach provides an alternative for cases where jQuery is not necessary or desired.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Can webrtc use for data exchange, send voice and video call?**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
