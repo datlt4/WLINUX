@@ -98,55 +98,55 @@ To handle different response status codes in a `fetch` request, you can use the 
 
 ```javascript
 fetch('your-url')
-  .then(function(response) {
-    if (!response.ok) {
-      switch(response.status) {
-        case 400:
-          // Handle 400 Bad Request
-          break;
-        case 401:
-          // Handle 401 Unauthorized
-          break;
-        case 403:
-          // Handle 403 Forbidden
-          break;
-        case 404:
-          // Handle 404 Not Found
-          break;
-        case 409:
-          // Handle 409 Conflict
-          break;
-        case 411:
-          // Handle 411 Length Required
-          break;
-        case 413:
-          // Handle 413 Payload Too Large
-          break;
-        case 414:
-          // Handle 414 URI Too Long
-          break;
-        case 415:
-          // Handle 415 Unsupported Media Type
-          break;
-        case 451:
-          // Handle 451 Unavailable For Legal Reasons
-          break;
-        case 500:
-          // Handle 500 Internal Server Error
-          break;
-        default:
-          // Handle other status codes
-          break;
-      }
-    }
-    return response.json(); // Assuming response is JSON
-  })
-  .then(function(data) {
-    // Handle successful response
-  })
-  .catch(function(error) {
-    // Handle network errors
-  });
+    .then(function(response) {
+        if (!response.ok) {
+            switch(response.status) {
+              case 400:
+                  // Handle 400 Bad Request
+                  break;
+              case 401:
+                  // Handle 401 Unauthorized
+                  break;
+              case 403:
+                  // Handle 403 Forbidden
+                  break;
+              case 404:
+                  // Handle 404 Not Found
+                  break;
+              case 409:
+                  // Handle 409 Conflict
+                  break;
+              case 411:
+                  // Handle 411 Length Required
+                  break;
+              case 413:
+                  // Handle 413 Payload Too Large
+                  break;
+              case 414:
+                  // Handle 414 URI Too Long
+                  break;
+              case 415:
+                  // Handle 415 Unsupported Media Type
+                  break;
+              case 451:
+                  // Handle 451 Unavailable For Legal Reasons
+                  break;
+              case 500:
+                  // Handle 500 Internal Server Error
+                  break;
+              default:
+                  // Handle other status codes
+                  break;
+            }
+        }
+        return response.json(); // Assuming response is JSON
+    })
+    .then(function(data) {
+        // Handle successful response
+    })
+    .catch(function(error) {
+        // Handle network errors
+    });
 ```
 
 In this code:
