@@ -12,6 +12,156 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **which should use between `XMLHttpRequest` and `fetch`
+
+**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Both `XMLHttpRequest` and `fetch` are used to make HTTP requests in JavaScript, but `fetch` is a newer API and generally considered more modern and easier to use. Here's a comparison of both:
+
+1. **XMLHttpRequest**:
+   - Older API for making HTTP requests.
+   - More verbose syntax compared to `fetch`.
+   - Supports synchronous and asynchronous requests.
+   - Requires more code for error handling and processing responses.
+   - Compatible with older browsers.
+
+2. **fetch**:
+   - Modern API introduced in ES6.
+   - Provides a simpler and cleaner syntax compared to `XMLHttpRequest`.
+   - Returns Promises, making it easier to work with asynchronous code.
+   - Built-in support for JSON responses.
+   - Provides a more consistent and intuitive API for making HTTP requests.
+   - Not supported in older browsers without polyfills.
+
+In general, if you're working on a modern web application and browser compatibility is not a concern, using `fetch` is recommended due to its cleaner syntax and better support for Promises. However, if you need to support older browsers or have specific requirements that `fetch` doesn't meet, you may still use `XMLHttpRequest`.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **create new form with key: `email` and value is `my-email@gmai.com` and send POST request to `check-email` route**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+To create a new form with the key `email` and the value `my-email@gmail.com` and send a POST request to the `check-email` route, you can use JavaScript. Here's how you can do it using the Fetch API:
+
+```javascript
+// Define the data to be sent in the form
+const formData = new FormData();
+formData.append('email', 'my-email@gmail.com');
+
+// Define the fetch options
+const requestOptions = {
+  method: 'POST',
+  body: formData
+};
+
+// Send the POST request to the check-email route
+fetch('/check-email', requestOptions)
+  .then(response => {
+    if (response.ok) {
+      // If the response is successful, handle it here
+      console.log('Email check successful');
+    } else {
+      // If the response is not successful, handle the error here
+      console.error('Email check failed');
+    }
+  })
+  .catch(error => {
+    // Handle any network errors here
+    console.error('Network error:', error);
+  });
+```
+
+Make sure to replace `/check-email` with the actual route where you want to send the POST request. This code sends a POST request with form data containing the key-value pair `email: my-email@gmail.com`. You can handle the response inside the `.then()` method based on your requirements.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **check response status code and add handler for status code: 400, 401, 403, 404, 409, 411, 413, 414, 415, 451, 500**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+To handle different response status codes in a `fetch` request, you can use the `then()` method to check the `status` property of the response. Here's an example of how you can handle different status codes:
+
+```javascript
+fetch('your-url')
+  .then(function(response) {
+    if (!response.ok) {
+      switch(response.status) {
+        case 400:
+          // Handle 400 Bad Request
+          break;
+        case 401:
+          // Handle 401 Unauthorized
+          break;
+        case 403:
+          // Handle 403 Forbidden
+          break;
+        case 404:
+          // Handle 404 Not Found
+          break;
+        case 409:
+          // Handle 409 Conflict
+          break;
+        case 411:
+          // Handle 411 Length Required
+          break;
+        case 413:
+          // Handle 413 Payload Too Large
+          break;
+        case 414:
+          // Handle 414 URI Too Long
+          break;
+        case 415:
+          // Handle 415 Unsupported Media Type
+          break;
+        case 451:
+          // Handle 451 Unavailable For Legal Reasons
+          break;
+        case 500:
+          // Handle 500 Internal Server Error
+          break;
+        default:
+          // Handle other status codes
+          break;
+      }
+    }
+    return response.json(); // Assuming response is JSON
+  })
+  .then(function(data) {
+    // Handle successful response
+  })
+  .catch(function(error) {
+    // Handle network errors
+  });
+```
+
+In this code:
+- The `fetch` function is called with the URL you want to send the request to.
+- The `then()` method is used to handle the response asynchronously.
+- Inside the `then()` method, the `response` object's `ok` property is checked to see if the request was successful.
+- If the response is not OK, the `status` property is checked to determine the specific error status code, and appropriate actions are taken accordingly.
+- Finally, the response body is parsed as JSON assuming it's a JSON response, and further processing can be done inside another `then()` block.
+
+Remember to replace `'your-url'` with the actual URL you want to send the request to.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **HOW can C++ get all field in message of protobuf**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
