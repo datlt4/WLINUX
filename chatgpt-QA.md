@@ -12,9 +12,49 @@
 
 ---
 
-## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **which should use between `XMLHttpRequest` and `fetch`
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Compare opencl, opengl and vulkan**
 
-**
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+OpenCL, OpenGL, and Vulkan are all APIs used in computer graphics and parallel computing, but they serve different purposes and have different characteristics. Here's a comparison of these three technologies:
+
+1. **OpenCL (Open Computing Language)**:
+   - Purpose: OpenCL is primarily used for general-purpose parallel programming across CPUs, GPUs, and other processors. It allows developers to write code that can execute across heterogeneous platforms.
+   - Features:
+     - Provides a programming framework for parallel execution on various computing devices.
+     - Supports both task-based and data-based parallelism.
+     - Offers low-level control over hardware resources.
+     - Suitable for a wide range of applications, including scientific simulations, image processing, and machine learning.
+   - Cross-Platform: OpenCL is designed to be platform-independent and can run on various operating systems and hardware architectures.
+
+2. **OpenGL (Open Graphics Library)**:
+   - Purpose: OpenGL is an API for rendering 2D and 3D graphics. It is used for creating interactive computer graphics applications, such as video games, visualizations, and simulations.
+   - Features:
+     - Provides a set of functions for rendering geometric primitives (points, lines, triangles) and applying textures and shading effects.
+     - Supports hardware-accelerated rendering on GPUs.
+     - Offers a state-based interface for configuring rendering parameters.
+     - Widely supported across different platforms, including desktop, mobile, and web.
+   - Legacy: While still widely used, OpenGL has been largely superseded by newer graphics APIs like Vulkan for high-performance graphics applications.
+
+3. **Vulkan**:
+   - Purpose: Vulkan is a modern, low-overhead graphics and compute API designed for high-performance 3D graphics and parallel computing tasks. It aims to provide more control and better performance than previous APIs like OpenGL.
+   - Features:
+     - Offers explicit control over GPU resources, allowing developers to optimize performance and reduce CPU overhead.
+     - Supports multi-threaded command buffer generation for parallel execution.
+     - Provides a lower-level abstraction compared to OpenGL, which can lead to more efficient use of hardware resources.
+     - Designed with modern graphics hardware in mind, Vulkan is suitable for demanding real-time graphics applications, such as games and VR experiences.
+   - Cross-Platform: Like OpenGL and OpenCL, Vulkan is cross-platform and can run on various operating systems and hardware architectures.
+
+In summary, while OpenCL is focused on parallel computing across heterogeneous platforms, OpenGL and Vulkan are both graphics APIs, with OpenGL being a more traditional graphics API and Vulkan offering a more modern, low-level approach with better performance and control. The choice between these technologies depends on the specific requirements of the application and the desired level of control and performance.
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **which should use between `XMLHttpRequest` and `fetch`**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
 
