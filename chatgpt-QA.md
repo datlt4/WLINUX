@@ -137,6 +137,47 @@ Make sure to replace `/check-email` with the actual route where you want to send
 To handle different response status codes in a `fetch` request, you can use the `then()` method to check the `status` property of the response. Here's an example of how you can handle different status codes:
 
 ```javascript
+setInterval(
+    function() {
+        fetch("/check-is-confirmed", { method: "POST" })
+            .then(response => {
+                if (response.ok) {
+                    switch(response.status) {
+                        case 200:
+                            console.log("200: SUCCESS");
+                            break;
+                        default:
+                            // Handle other status codes
+                            console.log("Handle other status codes");
+                            break;
+                    }
+                } else {
+                    switch(response.status) {
+                        case 401:
+                            // Handle 401 Unauthorized
+                            console.log("Handle 401 Unauthorized");
+                            break;
+                        case 500:
+                            // Handle 500 Internal Server Error
+                            console.log("Handle 500 Internal Server Error");
+                            break;
+                        default:
+                            // Handle other status codes
+                            console.log("Handle other status codes");
+                            break;
+                    }
+
+                }
+            })
+            .catch(error => {
+                // Handle any network errors here
+                insertMessageIntoToast("Network error", error, "danger")
+            })        
+    }, 3000
+);
+```
+
+```javascript
 fetch('your-url')
     .then(function(response) {
         if (!response.ok) {
