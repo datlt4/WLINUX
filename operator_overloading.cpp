@@ -73,11 +73,15 @@ public:
     // const ComplexNumber* operator->() const;
     // const ComplexNumber* operator->*(int) const;
 
+    // Object Conversion Operators
+    operator double() const
+
     // Other Operators
     ComplexNumber operator,(const ComplexNumber &other) const;
     static void *operator new(size_t size);
     static void operator delete(void *ptr);
-    friend std::ostream &operator<<(std::ostream &os, const ComplexNumber &dt);
+    friend std::ostream &operator<<(std::ostream &os, const ComplexNumber &c);
+    friend std::istream &operator >> (std::istream &is, ComplexNumber &c);
 };
 
 // Overloading Unary Plus operator
@@ -380,6 +384,12 @@ const double &ComplexNumber::operator[](int index) const
     }
 }
 
+// Overloading Double object Conversion Operators
+
+operator ComplexNumber::double() const {
+    return std::sqrt(real * real + imaginary * imaginary);
+}
+
 // Overloading Function Call Operator
 ComplexNumber ComplexNumber::operator()()
 {
@@ -417,6 +427,15 @@ std::ostream &operator<<(std::ostream &os, const ComplexNumber &C)
     else
         os << C.imaginary << "i";
     return os;
+}
+
+// Overload the input operator
+friend std::istream &operator >> (std::istream &is, ComplexNumber &C)
+{
+    is >> c.real;
+    std::cout << "Enter imaginary part: ";
+    is >> c.imaginary;
+    return is;
 }
 
 int main()
@@ -631,6 +650,11 @@ int main()
         // Function Call Operator
         ComplexNumber b = a();
         std::cout << "Function Call Operator Result: a: " << a << ", b: " << b << std::endl;
+    }
+    std::cout << "------------------------------\n";
+    {
+        ComplexNumber a(4.0, 3.0);
+        std::cout << (double) a << std::endl;
     }
     std::cout << "------------------------------\n";
     {
