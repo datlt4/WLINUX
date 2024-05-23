@@ -620,3 +620,68 @@
   getFile();
   ```
 </details>
+
+# HTML + Javascript
+
+## HTML `<div> data-*` Attribute
+
+<details>
+  <summary>click to expand</summary>
+
+### Using `data-*`
+
+- A `data-*` attribute on a `<div>` tag attaches additional data to the `div` element.
+
+- To create a custom attribute, replace `*` with a `lowercase string`, such as `data-id`, `data-status`, or `data-location`.
+
+- An `<div>` element can have any number of `data-*` attributes, each with their own name.
+
+- Using `data-*` attributes reduces the need for requests to the server.
+
+- **Note:** The `data-*` attribute is not visible and does not change the appearance of the `div` element.
+
+- Example:
+
+    ```html
+    <div data-registration-number="40039" style="background-color:aliceblue;padding:25px;">
+        <b>Registration Successful!</b>
+        <p>We will email your entry passes to the Louvre Museum in Paris.</p>
+    </div>
+    ```
+
+### Syntax
+
+- **Note:** The `*` can be any string, such as `data-id`,  `data-cost`,  `data-supplier`, etc.
+
+    ```html
+    <div data-*="value" >
+    ```
+    
+    |VALUE|DESCRIPTION|
+    |:---:|---|
+    |`value`|A string value. Can be numeric, alphanumeric, JSON, etc.|
+  
+    ```html
+    <div data-ticket="1223887" id="mydiv" style="background-color:aliceblue;padding:25px;">
+        <b>Registration Successful!</b>
+        <p>We will email your entry passes to the Louvre Museum in Paris.</p>
+    </div>
+    
+    <br/>
+    <button onclick="show1();">Show data with getAttribute</button>
+    <button onclick="show2();">Show data with dataset.*</button>
+    
+    <script>
+        let show1 = () => {
+            let element = document.getElementById("mydiv");
+            alert("Ticket # = " + element.getAttribute('data-ticket'));
+        };
+
+        let show2 = () => {
+            let element = document.getElementById("mydiv");
+            alert("Dataset.Ticket # = " + element.dataset.ticket);
+        };
+    </script>
+    ```
+
+</details>
