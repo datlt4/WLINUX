@@ -1,5 +1,8 @@
 # Bootstrap 5 Containers
 
+<details>
+  <summary>click to expand</summary>
+
 ## Bootstrap 5 Containers
 
 - Containers are used to pad the content inside of them, and there are two container classes available:
@@ -247,7 +250,12 @@
 
     [Try It Yourself](<https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_ex2&stacked=h>)
 
+</details>
+
 # Bootstrap 5 Text/Typography
+
+<details>
+  <summary>click to expand</summary>
 
 ## Bootstrap 5 Default Settings
 
@@ -345,3 +353,321 @@
 |`.initialism`|Displays the text inside an `<abbr>` element in a slightly smaller font size|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_ref_txt_abbr2&amp;stacked=h)|
 |`.list-unstyled`|Removes the default list-style and left margin on list items (works on both `<ul>` and `<ol>`). This class only applies to immediate children list items (to remove the default list-style from any nested lists, apply this class to any nested lists as well)|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_ref_txt_list-unstyled&amp;stacked=h)|
 |`.list-inline`|Places all list items on a single line (used together with .list-inline-item on each `<li>` elements)|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_ref_txt_list-inline&amp;stacked=h)|
+
+## Text Colors
+
+- Bootstrap 5 has some contextual classes that can be used to provide "meaning through colors".
+
+- The classes for text colors are: `.text-muted`, `.text-primary`, `.text-success`, `.text-info`, `.text-warning`, `.text-danger`, `.text-secondary`, `.text-white`, `.text-dark`, `.text-body` (default body color/often black) and `.text-light`:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_txt_colors&stacked=h)
+
+- You can also add `50% opacity` for black or white text with the `.text-black-50` or `.text-white-50` classes:
+
+    [Try It Yourself](<https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_txt_colors_opacity&stacked=h>)
+
+## Background Colors
+
+- The classes for background colors are: `.bg-primary`, `.bg-success`, `.bg-info`, `.bg-warning`, `.bg-danger`, `.bg-secondary`, `.bg-dark` and `.bg-light`.
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_txt_bgcolors&stacked=h)
+
+- The `.bg-color` classes above does not work well with text, or at least then you have to specify a proper `.text-color` class to get the right text color for each background.
+
+- However, you can use the `.text-bg-color` classes and Bootstrap will automatically handle the appropriate text color for each background color:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_txt_bgcolors2&stacked=h)
+
+</details>
+
+# Bootstrap 5 Tables
+
+<details>
+  <summary>click to expand</summary>
+
+## Basic Table
+
+- A basic Bootstrap 5 table has a light padding and horizontal dividers.
+
+- The `.table` class adds basic styling to a table:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_basic&stacked=h)
+
+## Striped Rows
+
+- The `.table-striped` class adds zebra-stripes to a table:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_striped&stacked=h)
+
+## Bordered Table
+
+- The `.table-bordered` class adds borders on all sides of the table and cells:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_bordered&stacked=h)
+
+## Hover Rows
+
+- The `.table-hover` class adds a hover effect (grey background color) on table rows:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_hover&stacked=h)
+
+## Black/Dark Table
+
+- The `.table-dark` class adds a black background to the table:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_dark&stacked=h)
+
+## Dark Striped Table
+
+- Combine `.table-dark` and `.table-striped` to create a dark, striped table:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_dark_striped&stacked=h)
+
+## Hoverable Dark Table
+
+- The `.table-hover` class adds a hover effect (grey background color) on table rows:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_dark_hover&stacked=h)
+
+## Borderless Table
+
+- The `.table-borderless` class removes borders from the table:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_borderless&stacked=h)
+
+## Contextual Classes
+
+- Contextual classes can be used to color the whole table (`<table>`),  the table rows (`<tr>`) or table cells (`<td>`).
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_contextual&stacked=h)
+
+- The contextual classes that can be used are:
+
+    |Class|Description|
+    |:---:|---|
+    |`.table-primary`|Blue: Indicates an important action|
+    |`.table-success`|Green: Indicates a successful or positive action|
+    |`.table-danger`|Red: Indicates a dangerous or potentially negative action|
+    |`.table-info`|Light blue: Indicates a neutral informative change or action|
+    |`.table-warning`|Orange: Indicates a warning that might need attention|
+    |`.table-active`|Grey: Applies the hover color to the table row or table cell|
+    |`.table-secondary`|Grey: Indicates a slightly less important action|
+    |`.table-light`|Light grey table or table row background|
+    |`.table-dark`|Dark grey table or table row background|
+
+## Table Head Colors
+
+- You can also use any of the contextual classes to only add a background color to the table header:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_head&stacked=h)
+
+## Small table
+
+- The `.table-sm` class makes the table smaller by cutting cell padding in half:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_sm&stacked=h)
+
+## Responsive Tables
+
+- The `.table-responsive` class adds a scrollbar to the table when needed (when it is too big horizontally):
+
+- Example:
+
+    ```html
+    <div class="table-responsive">
+        <table class="table">
+            ...
+        </table>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_table_responsive)
+
+- You can also decide when the table should get a scrollbar, depending on the screen width:
+
+    |Class|Screen width|
+    |:---:|:---:|
+    |`.table-responsive-sm`|`< 576px`|
+    |`.table-responsive-md`|`< 768px`|
+    |`.table-responsive-lg`|`< 992px`|
+    |`.table-responsive-xl`|`< 1200px`|
+    |`.table-responsive-xxl`|`< 1400px`|
+
+- Example
+
+    ```html
+    <div class="table-responsive-sm">
+        <table class="table">
+            ...
+        </table>
+    </div>
+    ```
+
+</details>
+
+# Bootstrap 5 Images
+
+<details>
+  <summary>click to expand</summary>
+
+## Image Shapes
+
+### Rounded Corners
+
+- The `.rounded` class adds rounded corners to an image:
+
+- Example:
+
+    ```html
+    <img src="cinqueterre.jpg" class="rounded" alt="Cinque Terre">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_img_rounded&stacked=h)
+
+### Circle
+
+- The `.rounded-circle` class shapes the image to a circle:
+
+- Example:
+
+    ```html
+    <img src="cinqueterre.jpg" class="rounded-circle" alt="Cinque Terre">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_img_circle&stacked=h)
+
+### Thumbnail
+
+- The `.img-thumbnail` class shapes the image to a thumbnail (bordered):
+
+- Example:
+
+    ```html
+    <img src="cinqueterre.jpg" class="img-thumbnail" alt="Cinque Terre">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_img_thumbnail&stacked=h)
+
+## Aligning Images
+
+- Float an image to the left with the `.float-start` class or to the right with `.float-end`:
+
+- Example:
+
+    ```html
+    <img src="paris.jpg" class="float-start">
+    <img src="paris.jpg" class="float-end">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_img_align&stacked=h)
+
+## Centered Image
+
+- Center an image by adding the utility classes `.mx-auto` (margin:auto) and `.d-block` (display:block) to the image:
+
+- Example:
+
+    ```html
+    <img src="paris.jpg" class="mx-auto d-block">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_img_centered&stacked=h)
+
+## Responsive Images
+
+- Images come in all sizes. So do screens. Responsive images automatically adjust to fit the size of the screen.
+
+- Create responsive images by adding an `.img-fluid` class to the `<img>` tag. The image will then scale nicely to the parent element.
+
+- The `.img-fluid` class applies `max-width: 100%;` and `height: auto;` to the image:
+
+- Example:
+
+    ```html
+    <img class="img-fluid" src="ny.jpg" alt="New York">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_img_responsive&stacked=h)
+
+</details>
+
+# Bootstrap 5 Jumbotron
+
+<details>
+  <summary>click to expand</summary>
+
+## Jumbotron
+
+- Example:
+
+    ```html
+    <div class="mt-4 p-5 bg-primary text-white rounded">
+        <h1>Jumbotron Example</h1>
+        <p>Lorem ipsum...</p>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_jumbotron&stacked=h)
+
+</details>
+
+# Bootstrap 5 Alerts
+
+<details>
+  <summary>click to expand</summary>
+
+## Alerts
+
+- Bootstrap 5 provides an easy way to create predefined alert messages:
+
+    <img src="asset/bootstrap-5-alert.png" width="700"/>
+
+- Alerts are created with the `.alert` class, followed by one of the contextual classes `.alert-success`, `.alert-info`, `.alert-warning`, `.alert-danger`, `.alert-primary`, `.alert-secondary`, `.alert-light` or `.alert-dark`.
+
+- Example:
+
+    ```html
+    <div class="alert alert-success">
+        <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_alerts&stacked=h)
+
+## Alert Links
+
+- Add the `.alert-link` class to any links inside the alert box to create "matching colored links":
+
+- Example:
+
+    ```html
+    <div class="alert alert-success">
+        <strong>Success!</strong> You should <a href="#" class="alert-link">read this message</a>.
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_alerts_link&stacked=h)
+
+## Closing Alerts
+
+- To close the alert message, add a `.alert-dismissible` class to the alert container. Then add `class="btn-close"` and `data-bs-dismiss="alert"` to a link or a button element (when you click on this the alert box will disappear).
+
+- Example:
+
+    ```html
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Success!</strong> This alert box could indicate a successful or positive action.
+    </div>
+    ```
+
+
+</details>
+
+
+<!-- # Bootstrap 5 Items
+
+<details>
+  <summary>click to expand</summary>
+
+</details> -->
