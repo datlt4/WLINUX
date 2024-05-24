@@ -661,6 +661,15 @@
     </div>
     ```
 
+## Animated Alerts
+
+- The `.fade` and `.show` classes adds a fading effect when closing the alert message:
+
+- Example:
+
+    ```html
+    <div class="alert alert-danger alert-dismissible fade show">
+    ```
 
 </details>
 
