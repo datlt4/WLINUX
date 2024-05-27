@@ -175,12 +175,12 @@
 
 - The Bootstrap 5 grid system has six classes:
 
-    - `.col-` (extra small devices - screen width less than 576px)
-    - `.col-sm-` (small devices - screen width equal to or greater than 576px)
-    - `.col-md-` (medium devices - screen width equal to or greater than 768px)
-    - `.col-lg-` (large devices - screen width equal to or greater than 992px)
-    - `.col-xl-` (xlarge devices - screen width equal to or greater than 1200px)
-    - `.col-xxl-` (xxlarge devices - screen width equal to or greater than 1400px)
+  - `.col-` (extra small devices - screen width less than 576px)
+  - `.col-sm-` (small devices - screen width equal to or greater than 576px)
+  - `.col-md-` (medium devices - screen width equal to or greater than 768px)
+  - `.col-lg-` (large devices - screen width equal to or greater than 992px)
+  - `.col-xl-` (xlarge devices - screen width equal to or greater than 1200px)
+  - `.col-xxl-` (xxlarge devices - screen width equal to or greater than 1400px)
 
 **Tip**: Each class scales up, so if you want to set the same widths for `sm` and `md`, you only need to specify `sm`.
 
@@ -239,7 +239,6 @@
 ### Two Unequal Responsive Columns
 
 - The following example shows how to get two various-width columns starting at tablets and scaling to large extra desktops:
-
 
     ```html
     <div class="row">
@@ -471,8 +470,6 @@
 
 - The `.table-responsive` class adds a scrollbar to the table when needed (when it is too big horizontally):
 
-- Example:
-
     ```html
     <div class="table-responsive">
         <table class="table">
@@ -516,8 +513,6 @@
 
 - The `.rounded` class adds rounded corners to an image:
 
-- Example:
-
     ```html
     <img src="cinqueterre.jpg" class="rounded" alt="Cinque Terre">
     ```
@@ -527,8 +522,6 @@
 ### Circle
 
 - The `.rounded-circle` class shapes the image to a circle:
-
-- Example:
 
     ```html
     <img src="cinqueterre.jpg" class="rounded-circle" alt="Cinque Terre">
@@ -540,8 +533,6 @@
 
 - The `.img-thumbnail` class shapes the image to a thumbnail (bordered):
 
-- Example:
-
     ```html
     <img src="cinqueterre.jpg" class="img-thumbnail" alt="Cinque Terre">
     ```
@@ -551,8 +542,6 @@
 ## Aligning Images
 
 - Float an image to the left with the `.float-start` class or to the right with `.float-end`:
-
-- Example:
 
     ```html
     <img src="paris.jpg" class="float-start">
@@ -564,8 +553,6 @@
 ## Centered Image
 
 - Center an image by adding the utility classes `.mx-auto` (margin:auto) and `.d-block` (display:block) to the image:
-
-- Example:
 
     ```html
     <img src="paris.jpg" class="mx-auto d-block">
@@ -581,8 +568,6 @@
 
 - The `.img-fluid` class applies `max-width: 100%;` and `height: auto;` to the image:
 
-- Example:
-
     ```html
     <img class="img-fluid" src="ny.jpg" alt="New York">
     ```
@@ -597,8 +582,6 @@
   <summary>click to expand</summary>
 
 ## Jumbotron
-
-- Example:
 
     ```html
     <div class="mt-4 p-5 bg-primary text-white rounded">
@@ -624,8 +607,6 @@
 
 - Alerts are created with the `.alert` class, followed by one of the contextual classes `.alert-success`, `.alert-info`, `.alert-warning`, `.alert-danger`, `.alert-primary`, `.alert-secondary`, `.alert-light` or `.alert-dark`.
 
-- Example:
-
     ```html
     <div class="alert alert-success">
         <strong>Success!</strong> Indicates a successful or positive action.
@@ -637,8 +618,6 @@
 ## Alert Links
 
 - Add the `.alert-link` class to any links inside the alert box to create "matching colored links":
-
-- Example:
 
     ```html
     <div class="alert alert-success">
@@ -652,8 +631,6 @@
 
 - To close the alert message, add a `.alert-dismissible` class to the alert container. Then add `class="btn-close"` and `data-bs-dismiss="alert"` to a link or a button element (when you click on this the alert box will disappear).
 
-- Example:
-
     ```html
     <div class="alert alert-success alert-dismissible">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -665,18 +642,450 @@
 
 - The `.fade` and `.show` classes adds a fading effect when closing the alert message:
 
-- Example:
-
     ```html
     <div class="alert alert-danger alert-dismissible fade show">
     ```
 
 </details>
 
-
-<!-- # Bootstrap 5 Items
+# Bootstrap 5 Buttons
 
 <details>
   <summary>click to expand</summary>
 
-</details> -->
+## Button Styles
+
+- Bootstrap 5 provides different styles of buttons:
+
+    ```html
+    <button type="button" class="btn">Basic</button>
+    <button type="button" class="btn btn-primary">Primary</button>
+    <button type="button" class="btn btn-secondary">Secondary</button>
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-info">Info</button>
+    <button type="button" class="btn btn-warning">Warning</button>
+    <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-dark">Dark</button>
+    <button type="button" class="btn btn-light">Light</button>
+    <button type="button" class="btn btn-link">Link</button>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_button_styles&stacked=h)
+
+- The button classes can be used on `<a>`, `<button>`, or `<input>` elements:
+
+    ```html
+    <a href="#" class="btn btn-success">Link Button</a>
+    <button type="button" class="btn btn-success">Button</button>
+    <input type="button" class="btn btn-success" value="Input Button">
+    <input type="submit" class="btn btn-success" value="Submit Button">
+    <input type="reset" class="btn btn-success" value="Reset Button">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_button_elements&stacked=h)
+
+## Button Outline
+
+- Bootstrap 5 also provides eight outline/bordered buttons.
+
+- Move the mouse over them to see an additional `hover` effect:
+
+    ```html
+    <button type="button" class="btn btn-outline-primary">Primary</button>
+    <button type="button" class="btn btn-outline-secondary">Secondary</button>
+    <button type="button" class="btn btn-outline-success">Success</button>
+    <button type="button" class="btn btn-outline-info">Info</button>
+    <button type="button" class="btn btn-outline-warning">Warning</button>
+    <button type="button" class="btn btn-outline-danger">Danger</button>
+    <button type="button" class="btn btn-outline-dark">Dark</button>
+    <button type="button" class="btn btn-outline-light text-dark">Light</button>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_button_outline&stacked=h)
+
+## Button Sizes
+
+- Use the `.btn-lg` class for large buttons or `.btn-sm` class for small buttons:
+
+    ```html
+    <button type="button" class="btn btn-primary btn-lg">Large</button>
+    <button type="button" class="btn btn-primary">Default</button>
+    <button type="button" class="btn btn-primary btn-sm">Small</button>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_button_sizes&stacked=h)
+
+## Block Level Buttons
+
+- To create a block level button that spans the entire width of the parent element, use the .d-grid "helper" class on the parent element:
+
+    ```html
+    <div class="d-grid">
+        <button type="button" class="btn btn-primary btn-block">Full-Width Button</button>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_button_block&stacked=h)
+
+- If you have many block-level buttons, you can control the space between them with the `.gap-*` class:
+
+    ```html
+    <div class="d-grid gap-3">
+        <button type="button" class="btn btn-primary btn-block">Full-Width Button</button>
+        <button type="button" class="btn btn-primary btn-block">Full-Width Button</button>
+        <button type="button" class="btn btn-primary btn-block">Full-Width Button</button>
+    </div>
+    ```
+
+## Active/Disabled Buttons
+
+- A button can be set to an active (appear pressed) or a disabled (unclickable) state:
+
+- The class `.active` makes a button appear pressed, and the `disabled` attribute makes a button unclickable. Note that `<a>` elements do not support the disabled attribute and must therefore use the `.disabled` class to make it visually appear disabled.
+
+    ```html
+    <button type="button" class="btn btn-primary active">Active Primary</button>
+    <button type="button" class="btn btn-primary" disabled>Disabled Primary</button>
+    <a href="#" class="btn btn-primary disabled">Disabled Link</a>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_button_active&stacked=h)
+
+## Spinner Buttons
+
+- You can also add `spinners` to a button, which you will learn more about in our [BS5 Spinners Tutorial](https://www.w3schools.com/bootstrap5/bootstrap_spinners.php):
+
+    ```html
+    <button class="btn btn-primary">
+        <span class="spinner-border spinner-border-sm"></span>
+    </button>
+
+    <button class="btn btn-primary">
+        <span class="spinner-border spinner-border-sm"></span>
+        Loading..
+    </button>
+
+    <button class="btn btn-primary" disabled>
+        <span class="spinner-border spinner-border-sm"></span>
+        Loading..
+    </button>
+
+    <button class="btn btn-primary" disabled>
+        <span class="spinner-grow spinner-grow-sm"></span>
+        Loading..
+    </button>
+    ```
+
+</details>
+
+# Bootstrap 5 Button Groups
+
+<details>
+  <summary>click to expand</summary>
+
+## Button Groups
+
+- Bootstrap 5 allows you to group a series of buttons together (on a single line) in a button group:
+
+- Use a `<div>` element with class `.btn-group` to create a button group:
+
+    ```html
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary">Apple</button>
+        <button type="button" class="btn btn-primary">Samsung</button>
+        <button type="button" class="btn btn-primary">Sony</button>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_button_group&stacked=h)
+
+- Tip: Instead of applying button sizes to every button in a group, use class `.btn-group-lg` for a large button group or the `.btn-group-sm` for a small button group:
+
+    ```html
+    <div class="btn-group btn-group-lg">
+        <button type="button" class="btn btn-primary">Apple</button>
+        <button type="button" class="btn btn-primary">Samsung</button>
+        <button type="button" class="btn btn-primary">Sony</button>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_button_group_size&stacked=h)
+
+## Vertical Button Groups
+
+- Bootstrap 5 also supports vertical button groups:
+
+- Use the class `.btn-group-vertical` to create a vertical button group:
+
+    ```html
+    <div class="btn-group-vertical">
+        <button type="button" class="btn btn-primary">Apple</button>
+        <button type="button" class="btn btn-primary">Samsung</button>
+        <button type="button" class="btn btn-primary">Sony</button>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_button_group_v&stacked=h)
+
+## Button Groups Side by Side
+
+- Button groups are `inline` by default, which makes them appear side by side when you have multiple groups:
+
+    ```html
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary">Apple</button>
+        <button type="button" class="btn btn-primary">Samsung</button>
+        <button type="button" class="btn btn-primary">Sony</button>
+    </div>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary">BMW</button>
+        <button type="button" class="btn btn-primary">Mercedes</button>
+        <button type="button" class="btn btn-primary">Volvo</button>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_button_group_inline&stacked=h)
+
+## Nesting Button Groups & Dropdown Menus
+
+- Nest button groups to create dropdown menus (you will learn more about dropdowns in a later chapter):
+
+    ```html
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary">Apple</button>
+        <button type="button" class="btn btn-primary">Samsung</button>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Sony</button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Tablet</a>
+                <a class="dropdown-item" href="#">Smartphone</a>
+            </div>
+        </div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_button_group_dropdown&stacked=h)
+
+</details>
+
+# Bootstrap 5 Badges
+
+<details>
+  <summary>click to expand</summary>
+
+## Badges
+
+- Badges are used to add additional information to any content:
+
+- Use the `.badge` class together with a contextual class (like `.bg-secondary`) within `<span>` elements to create rectangular badges. Note that badges scale to match the size of the parent element (if any):
+
+    ```html
+    <h1>Example heading <span class="badge bg-secondary">New</span></h1>
+    <h2>Example heading <span class="badge bg-secondary">New</span></h2>
+    <h3>Example heading <span class="badge bg-secondary">New</span></h3>
+    <h4>Example heading <span class="badge bg-secondary">New</span></h4>
+    <h5>Example heading <span class="badge bg-secondary">New</span></h5>
+    <h6>Example heading <span class="badge bg-secondary">New</span></h6>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_badges&stacked=h)
+
+## Contextual Badges
+
+- Use any of the contextual classes (`.bg-*`) to change the color of a badge:
+
+    ```html
+    <span class="badge bg-primary">Primary</span>
+    <span class="badge bg-secondary">Secondary</span>
+    <span class="badge bg-success">Success</span>
+    <span class="badge bg-danger">Danger</span>
+    <span class="badge bg-warning">Warning</span>
+    <span class="badge bg-info">Info</span>
+    <span class="badge bg-light">Light</span>
+    <span class="badge bg-dark">Dark</span>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_badges2&stacked=h)
+
+## Pill Badges
+
+- Use the `.rounded-pill` class to make the badges more round:
+
+    ```html
+    <span class="badge rounded-pill bg-primary">Primary</span>
+    <span class="badge rounded-pill bg-secondary">Secondary</span>
+    <span class="badge rounded-pill bg-success">Success</span>
+    <span class="badge rounded-pill bg-danger">Danger</span>
+    <span class="badge rounded-pill bg-warning">Warning</span>
+    <span class="badge rounded-pill bg-info">Info</span>
+    <span class="badge rounded-pill bg-light">Light</span>
+    <span class="badge rounded-pill bg-dark">Dark</span>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_badges_pills&stacked=h)
+
+## Badge inside an Element
+
+- An example of using a badge inside a button:
+
+    ```html
+    <button type="button" class="btn btn-primary">
+        Messages <span class="badge bg-danger">4</span>
+    </button>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_badges_button&stacked=h)
+
+</details>
+
+# Bootstrap 5 Progress Bars
+
+<details>
+  <summary>click to expand</summary>
+
+## Basic Progress Bar
+
+- A progress bar can be used to show how far a user is in a process.
+
+- To create a default progress bar, add a `.progress` class to a container element and add the `.progress-bar` class to its child element. Use the CSS width property to set the width of the progress bar:
+
+    ```html
+    <div class="progress">
+        <div class="progress-bar" style="width:70%"></div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_progressbar1&stacked=h)
+
+## Progress Bar Height
+
+- The height of the progress bar is `1rem` (usually `16px`) by default. Use the CSS height property to change it:
+
+    ```html
+    <div class="progress" style="height:20px">
+        <div class="progress-bar" style="width:40%;"></div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_progressbar7&stacked=h)
+
+## Progress Bar Labels
+
+- Add text inside the progress bar to show the visible percentage:
+
+    ```html
+    <div class="progress">
+        <div class="progress-bar" style="width:70%">70%</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_progressbar2&stacked=h)
+
+## Colored Progress Bars
+
+- By default, the progress bar is blue (primary). Use any of the contextual background classes to change its color:
+
+    ```html
+    <!-- Blue -->
+    <div class="progress">
+        <div class="progress-bar" style="width:10%"></div>
+    </div>
+
+    <!-- Green -->
+    <div class="progress">
+        <div class="progress-bar bg-success" style="width:20%"></div>
+    </div>
+
+    <!-- Turquoise -->
+    <div class="progress">
+        <div class="progress-bar bg-info" style="width:30%"></div>
+    </div>
+
+    <!-- Orange -->
+    <div class="progress">
+        <div class="progress-bar bg-warning" style="width:40%"></div>
+    </div>
+
+    <!-- Red -->
+    <div class="progress">
+        <div class="progress-bar bg-danger" style="width:50%"></div>
+    </div>
+
+    <!-- White -->
+    <div class="progress border">
+        <div class="progress-bar bg-white" style="width:60%"></div>
+    </div>
+
+    <!-- Grey -->
+    <div class="progress">
+        <div class="progress-bar bg-secondary" style="width:70%"></div>
+    </div>
+
+    <!-- Light Grey -->
+    <div class="progress border">
+        <div class="progress-bar bg-light" style="width:80%"></div>
+    </div>
+
+    <!-- Dark Grey -->
+    <div class="progress">
+        <div class="progress-bar bg-dark" style="width:90%"></div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_progressbar3&stacked=h)
+
+## Striped Progress Bars
+
+- Use the `.progress-bar-striped` class to add stripes to the progress bars:
+
+    ```html
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped" style="width:40%"></div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_progressbar4&stacked=h)
+
+## Animated Progress Bar
+
+- Add the `.progress-bar-animated` class to animate the progress bar:
+
+    ```html
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:40%"></div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_progressbar5&stacked=h)
+
+## Multiple Progress Bars
+
+- Progress bars can also be stacked:
+
+    ```html
+    <div class="progress">
+        <div class="progress-bar bg-success" style="width:40%">
+            Free Space
+        </div>
+        <div class="progress-bar bg-warning" style="width:10%">
+            Warning
+        </div>
+        <div class="progress-bar bg-danger" style="width:20%">
+            Danger
+        </div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_progressbar6&stacked=h)
+
+</details>
+
+<!--
+# Bootstrap 5 Items
+
+<details>
+  <summary>click to expand</summary>
+
+</details>
+-->
