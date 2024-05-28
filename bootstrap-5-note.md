@@ -2089,6 +2089,9 @@
 
 # Bootstrap 5 Navbars
 
+<details>
+  <summary>click to expand</summary>
+
 ## Navigation Bars
 
 - A navigation bar is a navigation header that is placed at the top of the page:
@@ -2350,6 +2353,8 @@
     ```
 
     [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_navbar_fixed_sticky&stacked=h)
+
+</details>
 
 # Bootstrap 5 Carousel
 
