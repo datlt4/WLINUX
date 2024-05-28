@@ -2436,6 +2436,1203 @@
 
 </details>
 
+# Bootstrap 5 Modal
+
+<details>
+  <summary>click to expand</summary>
+
+## Modals
+
+- The Modal component is a dialog box/popup window that is displayed on top of the current page:
+
+    <img src="asset/bootstrap-5-modal.png" width="500"/>
+
+## How To Create a Modal
+
+- The following example shows how to create a basic modal:
+
+    ```html
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+        Open modal
+    </button>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal&stacked=h)
+
+## Add animation
+
+- Use the `.fade` class to add a fading effect when opening and closing the modal:
+
+    ```html
+    <!-- Fading modal -->
+    <div class="modal fade"></div>
+    <!-- Modal without animation -->
+    <div class="modal"></div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_fade&stacked=h)
+
+## Modal Size
+
+- Change the size of the modal by adding the `.modal-sm` class for small modals (max-width 300px), `.modal-lg` class for large modals  (max-width 800px), or `.modal-xl` for extra large modals  (max-width 1140px). Default is `500px` max-width.
+
+- Add the size class to the `<div>` element with class `.modal-dialog`:
+
+- Small Modal
+
+    ```html
+    <div class="modal-dialog modal-sm">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_sm&stacked=h)
+
+- Large Modal
+
+    ```html
+    <div class="modal-dialog modal-lg">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_lg&stacked=h)
+
+- Extra Large Modal
+
+    ```html
+    <div class="modal-dialog modal-xl">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_xl&stacked=h)
+
+- By default, modals are `medium` in size (`500px` max-width).
+
+## Fullscreen Modals
+
+- If you want the modal to span the whole width and height of the page, use the `.modal-fullscreen` class:
+
+    ```html
+    <div class="modal-dialog modal-fullscreen">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_fullscreen&stacked=h)
+
+## Responsive Fullscreen Modals
+
+You can also control when the modal should be in fullscreen, with the .modal-fullscreen-*-* classes:
+
+|Class|Description|Example|
+|---|---|:---:|
+|`.modal-fullscreen-sm-down`|Fullscreen below 576px|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_fullscreen_sm)|
+|`.modal-fullscreen-md-down`|Fullscreen below 768px|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_fullscreen_md)|
+|`.modal-fullscreen-lg-down`|Fullscreen below 992px|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_fullscreen_lg)|
+|`.modal-fullscreen-xl-down`|Fullscreen below 1200px|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_fullscreen_xl&stacked=h)|
+|`.modal-fullscreen-xxl-down`|Fullscreen below 1400px|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_fullscreen_xxl&stacked=h)|
+
+## Centered Modal
+
+- Center the modal vertically and horizontally within the page, with the `.modal-dialog-centered` class:
+
+    ```html
+    <div class="modal-dialog modal-dialog-centered">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_centered)
+
+## Scrolling Modal
+
+- When you have a lot of content inside the modal, a scrollbar is added to the page. See the examples below to understand it:
+
+    ```html
+    <div class="modal-dialog">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_scroll&stacked=h)
+
+- However, it is possible to only scroll inside the modal, instead of the page itself, by adding .modal-dialog-scrollable to .modal-dialog:
+
+    ```html
+    <div class="modal-dialog modal-dialog-scrollable">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_modal_scroll2&stacked=h)
+
+</details>
+
+# Bootstrap 5 Tooltip
+
+<details>
+  <summary>click to expand</summary>
+
+## Tooltips
+
+- The Tooltip component is small pop-up box that appears when the user moves the mouse pointer over an element:
+
+    <img src="asset/bootstrap-5-tooltip.png"/>
+
+## How To Create a Tooltip
+
+- To create a tooltip, add the `data-bs-toggle="tooltip"` attribute to an element.
+
+- Use the `title` attribute to specify the text that should be displayed inside the tooltip:
+
+    ```html
+    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title="Hooray!">Hover over me!</button>
+    ```
+
+- **Note**: Tooltips must be initialized with JavaScript to work.
+
+- The following code will enable all tooltips in the document:
+
+    ```html
+    <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+    </script>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_tooltip&stacked=h)
+
+## Positioning Tooltips
+
+- By default, the tooltip will appear on top of the element.
+
+- Use the `data-bs-placement` attribute to set the position of the tooltip on top, bottom, left or the right side of the element:
+
+    ```html
+    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Hooray!">Hover</a>
+    <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hooray!">Hover</a>
+    <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Hooray!">Hover</a>
+    <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Hooray!">Hover</a>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_tooltip_pos&stacked=h)
+
+</details>
+
+# Bootstrap 5 Popover
+
+<details>
+  <summary>click to expand</summary>
+
+## Popovers
+
+- The Popover component is similar to tooltips; it is a pop-up box that appears when the user clicks on an element. The difference is that the popover can contain much more content.
+
+    <img src="asset/bootstrap-5-popover.png"/>
+
+## How To Create a Popover
+
+- To create a popover, add the `data-bs-toggle="popover"` attribute to an element.
+
+- Use the `title` attribute to specify the header text of the popover, and use the `data-bs-content` attribute to specify the text that should be displayed inside the popover's body:
+
+    ```html
+    <button type="button" class="btn btn-primary" data-bs-toggle="popover" title="Popover Header" data-bs-content="Some content inside the popover">Toggle popover</button>
+    ```
+
+- **Note**: Popovers must be initialized with JavaScript to work.
+
+- The following code will enable all popovers in the document:
+
+    ```html
+    <script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
+    </script>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_popover&stacked=h)
+
+## Positioning Popovers
+
+- By default, the popover will appear on the right side of the element.
+
+- Use the `data-bs-placement` attribute to set the position of the popover on top, bottom, left or the right side of the element:
+
+```html
+<a href="#" title="Header" data-bs-toggle="popover" data-bs-placement="top" data-content="Content">Top</a>
+<a href="#" title="Header" data-bs-toggle="popover" data-bs-placement="bottom" data-content="Content">Bottom</a>
+<a href="#" title="Header" data-bs-toggle="popover" data-bs-placement="left" data-content="Content">Left</a>
+<a href="#" title="Header" data-bs-toggle="popover" data-bs-placement="right" data-content="Content">Right</a>
+```
+
+[Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_popover_pos&stacked=h)
+
+- **Note**: The placement attributes do not work as you expect if it is not enough room for them. For example: if you use the top placement at the top of a page (where it is no room for it), it will instead display the popover below the element or to the right (wherever it is room for it).
+
+## Closing Popovers
+
+- By default, the popover is closed when you click on the element again. However, you can use the `data-bs-trigger="focus"` attribute which will close the popover when clicking outside the element:
+
+    ```html
+    <a href="#" title="Dismissible popover" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="Click anywhere in the document to close this popover">Click me</a>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_popover_focus&stacked=h)
+
+## Hoverable Popover
+
+- **Tip**: If you want the popover to be displayed when you move the mouse pointer over the element, use `the data-bs-trigger` attribute with a value of `"hover"`:
+
+    ```html
+    <a href="#" title="Header" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Popover text">Hover over me</a>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_popover_hover&stacked=h)
+
+</details>
+
+# Bootstrap 5 Toasts
+
+<details>
+  <summary>click to expand</summary>
+
+## Toasts
+
+- The toast component is like an alert box that is only shown for a couple of seconds when something happens (i.e. when the user clicks on a button, submits a form, etc.).
+
+## How To Create a Toast
+
+- To create a toast, use the `.toast` class, and add a `.toast-header` and a `.toast-body` inside of it.
+
+- **Note**: Toasts are hidden by default. Use the `.show` class if you want to display it. To close it, use a `<button>` element and add `data-bs-dismiss="toast"`:
+
+    ```html
+    <div class="toast show">
+        <div class="toast-header">
+            Toast Header
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">
+            Some text inside the toast body
+        </div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_toast_close&stacked=h)
+
+## Open a Toast
+
+- To show a toast with a click of a button, you must initialize it with JavaScript: select the specified element and call the `toast()` method.
+
+- The following code will show all `toasts` in the document when you click on a button:
+
+    ```html
+    <script>
+    document.getElementById("toastbtn").onclick = function() {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function(toastEl) {
+            return new bootstrap.Toast(toastEl)
+        })
+        toastList.forEach(toast => toast.show())
+    }
+    </script>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_toast&stacked=h)
+
+</details>
+
+# Bootstrap 5 Scrollspy
+
+<details>
+  <summary>click to expand</summary>
+
+## Scrollspy
+
+- Scrollspy is used to automatically update links in a navigation list based on scroll position.
+
+    <img src="asset/bootstrap-5-scrollspy.png" width="800"/>
+
+## How To Create a Scrollspy
+
+- The following example shows how to create a scrollspy:
+
+    ```html
+    <!-- The scrollable area -->
+    <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
+
+    <!-- The navbar - The <a> elements are used to jump to a section in the scrollable area -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    ...
+        <ul class="navbar-nav">
+            <li><a href="#section1">Section 1</a></li>
+            ...
+    </nav>
+
+    <!-- Section 1 -->
+    <div id="section1">
+        <h1>Section 1</h1>
+        <p>Try to scroll this page and look at the navigation bar while scrolling!</p>
+    </div>
+    ...
+
+    </body>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_scrollspy&stacked=h)
+
+### Example Explained
+
+- Add `data-bs-spy="scroll"` to the element that should be used as the scrollable area (often this is the `<body>` element).
+
+- Then add the `data-bs-target` attribute with a value of the id or the class name of the navigation bar (`.navbar`). This is to make sure that the navbar is connected with the scrollable area.
+
+- Note that scrollable elements must match the ID of the links inside the navbar's list items (`<div id="section1">` matches `<a href="#section1">`).
+
+- The optional `data-bs-offset` attribute specifies the number of pixels to offset from top when calculating the position of scroll. This is useful when you feel that the links inside the navbar changes the active state too soon or too early when jumping to the scrollable elements. Default is 10 pixels.
+
+- **Requires relative positioning**: The element with data-bs-spy="scroll" requires the CSS **position** property, with a value of "relative" to work properly.
+
+</details>
+
+# Bootstrap 5 Offcanvas
+
+<details>
+  <summary>click to expand</summary>
+
+## Offcanvas
+
+- Offcanvas is similar to modals (hidden by default and shown when activated), except that is often used as a sidebar navigation menu.
+
+    <img src="asset/bootstrap-5-offcanvas.png" width="800"/>
+
+## How To Create an Offcanvas Sidebar
+
+- The following example shows how to create an offcanvas sidebar:
+
+    ```html
+    <!-- Offcanvas Sidebar -->
+    <div class="offcanvas offcanvas-start" id="demo">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas-title">Heading</h1>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>Some text lorem ipsum.</p>
+            <p>Some text lorem ipsum.</p>
+            <button class="btn btn-secondary" type="button">A Button</button>
+        </div>
+    </div>
+
+    <!-- Button to open the offcanvas sidebar -->
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+        Open Offcanvas Sidebar
+    </button>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_offcanvas&stacked=h)
+
+### Example Explained
+
+- The `.offcanvas` class creates the offcanvas sidebar.
+
+- The `.offcanvas-start` class positions the offcanvas, and makes it 400px wide. See examples below for more positioning classes.
+
+- The `.offcanvas-title` class ensures proper margins and line-height.
+
+- Then, add your content inside the `.offcanvas-body` class.
+
+- To open the offcanvas sidebar, you must use a `<button>` or an `<a>` element that points to the id of the `.offcanvas` container (`#demo` in our example).
+
+- To open the offcanvas sidebar with an `<a>` element, you can point to `#demo` with the `href` attribute, instead of `data-bs-target` attribute.
+
+## Offcanvas Position
+
+- Use the `.offcanvas-start|end|top|bottom` to position the offcanvas to the left, right, top or bottom:
+
+- Right Example
+
+    ```html
+    <div class="offcanvas offcanvas-end" id="demo">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_offcanvas_end&stacked=h)
+
+- Top Example
+
+    ```html
+    <div class="offcanvas offcanvas-top" id="demo">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_offcanvas_top)
+
+- Bottom Example
+
+    ```html
+    <div class="offcanvas offcanvas-bottom" id="demo">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_offcanvas_bottom)
+
+## Responsive OffCanvas Menu
+
+- You can also control when you want to hide or show the offcanvas menu on different screen widths, with the `.offcanvas-sm|md|lg|xl|xxl` classes:
+
+    ```html
+    <div class="offcanvas offcanvas-start offcanvas-lg" id="demo">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_offcanvas_responsive&stacked=h)
+
+## Dark OffCanvas Menu
+
+- Use the `.text-bg-dark` class to create a dark offcanvas menu.
+
+- **Tip**: We have also added the `.btn-close-white` class to `.btn-close`, to create a white close button that looks nice with the dark background:
+
+    ```html
+    <div class="offcanvas offcanvas-start text-bg-dark" id="demo">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas-title">Heading</h1>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>Some text lorem ipsum.</p>
+            <p>Some text lorem ipsum.</p>
+            <p>Some text lorem ipsum.</p>
+            <button class="btn btn-secondary" type="button">A Button</button>
+        </div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_offcanvas_dark)
+
+</details>
+
+# Bootstrap 5 Utilities
+
+<details>
+  <summary>click to expand</summary>
+
+## Utilities / Helper Classes
+
+- Bootstrap 5 has a lot of utility/helper classes to quickly style elements without using any CSS code.
+
+## Borders
+
+- Use the `border` classes to add or remove borders from an element:
+
+    <img src="asset/bootstrap-5-utilities-border.png" width="500"/>
+
+    ```html
+    <span class="border"></span>
+    <span class="border border-0"></span>
+    <span class="border border-top-0"></span>
+    <span class="border border-end-0"></span>
+    <span class="border border-bottom-0"></span>
+    <span class="border border-start-0"></span>
+    <br>
+
+    <span class="border-top"></span>
+    <span class="border-end"></span>
+    <span class="border-bottom"></span>
+    <span class="border-start"></span>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_borders&stacked=h)
+
+## Border Width
+
+- Use `.border-1` to `.border-5` to change the width of the border:
+
+    <img src="asset/bootstrap-5-utilities-border-width.png" width="400"/>
+
+    ```html
+    <span class="border border-1"></span>
+    <span class="border border-2"></span>
+    <span class="border border-3"></span>
+    <span class="border border-4"></span>
+    <span class="border border-5"></span>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_borders_width&stacked=h)
+
+## Border Color
+
+- Add a color to the border with any of the contextual border color classes:
+
+    <img src="asset/bootstrap-5-utilities-border-color.png"/>
+
+    ```html
+    <span class="border border-primary"></span>
+    <span class="border border-secondary"></span>
+    <span class="border border-success"></span>
+    <span class="border border-danger"></span>
+    <span class="border border-warning"></span>
+    <span class="border border-info"></span>
+    <span class="border border-light"></span>
+    <span class="border border-dark"></span>
+    <span class="border border-white"></span>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_borders_colors&stacked=h)
+
+## Border Radius
+
+- Add rounded corners to an element with the `rounded` classes:
+
+    <img src="asset/bootstrap-5-utilities-border-color.png"/>
+
+    ```html
+    <span class="rounded"></span>
+    <span class="rounded-top"></span>
+    <span class="rounded-end"></span>
+    <span class="rounded-bottom"></span>
+    <span class="rounded-start"></span>
+    <span class="rounded-circle"></span>
+    <span class="rounded-pill" style="width:130px"></span>
+    <span class="rounded-0"></span>
+    <span class="rounded-1"></span>
+    <span class="rounded-2"></span>
+    <span class="rounded-3"></span>
+    <span class="rounded-4"></span>
+    <span class="rounded-5"></span>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_borders_rounded&stacked=h)
+
+## Float and Clearfix
+
+- Float an element to the right with the `.float-end` class or to the left with `.float-start`, and clear floats with the `.clearfix` class:
+
+    <img src="asset/bootstrap-5-utilities-float-clearfix.png" width="800"/>
+
+    ```html
+    <div class="clearfix">
+        <span class="float-start">Float left</span>
+        <span class="float-end">Float right</span>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_float&stacked=h)
+
+## Responsive Floats
+
+- Float an element to the left or to the right depending on screen width, with the responsive float classes (`.float-*-start|end` - where* is `sm` (>=576px), `md` (>=768px), `lg` (>=992px), `xl` (>=1200px) or `xxl` (>=1400px)):
+
+    <img src="asset/bootstrap-5-utilities-responsive-float.png" width="800"/>
+
+    ```html
+    <div class="float-sm-end">Float right on small screens or wider</div><br>
+    <div class="float-md-end">Float right on medium screens or wider</div><br>
+    <div class="float-lg-end">Float right on large screens or wider</div><br>
+    <div class="float-xl-end">Float right on extra large screens or wider</div><br>
+    <div class="float-xxl-end">Float right on XXL screens or wider</div><br>
+    <div class="float-none">Float none</div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_float_resp&stacked=h)
+
+## Center Align
+
+- Center an element with the `.mx-auto` class (adds margin-left and margin-right: auto):
+
+    <img src="asset/bootstrap-5-utilities-center-align.png" width="800"/>
+
+    ```html
+    <div class="mx-auto bg-warning" style="width:150px">Centered</div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_center&stacked=h)
+
+## Width
+
+- Set the width of an element with the `w-*` classes (`.w-25`, `.w-50`, `.w-75`, `.w-100`, `.w-auto`, and `.mw-100`):
+
+    <img src="asset/bootstrap-5-utilities-width.png" width="800"/>
+
+    ```html
+    <div class="w-25 bg-warning">Width 25%</div>
+    <div class="w-50 bg-warning">Width 50%</div>
+    <div class="w-75 bg-warning">Width 75%</div>
+    <div class="w-100 bg-warning">Width 100%</div>
+    <div class="w-auto bg-warning">Auto Width</div>
+    <div class="mw-100 bg-warning">Max Width 100%</div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_width&stacked=h)
+
+## Height
+
+- Set the height of an element with the `h-*` classes (`.h`-25, `.h-50`, `.h-75`, `.h-100`, `.h-auto`, and `.mh-100`):
+
+    <img src="asset/bootstrap-5-utilities-height.png" width="800"/>
+
+    ```html
+    <div style="height:200px;background-color:#ddd">
+        <div class="h-25 bg-warning">Height 25%</div>
+        <div class="h-50 bg-warning">Height 50%</div>
+        <div class="h-75 bg-warning">Height 75%</div>
+        <div class="h-100 bg-warning">Height 100%</div>
+        <div class="h-auto bg-warning">Auto Height</div>
+        <div class="mh-100 bg-warning" style="height:500px">Max Height 100%</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_height&stacked=h)
+
+## Spacing
+
+- Bootstrap 5 has a wide range of responsive margin and padding utility classes. They work for all breakpoints: `xs` (<=576px), `sm` (>=576px), `md` (>=768px), `lg` (>=992px), `xl` (>=1200px) or `xxl` (>=1400px):
+
+- The classes are used in the format: `{property}{sides}-{size}` for `xs` and `{property}{sides}-{breakpoint}-{size}` for `sm`, `md`, `lg`, `xl` and `xxl`.
+
+- Where property is one of:
+
+  - `m` - sets `margin`
+  - `p` - sets `padding`
+
+- Where *sides* is one of:
+
+  - `t` - sets `margin-top` or `padding-top`
+  - `b` - sets `margin-bottom` or `padding-bottom`
+  - `s` - sets `margin-left` or `padding-left`
+  - `e` - sets `margin-right` or `padding-right`
+  - `x` - sets both `padding-left` and `padding-right` or `margin-left` and `margin-right`
+  - `y` - sets both `padding-top` and `padding-bottom` or `margin-top` and `margin-bottom`
+  - *blank* - sets a `margin` or `padding` on all 4 sides of the element
+
+- Where size is one of:
+
+  - `0` - sets `margin` or `padding` to `0`
+  - `1` - sets `margin` or `padding` to `.25rem`
+  - `2` - sets `margin` or `padding` to `.5rem`
+  - `3` - sets `margin` or `padding` to `1rem`
+  - `4` - sets `margin` or `padding` to `1.5rem`
+  - `5` - sets `margin` or `padding` to `3rem`
+  - `auto` - sets `margin` to `auto`
+
+    <img src="asset/bootstrap-5-utilities-spacing.png" width="800"/>
+
+    ```html
+    <div class="pt-4 bg-warning">I only have a top padding (1.5rem)</div>
+    <div class="p-5 bg-success">I have a padding on all sides (3rem)</div>
+    <div class="m-5 pb-5 bg-info">I have a margin on all sides (3rem) and a bottom padding (3rem)</div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_spacing&stacked=h)
+
+### More Spacing Examples
+
+- More Spacing Examples
+
+    ||||
+    |---|---|:---:|
+    |`.m-# / m-*-#`|margin on all sides|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_spacing&amp;stacked=h)|
+    |`.mt-# / mt-*-#`|margin top|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_mt-responsive&amp;stacked=h)|
+    |`.mb-# / mb-*-#`|margin bottom|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_mb-responsive&amp;stacked=h)|
+    |`.ms-# / ms-*-#`|margin left|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_ms-responsive&amp;stacked=h)|
+    |`.me-# / me-*-#`|margin right|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_me-responsive&amp;stacked=h)|
+    |`.mx-# / mx-*-#`|margin left and right|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_mx-responsive&amp;stacked=h)|
+    |`.my-# / my-*-#`|margin top and bottom|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_my-responsive&amp;stacked=h)|
+    |`.p-# / p-*-#`|padding on all sides|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_p-responsive&amp;stacked=h)|
+    |`.pt-# / pt-*-#`|padding top|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_pt-responsive&amp;stacked=h)|
+    |`.pb-# / pb-*-#`|padding bottom|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_pb-responsive&amp;stacked=h)|
+    |`.ps-# / ps-*-#`|padding left|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_ps-responsive&amp;stacked=h)|
+    |`.pe-# / pe-*-#`|padding right|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_pe-responsive&amp;stacked=h)|
+    |`.py-# / py-*-#`|padding top and bottom|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_py-responsive&amp;stacked=h)|
+    |`.px-# / px-*-#`|padding left and righ|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_px-responsive&amp;stacked=h)|
+
+## Shadows
+
+- Use the `shadow-` classes to add shadows to an element:
+
+    <img src="asset/bootstrap-5-utilities-shadow.png" width="600"/>
+
+    ```html
+    <div class="shadow-none p-4 mb-4 bg-light">No shadow</div>
+    <div class="shadow-sm p-4 mb-4 bg-white">Small shadow</div>
+    <div class="shadow p-4 mb-4 bg-white">Default shadow</div>
+    <div class="shadow-lg p-4 mb-4 bg-white">Large shadow</div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_shadow&stacked=h)
+
+## Vertical Align
+
+- Use the `align-` classes to change the alignment of elements (only works on `inline`, `inline-block`, `inline-table` and table cell elements):
+
+    <img src="asset/bootstrap-5-utilities-vertical-align.png" width="600"/>
+
+    ```html
+    <span class="align-baseline">baseline</span>
+    <span class="align-top">top</span>
+    <span class="align-middle">middle</span>
+    <span class="align-bottom">bottom</span>
+    <span class="align-text-top">text-top</span>
+    <span class="align-text-bottom">text-bottom</span>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_align&stacked=h)
+
+## Aspect Ratio
+
+- Create responsive video or slideshows based on the width of the parent.
+
+- Add the `.ratio` class together with an aspect ratio of your choice `.ratio-*` to a parent element, and add the embed (video or iframe) inside of it:
+
+```html
+<!-- Aspect ratio 1:1 -->
+<div class="ratio ratio-1x1">
+  <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+</div>
+
+<!-- Aspect ratio 4:3 -->
+<div class="ratio ratio-4x3">
+  <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+</div>
+
+<!-- Aspect ratio 16:9 -->
+<div class="ratio ratio-16x9">
+  <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+</div>
+
+<!-- Aspect ratio 21:9 -->
+<div class="ratio ratio-21x9">
+  <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+</div>
+```
+
+[Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_aspect_ratio)
+
+## Visibility
+
+- Use the `.visible` or `.invisible` classes to control the visibility of elements.
+- **Note**: These classes do not change the CSS display value. They only add `visibility:visible` or `visibility:hidden`:
+
+    ```html
+    <div class="visible">I am visible</div>
+    <div class="invisible">I am invisible</div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_visibility&stacked=h)
+
+## Close icon
+
+- Use the `.btn-close` class to style a close icon. This is often used for alerts and modals.
+
+    ```html
+    <button type="button" class="btn-close"></button>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_close&stacked=h)
+
+## Screenreaders
+
+- Use the `.visually-hidden` class to hide an element on all devices, except screen readers:
+
+    ```html
+    <span class="visually-hidden">I will be hidden on all screens except for screen readers.</span>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_util_sr&stacked=h)
+
+## Colors
+
+- As described in the Colors chapter, here is a list of all text and background color classes:
+
+- The classes for text colors are: `.text-muted`, `.text-primary`, `.text-success`, `.text-info`, `.text-warning`, `.text-danger`, `.text-secondary`, `.text-white`, `.text-dark`, `.text-body` (default body color/often black) and `.text-light`:
+
+- You can also add `50%` opacity for black or white text with the `.text-black-50` or `.text-white-50` classes:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_txt_colors&stacked=h)
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_txt_colors_links&stacked=h)
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_txt_colors_opacity&stacked=h)
+
+## Background Colors
+
+- The classes for background colors are: `.bg-primary`, `.bg-success`, `.bg-info`, `.bg-warning`, `.bg-danger`, `.bg-secondary`, `.bg-dark` and `.bg-light`.
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_txt_bgcolors&stacked=h)
+
+- The `.bg-color` classes above does not work well with text, or atleast then you have to specify a proper `.text-color` class to get the right text color for each background.
+
+- However, you can use the `.text-bg-color` classes and Bootstrap will automatically handle the appropriate text color for each background color:
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_txt_bgcolors2&stacked=h)
+
+</details>
+
+<!--
+# Bootstrap 5 Items
+
+<details>
+  <summary>click to expand</summary>
+
+</details>
+-->
+
+# Bootstrap 5 Dark Mode
+
+<details>
+  <summary>click to expand</summary>
+
+## Dark Mode
+
+- By default, bootstrap pages have a white (light) background color.
+
+- If you want to change the whole page to a darker color, you can add `data-bs-theme="dark"` to the `<html>` element:
+
+    <img src="asset/bootstrap-5-dark-mode.png" width="800"/>
+
+    ```html
+    <html lang="en" data-bs-theme="dark">
+        <head>
+            ...
+        </head>
+
+        <body>
+            ...
+        </body>
+    </html>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_darkmode_light&stacked=h)
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_darkmode&stacked=h)
+
+## Dark Mode For Components
+
+- If you don't want the whole page to have a darker color, but only specific components, you can add the `data-bs-theme="dark"` attribute to the specified component.
+
+- For example, add dark mode to a table:
+
+    ```html
+    <table class="table" data-bs-theme="dark">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_darkmode_table&stacked=h)
+
+- Or for example, add dark mode to a dropdown menu:
+
+    ```html
+    <div class="dropdown" data-bs-theme="dark">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_darkmode_dropdown&stacked=h)
+
+</details>
+
+# Bootstrap 5 Flex
+
+<details>
+  <summary>click to expand</summary>
+
+## Flexbox
+
+- To create a flexbox container and to transform direct children into flex items, use the `d-flex` class:
+
+    <img src="asset/bootstrap-5-d-flex.png" width="700"/>
+
+    ```html
+    <div class="d-flex p-3 bg-secondary text-white">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex&stacked=h)
+
+- To create an inline flexbox container, use the `d-inline-flex` class:
+
+    <img src="asset/bootstrap-5-d-inline-flex.png" width="700"/>
+
+    ```html
+    <div class="d-inline-flex p-3 bg-secondary text-white">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-inline&stacked=h)
+
+## Horizontal Direction
+
+- Use `.flex-row` to display the flex items horizontally (side by side). This is default.
+
+- **Tip**: Use `.flex-row-reverse` to right-align the horizontal direction:
+
+    <img src="asset/bootstrap-5-horizontal-direction.png" width="700"/>
+
+    ```html
+    <div class="d-flex flex-row bg-secondary">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+
+    <div class="d-flex flex-row-reverse bg-secondary">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-direction&stacked=h)
+
+## Vertical Direction
+
+- Use `.flex-column` to display the flex items vertically (on top of each other), or `.flex-column-reverse` to reverse the vertical direction:
+
+    <img src="asset/bootstrap-5-vertical-direction.png" width="700"/>
+
+    ```html
+    <div class="d-flex flex-column">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+
+    <div class="d-flex flex-column-reverse">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-direction-col&stacked=h)
+
+## Justify Content
+
+- Use the `.justify-content-*` classes to change the alignment of flex items. Valid classes are `start` (default), `end`, `center`, `between` or `around`
+
+    <img src="asset/bootstrap-5-justify-content.png" width="700"/>
+
+    ```html
+    <div class="d-flex justify-content-start">...</div>
+    <div class="d-flex justify-content-end">...</div>
+    <div class="d-flex justify-content-center">...</div>
+    <div class="d-flex justify-content-between">...</div>
+    <div class="d-flex justify-content-around">...</div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-justify&stacked=h)
+
+## Fill / Equal Widths
+
+- Use `.flex-fill` on flex items to force them into equal widths
+
+    <img src="asset/bootstrap-5-fill-equal-widths.png" width="700"/>
+
+    ```html
+    <div class="d-flex">
+        <div class="p-2 bg-info flex-fill">Flex item 1</div>
+        <div class="p-2 bg-warning flex-fill">Flex item 2</div>
+        <div class="p-2 bg-primary flex-fill">Flex item 3</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-fill&stacked=h)
+
+## Grow
+
+- Use `.flex-grow-1` on a flex item to take up the rest of the space. In the example below, the first two flex items take up their necessary space, while the last item takes up the rest of the available space
+
+    <img src="asset/bootstrap-5-fill-grow-widths.png" width="700"/>
+
+    ```html
+    <div class="d-flex">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary flex-grow-1">Flex item 3</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-grow&stacked=h)
+
+## Order
+
+- Change the visual order of a specific flex item(s) with the `.order` classes. Valid classes are from `0` to `5`, where the lowest number has highest priority (`order-1` is shown before `order-2`, etc..)
+
+    <img src="asset/bootstrap-5-flex-order.png" width="700"/>
+
+    ```html
+    <div class="d-flex bg-secondary">
+        <div class="p-2 bg-info order-3">Flex item 1</div>
+        <div class="p-2 bg-warning order-2">Flex item 2</div>
+        <div class="p-2 bg-primary order-1">Flex item 3</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-order&stacked=h)
+
+## Auto Margins
+
+- Easily add auto margins to flex items with `.ms-auto` (push items to the right), or by using `.me-auto` (push items to the left):
+
+    <img src="asset/bootstrap-5-flex-auto-margins.png" width="700"/>
+
+    ```html
+    <div class="d-flex bg-secondary">
+        <div class="p-2 ms-auto bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+
+    <div class="d-flex bg-secondary">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 me-auto bg-primary">Flex item 3</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-auto-margins&stacked=h)
+
+## Wrap
+
+- Control how flex items wrap in a flex container with `.flex-nowrap` (default), `.flex-wrap` or `.flex-wrap-reverse`.
+
+    <img src="asset/bootstrap-5-flex-wrap.png" width="800"/>
+
+    ```html
+    <div class="d-flex flex-wrap">..</div>
+
+    <div class="d-flex flex-wrap-reverse">..</div>
+
+    <div class="d-flex flex-nowrap">..</div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-wrap&stacked=h)
+
+## Align Content
+
+- Control the vertical alignment of gathered flex items with the `.align-content-*` classes. Valid classes are `.align-content-start` (default), `.align-content-end`, `.align-content-center`, `.align-content-between`, `.align-content-around` and `.align-content-stretch`.
+
+- **Note**: These classes have no effect on single rows of flex items.
+
+    ```html
+    <div class="d-flex flex-wrap align-content-start">..</div>
+
+    <div class="d-flex flex-wrap align-content-end">..</div>
+
+    <div class="d-flex flex-wrap align-content-center">..</div>
+
+    <div class="d-flex flex-wrap align-content-around">..</div>
+
+    <div class="d-flex flex-wrap align-content-stretch">..</div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-content&stacked=h)
+
+    <img src="asset/bootstrap-5-flex-align-content.png" width="600"/>
+
+## Align Items
+
+- Control the vertical alignment of single rows of flex items with the `.align-items-*` classes. Valid classes are `.align-items-start`, `.align-items-end`, `.align-items-center`, `.align-items-baseline`, and `.align-items-stretch` (default).
+
+    ```html
+    <div class="d-flex align-items-start">..</div>
+
+    <div class="d-flex align-items-end">..</div>
+
+    <div class="d-flex align-items-center">..</div>
+
+    <div class="d-flex align-items-baseline">..</div>
+
+    <div class="d-flex align-items-stretch">..</div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-items&stacked=h)
+
+## Align Self
+
+- Control the vertical alignment of a specified flex item with the `.align-self-*` classes. Valid classes are `.align-self-start`, `.align-self-end`, `.align-self-center`, `.align-self-baseline`, and `.align-self-stretch` (default).
+
+```html
+<div class="d-flex bg-light" style="height:150px">
+    <div class="p-2 border">Flex item 1</div>
+    <div class="p-2 border align-self-start">Flex item 2</div>
+    <div class="p-2 border">Flex item 3</div>
+</div>
+```
+
+[Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-self&stacked=h)
+
+## Responsive Flex Classes
+
+- All flex classes comes with additional responsive classes, which makes it easy to set a specific flex class on a specific screen size.
+
+- The `*` symbol can be replaced with `sm`, `md`, `lg`, `xl` or `xxl`, which represents small, medium, large, xlarge and xxlarge screens.
+
+|Class|Description|Example|
+|---|---|---|
+|**Flex Container**|||
+|`.d-*-flex`|Creates a flexbox container for different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-responsive)|
+|`.d-*-inline-flex`|Creates an inline flexbox container for different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-inline-responsive)|
+|**Direction**|||
+|`.flex-*-row`|Display flex items horizontally on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-row-responsive)|
+|`.flex-*-row-reverse`|Display flex items horizontally, and right-aligned, on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-row-reverse-responsive)|
+|`.flex-*-column`|Display flex items vertically on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-column-responsive)|
+|`.flex-*-column-reverse`|Display flex items vertically, with reversed order, on different screens screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-column-reverse-responsive)|
+|**Justified Content**|||
+|`.justify-content-*-start`|Display flex items from the start (left-aligned) on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-justify-start-responsive)|
+|`.justify-content-*-end`|Display flex items at the end (right-aligned) on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-justify-end-responsive)|
+|`.justify-content-*-center`|Display flex items in the center of a flex container on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-justify-center-responsive)|
+|`.justify-content-*-between`|Display flex items in "between" on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-justify-between-responsive)|
+|`.justify-content-*-around`|Display flex items "around" on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-justify-around-responsive)|
+|**Fill / Equal Width**|||
+|`.flex-*-fill`|Force flex items into equal widths on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-fill-responsive)|
+|**Grow**|||
+|`.flex-*-grow-0`|Don't make the items grow on different screens||
+|`.flex-*-grow-1`|Make items grow on different screens||
+|**Shrink**|||
+|`.flex-*-shrink-0`|Don't make the items shrink on diferent screens||
+|`.flex-*-shrink-1`|Make items shrink on different screens||
+|**Order**|||
+|`.order-*-0-12`|Change the order from 0 to 5 on small screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-order-responsive)|
+|**Wrap**|||
+|`.flex-*-nowrap`|Don't wrap items on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-nowrap-responsive)|
+|`.flex-*-wrap`|Wrap items on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-wrap-responsive)|
+|`.flex-*-wrap-reverse`|Reverse the wrapping of items on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-wrap-reverse-responsive)|
+|**Align Content**|||
+|`.align-content-*-start`|Align gathered items from the start on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-content-start-responsive)|
+|`.align-content-*-end`|Align gathered items at the end on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-content-end-responsive)|
+|`.align-content-*-center`|Align gathered items in the center on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-content-center-responsive)|
+|`.align-content-*-around`|Align gathered items "around" on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-content-around-responsive)|
+|`.align-content-*-stretch`|Stretch gathered items on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-content-stretch-responsive)|
+|**Align Items**|||
+|`.align-items-*-start`|Align single rows of items from the start on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-items-start-responsive)|
+|`.align-items-*-end`|Align single rows of items at the end on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-items-end-responsive)|
+|`.align-items-*-center`|Align single rows of items in the center on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-items-center-responsive)|
+|`.align-items-*-baseline`|Align single rows of items on the baseline on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-items-baseline-responsive)|
+|`.align-items-*-stretch`|Stretch single rows of items on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-items-stretch-responsive)|
+|**Align Self**|||
+|`.align-self-*-start`|Align a flex item from the start on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-self-start-responsive)|
+|`.align-self-*-end`|Align a flex item at the end on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-self-end-responsive)|
+|`.align-self-*-center`|Align a flex item in the center on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-self-center-responsive)|
+|`.align-self-*-baseline`|Align a flex item on the baseline on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-self-baseline-responsive)|
+|`.align-self-*-stretch`|Stretch a flex item on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-self-stretch-responsive)|
+
+</details>
+
 <!--
 # Bootstrap 5 Items
 
