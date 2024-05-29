@@ -4673,6 +4673,90 @@ You can also control when the modal should be in fullscreen, with the .modal-ful
 
 </details>
 
+# Bootstrap 5 Responsive Sidebar
+
+<details>
+  <summary>click to expand</summary>
+
+## Bootstrap 5 Responsive Sidebar
+
+- To create a responsive sidebar in Bootstrap 5 that resizes to a thinner bar when the screen width is reduced, you can use Bootstrap's grid system along with custom CSS. Below is an example of how you can achieve this:
+
+    <img src="asset/bootstrap-5-responsive-side-bar.png" width="750"/>"
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Responsive Sidebar</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            /* Style for the sidebar */
+            .sidebar {
+                background-color: #343a40;
+                color: white;
+                height: 100vh;
+                transition: width 0.3s;
+            }
+
+            /* Thinner sidebar when screen is smaller */
+            @media (max-width: 768px) {
+                .sidebar {
+                    width: 60px;
+                }
+
+                .sidebar .sidebar-content {
+                    display: none;
+                }
+            }
+
+            .sidebar-content {
+                padding: 15px;
+            }
+
+            /* Main content style */
+            .main-content {
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-auto sidebar p-0">
+                    <div class="sidebar-content">
+                    <h4>Sidebar</h4>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Link 1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Link 2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Link 3</a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+                <!-- Main content -->
+                <div class="col main-content">
+                    <h1>Main Content</h1>
+                    <p>This is the main content area.</p>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
+    ```
+
+</details>
+
 <!--
 # Bootstrap 5 Items
 
