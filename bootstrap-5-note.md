@@ -157,9 +157,14 @@
 
     [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_container_resp&stacked=h)
 
+</details>
+
 # Bootstrap 5 Grids
 
-## Bootstrap 5 Grid System
+<details>
+  <summary>click to expand</summary>
+
+# Bootstrap 5 Grid System
 
 - Bootstrap's grid system is built with flexbox and allows up to 12 columns across the page.
 
