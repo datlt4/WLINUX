@@ -576,24 +576,6 @@
 
 </details>
 
-# Bootstrap 5 Jumbotron
-
-<details>
-  <summary>click to expand</summary>
-
-## Jumbotron
-
-    ```html
-    <div class="mt-4 p-5 bg-primary text-white rounded">
-        <h1>Jumbotron Example</h1>
-        <p>Lorem ipsum...</p>
-    </div>
-    ```
-
-    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_jumbotron&stacked=h)
-
-</details>
-
 # Bootstrap 5 Alerts
 
 <details>
@@ -3630,6 +3612,957 @@ You can also control when the modal should be in fullscreen, with the .modal-ful
 |`.align-self-*-center`|Align a flex item in the center on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-self-center-responsive)|
 |`.align-self-*-baseline`|Align a flex item on the baseline on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-self-baseline-responsive)|
 |`.align-self-*-stretch`|Stretch a flex item on different screens|[Try It](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_flex-align-self-stretch-responsive)|
+
+</details>
+
+# Bootstrap 5 Forms
+
+<details>
+  <summary>click to expand</summary>
+
+## Stacked Form
+
+- All textual `<input>` and  `<textarea>` elements with class `.form-control` get proper form styling:
+
+    <img src="asset/bootstrap-5-forms-stacked-form.png" width="450"/>
+
+    ```html
+    <form action="/action_page.php">
+        <div class="mb-3 mt-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        </div>
+        <div class="mb-3">
+            <label for="pwd" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+        </div>
+        <div class="form-check mb-3">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="remember"> Remember me
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form&stacked=h)
+
+- Also note that we add a `.form-label` class to each label element to ensure correct padding.
+
+- Checkboxes have different markup. They are wrapped around a container element with `.form-check`, and labels have a class of `.form-check-label`, while checkboxes and radio buttons use `.form-check-input`.
+
+## Textarea
+
+- Textarea
+
+    <img src="asset/bootstrap-5-forms-textarea.png" width="450"/>
+
+    ```html
+    <label for="comment" class="form-label">Comments:</label>
+    <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_textarea&stacked=h)
+
+## Form Row/Grid (Inline Forms)
+
+- If you want your form elements to appear side by side, use `.row` and `.col`:
+
+    <img src="asset/bootstrap-5-forms-inline-forms.png" width="450"/>
+
+    ```html
+    <form>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Enter email" name="email">
+            </div>
+            <div class="col">
+                <input type="password" class="form-control" placeholder="Enter password" name="pswd">
+            </div>
+        </div>
+    </form>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_grid&stacked=h)
+
+## Form Control Size
+
+- You can change the size of `.form-control` inputs with `.form-control-lg` or `.form-control-sm`:
+
+    <img src="asset/bootstrap-5-forms-form-control-size.png" width="450"/>
+
+    ```html
+    <input type="text" class="form-control form-control-lg" placeholder="Large input">
+    <input type="text" class="form-control" placeholder="Normal input">
+    <input type="text" class="form-control form-control-sm" placeholder="Small input">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_size&stacked=h)
+
+## Disabled and Readonly
+
+- Use the disabled and/or readonly attributes to disable the input field:
+
+    <img src="asset/bootstrap-5-forms-disabled_and_readonly.png" width="450"/>
+
+    ```html
+    <input type="text" class="form-control" placeholder="Normal input">
+    <input type="text" class="form-control" placeholder="Disabled input" disabled>
+    <input type="text" class="form-control" placeholder="Readonly input" readonly>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_disabled&stacked=h)
+
+## Plain text Inputs
+
+- Use the `.form-control-plaintext` class to style an input field without borders, but keep proper marigins and padding:
+
+    ```html
+    <input type="text" class="form-control-plaintext" placeholder="Plaintext input">
+    <input type="text" class="form-control" placeholder="Normal input">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_plaintext&stacked=h)
+
+## Color Picker
+
+- To style an input with `type="color"` properly, use the `.form-control-color` class:
+
+    ```html
+    <input type="color" class="form-control form-control-color" value="#CCCCCC">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_color&stacked=h)
+
+</details>
+
+# Bootstrap 5 Select
+
+<details>
+  <summary>click to expand</summary>
+
+## Select Menu
+
+- Select menus are used if you want to allow the user to pick from multiple options.
+
+- To style a select menu in Bootstrap 5, add the `.form-select` class to the `<select>` element:
+
+    ```html
+    <select class="form-select">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+    </select>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_select&stacked=h)
+
+## Select Menu Size
+
+- Use the `.form-select-lg` or `.form-select-sm` class to change the size of the select menu:
+
+    ```html
+    <select class="form-select form-select-lg">
+    <select class="form-select">
+    <select class="form-select form-select-sm">
+        ``` 
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_select_size&stacked=h)
+
+## Disabled Select Menu
+
+- Use the disabled attribute to disable the select menu:
+
+    ```html
+    <select class="form-select" disabled>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+    </select>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_select_disabled&stacked=h)
+
+</details>
+
+# Bootstrap 5 Checkboxes and Radio buttons
+
+<details>
+  <summary>click to expand</summary>
+
+## Checkboxes
+
+- Checkboxes are used if you want the user to select any number of options from a list of preset options.
+
+    ```html
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+        <label class="form-check-label">Option 1</label>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_checkbox&stacked=h)
+
+- To style checkboxes, use a wrapper element with `class="form-check"` to ensure proper margins for labels and checkboxes.
+
+- Then, add the `.form-check-label` class to label elements, and `.form-check-input` to style checkboxes properly inside the `.form-check` container.
+
+- Use the `checked` attribute if you want the checkbox to be checked by default.
+
+## Radio buttons
+
+- Radio buttons are used if you want to limit the user to just one selection from a list of preset options.
+
+    ```html
+    <div class="form-check">
+        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Option 1
+        <label class="form-check-label" for="radio1"></label>
+    </div>
+    <div class="form-check">
+        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Option 2
+        <label class="form-check-label" for="radio2"></label>
+    </div>
+    <div class="form-check">
+        <input type="radio" class="form-check-input" disabled>Option 3
+        <label class="form-check-label"></label>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_radio&stacked=h)
+
+## Toggle Switches
+
+- If you want your checkbox to be styled as a toggle switch, use the `.form-switch` class together with the `.form-check` container:
+
+    ```html
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
+        <label class="form-check-label" for="mySwitch">Dark Mode</label>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_toggle_switch&stacked=h)
+
+</details>
+
+# Bootstrap 5 Range
+
+<details>
+  <summary>click to expand</summary>
+
+## Custom Range
+
+- To style a range menu, add the `.form-range` class to the input element with `type="range"`:
+
+```html
+<label for="customRange" class="form-label">Custom range</label>
+<input type="range" class="form-range" id="customRange">
+```
+
+## Steps
+
+- By default, the interval between the range numbers is 1. You can change it by using the `step` attribute:
+
+    ```html
+    <input type="range" class="form-range" step="10">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_range&stacked=h)
+
+## Min and Max
+
+- By default, the minimum value is 0 and maximum value is 100. You can use the `min` and/or `max` attribute change it:
+
+    ```html
+    <input type="range" class="form-range" min="0" max="4">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_range_minmax&stacked=h)
+
+</details>
+
+# Bootstrap 5 Input Groups
+
+<details>
+  <summary>click to expand</summary>
+
+## Input Groups
+
+- The `.input-group` class is a container to enhance an input by adding an icon, text or a button in front or behind the input field as a "help text".
+
+- To style the specified help text, use the `.input-group-text` class
+
+    <img src="asset/bootstrap-5-forms-input-groups.png" width="450"/>
+
+    ```html
+    <form>
+        <div class="input-group">
+            <span class="input-group-text">@</span>
+            <input type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Your Email">
+            <span class="input-group-text">@example.com</span>
+        </div>
+    </form>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_input_group&stacked=h)
+
+## Input Group Size
+
+- Use the `.input-group-sm` class for small input groups and `.input-group-lg` for large inputs groups
+
+    ```html
+    <div class="input-group mb-3 input-group-sm">
+        <span class="input-group-text">Small</span>
+        <input type="text" class="form-control">
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text">Default</span>
+        <input type="text" class="form-control">
+    </div>
+
+    <div class="input-group mb-3 input-group-lg">
+        <span class="input-group-text">Large</span>
+        <input type="text" class="form-control">
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_input_group_size&stacked=h)
+
+## Multiple Inputs and Helpers
+
+- Add multiple inputs or addons
+
+    <img src="asset/bootstrap-5-forms-mulple-inputs-and-helpers.png" width="450"/>
+
+    ```html
+    <!-- Multiple inputs -->
+    <div class="input-group mb-3">
+        <span class="input-group-text">Person</span>
+        <input type="text" class="form-control" placeholder="First Name">
+        <input type="text" class="form-control" placeholder="Last Name">
+    </div>
+
+    <!-- Multiple addons / help text -->
+    <div class="input-group mb-3">
+        <span class="input-group-text">One</span>
+        <span class="input-group-text">Two</span>
+        <span class="input-group-text">Three</span>
+        <input type="text" class="form-control">
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_input_group_multiple&stacked=h)
+
+## Input Group with Checkboxes and Radios
+
+- You can also use checkboxes or radio buttons instead of text
+
+    <img src="asset/bootstrap-5-forms-input-group-with-checkboxes-radios.png" width="450"/>
+
+    ```html
+    <div class="input-group mb-3">
+        <div class="input-group-text">
+            <input type="checkbox">
+        </div>
+        <input type="text" class="form-control" placeholder="Some text">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-text">
+            <input type="radio">
+        </div>
+        <input type="text" class="form-control" placeholder="Some text">
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_input_group_check&stacked=h)
+
+## Input Group Buttons
+
+- Input Group Buttons
+
+    <img src="asset/(bootstrap-5-forms-input-group-buttons.png" width="450"/>
+
+    ```html
+    <div class="input-group mb-3">
+        <button class="btn btn-outline-primary" type="button">Basic Button</button>
+        <input type="text" class="form-control" placeholder="Some text">
+    </div>
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search">
+        <button class="btn btn-success" type="submit">Go</button>
+    </div>
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Something clever..">
+        <button class="btn btn-primary" type="button">OK</button>
+        <button class="btn btn-danger" type="button">Cancel</button>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_input_group_btn&stacked=h)
+
+## Input Group with Dropdown Button
+
+- Add a dropdown button in the input group. Note that you don't need the .dropdown wrapper, as you normally would.
+
+    <img src="asset/bootstrap-5-forms-input-group-with-dropdown-button.png" width="450"/>
+
+    ```html
+    <div class="input-group mt-3 mb-3">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+            Dropdown button
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Link 1</a></li>
+            <li><a class="dropdown-item" href="#">Link 2</a></li>
+            <li><a class="dropdown-item" href="#">Link 3</a></li>
+        </ul>
+        <input type="text" class="form-control" placeholder="Username">
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_input_group_dropdown&stacked=h)
+
+## Bootstrap 5 Form Floating Labels
+
+## Floating Labels / Animated Labels
+
+- By default, when using labels, they normally appear on top of the input field:
+
+    <img src="asset/bootstrap-5-forms-floating-labels-1.png" width="450"/>
+
+- With floating labels, you can insert the label inside the input field, and make them float/animate when you click on the input field:
+
+    <img src="asset/bootstrap-5-forms-floating-labels-1.png" width="450"/>
+
+    ```html
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
+        <label for="email">Email</label>
+    </div>
+
+    <div class="form-floating mt-3 mb-3">
+        <input type="text" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+        <label for="pwd">Password</label>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_floating_labels&stacked=h)
+
+- **Notes** on floating labels: The `<label>` elements must come after the `<input>` element, and the `placeholder` attribute is required for each `<input>` element (even though it is not shown).
+
+## Textarea
+
+- It also works for textareas:
+
+    <img src="asset/bootstrap-5-forms-floating-labels-textarea.png" width="450"/>
+
+    ```html
+    <div class="form-floating">
+        <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
+        <label for="comment">Comments</label>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_floating_labels_textarea&stacked=h)
+
+## Select Menus
+
+- You can also use `floating-labels` on select menus. However, they will not float/get animated. The label will always appear in the top left corner, inside the select menu:
+
+    ```html
+    <div class="form-floating">
+        <select class="form-select" id="sel1" name="sellist">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+        <label for="sel1" class="form-label">Select list (select one):</label>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_floating_labels_select&stacked=h)
+
+</details>
+
+# Bootstrap 5 Form Validation
+
+<details>
+  <summary>click to expand</summary>
+
+## Form Validation
+
+- You can use different validation classes to provide valuable feedback to users. Add either `.was-validated` or `.needs-validation` to the `<form>` element, depending on whether you want to provide validation feedback before or after submitting the form. The input fields will have a **green (valid)** or **red (invalid)** border to indicate what's missing in the form. You can also add a `.valid-feedback` or `.invalid-feedback` message to tell the user explicitly what's missing, or needs to be done before submitting the form.
+
+    <img src="asset/bootstrap-5-forms-form-validation.png" width="450"/>
+
+    ```html
+    <form action="/action_page.php" class="was-validated">
+        <div class="mb-3 mt-3">
+            <label for="uname" class="form-label">Username:</label>
+            <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="mb-3">
+            <label for="pwd" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="myCheck" name="remember" required>
+            <label class="form-check-label" for="myCheck">I agree on blabla.</label>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Check this checkbox to continue.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_form_validation&stacked=h)
+
+</details>
+
+# Bootstrap 5 Grid System
+
+<details>
+  <summary>click to expand</summary>
+
+## The Grid System
+
+- Bootstrap's grid system is built with flexbox and allows up to 12 columns across the page.
+
+- If you do not want to use all 12 columns individually, you can group the columns together to create wider columns.
+
+    <img src="asset/bootstrap-5-grid-system.png" width="700"/>
+
+- The grid system is responsive, and the columns will re-arrange automatically depending on the screen size.
+
+- Make sure that the sum adds up to `12` or fewer (it is not required that you use all `12` available columns).
+
+## Grid Classes
+
+- The Bootstrap 5 grid system has six classes:
+
+  - `.col-` (extra small devices - screen width less than `576px`)
+  - `.col-sm-` (small devices - screen width equal to or greater than `576px`)
+  - `.col-md-` (medium devices - screen width equal to or greater than `768px`)
+  - `.col-lg-` (large devices - screen width equal to or greater than `992px`)
+  - `.col-xl-` (xlarge devices - screen width equal to or greater than `1200px`)
+  - `.col-xxl-` (xxlarge devices - screen width equal to or greater than `1400px`)
+
+- The classes above can be combined to create more dynamic and flexible layouts.
+
+- **Tip**: Each class scales up, so if you want to set the same widths for `sm` and `md`, you only need to specify `sm`.
+
+## Basic Structure of a Bootstrap 5 Grid
+
+- The following is a basic structure of a Bootstrap 5 grid:
+
+```html
+<!-- Control the column width, and how they should appear on different devices -->
+<div class="row">
+    <div class="col-*-*"></div>
+    <div class="col-*-*"></div>
+</div>
+<div class="row">
+    <div class="col-*-*"></div>
+    <div class="col-*-*"></div>
+    <div class="col-*-*"></div>
+</div>
+
+<!-- Or let Bootstrap automatically handle the layout -->
+<div class="row">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+</div>
+```
+
+[Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_ex_structure&stacked=h)
+
+- First example: create a row (`<div class="row">`). Then, add the desired number of columns (tags with appropriate `.col-*-*` classes). The first star (`*`) represents the responsiveness: `sm`, `md`, `lg`, `xl` or `xxl`, while the second star represents a number, which should add up to `12` for each row.
+
+- Second example: instead of adding a number to each `col`, let bootstrap handle the layout, to create equal width columns: two `col` elements = `50%` width to each col, while three cols = `33.33%` width to each col. Four cols = `25%` width, etc. You can also use `.col-sm|md|lg|xl|xxl` to make the columns responsive.
+
+    ||Extra small (<576px)|Small (>=576px)|Medium (>=768px)|Large (>=992px)|Extra Large (>=1200px)|XXL (>=1400px)|
+    |---|---|---|---|---|---|---|
+    |Class prefix|`.col-`</td>|`.col-sm-`</td>|`.col-md-`</td>|`.col-lg-`</td>|`.col-xl-`</td>|`.col-xxl-`|
+    |Grid behaviour|Horizontal at all times</td>|Collapsed to start, horizontal above breakpoints</td>|Collapsed to start, horizontal above breakpoints</td>|Collapsed to start, horizontal above breakpoints</td>        |Collapsed to start, horizontal above breakpoints</td>        |Collapsed to start, horizontal above breakpoints|
+    |Container width|None (auto)|540px|720px|960px|1140px|1320px|
+    |Suitable for|Portrait phones|Landscape phones|Tablets|Laptops|Laptops and Desktops|Laptops and Desktops|
+    |# of columns|12|12|12|12|12|12|
+    |Gutter width|`1.5rem` (`.75rem` on each side of a column)|`1.5rem` (`.75rem` on each side of a column)|`1.5rem` (`.75rem` on each side of a column)|`1.5rem` (`.75rem` on each side of a column)|`1.5rem` (`.75rem` on each side of a column)|`1.5rem` (`.75rem` on each side of a column)|
+    |Nestable|Yes|Yes|Yes|Yes|Yes|Yes|
+    |Offsets|Yes|Yes|Yes|Yes|Yes|Yes|
+    |Column ordering|Yes|Yes|Yes|Yes|Yes|Yes|
+
+</details>
+
+# Bootstrap 5 Grid Stacked to horizontal
+
+<details>
+  <summary>click to expand</summary>
+
+## Grid Example: Stacked-to-horizontal
+
+- Let's create a basic grid system that starts out stacked on extra small devices, before becoming horizontal on larger devices.
+
+- The following example shows a simple "stacked-to-horizontal" two-column layout, meaning it will result in a 50%/50% split on all screens, except for extra small screens, which it will automatically stack (100%):
+
+    <img src="asset/bootstrap-5-grid-stacked-to-horizontal.png" width="700"/>
+
+    ```html
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 bg-primary">
+                <p>Lorem ipsum...</p>
+            </div>
+            <div class="col-sm-6 bg-dark">
+                <p>Sed ut perspiciatis...</p>
+            </div>
+        </div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_stacked_to_hor&stacked=h)
+
+- **Tip**: The numbers in the `.col-sm-*` classes indicates how many columns the `div` should span (out of 12). So, `.col-sm-1` spans `1` column, `.col-sm-4` spans `4` columns, `.col-sm-6` spans `6` columns, etc.
+
+- **Note**: Make sure that the sum adds up to `12` or fewer (it is not required that you use all `12` available columns):
+
+- **Tip**: You can turn any **full-width** layout into a **fixed-width** responsive layout, by changing the `.container-fluid` class to .container:
+
+    ```html
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <p>Lorem ipsum...</p>
+            </div>
+            <div class="col-sm-6">
+                <p>Sed ut perspiciatis...</p>
+            </div>
+        </div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_stacked_to_hor2&stacked=h)
+
+## Auto Layout Columns
+
+- In Bootstrap 5, there is an easy way to create equal width columns for all devices: just remove the number from `.col-size-*` and only use the `.col-size` class on a specified number of **col elements**. Bootstrap will recognize how many columns there are, and each column will get the same width. The size classes (`sm`, `md`, etc.) determines **when** the columns should be responsive:
+
+    <img src="asset/bootstrap-5-grid-auto-layout-columns.png" width="700"/>
+
+    ```html
+    <!-- Two columns: 50% width on all screens, except for extra small (100% width) -->
+    <div class="row">
+        <div class="col-sm">1 of 2</div>
+        <div class="col-sm">2 of 2</div>
+    </div>
+
+    <!-- Four columns: 25% width on all screens, except for extra small (100% width)-->
+    <div class="row">
+        <div class="col-sm">1 of 4</div>
+        <div class="col-sm">2 of 4</div>
+        <div class="col-sm">3 of 4</div>
+        <div class="col-sm">4 of 4</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_stacked_auto&stacked=h)
+
+</details>
+
+# Bootstrap 5 Grid Examples
+
+<details>
+  <summary>click to expand</summary>
+
+## Three Equal Columns
+
+- Use the `.col` class on a specified number of elements and Bootstrap will recognize how many elements there are (and create equal-width columns). In the example below, we use three col elements, which gets a width of `33.33%` each.
+
+    <img src="asset/bootstrap-5-grid-three-equal-columns.png" width="750"/>
+
+    ```html
+    <div class="row">
+        <div class="col">col</div>
+        <div class="col">col</div>
+        <div class="col">col</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_examples1&stacked=h)
+
+## Three Equal Columns Using Numbers
+
+- You can also use numbers to control the column width. Just make sure that the sum adds up to `12` or fewer (it is not required that you use all `12` available columns)
+
+    <img src="asset/bootstrap-5-grid-three-equal-columns-using-number.png" width="750"/>
+
+    ```html
+    <div class="row">
+        <div class="col-4">col-4</div>
+        <div class="col-4">col-4</div>
+        <div class="col-4">col-4</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_examples2&stacked=h)
+
+## Three Unequal columns
+
+- To create unequal columns, you have to use numbers. The following example will create a `25%` / `50%` / `25%` split:
+
+    <img src="asset/bootstrap-5-grid-three-unequal-columns.png" width="750"/>
+
+    ```html
+    <div class="row">
+        <div class="col-3">col-3</div>
+        <div class="col-6">col-6</div>
+        <div class="col-3">col-3</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_examples3&stacked=h)
+
+## Setting One Column Width
+
+- However, it is enough to only set the width of one column, and have the sibling columns automatically resize around it. The following example will create a `25%` / `50%` / `25%` split:
+
+    <img src="asset/bootstrap-5-grid-setting-one-column-width.png" width="750"/>
+
+    ```html
+    <div class="row">
+        <div class="col">col</div>
+        <div class="col-6">col-6</div>
+        <div class="col">col</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_examples4&stacked=h)
+
+## More Equal Columns
+
+- More Equal Columns
+
+    <img src="asset/bootstrap-5-grid-more-equal-columns.png" width="750"/>
+
+    ```html
+    <!-- Two equal columns -->
+    <div class="row">
+        <div class="col">1 of 2</div>
+        <div class="col">2 of 2</div>
+    </div>
+
+    <!-- Four equal columns -->
+    <div class="row">
+        <div class="col">1 of 4</div>
+        <div class="col">2 of 4</div>
+        <div class="col">3 of 4</div>
+        <div class="col">4 of 4</div>
+    </div>
+
+    <!-- Six equal columns -->
+    <div class="row">
+        <div class="col">1 of 6</div>
+        <div class="col">2 of 6</div>
+        <div class="col">3 of 6</div>
+        <div class="col">4 of 6</div>  
+        <div class="col">5 of 6</div>
+        <div class="col">6 of 6</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_examples5&stacked=h)
+
+## Row Cols
+
+- You can also control how many columns that should appear next to each other (regardless of how many cols), with the `.row-cols-*` classes:
+
+    <img src="asset/bootstrap-5-grid-row-cols.png" width="750"/>
+
+    ```html
+    <div class="row row-cols-1">
+        <div class="col">1 of 2</div>
+        <div class="col">2 of 2</div>
+    </div>
+
+    <div class="row row-cols-2">
+        <div class="col">1 of 4</div>
+        <div class="col">2 of 4</div>
+        <div class="col">3 of 4</div>
+        <div class="col">4 of 4</div>
+    </div>
+
+    <div class="row row-cols-3">
+        <div class="col">1 of 6</div>
+        <div class="col">2 of 6</div>
+        <div class="col">3 of 6</div>
+        <div class="col">4 of 6</div>  
+        <div class="col">5 of 6</div>
+        <div class="col">6 of 6</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_row-cols2&stacked=h)
+
+## More Unequal Columns
+
+- More Unequal Columns
+
+    <img src="asset/bootstrap-5-grid-more-unequal-columns.png" width="750"/>
+
+    ```html
+    <!-- Two Unequal Columns -->
+    <div class="row">
+        <div class="col-8">1 of 2</div>
+        <div class="col-4">2 of 2</div>
+    </div>
+
+    <!-- Four Unequal Columns -->
+    <div class="row">
+        <div class="col-2">1 of 4</div>
+        <div class="col-2">2 of 4</div>
+        <div class="col-2">3 of 4</div>
+        <div class="col-6">4 of 4</div>
+    </div>
+
+    <!-- Setting two column widths -->
+    <div class="row">
+        <div class="col-4">1 of 4</div>
+        <div class="col-6">2 of 4</div>
+        <div class="col">3 of 4</div>
+        <div class="col">4 of 4</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_examples6&stacked=h)
+
+## Equal Height
+
+- If one of the column is taller than the other (due to text or CSS height), the rest will follow
+
+    <img src="asset/bootstrap-5-grid-equal-height.png" width="750"/>
+
+    ```html
+    <div class="row">
+        <div class="col">Lorem ipsum...</div>
+        <div class="col">col</div>
+        <div class="col">col</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_examples8&stacked=h)
+
+## Nested Columns
+
+- The following example shows how to create a two column layout, with another two columns inside one of the columns:
+
+    <img src="asset/bootstrap-5-grid-nested-columns.png" width="750"/>
+
+    ```html
+    <div class="row">
+        <div class="col-8">
+            .col-8
+            <div class="row">
+                <div class="col-6">.col-6</div>
+                <div class="col-6">.col-6</div>
+            </div>
+        </div>
+        <div class="col-4">.col-4</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_examples9&stacked=h)
+
+## Responsive Classes
+
+- The Bootstrap 5 grid system has five classes:
+
+  - `.col-` (extra small devices - screen width less than `576px`)
+  - `.col-sm-` (small devices - screen width equal to or greater than `576px`)
+  - `.col-md-` (medium devices - screen width equal to or greater than `768px`)
+  - `.col-lg-` (large devices - screen width equal to or greater than `992px`)
+  - `.col-xl-` (xlarge devices - screen width equal to or greater than `1200px`)
+  - `.col-xxl-` (xxl devices - screen width equal to or greater than `1400px`)
+
+- The classes above can be combined to create more dynamic and flexible layouts.
+
+- **Tip**: Each class scales up, so if you wish to set the same widths for `sm` and `md`, you only need to specify `sm`.
+
+## Stacked to Horizontal
+
+- The following example shows how to create a column layout that starts out stacked on extra small devices, before becoming horizontal on larger devices (`sm`, `md`, `lg` and `xl`):
+
+    <img src="asset/bootstrap-5-grid-stacked-rows-to-horizontal.png" width="750"/>
+
+    ```html
+    <div class="row">
+        <div class="col-sm-9">col-sm-9</div>
+        <div class="col-sm-3">col-sm-3</div>
+    </div>
+    <div class="row">
+        <div class="col-sm">col-sm</div>
+        <div class="col-sm">col-sm</div>
+        <div class="col-sm">col-sm</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_examples10&stacked=h)
+
+## Mix and Match
+
+- Mix and Match
+
+    <img src="asset/bootstrap-5-grid-mix-and-match.png" width="750"/>
+
+    ```html
+    <!-- 50%/50% split on extra small devices and 75%/25% split on larger devices -->
+    <div class="row">
+        <div class="col-6 col-sm-9">col-6 col-sm-9</div>
+        <div class="col-6 col-sm-3">col-6 col-sm-3</div>
+    </div>
+
+    <!-- 58%/42% split on extra small, small and medium devices and 66.3%/33.3% split on large and xlarge devices -->
+    <div class="row">
+        <div class="col-7 col-lg-8">col-7 col-lg-8</div>
+        <div class="col-5 col-lg-4">col-5 col-lg-4</div>
+    </div>
+
+    <!-- 25%/75% split on small devices, a 50%/50% split on medium devices, and a 33%/66% split on large and xlarge devices. On extra small devices, it will automatically stack (100%) -->
+    <div class="row">
+        <div class="col-sm-3 col-md-6 col-lg-4">col-sm-3 col-md-6 col-lg-4</div>
+        <div class="col-sm-9 col-md-6 col-lg-8">col-sm-9 col-md-6 col-lg-8</div>
+    </div>
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_examples11&stacked=h)
+
+## No Gutters
+
+- To change the gutters (extra space) between columns, use any of the `.g-1|2|3|4|5` classes (`.g-4` is default).
+
+- To remove the gutter completely, use `.g-0`
+
+    <img src="asset/bootstrap-5-grid-no-gutters" width="750"/>
+
+    ```html
+    <div class="row g-0">
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/bootstrap5/tryit.asp?filename=trybs_grid_nogutters&stacked=h)
 
 </details>
 
