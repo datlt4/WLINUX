@@ -1756,6 +1756,8 @@
 
 - To control (show/hide) the collapsible content, add the `data-bs-toggle="collapse"` attribute to an `<a>` or a `<button>` element. Then add the `data-bs-target="#id"` attribute to connect the button with the collapsible content (`<div id="demo">`).
 
+    <img src="asset/bootstrap-5-collapse.png"/>
+
     ```html
     <button data-bs-toggle="collapse" data-bs-target="#demo">Collapsible</button>
 
@@ -1793,6 +1795,8 @@
 - The following example shows a simple accordion by extending the card component.
 
 - Note: Use the `data-bs-parent` attribute to make sure that all collapsible elements under the specified parent will be closed when one of the collapsible item is shown.
+
+    <img src="asset/bootstrap-5-accordion.png"/>
 
     ```html
     <div id="accordion">
