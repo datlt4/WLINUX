@@ -4556,7 +4556,7 @@ You can also control when the modal should be in fullscreen, with the .modal-ful
 
 - To remove the gutter completely, use `.g-0`
 
-    <img src="asset/bootstrap-5-grid-no-gutters" width="750"/>
+    <img src="asset/bootstrap-5-grid-no-gutters.png" width="750"/>
 
     ```html
     <div class="row g-0">
