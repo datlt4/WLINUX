@@ -3987,7 +3987,7 @@ You can also control when the modal should be in fullscreen, with the .modal-ful
 
 - Input Group Buttons
 
-    <img src="asset/(bootstrap-5-forms-input-group-buttons.png" width="450"/>
+    <img src="asset/bootstrap-5-forms-input-group-buttons.png" width="450"/>
 
     ```html
     <div class="input-group mb-3">
