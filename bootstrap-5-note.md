@@ -916,6 +916,8 @@
 
 - An example of using a badge inside a button:
 
+    <img src="asset/bootstrap-5-badges.png"/>
+
     ```html
     <button type="button" class="btn btn-primary">
         Messages <span class="badge bg-danger">4</span>
