@@ -1850,7 +1850,7 @@
 
 ## Nav Menus
 
-- If you want to create a simple horizontal menu, add the .nav class to a <ul> element, followed by .nav-item for each <li> and add the .nav-link class to their links:
+- If you want to create a simple horizontal menu, add the `.nav` class to a `<ul>` element, followed by `.nav-item` for each `<li>` and add the `.nav-link` class to their links
 
     <img src="asset/bootstrap-5-nav-menus.png" width="300"/>
 
