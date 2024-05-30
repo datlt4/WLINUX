@@ -1,3 +1,39 @@
+# JavaScript Date and Time
+
+<details>
+  <summary>click to expand</summary>
+
+```javascript
+const currentDate = new Date();
+console.log(currentDate);
+// Output: "Thu May 30 2024 09:15:36 GMT+0700 (Indochina Time)"
+
+const specificDate = new Date(2024, 5, 14, 12, 0, 0);
+console.log(specificDate);
+// Output: "Fri Jun 14 2024 12:00:00 GMT+0700 (Indochina Time)"
+
+const nextYear = new Date();
+nextYear.setFullYear(nextYear.getFullYear() + 1);
+console.log(nextYear);
+// Output: date and time one year later
+
+const formattedDate = currentDate.toLocaleDateString("en-US",
+    { weekend: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+console.log(formattedDate);
+// Output: "May 30, 2024"
+
+// Install moment.js in here (https://momentjs.com/)
+const momentDate = moment();
+console.log(momentDate.format('MMMM Do YYYY, h:mm:ss a'));
+// Output: "May 30th 2024, 9:48:48 am"
+console.log(moment("20111031", "YYYYMMDD").fromNow());
+// Output: "13 years ago"
+console.log(moment("20111031").format('MMMM Do YYYY, h:mm:ss a'));
+// Output: "October 31st 2011, 12:00:00 am"
+```
+
+</details>
+
 # JavaScript Variables
 
 ### JavaScript Variables can be declared in 4 ways
