@@ -415,7 +415,7 @@
 
     [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss3_transition_transform)
 
-```## More Transition csss```
+## More Transition CSS
 
 - The CSS transition properties can be specified one by one, like this:
 
