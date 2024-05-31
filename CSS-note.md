@@ -11,15 +11,15 @@
 
 - With the CSS transform property you can use the following 2D transformation methods:
 
-    - `translate()`
-    - `rotate()`
-    - `scaleX()`
-    - `scaleY()`
-    - `scale()`
-    - `skewX()`
-    - `skewY()`
-    - `skew()`
-    - `matrix()`
+  - `translate()`
+  - `rotate()`
+  - `scaleX()`
+  - `scaleY()`
+  - `scale()`
+  - `skewX()`
+  - `skewY()`
+  - `skew()`
+  - `matrix()`
 
 ## The `translate()` Method
 
@@ -242,9 +242,9 @@
 
 - With the CSS transform property you can use the following 3D transformation methods:
 
-    - `rotateX()`
-    - `rotateY()`
-    - `rotateZ()`
+  - `rotateX()`
+  - `rotateY()`
+  - `rotateZ()`
 
 ## The `rotateX()` Method
 
@@ -314,16 +314,16 @@
 
 - You will learn about the following properties:
 
-    - `transition`
-    - `transition-delay`
-    - `transition-duration`
-    - `transition-property`
-    - `transition-timing-function`
+  - `transition`
+  - `transition-delay`
+  - `transition-duration`
+  - `transition-property`
+  - `transition-timing-function`
 
 - To create a transition effect, you must specify two things:
 
-    - the CSS property you want to add an effect to
-    - the duration of the effect
+  - the CSS property you want to add an effect to
+  - the duration of the effect
 
 - **Note**: If the duration part is not specified, the transition will have no effect, because the default value is **0**.
 
@@ -370,12 +370,12 @@
 
 - The `transition-timing-function` property can have the following values:
 
-    - `ease` - specifies a transition effect with a slow start, then fast, then end slowly (this is default).
-    - `linear` - specifies a transition effect with the same speed from start to end.
-    - `ease-in` - specifies a transition effect with a slow start.
-    - `ease-out` - specifies a transition effect with a slow end.
-    - `ease-in-out` - specifies a transition effect with a slow start and end.
-    - `cubic-bezier(n,n,n,n)` - lets you define your own values in a cubic-bezier function.
+  - `ease` - specifies a transition effect with a slow start, then fast, then end slowly (this is default).
+  - `linear` - specifies a transition effect with the same speed from start to end.
+  - `ease-in` - specifies a transition effect with a slow start.
+  - `ease-out` - specifies a transition effect with a slow end.
+  - `ease-in-out` - specifies a transition effect with a slow start and end.
+  - `cubic-bezier(n,n,n,n)` - lets you define your own values in a cubic-bezier function.
 
 - The following example shows some of the different speed curves that can be used:
 
@@ -465,15 +465,15 @@
 
 - In this chapter you will learn about the following properties:
 
-    - `@keyframes`
-    - `animation-name`
-    - `animation-duration`
-    - `animation-delay`
-    - `animation-iteration-count`
-    - `animation-direction`
-    - `animation-timing-function`
-    - `animation-fill-mode`
-    - `animation`
+  - `@keyframes`
+  - `animation-name`
+  - `animation-duration`
+  - `animation-delay`
+  - `animation-iteration-count`
+  - `animation-direction`
+  - `animation-timing-function`
+  - `animation-fill-mode`
+  - `animation`
 
 ## What are CSS Animations?
 
@@ -644,10 +644,10 @@
 
 - The `animation-direction` property can have the following values:
 
-    - `normal` - The animation is played as normal (forwards). This is default
-    - `reverse` - The animation is played in reverse direction (backwards)
-    - `alternate` - The animation is played forwards first, then backwards
-    - `alternate-reverse` - The animation is played backwards first, then forwards
+  - `normal` - The animation is played as normal (forwards). This is default
+  - `reverse` - The animation is played in reverse direction (backwards)
+  - `alternate` - The animation is played forwards first, then backwards
+  - `alternate-reverse` - The animation is played backwards first, then forwards
 
 - The following example will run the animation in reverse direction (backwards):
 
@@ -705,12 +705,12 @@
 
 - The `animation-timing-function` property can have the following values:
 
-    - `ease` - Specifies an animation with a slow start, then fast, then end slowly (this is default).
-    - `linear` - Specifies an animation with the same speed from start to end.
-    - `ease-in` - Specifies an animation with a slow start.
-    - `ease-out` - Specifies an animation with a slow end.
-    - `ease-in-out` - Specifies an animation with a slow start and end.
-    - `cubic-bezier(n,n,n,n)` - Lets you define your own values in a cubic-bezier function.
+  - `ease` - Specifies an animation with a slow start, then fast, then end slowly (this is default).
+  - `linear` - Specifies an animation with the same speed from start to end.
+  - `ease-in` - Specifies an animation with a slow start.
+  - `ease-out` - Specifies an animation with a slow end.
+  - `ease-in-out` - Specifies an animation with a slow start and end.
+  - `cubic-bezier(n,n,n,n)` - Lets you define your own values in a cubic-bezier function.
 
 - The following example shows some of the different speed curves that can be used:
 
@@ -732,10 +732,10 @@
 
 - The `animation-fill-mode` property can have the following values:
 
-    - `none` - Default value. Animation will not apply any styles to the element before or after it is executing.
-    - `forwards` - The element will retain the style values that is set by the last keyframe (depends on `animation-direction` and `animation-iteration-count`).
-    - `backwards` - The element will get the style values that is set by the first keyframe (depends on `animation-direction`), and retain this during the `animation-delay` period.
-    - `both` - The animation will follow the rules for both forwards and backwards, extending the animation properties in both directions.
+  - `none` - Default value. Animation will not apply any styles to the element before or after it is executing.
+  - `forwards` - The element will retain the style values that is set by the last keyframe (depends on `animation-direction` and `animation-iteration-count`).
+  - `backwards` - The element will get the style values that is set by the first keyframe (depends on `animation-direction`), and retain this during the `animation-delay` period.
+  - `both` - The animation will follow the rules for both forwards and backwards, extending the animation properties in both directions.
 
 - The following example lets the `<div>` element retain the style values from the last keyframe when the animation ends:
 
@@ -814,7 +814,6 @@
 
     [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation5)
 
-
 ## CSS Animation Properties
 
 - The following table lists the `@keyframes` rule and all the CSS animation properties:
@@ -831,5 +830,370 @@
     |`animation-name`|Specifies the name of the @keyframes animation|
     |`animation-play-state`|Specifies whether the animation is running or paused|
     |`animation-timing-function`|Specifies the speed curve of the animation|
+
+</details>
+
+
+# CSS Pseudo-classes
+
+<details>
+  <summary>click to expand</summary>
+
+## What are Pseudo-classes?
+
+- A pseudo-class is used to define a special state of an element.
+
+## Syntax
+
+- The syntax of pseudo-classes:
+
+    ```css
+    selector:pseudo-class {
+        property: value;
+    }
+    ```
+
+## Anchor Pseudo-classes
+
+- Links can be displayed in different ways:
+
+    ```css
+    /*unvisited link*/
+    a:link {
+        color: #FF0000;
+    }
+
+    /*visited link*/
+    a:visited {
+        color: #00FF00;
+    }
+
+    /*mouse over link*/
+    a:hover {
+        color: #FF00FF;
+    }
+
+    /*selected link*/
+    a:active {
+        color: #0000FF;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_pseudo-class_links)
+
+## Pseudo-classes and HTML Classes
+
+- Pseudo-classes can be combined with HTML classes:
+
+- When you hover over the link in the example, it will change color:
+
+    ```css
+    a.highlight:hover {
+        color: #ff0000;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_pseudo-class)
+
+## Hover on `<div>`
+
+- An example of using the `:hover` pseudo-class on a `<div>` element:
+
+    ```css
+    div:hover {
+        background-color: blue;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_pseudo-class_hover_div)
+
+## Simple Tooltip Hover
+
+- Hover over a `<div>` element to show a `<p>` element (like a tooltip):
+
+    ```css
+    p {
+        display: none;
+        background-color: yellow;
+        padding: 20px;
+    }
+
+    div:hover p {
+        display: block;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_pseudo-class_hover_tooltip)
+
+## CSS - The `:first-child` Pseudo-class
+
+- The `:first-child` pseudo-class matches a specified element that is the first child of another element.
+
+### Match the first `<p>` element
+
+- In the following example, the selector matches any `<p>` element that is the first child of any element:
+
+    ```css
+    p:first-child {
+        color: blue;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_first-child1)
+
+### Match the first `<i>` element in all `<p>` elements
+
+- In the following example, the selector matches the first `<i>` element in all `<p>` elements:
+
+    ```css
+    p i:first-child {
+        color: blue;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_first-child2)
+
+### Match all `<i>` elements in all first child `<p>` elements
+
+- In the following example, the selector matches all `<i>` elements in `<p>` elements that are the first child of another element:
+
+    ```css
+    p:first-child i {
+        color: blue;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_first-child3)
+
+## All CSS Pseudo Classes
+
+- All CSS Pseudo Classes
+
+    |Selector|Example|Example description|
+    |---|---|---|
+    |[`:active`](https://www.w3schools.com/cssref/sel_active.asp)|`a:active`|Selects the active link|
+    |[`:checked`](https://www.w3schools.com/cssref/sel_checked.asp)|`input:checked`|Selects every checked `<input>`; element|
+    |[`:disabled`](https://www.w3schools.com/cssref/sel_disabled.asp)|`input:disabled`|Selects every disabled `<input>`; element|
+    |[`:empty`](https://www.w3schools.com/cssref/sel_empty.asp)|`p:empty`|Selects every `<p>`; element that has no childre>|
+    |[`:enabled`](https://www.w3schools.com/cssref/sel_enabled.asp)|`input:enabled`|Selects every enabled `<input>`; element|
+    |[`:first-child`](https://www.w3schools.com/cssref/sel_firstchild.asp)|`p:first-child`|Selects every `<p>`; elements that is the first child of itent|
+    |[`:first-of-type`](https://www.w3schools.com/cssref/sel_first-of)|`p:first-of-type`|Selects every `<p>`; element that is the first `<p>`ment of its parent|
+    |[`:focus`](https://www.w3schools.com/cssref/sel_focus.asp)|`input:focus`|Selects the `<input>`; element that has focus|
+    |[`:hover`](https://www.w3schools.com/cssref/sel_hover.asp)|`a:hover`|Selects links on mouse over|
+    |[`:in-range`](https://www.w3schools.com/cssref/sel_in-range)|`input:in-range`|Selects `<input>`; elements with a value within a fied range|
+    |[`:invalid`](https://www.w3schools.com/cssref/sel_invalid.asp)|`input:invalid`|Selects all `<input>`; elements with an invalid value|
+    |[`:lang(<i>language</i>)`](https://www.w3schools.com/cssref/sel_lang.asp)|`p:lang(it)`|Selects every `<p>`; element with a lang attribute value startith "it"|
+    |[`:last-child`](https://www.w3schools.com/cssref/sel_last-child)|`p:last-child`|Selects every `<p>`; elements that is the last child o parent|
+    |[`:last-of-type`](https://www.w3schools.com/cssref/sel_last-of)|`p:last-of-type`|Selects every `<p>`; element that is the last element of its parent|
+    |[`:link`](https://www.w3schools.com/cssref/sel_link.asp)|`a:link`|Selects all unvisited links|
+    |[`:not(selector)`](https://www.w3schools.com/cssref/sel_not.asp)|`:not(p)`|Selects every element that is not a `<p>`; element|
+    |[`:nth-child(n)`](https://www.w3schools.com/cssref/sel_nth-child)|`p:nth-child(2)`|Selects every `<p>`; element that is the second child of parent|
+    |[`:nth-last-child(n)`](https://www.w3schools.com/cssref/sel_nth-last)|`p:nth-last-child(2)`|Selects every `<p>`; element that is the second child of itent, counting from the last child|
+    |[`:nth-last-of-type(n)`](https://www.w3schools.com/cssref/sel_nth-last)|`p:nth-last-of-type(2)`|Selects every `<p>`; element that is the second `<p>`; eleof its parent, counting from the last child|
+    |[`:nth-of-type(n)`](https://www.w3schools.com/cssref/sel_nth-of)|`p:nth-of-type(2)`|Selects every `<p>`; element that is the second `<p&lement of its parent|
+    |[`:only-of-type`](https://www.w3schools.com/cssref/sel_only-of)|`p:only-of-type`|Selects every `<p>`; element that is the only `<p&gement of its parent|
+    |[`:only-child`](https://www.w3schools.com/cssref/sel_only-child)|`p:only-child`|Selects every `<p>`; element that is the only child ofparent|
+    |[`:optional`](https://www.w3schools.com/cssref/sel_optional.asp)|`input:optional`|Selects `<input>`; elements with no "required" attribud>|
+    |[`:out-of-range`](https://www.w3schools.com/cssref/sel_out-of)|`input:out-of-range`|Selects `<input>`; elements with a value outside a sied range|
+    |[`:read-only`](https://www.w3schools.com/cssref/sel_read-only)|`input:read-only`|Selects `<input>`; elements with a "readonly" attribpecified|
+    |[`:read-write`](https://www.w3schools.com/cssref/sel_read-write)|`input:read-write`|Selects `<input>`; elements with no "readonly" attribute|
+    |[`:required`](https://www.w3schools.com/cssref/sel_required.asp)|`input:required`|Selects `<input>`; elements with a "required" attributcified|
+    |[`:root`](https://www.w3schools.com/cssref/sel_root.asp)|`root`|Selects the document's root element|
+    |[`:target`](https://www.w3schools.com/cssref/sel_target.asp)|`#news:target`|Selects the current active #news element (clicked on  containing that anchor name)|
+    |[`:valid`](https://www.w3schools.com/cssref/sel_valid.asp)|`input:valid`|Selects all `<input>`; elements with a valid value|
+    |[`:visited`](https://www.w3schools.com/cssref/sel_visited.asp)|`a:visited`|Selects all visited links|
+
+</details>
+
+# CSS Pseudo-elements
+
+<details>
+  <summary>click to expand</summary>
+
+## What are Pseudo-Elements?
+
+- A CSS pseudo-element is used to style specified parts of an element.
+
+## Syntax
+
+- The syntax of pseudo-elements:
+
+    ```css
+    selector::pseudo-element {
+        property: value;
+    }
+    ```
+
+## The `::first-line` Pseudo-element
+
+- The `::first-line` pseudo-element is used to add a special style to the first line of a text.
+
+- The following example formats the first line of the text in all `<p>` elements:
+
+    ```css
+    p::first-line {
+        color: #ff0000;
+        font-variant: small-caps;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_firstline)
+
+- **Note**: The `::first-line` pseudo-element can only be applied to block-level elements.
+
+- The following properties apply to the `::first-line` pseudo-element:
+
+    - font properties
+    - color properties
+    - background properties
+    - word-spacing
+    - letter-spacing
+    - text-decoration
+    - vertical-align
+    - text-transform
+    - line-height
+    - clear
+
+## The `::first-letter` Pseudo-element
+
+- The `::first-letter` pseudo-element is used to add a special style to the first letter of a text.
+
+- The following example formats the first letter of the text in all `<p>` elements:
+
+    ```css
+    p::first-letter {
+        color: #ff0000;
+        font-size: xx-large;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_firstletter)
+
+- Note: The `::first-letter` pseudo-element can only be applied to block-level elements.
+
+- The following properties apply to the `::first-letter` pseudo- element:
+
+    - font properties
+    - color properties
+    - background properties
+    - margin properties
+    - padding properties
+    - border properties
+    - text-decoration
+    - vertical-align (only if `float` is `none`)
+    - text-transform
+    - line-height
+    - float
+    - clear
+
+## Pseudo-elements and HTML Classes
+
+- Pseudo-elements can be combined with HTML classes:
+
+    ```css
+    p.intro::first-letter {
+        color: #ff0000;
+        font-size: 200%;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_pseudo-element)
+
+- The example above will display the first letter of paragraphs with `class="intro"`, in red and in a larger size.
+
+## Pseudo-elements and HTML Classes
+
+- Pseudo-elements can be combined with HTML classes:
+
+    ```css
+    p.intro::first-letter {
+        color: #ff0000;
+        font-size: 200%;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_pseudo-element)
+
+- The example above will display the first letter of paragraphs with class="intro", in red and in a larger size.
+
+## Multiple Pseudo-elements
+
+- Several pseudo-elements can also be combined.
+
+- In the following example, the first letter of a paragraph will be red, in an `xx-large` font size. The rest of the first line will be blue, and in small-caps. The rest of the paragraph will be the default font size and color:
+
+    ```css
+    p::first-letter {
+        color: #ff0000;
+        font-size: xx-large;
+    }
+
+    p::first-line {
+        color: #0000ff;
+        font-variant: small-caps;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_firstline_letter)
+
+## CSS - The `::before` Pseudo-element
+
+- The `::before` pseudo-element can be used to insert some content before the content of an element.
+
+- The following example inserts an image before the content of each `<h1>` element:
+
+    ```css
+    h1::before {
+        content: url(smiley.gif);
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_before)
+
+## CSS - The `::after` Pseudo-element
+
+- The `::after` pseudo-element can be used to insert some content after the content of an element.
+
+- The following example inserts an image after the content of each `<h1>` element:
+
+    ```css
+    h1::after {
+        content: url(smiley.gif);
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_after)
+
+## CSS - The `::marker` Pseudo-element
+
+- The `::marker` pseudo-element selects the markers of list items.
+
+- The following example styles the markers of list items:
+
+    ```css
+    ::marker {
+        color: red;
+        font-size: 23px;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss_marker)
+
+## CSS - The `::selection` Pseudo-element
+
+- The `::selection` pseudo-element matches the portion of an element that is selected by a user.
+
+- The following CSS properties can be applied to `::selection`: color, background, cursor, and outline.
+
+- The following example makes the selected text red on a yellow background:
+
+    ```css
+    ::selection {
+        color: red;
+        background: yellow;
+    }
+    ```
+
+    [Try It Yourself](https://www.w3schools.com/css/tryit.asp?filename=trycss3_selection)
 
 </details>
