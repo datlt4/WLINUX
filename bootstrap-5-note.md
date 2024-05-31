@@ -1267,6 +1267,8 @@
 
 - Another form for `pagination`, is `breadcrumbs`:
 
+    <img src="asset/bootstrap-5-breadcrumbs.png"/>
+
 - The `.breadcrumb` and `.breadcrumb-item` classes indicates the current page's location within a navigational hierarchy:
 
     ```html
