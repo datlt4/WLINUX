@@ -12,7 +12,7 @@
 
 ---
 
-## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **w\Why I don't need to release devices and platform?**
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Why I don't need to release devices and platform?**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
 
