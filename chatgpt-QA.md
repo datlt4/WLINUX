@@ -12,6 +12,170 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **file handle functions in `C`**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+In C, file handling is done through a set of functions provided by the standard I/O library (`stdio.h`). These functions allow you to create, open, read, write, and close files, among other operations. Here is a summary of the main file handling functions in C:
+
+### Opening and Closing Files
+
+1. **fopen()**: Opens a file and returns a file pointer.
+   ```c
+   FILE *fopen(const char *filename, const char *mode);
+   ```
+   - `filename`: The name of the file to open.
+   - `mode`: The mode in which to open the file (e.g., "r" for read, "w" for write).
+
+2. **fclose()**: Closes an opened file.
+   ```c
+   int fclose(FILE *stream);
+   ```
+   - `stream`: The file pointer to the file you want to close.
+
+### Reading from Files
+
+3. **fgetc()**: Reads a single character from a file.
+   ```c
+   int fgetc(FILE *stream);
+   ```
+   - `stream`: The file pointer from which to read the character.
+
+4. **fgets()**: Reads a string from a file.
+   ```c
+   char *fgets(char *str, int n, FILE *stream);
+   ```
+   - `str`: The buffer to store the read string.
+   - `n`: The maximum number of characters to read, including the null terminator.
+   - `stream`: The file pointer from which to read the string.
+
+5. **fread()**: Reads a block of data from a file.
+   ```c
+   size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
+   ```
+   - `ptr`: The buffer to store the read data.
+   - `size`: The size of each element to read.
+   - `nmemb`: The number of elements to read.
+   - `stream`: The file pointer from which to read the data.
+
+### Writing to Files
+
+6. **fputc()**: Writes a single character to a file.
+   ```c
+   int fputc(int c, FILE *stream);
+   ```
+   - `c`: The character to write.
+   - `stream`: The file pointer to which to write the character.
+
+7. **fputs()**: Writes a string to a file.
+   ```c
+   int fputs(const char *str, FILE *stream);
+   ```
+   - `str`: The string to write.
+   - `stream`: The file pointer to which to write the string.
+
+8. **fwrite()**: Writes a block of data to a file.
+   ```c
+   size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
+   ```
+   - `ptr`: The buffer containing the data to write.
+   - `size`: The size of each element to write.
+   - `nmemb`: The number of elements to write.
+   - `stream`: The file pointer to which to write the data.
+
+### File Positioning
+
+9. **fseek()**: Sets the file position indicator for a file.
+   ```c
+   int fseek(FILE *stream, long int offset, int origin);
+   ```
+   - `stream`: The file pointer.
+   - `offset`: The number of bytes to offset from `origin`.
+   - `origin`: The starting point for the offset (e.g., `SEEK_SET`, `SEEK_CUR`, `SEEK_END`).
+
+10. **ftell()**: Gets the current file position.
+    ```c
+    long int ftell(FILE *stream);
+    ```
+    - `stream`: The file pointer.
+
+11. **rewind()**: Sets the file position to the beginning of the file.
+    ```c
+    void rewind(FILE *stream);
+    ```
+    - `stream`: The file pointer.
+
+### Error Handling
+
+12. **feof()**: Checks if the end-of-file indicator is set for a file.
+    ```c
+    int feof(FILE *stream);
+    ```
+    - `stream`: The file pointer.
+
+13. **ferror()**: Checks if the error indicator is set for a file.
+    ```c
+    int ferror(FILE *stream);
+    ```
+    - `stream`: The file pointer.
+
+14. **clearerr()**: Clears the end-of-file and error indicators for a file.
+    ```c
+    void clearerr(FILE *stream);
+    ```
+    - `stream`: The file pointer.
+
+### Example Usage
+
+Here's a simple example demonstrating some of these functions:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *file;
+    char buffer[100];
+
+    // Open a file for writing
+    file = fopen("example.txt", "w");
+    if (file == NULL) {
+        perror("Error opening file");
+        return -1;
+    }
+
+    // Write to the file
+    fputs("Hello, World!\n", file);
+    fclose(file);
+
+    // Open the file for reading
+    file = fopen("example.txt", "r");
+    if (file == NULL) {
+        perror("Error opening file");
+        return -1;
+    }
+
+    // Read from the file
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+        printf("%s", buffer);
+    }
+
+    // Close the file
+    fclose(file);
+
+    return 0;
+}
+```
+
+This example opens a file for writing, writes a string to it, closes the file, then reopens the file for reading, reads the string back, and prints it to the console.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **What types of form of cloud computing are operating by big corp?**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
