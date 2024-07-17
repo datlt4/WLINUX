@@ -778,3 +778,258 @@ console.log(moment("20111031").format('MMMM Do YYYY, h:mm:ss a'));
 - To generate the first 10 Fibonacci numbers, this function is recursively executed 20 times only. A significant improvement.
 
 </details>
+
+## [async/await JS in-depth](https://medium.com/@ktan2050/async-await-in-depth-part-1-52ea6db38527)
+
+- In nativePromise, a nested promise chain is used to fetch user info first and after getting the user info, fetching comments given by that user.It looks clumsy from a reading standpoint.The same thing can be achieved using async/await in a cleaner way as mentioned in asyncAwait method.
+
+    ```javascript
+    function nativePromise() {
+        fetch("https://jsonplaceholder.typicode.com/todos/1")
+            .then(response => response.json())
+            .catch(error => console.log(error))
+            .then(user => {
+                fetch(`https://jsonplaceholder.typicode.com/posts/${user.userId}/comments`)
+                    .then(response => response.json())
+                    .catch(error => console.log(error))
+                    .then(comments => {
+                        console.log("user: ", user);
+                        console.log("comments: ", comments);
+                    })
+                    .catch(error => console.log(error))
+            })
+            .catch(error => console.log(error))
+    }
+    ```
+
+    ```javascript
+    async function asyncAwait(id = 1) {
+        try {
+            let response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`);
+            const user = await response.json();
+            response = await fetch(`https://jsonplaceholder.typicode.com/posts/${user.userId}/comments`);
+            const comments = await response.json();
+            console.log("user: ", user);
+            console.log("comments: ", comments);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    ```
+
+## `Async`
+
+
+- If a function is defined as `async`, then it implies that a promise will be returned.
+
+- If `async` function returns a value instead of a promise then JavaScript will automatically warp the returned value in a resolved promise.
+
+- If `async` function returns nothing then JavaScript will automatically warp `undefined` in a resolved promise.
+
+    ```javascript
+    async function foo1() {
+        // JS will wrap 1 in a resolved primise i.e. equivalent to Promise.resolve(1)
+        return 1;
+    }
+
+    async function foo2() {
+        // JS will warp `undefined` in a resolved promise
+        // As nothitng is being returned by this method
+    }
+
+    await foo1().then(result => result);
+    // 1
+    await foo3().then(result => result);
+    // undefined
+    ```
+
+## `Await`
+
+- The keyword `await` make sure JavaScript will wait for a promise until and unless the promise has been either resolved or rejected
+
+- It can be used inside an `async` block only.
+
+- If `await` is used in regular function then JavaScript will throw an error.
+
+    ```javascript
+    async function foo3() {
+        const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+        // As await has been used, JS will wait until promise won't resolved
+        const user = await response.json();
+        console.log(user);
+    }
+
+    function syncFunction() {
+        console.log("Before asyncAwait is called");
+        foo3().then(result => result);
+        console.log("After asyncAwait is called");
+        // As JS is a single threaded, execution will continue in syncFunction
+        // It won't wait for completion of foo3 method as syncFunction is a regular method
+    }
+
+    async function asyncFunction() {
+        console.log("Before asyncAwait is called");
+        await foo3().then(result => result);
+        // As await is used for foo3, JS will wait to completes foo3 execution first
+        // Then it will resume further execution
+        console.log("After asyncAwait is called");
+    }
+
+    syncFunction();
+    // Before asyncAwait is called
+    // After asyncAwait is called
+    // {userId: 1, id: 1, title: 'delectus aut autem', completed: false}
+    asyncFunction();
+    // Before asyncAwait is called
+    // {userId: 1, id: 1, title: 'delectus aut autem', completed: false}
+    // After asyncAwait is called
+    ```
+
+- The main task of await is to wait for a Promise.
+
+- The await expression causes async function execution to pause until a Promise is settled (that is, fulfilled or rejected),
+
+```javascript
+async function foo() {
+    console.log("foo execution started");
+    let response = await fetch(`https://jsonplaceholder.typicode.com/todos/1`);
+    const user = await response.json();
+    console.log("user:", user);
+    console.log("foo execution completed");
+    return user;
+}
+
+function asyncAndSync() {
+    console.log("Calling foo method");
+    foo().then(user => console.log(`USER:`, JSON.stringify(user)));
+    console.log("Called foo method");
+    console.log("Normal execution continues add foo execution resumed once promise is settled");
+}
+
+asyncAndSync();
+// Calling foo method
+// foo execution started
+// Called foo method
+// Normal execution continues add foo execution resumed once promise is settled
+// user: {userId: 1, id: 1, title: 'delectus aut autem', completed: false}
+// foo execution completed
+// USER: {"userId":1,"id":1,"title":"delectus aut autem","completed":false}
+```
+
+- `asyncAndSync` is a regular function which will execute in synchronous fashion.
+
+- `foo` is an `async` function will execute in asynchronous fashion.
+
+## Different way of using async/await with try, catch, then and throw
+
+- There are many ways to handle a promise using `async/await`. It can be handled in a native way i.e. by using `.then` and `.catch`.
+
+- When a promise gets `resolved`, the `resolved` value will get handled by `then` block.
+
+- When a promise gets `rejected` then the `rejected` value will get handled by `catch` block.
+
+- It can be handled using `try` and `catch` block.
+
+- If a promise gets rejected then that rejected value will be caught in a `try` block and throw the same to `catch` block for error handling of rejected value.
+
+```javascript
+/**
+ * Using async/await with then
+ */
+async function foo4() {
+    let promise = new Promise(function(resolved, rejected) {
+        setTimeout(() => resolved("Promise has been resolved"), 1000);
+        // Promise will be resolved after 1 second
+    });
+    return promise;
+}
+
+funtion foo5() {
+    foo4().then((message) => console.log(message));
+}
+```
+
+```javascript
+/**
+ * Using async/await with catch
+ */
+async function foo6() {
+    let promise = new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            reject("Promise has been rejected")
+            // Promise will get reject after 1 second
+        }, 1000);
+    });
+    return promise;
+}
+
+function foo7() {
+    foo6().catch(err => console.error(err));
+}
+
+foo7();
+```
+
+asyncAndSync();
+
+
+asyncAndSync(10);
+asyncAndSync(11);
+asyncAndSync(12);
+
+
+asyncAndSync(13);
+asyncAndSync(14);
+asyncAndSync(15);
+
+
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+async function foo8() {
+    let promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (getRandomInt(100) % 2 === 0) {
+                resolve("Even number");
+            }
+            else {
+                reject("Odd number");
+            }
+        }, 1000);
+    });
+
+    return promise;
+}
+
+function foo9() {
+    console.log("Before foo8 is called");
+    foo8()
+        .then(result => result)
+        .catch(error => error)
+        .finally(() => console.log("foo8 execution finished"));
+    console.log("After foo8 is called");
+}
+
+async function foo11() {
+    try {
+        const result = await foo8();
+        console.log(result);
+    } catch (e) {
+        console.log(`Inside foo11 try-catch block ${e}`);
+    }
+}
+
+
+foo9();
+
+
+
+async function foo13() {
+    const result = await foo8()
+        .then(result => console.log(result))
+        .catch(error => {
+            console.log(`Inside foo13 try-catch block ${error}`);
+            throw error;
+        });
