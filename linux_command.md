@@ -332,6 +332,7 @@ loop_forever()
     ```bash
     tar cf - need_to_compress_dir/ | pigz -p 4 > outputfile.tar.gz
     pigz -d -p 4 outputfile.tar.gz
+    pigz -d -p 4 -c outputfile.tar.gz | tar -xvf - -C /path/to/destination/folder
     ```
 
 3. Split into multiple files
@@ -340,8 +341,8 @@ loop_forever()
     ```bash
     tar cf - /data | pigz -p 4 | split -b 500M - /backup/gitea_data_datlt4.tar.gz.part
     cat /backup/gitea_data_datlt4.tar.gz.part* | pigz -d | tar xf -
+    cat /backup/gitea_data_datlt4.tar.gz.part* | pigz -d | tar xf - -C /path/to/destination/folder
     ```
-
 
 ## `Tmpfs` and `Ramfs`
 
