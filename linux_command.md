@@ -318,6 +318,31 @@ setup_ssh(public_key)
 loop_forever()
 ```
 
+## Compress data using multiple CPU cores
+
+1. Install the Tools
+
+    ```bash
+    sudo apt-get update
+    sudo apt-get install pigz -y
+    ```
+
+2. Using pigz (Parallel GZip)
+
+    ```bash
+    tar cf - need_to_compress_dir/ | pigz -p 4 > outputfile.tar.gz
+    pigz -d -p 4 outputfile.tar.gz
+    ```
+
+3. Split into multiple files
+
+
+    ```bash
+    tar cf - /data | pigz -p 4 | split -b 500M - /backup/gitea_data_datlt4.tar.gz.part
+    cat /backup/gitea_data_datlt4.tar.gz.part* | pigz -d | tar xf -
+    ```
+
+
 ## `Tmpfs` and `Ramfs`
 
 - `Tmpfs`: Tmpfs is a temporary file system stored in the RAM memory (and/or swap memory). By specifying this file system with the argument -t of the command mount, you can assign limited memory resources to a temporary file system. As a result, applications stored in this filesystem will perform several times faster than they would on conventional storage devices, including cssd devices.
