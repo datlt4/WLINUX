@@ -4,6 +4,8 @@ sudo apt install fzf xclip -y
 ```
 
 ```bash
+figlet REMEMBER TO BACKUP DATA
+
 alias get_ngrok="curl -s http://localhost:4040/api/tunnels | python3 -c \"import json, sys, os, pwd; username=pwd.getpwuid(os.getuid()).pw_name; print(json.load(sys.stdin)['tunnels'][0]['public_url'].replace('tcp://', f'ssh {username}@').replace(':', ' -p '))\""
 alias share="python3 -m http.server"
 
@@ -17,6 +19,12 @@ alias pwdc="pwd | tr -d '\\n' | DISPLAY=:0 xclip -selection c"
 alias buzz0="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/canary-long.wav /usr/share/sounds/sound-icons/trumpet-12.wav"
 alias buzz1="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/canary-long.wav"
 alias buzz2="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/trumpet-12.wav"
+
+alias doc="cd /home/emoi/Documents"
+alias dl="cd /home/emoi/Downloads"
+alias b="cd build"
+
+alias open_vpn="/usr/bin/openvpn3 session-start --config <path to config file>.ovpn"
 ```
 
 For Raspberry Pi
@@ -36,8 +44,9 @@ PATH
 ```bash
 export EDITOR="/bin/nano"
 export SHELL='/bin/bash'
-export PATH=/usr/local/cuda/bin:/opt/Qt/6.2.2/gcc_64/lib/cmake:${PATH}
+export PATH=/usr/local/cuda/bin:/opt/Qt/6.2.2/gcc_64/lib/cmake:/usr/local/go/bin:${PATH}
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64:/usr/local/TensorRT/lib:/usr/local/cuda/extras/CUPTI/lib64:${LD_LIBRARY_PATH}"
+export LD_LIBRARY_PATH="/usr/local/lib:${LD_LIBRARY_PATH}"
 export Torch_DIR=/usr/local/lib/python3.8/dist-packages/torch
 export Qt6Core_DIR=/opt/Qt/6.2.2/gcc_64/lib/cmake/Qt6Core
 export Qt6_DIR=/opt/Qt/6.2.2/gcc_64/lib/cmake/Qt6
