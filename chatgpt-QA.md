@@ -7,6 +7,18 @@
 <details>
   <summary>Click to expand</summary>
 
+
+</details>
+
+---
+
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Generate a complicated c++ project and use zero copy to increase app performances**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
 Creating a complicated C++ project that uses zero-copy techniques to increase performance involves understanding how to manage memory efficiently. In zero-copy, data is not duplicated between different memory locations, such as when passing data between CPU and GPU, or between different processes or threads. 
 
 Here, I will outline a high-level approach to build a C++ project using zero-copy techniques to boost performance, focusing on:
@@ -217,18 +229,6 @@ In this project, we covered:
 3. **Zero-copy GPU** interaction with CUDA.
 
 This setup will give your application significant performance improvements by avoiding unnecessary memory copying.
-
-</details>
-
----
-
-## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Generate a complicated c++ project and use zero copy to increase app performances **
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
-
-<details>
-  <summary>Click to expand</summary>
-
 
 </details>
 
