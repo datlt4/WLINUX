@@ -2,6 +2,19 @@
 
 ## Submodule
 
+1. Basic Commands Overview
+
+| Command                           | Description                                                |
+|------------------------------------|------------------------------------------------------------|
+| `git submodule add <repo_url>`     | Add a submodule to your project                            |
+| `git submodule init`               | Initialize your submodules                                 |
+| `git submodule update`             | Fetch and checkout submodule commits                       |
+| `git submodule status`             | Check the status of your submodules                        |
+| `git submodule foreach <command>`  | Run a command in each submodule                            |
+| `git clone --recurse-submodules`   | Clone a repository and its submodules                      |
+| `git submodule sync`               | Sync submodule URLs when they change                       |
+| `git push`                         | Push changes in the main project and submodule (if updated)|
+
 1. Add a Git Submodule
 
    ```bash
@@ -139,4 +152,22 @@ sudo apt install git-lfs -y
 
    ```bash
    git lfs untrack "*.psd"
+   ```
+
+8. Fetching Recent Files
+
+   ```bash
+   git lfs fetch --recent
+   git lfs fetch --recent <n> # Fetches LFS objects for commits made in the last n days.
+   git lfs fetch --recent --recent-refs-days <n>
+   git lfs fetch --recent --recent-commits-days 7  # fetches commits from the last 7 days
+
+   # Fetch Specific LFS Files by Pattern (-I and -X)
+   # -I Option (Include specific files):
+   git lfs fetch -I "path/to/file.txt"
+   git lfs fetch -I "*.jpg"
+   # -X Option (Exclude specific files):
+   git lfs fetch -X "*.png"
+   # Combined Example (-I and -X):
+   git lfs fetch -I "*.jpg" -X "*.large.jpg"
    ```
