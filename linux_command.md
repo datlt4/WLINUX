@@ -340,8 +340,8 @@ loop_forever()
 
     ```bash
     tar cf - /data | pigz -p 4 | split -b 500M - /backup/gitea_data_datlt4.tar.gz.part
-    cat /backup/gitea_data_datlt4.tar.gz.part* | pigz -d | tar xf -
-    cat /backup/gitea_data_datlt4.tar.gz.part* | pigz -d | tar xf - -C /path/to/destination/folder
+    cat /backup/gitea_data_datlt4.tar.gz.part* | pigz -d -p 4 | tar xf -
+    cat /backup/gitea_data_datlt4.tar.gz.part* | pigz -d -p 4 | tar xf - -C /path/to/destination/folder
     ```
 
 ## `Tmpfs` and `Ramfs`
