@@ -12,6 +12,193 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Write a C++ project, which have pipelines to process data in pipeline manner between many thread, multi input multi output**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+To create a C++ project with a pipeline to process data across multiple threads, allowing for multi-input and multi-output, you can use a producer-consumer model with thread-safe queues. The design will feature several stages, each running in its own thread, and pass data between these stages in a pipeline manner. We will use modern C++ features like `std::thread`, `std::mutex`, and `std::condition_variable` to ensure thread safety and communication between stages.
+
+### Key Design
+- **Input threads** will receive input data (e.g., images, sensor readings).
+- **Processing threads** will transform the input data into output through various stages (e.g., rotation, filtering, feature extraction).
+- **Output threads** will consume the processed data and perform actions like saving results to disk or visualizing them.
+
+### Libraries Needed:
+- C++ Standard Library: For threading (`<thread>`), synchronization (`<mutex>`, `<condition_variable>`), and I/O (`<iostream>`).
+- OpenCV: For image processing, if you're working with image data.
+  
+### Project Structure
+
+```text
+cpp_pipeline_project/
+│
+├── CMakeLists.txt   # Build configuration
+├── main.cpp         # Entry point of the program
+├── data_processor.h # Header for data processing pipeline
+├── data_processor.cpp # Implementation of data pipeline
+├── utils.h          # Utility functions
+└── utils.cpp        # Utility function implementation
+```
+
+### Step-by-Step Example
+
+#### 1. **Thread-Safe Queue**
+We need a thread-safe queue for communication between threads.
+
+```cpp
+// safe_queue.h
+#include <queue>
+#include <mutex>
+#include <condition_variable>
+
+template<typename T>
+class SafeQueue {
+public:
+    SafeQueue() = default;
+
+    void push(const T& value) {
+        std::lock_guard<std::mutex> lock(mtx);
+        queue.push(value);
+        cv.notify_one();
+    }
+
+    bool pop(T& result) {
+        std::unique_lock<std::mutex> lock(mtx);
+        cv.wait(lock, [this]() { return !queue.empty(); });
+        result = queue.front();
+        queue.pop();
+        return true;
+    }
+
+    bool empty() {
+        std::lock_guard<std::mutex> lock(mtx);
+        return queue.empty();
+    }
+
+private:
+    std::queue<T> queue;
+    std::mutex mtx;
+    std::condition_variable cv;
+};
+```
+
+#### 2. **Pipeline Stages**
+Each stage will receive data from the previous stage, process it, and pass it to the next stage.
+
+```cpp
+// data_processor.h
+#include "safe_queue.h"
+#include <thread>
+#include <functional>
+#include <iostream>
+
+class DataProcessor {
+public:
+    DataProcessor() = default;
+    
+    void startPipeline() {
+        // Start the processing threads
+        inputThread = std::thread(&DataProcessor::inputStage, this);
+        processingThread = std::thread(&DataProcessor::processingStage, this);
+        outputThread = std::thread(&DataProcessor::outputStage, this);
+    }
+
+    void stopPipeline() {
+        inputThread.join();
+        processingThread.join();
+        outputThread.join();
+    }
+
+private:
+    SafeQueue<std::string> inputQueue; // Input -> Processing
+    SafeQueue<std::string> processingQueue; // Processing -> Output
+
+    std::thread inputThread, processingThread, outputThread;
+
+    // Simulate input stage (reading data)
+    void inputStage() {
+        for (int i = 0; i < 10; ++i) {
+            std::string input = "Data-" + std::to_string(i);
+            std::cout << "Input: " << input << std::endl;
+            inputQueue.push(input); // Push data to processing queue
+        }
+    }
+
+    // Simulate processing stage (data transformation)
+    void processingStage() {
+        std::string data;
+        while (inputQueue.pop(data)) {
+            std::string processedData = data + " Processed";
+            std::cout << "Processing: " << processedData << std::endl;
+            processingQueue.push(processedData); // Push to output queue
+        }
+    }
+
+    // Simulate output stage (saving data)
+    void outputStage() {
+        std::string processedData;
+        while (processingQueue.pop(processedData)) {
+            std::cout << "Output: " << processedData << std::endl;
+        }
+    }
+};
+```
+
+#### 3. **Main File**
+This is where you start the pipeline and define its behavior.
+
+```cpp
+// main.cpp
+#include "data_processor.h"
+
+int main() {
+    DataProcessor processor;
+    
+    // Start the pipeline
+    processor.startPipeline();
+
+    // Wait for pipeline completion
+    processor.stopPipeline();
+
+    return 0;
+}
+```
+
+### Build System: CMake
+
+```cmake
+# CMakeLists.txt
+cmake_minimum_required(VERSION 3.10)
+project(CPP_Pipeline)
+
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(cpp_pipeline_project main.cpp data_processor.cpp safe_queue.h)
+```
+
+### Explanation of the Pipeline:
+
+1. **Thread-Safe Queue (`SafeQueue`)**: The `SafeQueue` class ensures that data can be safely shared between threads. It has a blocking `pop()` function, which waits for data to be available if the queue is empty.
+   
+2. **Data Processor**:
+    - **Input Stage**: Simulates reading data (e.g., sensor input, network input) and pushes it to the next stage.
+    - **Processing Stage**: Simulates transforming the data (e.g., rotating an image, applying filters) and passes it to the output stage.
+    - **Output Stage**: Simulates saving or visualizing the final processed data.
+    
+3. **Pipeline Execution**: Threads for each stage run concurrently, communicating via queues. Each stage processes its portion of the task and hands off the results to the next stage in the pipeline.
+
+### Conclusion:
+This basic structure allows for creating multi-threaded pipelines with multiple input-output stages in a thread-safe manner. You can extend this design to include more stages, more complex processing, or multiple queues for multi-input and multi-output scenarios.
+
+Let me know if you want to add any specific details or need help with extending the system!
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Generate a complicated c++ project and use zero copy to increase app performances**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
