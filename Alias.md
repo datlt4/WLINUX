@@ -23,6 +23,9 @@ alias buzz2="notify-send 'DONE' && aplay /usr/share/sounds/sound-icons/trumpet-1
 alias doc="cd /home/emoi/Documents"
 alias dl="cd /home/emoi/Downloads"
 alias b="cd build"
+alias ..="cd ../"
+alias ...="cd ../../"
+alias ....="cd ../../../"
 
 alias open_vpn="/usr/bin/openvpn3 session-start --config <path to config file>.ovpn"
 ```
