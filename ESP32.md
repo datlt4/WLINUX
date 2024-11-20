@@ -84,9 +84,9 @@ idf.py -p /dev/ttyUSB0 monitor
     # try this instead if you don't have PWD defined
     # SRCDIR = \$(shell dirname \$(realpath \$(lastword \$(MAKEFILE_LIST))))
     all:
-        \$(MAKE) -C \$(KDIR) M=\$(SRCDIR) modules
+    	\$(MAKE) -C \$(KDIR) M=\$(SRCDIR) modules
     clean:
-        \$(MAKE) -C \$(KDIR) M=\$(SRCDIR) clean
+    	\$(MAKE) -C \$(KDIR) M=\$(SRCDIR) clean
     " > Makefile
     ```
 
@@ -102,6 +102,41 @@ idf.py -p /dev/ttyUSB0 monitor
     # run `sudo rmmod cp210x.ko` if existed
     ```
 
+## Install CH341 USB to UART Bridge
+
+- Install dependencies
+
+    ```bash
+    sudo apt install linux-headers-$(uname -r) -y
+    mkdir -p CH341_LINUX/
+    cd CH341_LINUX/
+    printf "ifeq (\$(KERNELRELEASE), )
+    KERNELDIR := /lib/modules/\$(shell uname -r)/build
+    PWD :=\$(shell pwd)
+    default:
+    	\$(MAKE) -C \$(KERNELDIR)  M=\$(PWD)
+    clean:
+    	rm -rf .tmp_versions Module.symvers *.mod.c *.o *.ko .*.cmd Module.markers modules.order
+    load:
+    	modprobe usbserial
+    	insmod ch34x.ko
+    unload:
+    	rmmod ch34x
+    else
+    	obj-m := ch34x.o
+    endif
+    " > Makefile
+    ```
+
+- Download [`ch341.c`](https://elixir.bootlin.com/linux/v6.8/source/drivers/usb/serial/ch341.c) corresponding to the kernel version and place in `CH341_LINUX`, and save to `ch34x.c`.
+
+- Then run `make all` to build module
+
+    ```bash
+    make
+    sudo make load # load ch34x chips driver
+    # sudo make unload # unload ch34x chips driver
+    ```
 
 ## ESP-IDF with Visual Studio Code
 
