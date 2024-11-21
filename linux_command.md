@@ -51,6 +51,30 @@ sudo nano /etc/sudoers
 emoi ALL = NOPASSWD: /bin/systemctl restart httpd.service, /bin/kill
 ```
 
+- [If syntax error that will make `sudoers` files corupted, you will not be able to run `sudo`](https://askubuntu.com/questions/799669/etc-sudoers-file-corrupted-and-i-cant-run-pkexec-visudo-over-ssh)
+
+  1. Open two ssh sessions to the target server.
+
+  2. In the first session, get the PID of bash by running:
+
+      ```bash
+      echo $$
+      ```
+
+  3. In the second session, start the authentication agent with:
+
+      ```bash
+      pkttyagent --process (pid from step 2)
+      ```
+
+  4. Back in the first session, run:
+
+      ```bash
+      pkexec visudo
+      ```
+
+  5. In the second session, you will get the password prompt. visudo will start in the first session.
+
 ## Secure Shell (SSH)
 
 - Install
