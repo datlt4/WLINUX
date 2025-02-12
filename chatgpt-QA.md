@@ -156,6 +156,155 @@ This pattern is particularly useful in multimedia pipelines (like those in GStre
 
 </details>
 
+<img src="https://i.namu.wiki/i/RHa36JjgDFT_3B8SDa5gz_mWY5HnAVCTjGr3nNmKZIIVKIkj5vK8HnArKaeIHJH1ff4J3OxbflyWUzRRFRHO-64tVIzMbKpolF40Oppw5BTjRkP43fdOdAASYv997Vnx1EL9cwTHU7uHlg1SRLvzFg.webp" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Creating an efficient `DataBuffer` class for use in a media processing pipeline similar to GStreamer involves several considerations:
+
+1. Avoiding unnecessary data copies.
+2. Managing memory efficiently.
+3. Ensuring thread safety if the buffer will be used across multiple threads.
+
+Below is an example implementation of such a `DataBuffer` class in C++. This class assumes that the data is stored as raw bytes and includes mechanisms to handle ownership and reference counting, which are crucial for reducing time spent on copying or moving large amounts of data.
+
+```cpp
+#include <iostream>
+#include <memory>
+
+class DataBuffer {
+public:
+    // Constructor that creates a new buffer with specified size.
+    explicit DataBuffer(size_t size)
+        : m_data(new char[size]), m_size(size), m_refCount(1) {}
+
+    // Copy constructor for sharing the same data pointer.
+    DataBuffer(const DataBuffer& other)
+        : m_data(other.m_data), m_size(other.m_size), m_refCount(nullptr) {
+        if (m_data) {
+            ++(*m_refCount);
+        }
+    }
+
+    // Move constructor to transfer ownership of raw buffer.
+    DataBuffer(DataBuffer&& other) noexcept
+        : m_data(std::exchange(other.m_data, nullptr)),
+          m_size(other.m_size), 
+          m_refCount(nullptr) {}
+
+    // Destructor for releasing the data pointer and decreasing reference count.
+    ~DataBuffer() {
+        if (m_data && !*m_refCount) {
+            delete[] m_data;
+        }
+    }
+
+    // Copy assignment operator to share data and manage refcount.
+    DataBuffer& operator=(const DataBuffer& other) {
+        return copyFrom(other);
+    }
+
+    // Move assignment operator for transferring ownership of raw buffer.
+    DataBuffer& operator=(DataBuffer&& other) noexcept {
+        if (this != &other) {
+            release();
+            m_data = std::exchange(other.m_data, nullptr);
+            m_size = other.m_size;
+            m_refCount = nullptr;
+        }
+        return *this;
+    }
+
+    // Getters
+    char* data() const { return m_data; }
+    size_t size() const { return m_size; }
+
+    // Methods to manipulate the buffer content.
+    void setData(const char* newData, size_t newSize) {
+        if (newSize > m_size) {
+            throw std::runtime_error("New data exceeds allocated buffer size");
+        }
+        memcpy(m_data, newData, newSize);
+    }
+
+private:
+    void release() {
+        if (m_refCount && *m_refCount == 1) {
+            delete[] m_data;
+            delete m_refCount;
+        } else if (*m_refCount > 0) {
+            --(*m_refCount);
+        }
+    }
+
+    DataBuffer& copyFrom(const DataBuffer& other) {
+        if (this != &other) {
+            release();
+            m_data = other.m_data;
+            m_size = other.m_size;
+            m_refCount = new int(1); // Initialize ref count for shared data.
+            ++(*m_refCount);
+        }
+        return *this;
+    }
+
+private:
+    char* m_data;         // Pointer to the raw buffer
+    size_t m_size;        // Size of the allocated buffer
+    std::unique_ptr<int> m_refCount; // Reference counter, nullptr for owned buffers.
+};
+
+// Example usage and testing
+int main() {
+    DataBuffer buf1(1024);  // Create a new buffer with size 1024 bytes
+
+    const char* testData = "This is some test data.";
+    buf1.setData(testData, strlen(testData));
+
+    std::cout << "Original Buffer: ";
+    for (size_t i = 0; i < buf1.size(); ++i) {
+        if(buf1.data()[i] == '\0') break;
+        std::cout << buf1.data()[i];
+    }
+    std::cout << "\n";
+
+    DataBuffer buf2(buf1); // Copy constructor: shared buffer, ref count incremented
+    std::cout << "Shared Buffer (buf2): ";
+    for (size_t i = 0; i < buf2.size(); ++i) {
+        if(buf2.data()[i] == '\0') break;
+        std::cout << buf2.data()[i];
+    }
+    std::cout << "\n";
+
+    DataBuffer buf3(std::move(buf1)); // Move constructor: transfer ownership
+    std::cout << "Moved Buffer (buf3): ";
+    for (size_t i = 0; i < buf3.size(); ++i) {
+        if(buf3.data()[i] == '\0') break;
+        std::cout << buf3.data()[i];
+    }
+    std::cout << "\n";
+
+    return 0;
+}
+```
+
+### Explanation:
+
+- **Copy Constructor and Assignment Operator**: The `DataBuffer` class uses reference counting to share data between buffers without making copies. This is useful in a pipeline where multiple components might need access to the same buffer.
+  
+- **Move Constructor and Move Assignment Operator**: These methods transfer ownership of the underlying raw buffer, allowing for efficient handling of large amounts of data.
+
+- **Release Method**: Ensures that when the last reference to the shared buffer goes out of scope, the memory is freed properly.
+
+### Usage:
+
+In a pipeline like GStreamer, you can use this `DataBuffer` class to efficiently pass data between components. By sharing buffers through copy construction and managing ownership with move semantics, you minimize the need for expensive data copies and improve overall performance.
+
+This implementation ensures that copying or moving data within the buffer is as efficient as possible while maintaining thread safety and proper memory management.
+
+</details>
+
 ---
 
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Write a C++ project, which have pipelines to process data in pipeline manner between many thread, multi input multi output**
