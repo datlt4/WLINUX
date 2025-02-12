@@ -12,6 +12,152 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **write a DataBuffer that will be used in a pipeline like gstreamer, optimize and reduce time for copying and moving data**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Below is one approach to designing a C++ DataBuffer class that minimizes copying by “owning” a reference‐counted block of memory. This design uses move semantics and a shared pointer with a custom deleter (or even no deleter if the memory isn’t owned) so that buffers can be passed along a processing pipeline (similar to how GStreamer uses GstBuffer) with little or no copying.
+
+In this example, we provide two ways to create a DataBuffer: one that allocates new memory (with std::malloc/free) and one that wraps externally allocated memory. The class is movable but not copyable so that moving a DataBuffer is simply a pointer move (i.e. zero‑copy).
+
+### DataBuffer.hpp
+
+```cpp
+#pragma once
+
+#include <cstdint>
+#include <cstdlib>
+#include <memory>
+#include <stdexcept>
+#include <functional>
+
+// A simple DataBuffer that holds a block of memory.
+// It uses a std::shared_ptr with a custom deleter to avoid copying data when moved.
+class DataBuffer {
+public:
+    // Type alias for a custom deleter
+    using Deleter = std::function<void(uint8_t*)>;
+
+    // Allocate a new buffer of the given size. Memory will be freed using std::free.
+    static DataBuffer allocate(size_t size) {
+        uint8_t* ptr = static_cast<uint8_t*>(std::malloc(size));
+        if (!ptr) {
+            throw std::bad_alloc();
+        }
+        // Use free as deleter.
+        return DataBuffer(ptr, size, [](uint8_t* p) { std::free(p); });
+    }
+
+    // Create a DataBuffer that wraps externally allocated data.
+    // The caller can provide a custom deleter, or if deleter is nullptr then the buffer is not owned.
+    DataBuffer(uint8_t* data, size_t size, Deleter deleter = nullptr)
+        : size_(size),
+          data_(data, deleter ? deleter : [](uint8_t*){/* no deletion */}) {
+    }
+
+    // Delete copy constructor to avoid accidental copying.
+    DataBuffer(const DataBuffer&) = delete;
+    DataBuffer& operator=(const DataBuffer&) = delete;
+
+    // Move constructor.
+    DataBuffer(DataBuffer&& other) noexcept
+        : size_(other.size_), data_(std::move(other.data_)) {
+        other.size_ = 0;
+    }
+
+    // Move assignment operator.
+    DataBuffer& operator=(DataBuffer&& other) noexcept {
+        if (this != &other) {
+            size_ = other.size_;
+            data_ = std::move(other.data_);
+            other.size_ = 0;
+        }
+        return *this;
+    }
+
+    // Returns the size of the buffer in bytes.
+    size_t size() const { return size_; }
+
+    // Returns a raw pointer to the buffer.
+    uint8_t* data() { return data_.get(); }
+    const uint8_t* data() const { return data_.get(); }
+
+private:
+    // Private constructor used by static allocate() and the public constructor.
+    DataBuffer(uint8_t* data, size_t size, Deleter deleter)
+        : size_(size), data_(data, deleter) {}
+
+    size_t size_;
+    std::shared_ptr<uint8_t> data_;
+};
+```
+
+### Explanation
+
+1. **Memory Ownership with Custom Deleter:**  
+   The buffer is wrapped in a `std::shared_ptr<uint8_t>`. When you create a DataBuffer using the `allocate()` method, it allocates the memory with `std::malloc` and installs a deleter that calls `std::free`. This means that when the last copy (or moved instance) goes out of scope, the memory is automatically freed.
+
+2. **Move Semantics for Zero-Copy Transfer:**  
+   The class deletes its copy constructor and copy assignment operator to avoid accidental copies. Instead, it provides a move constructor and move assignment operator so that the underlying pointer and size are simply transferred from one DataBuffer to another. This minimizes data copying, which is essential in a high‑performance pipeline.
+
+3. **Wrapping External Memory:**  
+   Sometimes your pipeline might produce data buffers from another source. The public constructor that takes a raw pointer, size, and optional deleter lets you wrap that external memory. If you don’t need the DataBuffer to own the memory (for example, if it’s managed elsewhere), you can pass a no-op deleter.
+
+4. **Reduced Overhead in Pipelines:**  
+   In a pipeline like GStreamer, buffers are passed between elements via reference counting with minimal copying. The design here mimics that approach by using a shared pointer and move semantics. When you pass a DataBuffer through your pipeline, you only transfer the pointer and size (usually a few bytes) rather than copying the entire data block.
+
+### Usage Example
+
+Here’s a small snippet showing how you might use the DataBuffer in a pipeline:
+
+```cpp
+#include "DataBuffer.hpp"
+#include <iostream>
+#include <cstring>
+
+void processFrame(DataBuffer buffer) {
+    // Example: print the first few bytes of the buffer.
+    std::cout << "Processing buffer of size: " << buffer.size() << std::endl;
+    if (buffer.size() > 4) {
+        for (size_t i = 0; i < 4; ++i) {
+            std::cout << std::hex << static_cast<int>(buffer.data()[i]) << " ";
+        }
+        std::cout << std::dec << std::endl;
+    }
+}
+
+int main() {
+    // Allocate a buffer of 1024 bytes.
+    DataBuffer buffer = DataBuffer::allocate(1024);
+
+    // Fill with some data.
+    std::memset(buffer.data(), 0xAB, buffer.size());
+
+    // Pass the buffer to a processing function.
+    processFrame(std::move(buffer));
+
+    // The buffer is automatically cleaned up when out of scope.
+    return 0;
+}
+```
+
+### Summary
+
+This DataBuffer design minimizes data copying and movement by:
+
+- Using a shared pointer with custom deleters to manage memory lifetime.
+- Providing move semantics to transfer buffers without copying data.
+- Allowing you to wrap externally allocated buffers to integrate with other systems.
+
+This pattern is particularly useful in multimedia pipelines (like those in GStreamer) where you want to pass data from one element to another with minimal overhead.
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Write a C++ project, which have pipelines to process data in pipeline manner between many thread, multi input multi output**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
