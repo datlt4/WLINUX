@@ -36,17 +36,17 @@ In this example, we provide two ways to create a DataBuffer: one that allocates 
 
 // A simple DataBuffer that holds a block of memory.
 // It uses a std::shared_ptr with a custom deleter to avoid copying data when moved.
-class DataBuffer {
-public:
+class DataBuffer
+{
+  public:
     // Type alias for a custom deleter
     using Deleter = std::function<void(uint8_t*)>;
 
     // Allocate a new buffer of the given size. Memory will be freed using std::free.
-    static DataBuffer allocate(size_t size) {
+    static DataBuffer allocate(size_t size)
+    {
         uint8_t* ptr = static_cast<uint8_t*>(std::malloc(size));
-        if (!ptr) {
-            throw std::bad_alloc();
-        }
+        if (!ptr) { throw std::bad_alloc(); }
         // Use free as deleter.
         return DataBuffer(ptr, size, [](uint8_t* p) { std::free(p); });
     }
@@ -54,8 +54,8 @@ public:
     // Create a DataBuffer that wraps externally allocated data.
     // The caller can provide a custom deleter, or if deleter is nullptr then the buffer is not owned.
     DataBuffer(uint8_t* data, size_t size, Deleter deleter = nullptr)
-        : size_(size),
-          data_(data, deleter ? deleter : [](uint8_t*){/* no deletion */}) {
+        : size_(size), data_(data, deleter ? deleter : [](uint8_t*) { /* no deletion */ })
+    {
     }
 
     // Delete copy constructor to avoid accidental copying.
@@ -63,13 +63,11 @@ public:
     DataBuffer& operator=(const DataBuffer&) = delete;
 
     // Move constructor.
-    DataBuffer(DataBuffer&& other) noexcept
-        : size_(other.size_), data_(std::move(other.data_)) {
-        other.size_ = 0;
-    }
+    DataBuffer(DataBuffer&& other) noexcept : size_(other.size_), data_(std::move(other.data_)) { other.size_ = 0; }
 
     // Move assignment operator.
-    DataBuffer& operator=(DataBuffer&& other) noexcept {
+    DataBuffer& operator=(DataBuffer&& other) noexcept
+    {
         if (this != &other) {
             size_ = other.size_;
             data_ = std::move(other.data_);
@@ -85,11 +83,7 @@ public:
     uint8_t* data() { return data_.get(); }
     const uint8_t* data() const { return data_.get(); }
 
-private:
-    // Private constructor used by static allocate() and the public constructor.
-    DataBuffer(uint8_t* data, size_t size, Deleter deleter)
-        : size_(size), data_(data, deleter) {}
-
+  private:
     size_t size_;
     std::shared_ptr<uint8_t> data_;
 };
@@ -118,18 +112,18 @@ Here’s a small snippet showing how you might use the DataBuffer in a pipeline:
 #include <iostream>
 #include <cstring>
 
-void processFrame(DataBuffer buffer) {
+void processFrame(DataBuffer buffer)
+{
     // Example: print the first few bytes of the buffer.
     std::cout << "Processing buffer of size: " << buffer.size() << std::endl;
     if (buffer.size() > 4) {
-        for (size_t i = 0; i < 4; ++i) {
-            std::cout << std::hex << static_cast<int>(buffer.data()[i]) << " ";
-        }
+        for (size_t i = 0; i < 4; ++i) { std::cout << std::hex << static_cast<int>(buffer.data()[i]) << " "; }
         std::cout << std::dec << std::endl;
     }
 }
 
-int main() {
+int main()
+{
     // Allocate a buffer of 1024 bytes.
     DataBuffer buffer = DataBuffer::allocate(1024);
 
