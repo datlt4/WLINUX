@@ -33,6 +33,13 @@ stop_vizgard_vpn() {
      /usr/bin/openvpn3 session-manage --session-path $(openvpn3 sessions-list | grep -B 4 'dat_dat@vizgard.openvpn.com_Tokyo.ovpn' | grep 'Path:' | awk '{print $2}') --disconnect
 }
 alias docker_nvidia="xhost +local:root && docker run -it --rm --net=host --runtime nvidia --gpus all -v /tmp/.X11-unix/:/tmp/.X11-unix -v ${HOME}/.Xauthority:/root/.Xauthority --device /dev/dri:/dev/dri -e DISPLAY=$DISPLAY"
+
+alias hack_wintel="sudo sysctl -w net.ipv4.ip_default_ttl=65"
+alias LocalSend="cd /mnt/ssd_1tb/Downloads-Ubuntu/Miscellaneous && ./LocalSend-1.16.1-linux-x86-64.AppImage"
+alias k="--profile koi_1"
+alias cursor="$(ls -1t ~/Downloads/Cursor-* | head -n 1)"
+alias rnote="flatpak run com.github.flxzt.rnote"
+alias own="sudo chown -R koi:koi"
 ```
 
 For Raspberry Pi
