@@ -29,7 +29,7 @@ alias ...="cd ../../"
 alias ....="cd ../../../"
 
 alias open_vpn="/usr/bin/openvpn3 session-start --config <PATH_TO_OVPN_FILE>.ovpn"
-stop_vizgard_vpn() {
+stop_vpn() {
      /usr/bin/openvpn3 session-manage --session-path $(openvpn3 sessions-list | grep -B 4 'dat_dat@vizgard.openvpn.com_Tokyo.ovpn' | grep 'Path:' | awk '{print $2}') --disconnect
 }
 alias docker_nvidia="xhost +local:root && docker run -it --rm --net=host --runtime nvidia --gpus all -v /tmp/.X11-unix/:/tmp/.X11-unix -v ${HOME}/.Xauthority:/root/.Xauthority --device /dev/dri:/dev/dri -e DISPLAY=$DISPLAY"
