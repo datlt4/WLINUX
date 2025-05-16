@@ -40,6 +40,8 @@ alias k="--profile koi_1"
 alias cursor="$(ls -1t ~/Downloads/Cursor-* | head -n 1)"
 alias rnote="flatpak run com.github.flxzt.rnote"
 alias own="sudo chown -R koi:koi"
+alias upwg="sudo wg-quick up wg0"
+alias downwg="sudo wg-quick down wg0"
 ```
 
 For Raspberry Pi
