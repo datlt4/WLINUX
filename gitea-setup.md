@@ -976,3 +976,36 @@ JWT_SECRET = *******************************************
                 ls ${{ gitea.workspace }}
             - run: echo "🍏 This job's status is ${{ job.status }}."
       ```
+
+#### fix the “Error response from daemon: all predefined address pools have been fully subnetted” issue in Docker
+
+- Docker produces this error when it exhausts all available subnets from its default address pools while creating new bridge networks
+
+- By default, Docker uses:
+  - 16 subnets of /16 in the 172.17.0.0/12 range
+
+- Fixes:
+  - Delete unused Docker networks
+
+  ```bash
+  docker network prune
+  ```
+
+  - Increase available subnet pool
+
+    - Edit or create /etc/docker/daemon.json:
+
+    ```json
+    {
+      "default-address-pools": [
+        { "base": "172.17.0.0/12", "size": 20 },
+        { "base": "192.168.0.0/16", "size": 24 }
+      ]
+    }
+    ```
+    - Then restart docker:
+
+    ```bash
+    sudo systemctl restart docker
+    ```
+
