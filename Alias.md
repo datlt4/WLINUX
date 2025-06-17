@@ -45,11 +45,24 @@ alias downwg="sudo wg-quick down wg0"
 
 ntfy() {
   if [ -z "$1" ]; then
-    echo "Usage: ntfy <message>"
+    echo "Usage: ntfy <message> <priority_number>"
     return 1
   fi
+
   MESSAGE="$1"
-  curl -d "$MESSAGE" http://24.8.0.2:8020/koi
+  PRIORITY_NUMBER="$2"
+
+  case "$PRIORITY_NUMBER" in
+    5) PRIORITY_STRING="urgent";;
+    4) PRIORITY_STRING="high";;
+    3) PRIORITY_STRING="default";;
+    2) PRIORITY_STRING="low";;
+    1) PRIORITY_STRING="min";;
+    *)
+      PRIORITY_STRING="default";;
+  esac
+
+  curl -d "$MESSAGE" -H "Priority: $PRIORITY_STRING" http://24.8.0.2:8020/koi
 }
 ```
 
