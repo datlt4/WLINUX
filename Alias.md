@@ -42,6 +42,15 @@ alias rnote="flatpak run com.github.flxzt.rnote"
 alias own="sudo chown -R koi:koi"
 alias upwg="sudo wg-quick up wg0"
 alias downwg="sudo wg-quick down wg0"
+
+ntfy() {
+  if [ -z "$1" ]; then
+    echo "Usage: ntfy <message>"
+    return 1
+  fi
+  MESSAGE="$1"
+  curl -d "$MESSAGE" http://24.8.0.2:8020/koi
+}
 ```
 
 For Raspberry Pi
