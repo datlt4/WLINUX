@@ -12,6 +12,361 @@
 
 ---
 
+## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **Write a full NodeJS app using `Passport`, `Passport-Local`, and `Express-Session`, including login, logout, register routes, and an API route that requires authentication.**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
+
+<details>
+  <summary>Click to expand</summary>
+
+Dưới đây là **một app Node.js HOÀN CHỈNH, tối giản nhưng đúng chuẩn production**, dùng:
+
+* **Express**
+* **Passport + passport-local**
+* **express-session**
+* **bcrypt**
+* **PostgreSQL (pg)**
+* **Auth routes: register / login / logout**
+* **1 API route cần authentication**
+
+Mục tiêu:
+👉 Bạn **chạy được**, **đọc được**, và **hiểu từng phần**.
+
+---
+
+# 0️⃣ Cấu trúc project
+
+```text
+auth-app/
+├── app.js
+├── db.js
+├── passport.js
+├── routes/
+│   ├── auth.js
+│   └── api.js
+├── .env
+├── package.json
+```
+
+---
+
+# 1️⃣ package.json
+
+```json
+{
+  "name": "auth-app",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.4.0",
+    "express": "^4.19.0",
+    "express-session": "^1.17.3",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.11.3"
+  }
+}
+```
+
+---
+
+# 2️⃣ `.env`
+
+```env
+PORT=3000
+DATABASE_URL=postgres://postgres:password@localhost:5432/authdb
+SESSION_SECRET=supersecretkey
+```
+
+---
+
+# 3️⃣ Database schema (PostgreSQL)
+
+```sql
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+# 4️⃣ db.js (Postgres connection)
+
+```js
+import pg from "pg";
+const { Pool } = pg;
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL
+});
+
+export default pool;
+```
+
+---
+
+# 5️⃣ passport.js (CORE AUTH LOGIC)
+
+```js
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+import bcrypt from "bcrypt";
+import pool from "./db.js";
+
+/**
+ * Local Strategy
+ */
+passport.use(
+  new LocalStrategy(
+    { usernameField: "email" },
+    async (email, password, done) => {
+      try {
+        const { rows } = await pool.query(
+          "SELECT * FROM users WHERE email = $1",
+          [email]
+        );
+
+        if (rows.length === 0) {
+          return done(null, false, { message: "Invalid credentials" });
+        }
+
+        const user = rows[0];
+        const ok = await bcrypt.compare(password, user.password_hash);
+
+        if (!ok) {
+          return done(null, false, { message: "Invalid credentials" });
+        }
+
+        return done(null, user);
+      } catch (err) {
+        return done(err);
+      }
+    }
+  )
+);
+
+/**
+ * Serialize user → session
+ */
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+/**
+ * Deserialize session → user
+ */
+passport.deserializeUser(async (id, done) => {
+  try {
+    const { rows } = await pool.query(
+      "SELECT id, email FROM users WHERE id = $1",
+      [id]
+    );
+
+    if (rows.length === 0) {
+      return done(null, false);
+    }
+
+    done(null, rows[0]);
+  } catch (err) {
+    done(err);
+  }
+});
+
+export default passport;
+```
+
+---
+
+# 6️⃣ routes/auth.js (register / login / logout)
+
+```js
+import express from "express";
+import bcrypt from "bcrypt";
+import passport from "passport";
+import pool from "../db.js";
+
+const router = express.Router();
+
+/**
+ * REGISTER
+ */
+router.post("/register", async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    const hash = await bcrypt.hash(password, 10);
+
+    await pool.query(
+      "INSERT INTO users(email, password_hash) VALUES($1,$2)",
+      [email, hash]
+    );
+
+    res.status(201).json({ message: "Registered" });
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * LOGIN
+ */
+router.post(
+  "/login",
+  passport.authenticate("local"),
+  (req, res) => {
+    res.json({ message: "Logged in", user: req.user });
+  }
+);
+
+/**
+ * LOGOUT
+ */
+router.post("/logout", (req, res, next) => {
+  req.logout(err => {
+    if (err) return next(err);
+    req.session.destroy(() => {
+      res.json({ message: "Logged out" });
+    });
+  });
+});
+
+export default router;
+```
+
+---
+
+# 7️⃣ routes/api.js (API cần auth)
+
+```js
+import express from "express";
+
+const router = express.Router();
+
+/**
+ * Middleware bảo vệ route
+ */
+function requireAuth(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({ error: "Unauthorized" });
+}
+
+/**
+ * Protected API
+ */
+router.get("/secret", requireAuth, (req, res) => {
+  res.json({
+    message: "This is protected data",
+    user: req.user
+  });
+});
+
+export default router;
+```
+
+---
+
+# 8️⃣ app.js (ENTRY POINT)
+
+```js
+import express from "express";
+import session from "express-session";
+import dotenv from "dotenv";
+import passport from "./passport.js";
+
+import authRoutes from "./routes/auth.js";
+import apiRoutes from "./routes/api.js";
+
+dotenv.config();
+
+const app = express();
+
+app.use(express.json());
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use("/auth", authRoutes);
+app.use("/api", apiRoutes);
+
+/**
+ * Error handler
+ */
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: err.message });
+});
+
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on http://localhost:${process.env.PORT}`);
+});
+```
+
+---
+
+# 9️⃣ Test flow (QUAN TRỌNG)
+
+### Register
+
+```http
+POST /auth/register
+{
+  "email": "a@test.com",
+  "password": "123456"
+}
+```
+
+### Login
+
+```http
+POST /auth/login
+{
+  "email": "a@test.com",
+  "password": "123456"
+}
+```
+
+👉 Browser sẽ nhận **session cookie**
+
+### Access protected API
+
+```http
+GET /api/secret
+```
+
+✔ Login → OK
+❌ Logout → 401
+
+---
+
+# 🔟 Bạn vừa học được gì?
+
+* Passport **KHÔNG magic**
+* `done(null, user)` → login OK
+* `serialize → session → deserialize → req.user`
+* `req.isAuthenticated()` = chìa khóa bảo vệ route
+
+---
+
+</details>
+
+---
+
 ## <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" width="20"/> **teach me about kalman filter**
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" width="20"/>
