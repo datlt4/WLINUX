@@ -19,6 +19,14 @@ Before implementing:
 - If a simpler approach exists, say so. Push back when warranted.
 - If something is unclear, stop. Name what's confusing. Ask.
 
+**Never state inferred values as facts.**
+
+If you derived a version, path, config, or state from indirect evidence (docs, another machine, general knowledge), say so explicitly — don't present it as confirmed:
+- Wrong: "The library version on that machine is 2.3"
+- Right: "I'm inferring 2.3 from the platform docs — not verified directly"
+
+If the actual value is checkable (via SSH, a file, a command), check it before acting on it. Don't commit to a number you haven't seen.
+
 ## 2. Simplicity First
 
 **Minimum code that solves the problem. Nothing speculative.**
@@ -72,6 +80,10 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - Never add `Co-Authored-By: Claude` or any Claude/AI attribution to commit messages.
 - Write commit messages as if they came entirely from the developer.
 
+---
+
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+
 ## 6. Comments
 
 **Short and to the point. No essay writing.**
@@ -80,7 +92,3 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - No restating what the code already says (`i++ // increment i`).
 - No preamble, no closing remarks, no "This function does X by doing Y and then Z".
 - If a comment needs 4+ lines, the code probably needs to be clearer instead.
-
----
-
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
