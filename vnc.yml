@@ -11,17 +11,12 @@ name: vnc
 root: ~/
 
 # ─── CUSTOM Ở ĐÂY ────────────────────────────────────────────────────────────
-# VNC_CLIP    : vùng màn hình cần stream, lấy từ `xrandr --listmonitors`
-#               1920x1080+0+0      = màn FHD  (HDMI-1)
-#               2560x1440+1920+0   = màn 2K trái (DP-2)
-#               2560x1440+4480+0   = màn 2K phải (DP-0)
-#
-#               x11vnc cũng nhận cú pháp ngắn "xinerama0" / "xinerama1" /
-#               "xinerama2" (chỉ số sub-screen, x11vnc tự tính toạ độ).
-#               NHƯNG máy này báo `Xinerama: number of sub-screens: 1`,
-#               nghĩa là X server không cho x11vnc thấy layout đa màn hình,
-#               nên xineramaN sẽ ra sai màn hoặc ra cả 3 màn ghép lại.
-#               → Dùng toạ độ tuyệt đối. Chi tiết ở mục 4 của README.
+# VNC_CLIP    : màn hình cần stream, dạng chữ
+#               xinerama0 / xinerama1 / xinerama2 = màn thứ 1 / 2 / 3
+#               reset                             = cả 3 màn ghép lại
+#               Chỉ số không theo thứ tự vật lý — thử bằng
+#                 x11vnc -R clip:xinerama1
+#               rồi xem noVNC ra màn nào.
 # VNC_PORT    : port RFB nội bộ
 # WEB_PORT    : port noVNC mở ra LAN
 # VNC_VIEWONLY: "-viewonly" = chỉ xem  |  "" (rỗng) = cho phép điều khiển
@@ -77,9 +72,9 @@ windows:
           echo "  Log     : tail -f $VNC_LOG"
           echo "════════════════════════════════════════════════════════════"
           echo "  Đổi nóng, không cần restart:"
-          echo "    x11vnc -R clip:2560x1440+1920+0    # sang màn 2K trái"
-          echo "    x11vnc -R clip:2560x1440+4480+0    # sang màn 2K phải"
-          echo "    x11vnc -R clip:1920x1080+0+0       # về màn FHD"
+          echo "    x11vnc -R clip:xinerama0           # màn 0"
+          echo "    x11vnc -R clip:xinerama1           # màn 1"
+          echo "    x11vnc -R clip:xinerama2           # màn 2"
           echo "    x11vnc -R clip:reset               # cả 3 màn"
           echo "    x11vnc -R viewonly:0               # cho điều khiển"
           echo "    x11vnc -R viewonly:1               # khoá lại"
