@@ -1,0 +1,83 @@
+# ~/.config/tmuxinator/vnc.yml
+#
+#   tmuxinator start vnc      → chạy
+#   tmuxinator stop  vnc      → tắt
+#   Ctrl-b d                  → detach, server vẫn chạy
+#
+# Stream 1 màn hình ra browser trong LAN.
+# Sửa các biến trong pre_window bên dưới rồi stop/start lại.
+
+name: vnc
+root: ~/
+
+# ─── CUSTOM Ở ĐÂY ────────────────────────────────────────────────────────────
+# VNC_CLIP    : vùng màn hình cần stream, lấy từ `xrandr --listmonitors`
+#               1920x1080+0+0      = màn FHD  (HDMI-1)
+#               2560x1440+1920+0   = màn 2K trái (DP-2)
+#               2560x1440+4480+0   = màn 2K phải (DP-0)
+# VNC_PORT    : port RFB nội bộ
+# WEB_PORT    : port noVNC mở ra LAN
+# VNC_VIEWONLY: "-viewonly" = chỉ xem  |  "" (rỗng) = cho phép điều khiển
+# VNC_AUTH    : "-rfbauth $HOME/.vnc/passwd" | "-nopw" nếu không cần mật khẩu
+pre_window: >
+  export VNC_DISPLAY=":0"
+  VNC_CLIP="xinerama0"
+  VNC_PORT="5900"
+  WEB_PORT="8002"
+  VNC_VIEWONLY="-viewonly"
+  VNC_AUTH="-rfbauth $HOME/.vnc/passwd"
+  VNC_LOG="/tmp/x11vnc-5900.log"
+  NOVNC_DIR="/usr/share/novnc"
+
+# Dọn tiến trình cũ trước khi chạy, tránh "Address already in use"
+on_project_start: pkill -f 'x11vnc -display' ; pkill -f 'websockify --web' ; sleep 1 ; true
+on_project_stop:  pkill -f 'x11vnc -display' ; pkill -f 'websockify --web' ; true
+
+windows:
+  # ── Window 0: x11vnc ────────────────────────────────────────────────────────
+  # KHÔNG dùng -bg ở đây: pane sẽ đóng ngay và mất log.
+  # KHÔNG dùng -ncache: gây dải đen dày phía dưới ảnh trên noVNC.
+  - x11vnc:
+      panes:
+        - |
+          x11vnc -display $VNC_DISPLAY -auth guess \
+                 -clip $VNC_CLIP \
+                 $VNC_VIEWONLY -shared -forever \
+                 -rfbport $VNC_PORT $VNC_AUTH -localhost \
+                 -xkb -repeat \
+                 -nocursorshape -cursor most \
+                 -xrandr resize \
+                 -wait 10 -speeds lan \
+                 -o $VNC_LOG
+
+  # ── Window 1: websockify (cầu WebSocket + serve noVNC) ──────────────────────
+  - websockify:
+      panes:
+        - |
+          echo "Đợi x11vnc lên port $VNC_PORT..."
+          until nc -z localhost $VNC_PORT 2>/dev/null; do sleep 0.3; done
+          echo "OK. Mở: http://$(hostname -I | awk '{print $1}'):$WEB_PORT/vnc.html?autoconnect=1&resize=scale"
+          websockify --web=$NOVNC_DIR $WEB_PORT localhost:$VNC_PORT
+
+  # ── Window 2: bảng điều khiển ───────────────────────────────────────────────
+  - control:
+      panes:
+        - |
+          clear
+          echo "════════════════════════════════════════════════════════════"
+          echo "  URL     : http://$(hostname -I | awk '{print $1}'):$WEB_PORT/vnc.html?autoconnect=1&resize=scale"
+          echo "  Clip    : $VNC_CLIP"
+          echo "  Log     : tail -f $VNC_LOG"
+          echo "════════════════════════════════════════════════════════════"
+          echo "  Đổi nóng, không cần restart:"
+          echo "    x11vnc -R clip:2560x1440+1920+0    # sang màn 2K trái"
+          echo "    x11vnc -R clip:2560x1440+4480+0    # sang màn 2K phải"
+          echo "    x11vnc -R clip:1920x1080+0+0       # về màn FHD"
+          echo "    x11vnc -R clip:reset               # cả 3 màn"
+          echo "    x11vnc -R viewonly:0               # cho điều khiển"
+          echo "    x11vnc -R viewonly:1               # khoá lại"
+          echo "════════════════════════════════════════════════════════════"
+          echo "  xrandr --listmonitors :"
+          xrandr --listmonitors
+          echo
+          exec $SHELL
