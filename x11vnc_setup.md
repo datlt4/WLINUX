@@ -49,32 +49,60 @@ Cách một dòng (mật khẩu sẽ nằm trong shell history):
 x11vnc -storepasswd 'matkhau8' ~/.vnc/passwd
 ```
 
-## 4. Xác định toạ độ màn hình
+## 4. Xác định màn hình cần stream
+
+`-clip` nhận **dạng chữ** `xineramaN` — N là chỉ số sub-screen, x11vnc tự hỏi X server màn đó nằm ở đâu và to bao nhiêu rồi tự tính vùng cắt:
+
+```bash
+-clip xinerama0     # màn thứ nhất
+-clip xinerama1     # màn thứ hai
+-clip xinerama2     # màn thứ ba
+-clip reset         # bỏ clip, stream toàn bộ framebuffer
+```
+
+Ưu điểm lớn: **không phải cập nhật gì khi bố trí màn hình thay đổi**. Cắm rút màn, kéo màn sang vị trí khác, đổi độ phân giải — `xinerama0` vẫn tự trỏ đúng. Với toạ độ tuyệt đối thì mọi offset đều sai và phải sửa lại tay.
+
+### Xác định N nào là màn nào
+
+Chỉ số Xinerama **không nhất thiết trùng** thứ tự trong `xrandr --listmonitors`, cũng không nhất thiết theo thứ tự trái-sang-phải. Cách nhanh nhất là thử trực tiếp:
+
+```bash
+# Thử từng chỉ số, mỗi lần mở noVNC xem ra màn nào
+x11vnc -R clip:xinerama0
+x11vnc -R clip:xinerama1
+x11vnc -R clip:xinerama2
+```
+
+Ghi lại kết quả rồi điền vào bảng này để lần sau không phải mò:
+
+| Chỉ số | Màn hình thực tế | Độ phân giải |
+|---|---|---|
+| `xinerama0` | | |
+| `xinerama1` | | |
+| `xinerama2` | | |
+
+Muốn biết x11vnc thấy bao nhiêu sub-screen, xem log:
+
+```bash
+grep -i xinerama /tmp/x11vnc-5900.log
+```
+
+Kỳ vọng: `Xinerama: number of sub-screens: 3`. Nếu ra `1` thì X server đang gộp cả 3 màn thành một sub-screen duy nhất — khi đó `xinerama0` = toàn bộ framebuffer và `xinerama1/2` không tồn tại. Xem mục 12 để xử lý.
+
+### Tham khảo: layout hiện tại
 
 ```bash
 xrandr --listmonitors
 ```
 
-Ví dụ output của máy này:
-
 ```
 Monitors: 3
- 0: +*DP-2   2560/527x1440/296+1920+0   DP-2
- 1: +DP-0    2560/527x1440/296+4480+0   DP-0
- 2: +HDMI-1  1920/508x1080/286+0+0      HDMI-1
+ 0: +*DP-2   2560/527x1440/296+1920+0   DP-2      2K
+ 1: +DP-0    2560/527x1440/296+4480+0   DP-0      2K
+ 2: +HDMI-1  1920/508x1080/286+0+0      HDMI-1    FHD
 ```
 
-Cách đọc: `2560/527x1440/296+1920+0` → độ phân giải **2560x1440**, offset **+1920+0**.
-
-Chuỗi truyền cho `-clip` là `RỘNGxCAO+X+Y`:
-
-| Màn | Thiết bị | Chuỗi `-clip` |
-|---|---|---|
-| FHD | HDMI-1 | `1920x1080+0+0` |
-| 2K trái | DP-2 | `2560x1440+1920+0` |
-| 2K phải | DP-0 | `2560x1440+4480+0` |
-
-> **Quan trọng**: dùng **toạ độ tuyệt đối**, đừng dùng `xinerama0/1/2`. Trên nhiều máy x11vnc đọc sai layout (log báo `Xinerama: number of sub-screens: 1`) nên chỉ số `xineramaN` không đáng tin. Nếu bố trí màn hình bị canh giữa theo chiều dọc, offset Y sẽ khác 0 (ví dụ `+180`) và bỏ sót nó sẽ gây lệch hình.
+Chỉ dùng khi cần đối chiếu tên thiết bị hoặc debug — không cần copy số vào config.
 
 ## 5. Chạy nhanh (thủ công)
 
@@ -82,7 +110,7 @@ Terminal 1 — x11vnc:
 
 ```bash
 x11vnc -display :0 -auth guess \
-       -clip 1920x1080+0+0 \
+       -clip xinerama0 \
        -viewonly -shared -forever \
        -rfbport 5900 -rfbauth ~/.vnc/passwd \
        -xkb -repeat -nocursorshape -cursor most \
@@ -113,7 +141,8 @@ Lấy IP: `hostname -I | awk '{print $1}'`
 |---|---|
 | `-display :0` | X display cần capture. Gần như luôn là `:0`. |
 | `-auth guess` | Tự tìm file `Xauthority`. **Bắt buộc** nếu chạy qua SSH, cron, systemd, hoặc tmux khởi động từ session khác. |
-| `-clip WxH+X+Y` | Chỉ capture một vùng. Đây là cách "cắt" ra một màn hình trong dàn nhiều màn. |
+| `-clip xinerama0` | **Cách dùng chính.** Chỉ capture một sub-screen (một màn hình) thay vì cả framebuffer ghép. Giá trị: `xinerama0`, `xinerama1`, `xinerama2`..., hoặc `reset` để bỏ clip. Tự đúng khi layout màn hình thay đổi. |
+| `-clip WxH+X+Y` | Dạng toạ độ tuyệt đối, ví dụ `1920x1080+0+0`. Chỉ dùng làm phương án dự phòng khi X server không báo đúng sub-screen — xem mục 12. |
 | `-rfbport 5900` | Port VNC. Nhiều màn → mỗi màn một port (5900, 5901, 5902...). |
 | `-rfbauth ~/.vnc/passwd` | File mật khẩu. Bỏ tham số này là **mở toang không mật khẩu**. |
 | `-forever` | Không thoát khi client ngắt kết nối. Không có nó thì phải chạy lại sau mỗi lần đóng tab. |
@@ -172,8 +201,10 @@ Lấy IP: `hostname -I | awk '{print $1}'`
 x11vnc nhận lệnh remote control qua cờ `-R`. Mở terminal khác và chạy:
 
 ```bash
-x11vnc -R clip:2560x1440+1920+0    # nhảy sang màn 2K trái
-x11vnc -R clip:reset               # quay về toàn bộ 3 màn
+x11vnc -R clip:xinerama0           # nhảy sang màn 0
+x11vnc -R clip:xinerama1           # màn 1
+x11vnc -R clip:xinerama2           # màn 2
+x11vnc -R clip:reset               # bỏ clip, xem cả 3 màn
 x11vnc -R viewonly:0               # bật cho phép điều khiển
 x11vnc -R viewonly:1               # khoá lại chỉ xem
 x11vnc -R cursorshape:0            # vẽ con trỏ vào ảnh
@@ -215,11 +246,11 @@ Trong sidebar noVNC có sẵn:
 
 Mỗi màn một cặp port. Xem file `vnc-3mon.yml` để chạy cả 3 bằng tmuxinator.
 
-| Màn | `-clip` | Port VNC | Port web | URL |
-|---|---|---|---|---|
-| FHD (HDMI-1) | `1920x1080+0+0` | 5900 | 8002 | `http://<IP>:8002/vnc.html?autoconnect=1&resize=scale` |
-| 2K trái (DP-2) | `2560x1440+1920+0` | 5901 | 8003 | `http://<IP>:8003/vnc.html?autoconnect=1&resize=scale` |
-| 2K phải (DP-0) | `2560x1440+4480+0` | 5902 | 8004 | `http://<IP>:8004/vnc.html?autoconnect=1&resize=scale` |
+| `-clip` | Port VNC | Port web | URL |
+|---|---|---|---|
+| `xinerama0` | 5900 | 8002 | `http://<IP>:8002/vnc.html?autoconnect=1&resize=scale` |
+| `xinerama1` | 5901 | 8003 | `http://<IP>:8003/vnc.html?autoconnect=1&resize=scale` |
+| `xinerama2` | 5902 | 8004 | `http://<IP>:8004/vnc.html?autoconnect=1&resize=scale` |
 
 Lưu ý: mỗi instance là một lần capture + encode riêng, nên CPU nhân theo số luồng. Desktop tĩnh thì mỗi cái chỉ 1–3%. Chỉ chạy đủ số màn bạn thực sự cần xem.
 
@@ -285,7 +316,9 @@ Mặc định WebSocket của noVNC là `ws://` **không mã hoá**. Mật khẩ
 | Hiện tượng | Nguyên nhân | Cách sửa |
 |---|---|---|
 | Dải đen dày dưới ảnh, không phóng khít | Đang dùng `-ncache` | Bỏ `-ncache` và `-ncache_cr` |
-| Dải đen + vùng clip sai tỉ lệ | Offset Y sai (màn thấp hơn bị canh giữa) | Lấy lại số từ `xrandr --listmonitors`, để ý phần `+X+Y` |
+| `xinerama0` ra sai màn so với mong đợi | Chỉ số Xinerama không theo thứ tự vật lý | Thử `x11vnc -R clip:xinerama1` / `xinerama2` để tìm đúng chỉ số |
+| `xinerama0` ra cả 3 màn ghép lại, `xinerama1/2` vô tác dụng | X server gộp 3 màn thành 1 sub-screen. Log báo `Xinerama: number of sub-screens: 1` | Xem khối "Khi Xinerama không hoạt động" ngay dưới bảng này |
+| Dải đen ở dưới ảnh dù đã clip đúng | Đang dùng `-ncache` | Bỏ `-ncache` |
 | noVNC hỏi mật khẩu mãi không vào | File `~/.vnc/passwd` chưa tồn tại. Log báo `Couldn't read password file` | Chạy `x11vnc -storepasswd` |
 | Mật khẩu đúng mà vẫn sai | Mật khẩu dài hơn 8 ký tự | Đặt lại đúng 8 ký tự |
 | Không điều khiển được | Còn `-viewonly` ở server, **hoặc** noVNC còn tick View Only trong localStorage | `ps aux \| grep x11vnc` để kiểm tra; disconnect rồi bỏ tick; hoặc mở tab ẩn danh |
@@ -298,6 +331,27 @@ Mặc định WebSocket của noVNC là `ws://` **không mã hoá**. Mật khẩ
 | x11vnc thoát ngay khi cắm/rút màn hình | Layout thay đổi | Thêm `-xrandr resize` |
 | Cửa sổ bị cắt nửa | Cửa sổ nằm vắt qua 2 màn | Không tránh được, bản chất là cắt vùng pixel |
 | Gõ tiếng Việt ra ký tự sai | 2 bộ gõ chồng nhau | Chỉ dùng bộ gõ trên máy Ubuntu (ibus-bamboo/unikey), tắt bộ gõ ở máy client |
+
+### Khi Xinerama không hoạt động
+
+Nếu log báo `Xinerama: number of sub-screens: 1` trong khi bạn có 3 màn, X server đang gộp tất cả thành một sub-screen. Với driver NVIDIA proprietary, bật lại thông tin Xinerama:
+
+```bash
+sudo nvidia-xconfig --nvidia-xinerama-info
+# hoặc thêm vào /etc/X11/xorg.conf, Section "Screen":
+#   Option "nvidiaXineramaInfo" "true"
+```
+
+Rồi logout/login và kiểm tra lại. Nếu vẫn không được, dùng toạ độ tuyệt đối làm phương án dự phòng:
+
+```bash
+xrandr --listmonitors
+# 0: +*DP-2   2560/527x1440/296+1920+0   →  -clip 2560x1440+1920+0
+# 1: +DP-0    2560/527x1440/296+4480+0   →  -clip 2560x1440+4480+0
+# 2: +HDMI-1  1920/508x1080/286+0+0      →  -clip 1920x1080+0+0
+```
+
+Cách đọc: `2560/527x1440/296+1920+0` → độ phân giải **2560x1440**, offset **+1920+0** (bỏ qua hai số kích thước vật lý mm). Nhớ rằng nếu màn thấp hơn bị canh giữa theo chiều dọc thì offset Y sẽ khác 0 (ví dụ `+180`), và mỗi lần đổi bố trí màn hình bạn phải sửa lại toàn bộ số này bằng tay — đó là lý do `xineramaN` tiện hơn.
 
 Con trỏ khó thấy qua stream? Chạy trên máy Ubuntu:
 
