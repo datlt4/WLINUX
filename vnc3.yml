@@ -12,7 +12,7 @@
 # Mỗi instance là một lần capture + encode riêng → CPU nhân theo số luồng.
 # Desktop tĩnh: mỗi cái ~1-3%. Chỉ chạy đủ số màn bạn cần.
 
-name: vnc-3mon
+name: vnc3
 root: ~/
 
 pre_window: >
@@ -25,35 +25,35 @@ on_project_start: pkill -f 'x11vnc -display' ; pkill -f 'websockify --web' ; sle
 on_project_stop:  pkill -f 'x11vnc -display' ; pkill -f 'websockify --web' ; true
 
 windows:
-  # ── Màn FHD — HDMI-1 ────────────────────────────────────────────────────────
-  - fhd-8002:
+  # ── xinerama0 ────────────────────────────────────────────────────────
+  - mon0-8002:
       layout: even-horizontal
       panes:
         - |
           x11vnc $X11VNC_COMMON $VNC_VIEWONLY $VNC_AUTH \
-                 -clip 1920x1080+0+0 -rfbport 5900 -o /tmp/x11vnc-5900.log
+                 -clip xinerama0 -rfbport 5900 -o /tmp/x11vnc-5900.log
         - |
           until nc -z localhost 5900 2>/dev/null; do sleep 0.3; done
           websockify --web=$NOVNC_DIR 8002 localhost:5900
 
-  # ── Màn 2K trái — DP-2 ──────────────────────────────────────────────────────
-  - 2k-left-8003:
+  # ── xinerama1 ──────────────────────────────────────────────────────
+  - mon1-8003:
       layout: even-horizontal
       panes:
         - |
           x11vnc $X11VNC_COMMON $VNC_VIEWONLY $VNC_AUTH \
-                 -clip 2560x1440+1920+0 -rfbport 5901 -o /tmp/x11vnc-5901.log
+                 -clip xinerama1 -rfbport 5901 -o /tmp/x11vnc-5901.log
         - |
           until nc -z localhost 5901 2>/dev/null; do sleep 0.3; done
           websockify --web=$NOVNC_DIR 8003 localhost:5901
 
-  # ── Màn 2K phải — DP-0 ──────────────────────────────────────────────────────
-  - 2k-right-8004:
+  # ── xinerama2 ──────────────────────────────────────────────────────
+  - mon2-8004:
       layout: even-horizontal
       panes:
         - |
           x11vnc $X11VNC_COMMON $VNC_VIEWONLY $VNC_AUTH \
-                 -clip 2560x1440+4480+0 -rfbport 5902 -o /tmp/x11vnc-5902.log
+                 -clip xinerama2 -rfbport 5902 -o /tmp/x11vnc-5902.log
         - |
           until nc -z localhost 5902 2>/dev/null; do sleep 0.3; done
           websockify --web=$NOVNC_DIR 8004 localhost:5902
@@ -65,11 +65,11 @@ windows:
           clear
           IP=$(hostname -I | awk '{print $1}')
           echo "════════════════════════════════════════════════════════════"
-          echo "  FHD      HDMI-1  http://$IP:8002/vnc.html?autoconnect=1&resize=scale"
-          echo "  2K trái  DP-2    http://$IP:8003/vnc.html?autoconnect=1&resize=scale"
-          echo "  2K phải  DP-0    http://$IP:8004/vnc.html?autoconnect=1&resize=scale"
+          echo "  xinerama0  http://$IP:8002/vnc.html?autoconnect=1&resize=scale"
+          echo "  xinerama1  http://$IP:8003/vnc.html?autoconnect=1&resize=scale"
+          echo "  xinerama2  http://$IP:8004/vnc.html?autoconnect=1&resize=scale"
           echo "════════════════════════════════════════════════════════════"
-          echo "  Cho phép điều khiển màn FHD (port 5900):"
+          echo "  Cho phép điều khiển màn xinerama0 (port 5900):"
           echo "    x11vnc -R viewonly:0"
           echo "  Log: tail -f /tmp/x11vnc-5900.log"
           echo "════════════════════════════════════════════════════════════"
