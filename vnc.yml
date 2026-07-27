@@ -15,6 +15,13 @@ root: ~/
 #               1920x1080+0+0      = màn FHD  (HDMI-1)
 #               2560x1440+1920+0   = màn 2K trái (DP-2)
 #               2560x1440+4480+0   = màn 2K phải (DP-0)
+#
+#               x11vnc cũng nhận cú pháp ngắn "xinerama0" / "xinerama1" /
+#               "xinerama2" (chỉ số sub-screen, x11vnc tự tính toạ độ).
+#               NHƯNG máy này báo `Xinerama: number of sub-screens: 1`,
+#               nghĩa là X server không cho x11vnc thấy layout đa màn hình,
+#               nên xineramaN sẽ ra sai màn hoặc ra cả 3 màn ghép lại.
+#               → Dùng toạ độ tuyệt đối. Chi tiết ở mục 4 của README.
 # VNC_PORT    : port RFB nội bộ
 # WEB_PORT    : port noVNC mở ra LAN
 # VNC_VIEWONLY: "-viewonly" = chỉ xem  |  "" (rỗng) = cho phép điều khiển
