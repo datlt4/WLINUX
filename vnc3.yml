@@ -1,78 +1,26 @@
-# ~/.config/tmuxinator/vnc-3mon.yml
-#
-#   tmuxinator start vnc-3mon
-#
-# Stream cả 3 màn hình, mỗi màn một port riêng.
-# Layout hiện tại (đổi theo `xrandr --listmonitors` nếu bố trí màn thay đổi):
-#
-#   HDMI-1  FHD 1920x1080  +0+0        → 5900 / web 8002
-#   DP-2    2K  2560x1440  +1920+0     → 5901 / web 8003
-#   DP-0    2K  2560x1440  +4480+0     → 5902 / web 8004
-#
-# Mỗi instance là một lần capture + encode riêng → CPU nhân theo số luồng.
-# Desktop tĩnh: mỗi cái ~1-3%. Chỉ chạy đủ số màn bạn cần.
+# vnc3.yml
 
-name: vnc3
-root: ~/
-
-pre_window: >
-  export VNC_AUTH="-rfbauth $HOME/.vnc/passwd"
-  VNC_VIEWONLY="-viewonly"
-  NOVNC_DIR="/usr/share/novnc"
-  X11VNC_COMMON="-display :0 -auth guess -shared -forever -localhost -xkb -repeat -nocursorshape -cursor most -xrandr resize -wait 10 -speeds lan"
-
-on_project_start: pkill -f 'x11vnc -display' ; pkill -f 'websockify --web' ; sleep 1 ; true
-on_project_stop:  pkill -f 'x11vnc -display' ; pkill -f 'websockify --web' ; true
-
+project_name: vnc3
+on_project_stop: pkill x11vnc; pkill websockify;
 windows:
-  # ── xinerama0 ────────────────────────────────────────────────────────
-  - mon0-8002:
-      layout: even-horizontal
-      panes:
-        - |
-          x11vnc $X11VNC_COMMON $VNC_VIEWONLY $VNC_AUTH \
-                 -clip xinerama0 -rfbport 5900 -o /tmp/x11vnc-5900.log
-        - |
-          until nc -z localhost 5900 2>/dev/null; do sleep 0.3; done
-          websockify --web=$NOVNC_DIR 8002 localhost:5900
-
-  # ── xinerama1 ──────────────────────────────────────────────────────
-  - mon1-8003:
-      layout: even-horizontal
-      panes:
-        - |
-          x11vnc $X11VNC_COMMON $VNC_VIEWONLY $VNC_AUTH \
-                 -clip xinerama1 -rfbport 5901 -o /tmp/x11vnc-5901.log
-        - |
-          until nc -z localhost 5901 2>/dev/null; do sleep 0.3; done
-          websockify --web=$NOVNC_DIR 8003 localhost:5901
-
-  # ── xinerama2 ──────────────────────────────────────────────────────
-  - mon2-8004:
-      layout: even-horizontal
-      panes:
-        - |
-          x11vnc $X11VNC_COMMON $VNC_VIEWONLY $VNC_AUTH \
-                 -clip xinerama2 -rfbport 5902 -o /tmp/x11vnc-5902.log
-        - |
-          until nc -z localhost 5902 2>/dev/null; do sleep 0.3; done
-          websockify --web=$NOVNC_DIR 8004 localhost:5902
-
-  # ── Bảng điều khiển ─────────────────────────────────────────────────────────
   - control:
       panes:
         - |
           clear
-          IP=$(hostname -I | awk '{print $1}')
-          echo "════════════════════════════════════════════════════════════"
-          echo "  xinerama0  http://$IP:8002/vnc.html?autoconnect=1&resize=scale"
-          echo "  xinerama1  http://$IP:8003/vnc.html?autoconnect=1&resize=scale"
-          echo "  xinerama2  http://$IP:8004/vnc.html?autoconnect=1&resize=scale"
-          echo "════════════════════════════════════════════════════════════"
-          echo "  Cho phép điều khiển màn xinerama0 (port 5900):"
-          echo "    x11vnc -R viewonly:0"
-          echo "  Log: tail -f /tmp/x11vnc-5900.log"
-          echo "════════════════════════════════════════════════════════════"
-          xrandr --listmonitors
-          echo
-          exec $SHELL
+          echo "pkill x11vnc;"
+          echo "pkill websockify;"
+  - window_1:
+      layout: "3084,363x92,0,0{181x92,0,0,4,181x92,182,0,5}"
+      panes:
+        - /usr/bin/x11vnc -display :0 -clip xinerama0 -shared -forever -rfbport 5900 -xkb -repeat -bg  -nocursorshape -cursor most
+        - /usr/bin/websockify --web=/usr/share/novnc 8002 localhost:5900
+  - window_2:
+      layout: "3084,363x92,0,0{181x92,0,0,4,181x92,182,0,5}"
+      panes:
+        - /usr/bin/x11vnc -display :0 -clip xinerama1 -shared -forever -rfbport 5901 -xkb -repeat -bg  -nocursorshape -cursor most
+        - /usr/bin/websockify --web=/usr/share/novnc 8003 localhost:5901
+  - window_3:
+      layout: "3084,363x92,0,0{181x92,0,0,4,181x92,182,0,5}"
+      panes:
+        - /usr/bin/x11vnc -display :0 -clip xinerama2 -shared -forever -rfbport 5902 -xkb -repeat -bg  -nocursorshape -cursor most
+        - /usr/bin/websockify --web=/usr/share/novnc 8004 localhost:5902
