@@ -73,7 +73,9 @@ For Raspberry Pi
 alias cap="raspistill -o ~/Pictures/\$(date +%Y%m%d_%H%M%S_%N).jpg"
 
 # New
-alias cap="rpicam-still -o ~/Pictures/\$(date +%Y%m%d_%H%M%S_%N).jpg"
+# sudo apt install rpicam-apps
+alias cap="rpicam-still -t 1000 -o ~/Pictures/\$(date +%Y%m%d_%H%M%S_%N).jpg"
+alias cam_view="rpicam-still -t 300000"
 ```
 
 Get temporature Raspberry Pi
