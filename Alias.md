@@ -69,7 +69,11 @@ ntfy() {
 For Raspberry Pi
 
 ```bash
+# Old
 alias cap="raspistill -o ~/Pictures/\$(date +%Y%m%d_%H%M%S_%N).jpg"
+
+# New
+alias cap="rpicam-still -o ~/Pictures/\$(date +%Y%m%d_%H%M%S_%N).jpg"
 ```
 
 Get temporature Raspberry Pi
