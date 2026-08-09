@@ -1,6 +1,6 @@
 prerequisite
 ```
-sudo apt install fzf xclip -y
+sudo apt install fzf xclip figlet -y
 ```
 
 ```bash
